@@ -7,7 +7,7 @@ import java.util.HashMap;
 /**
  * @author yidxue
  */
-public class MapToJson {
+public class MapToJsonDemo1 {
     public static void main(String[] args){
         ObjectMapper om = new ObjectMapper();
         HashMap<String, String> map = new HashMap<>();
