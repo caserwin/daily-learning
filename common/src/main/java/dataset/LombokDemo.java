@@ -1,4 +1,4 @@
-package core;
+package dataset;
 
 import lombok.Data;
 
