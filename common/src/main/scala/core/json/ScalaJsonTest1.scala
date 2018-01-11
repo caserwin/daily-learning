@@ -1,9 +1,7 @@
-package core
+package core.json
 
 import net.minidev.json.JSONObject
 import net.minidev.json.JSONValue
-
-
 /**
   * User: Erwin
   * Date: 17/12/5 上午9:29
