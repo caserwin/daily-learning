@@ -2,6 +2,7 @@ package core.sort
 
 import java.util
 import java.util.{Collections, Comparator}
+import scala.collection.JavaConversions._
 
 object SortArrayList {
 
