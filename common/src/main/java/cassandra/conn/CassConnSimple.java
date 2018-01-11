@@ -15,7 +15,10 @@ public class CassConnSimple {
         //认证配置
         AuthProvider authProvider = new PlainTextAuthProvider("pdaadmin", "Prod4%pdaAdmin");
         // 创建连接到Cassandra的客户端
-        Cluster cluster = Cluster.builder().addContactPoints(hosts).withAuthProvider(authProvider).build();
+        Cluster cluster = Cluster.builder()
+                .addContactPoints(hosts)
+                .withAuthProvider(authProvider)
+                .build();
         // 创建用户会话
         return cluster.connect(keyspace);
     }
