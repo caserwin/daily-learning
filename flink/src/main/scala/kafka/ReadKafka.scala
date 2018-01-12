@@ -8,7 +8,7 @@ import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer010
 import org.apache.flink.streaming.util.serialization.SimpleStringSchema
 
 
-object SendKafka {
+object ReadKafka {
   @throws[Exception]
   def main(args: Array[String]): Unit = {
     println("scala activeUser")

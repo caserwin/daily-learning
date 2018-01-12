@@ -1,4 +1,4 @@
-package dataset;
+package core;
 
 import org.apache.flink.api.common.restartstrategy.RestartStrategies;
 import org.apache.flink.api.java.DataSet;

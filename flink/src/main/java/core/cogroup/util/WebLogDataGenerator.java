@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package dataset.cogroup.util;
+package core.cogroup.util;
 
 import java.io.FileWriter;
 import java.io.IOException;
