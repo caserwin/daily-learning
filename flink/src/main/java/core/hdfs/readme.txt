@@ -1,0 +1,1 @@
+必须手动把hadoop-lzo-0.4.21-SNAPSHOT.jar 包添加到依赖中，才能运行

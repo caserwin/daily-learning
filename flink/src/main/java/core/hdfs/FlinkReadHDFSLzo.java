@@ -1,4 +1,4 @@
-package core;
+package core.hdfs;
 
 import org.apache.flink.api.common.restartstrategy.RestartStrategies;
 import org.apache.flink.api.java.DataSet;
@@ -17,7 +17,7 @@ import org.apache.hadoop.mapred.TextInputFormat;
  */
 public class FlinkReadHDFSLzo {
 
-    private static final String TIMING_PROD_PATH = "hdfs://rpsj1hmn001.webex.com:8020/kafka-bak/timing_telemetry_hdfs/timing_telemetry_hdfs.2018-01-08.lzo";
+    private static final String TIMING_PROD_PATH = "hdfs://rpsj1hmn001.webex.com:8020/kafka-bak/timing_telemetry_hdfs/timing_telemetry_hdfs.2017-12-31.lzo";
 
     private static JobConf getConfiguration() {
         JobConf conf = new JobConf();
