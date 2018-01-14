@@ -13,7 +13,6 @@ import org.apache.hadoop.mapred.TextInputFormat;
 
 /**
  * @author yidxue
- * TODO 需要进一步验证下面code
  */
 public class FlinkReadHDFSLzo {
 
