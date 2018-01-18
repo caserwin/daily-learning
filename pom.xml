@@ -13,6 +13,7 @@
         <module>spark16</module>
         <module>spark22</module>
         <module>common</module>
+        <module>sparkexample</module>
     </modules>
 
     <repositories>

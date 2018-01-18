@@ -5,10 +5,9 @@ import org.apache.spark.{SparkConf, SparkContext}
 object ReadHDFSLzo {
 
   def main(args: Array[String]): Unit = {
-    val sparkConf = new SparkConf()
-      .setAppName("Simple Application")
+    val sparkConf = new SparkConf().setAppName("Simple Application").setMaster("local[*]")
     val sc = new SparkContext(sparkConf)
-    val filePath = args(0)
+    val filePath = "hdfs://rpsj1hsn001.webex.com:8020/kafka-bak/logstash_telephony_hdfs/mmpmcs/tx1_logstash_telephony_hdfs.2018-01-10.lzo"
 
     val lzoFile = sc.newAPIHadoopFile(filePath,
       classOf[com.hadoop.mapreduce.LzoTextInputFormat],
