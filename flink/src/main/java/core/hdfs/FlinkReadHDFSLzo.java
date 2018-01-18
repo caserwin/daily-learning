@@ -13,6 +13,7 @@ import org.apache.hadoop.mapred.TextInputFormat;
 
 /**
  * @author yidxue
+ * reference: https://flink.apache.org/news/2014/11/18/hadoop-compatibility.html
  */
 public class FlinkReadHDFSLzo {
 

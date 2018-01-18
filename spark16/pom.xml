@@ -40,5 +40,11 @@
             <!--<scope>provided</scope>-->
         </dependency>
 
+        <dependency>
+            <groupId>com.hadoop.gplcompression</groupId>
+            <artifactId>hadoop-lzo</artifactId>
+            <version>0.4.20</version>
+        </dependency>
+
     </dependencies>
 </project>
