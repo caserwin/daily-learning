@@ -30,6 +30,7 @@ object Word2VecExample {
     val spark = SparkSession
       .builder
       .appName("Word2Vec example")
+      .config("spark.master", "local[*]")
       .getOrCreate()
 
     // $example on$

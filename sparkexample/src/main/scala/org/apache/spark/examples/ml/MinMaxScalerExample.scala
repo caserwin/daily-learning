@@ -29,6 +29,7 @@ object MinMaxScalerExample {
     val spark = SparkSession
       .builder
       .appName("MinMaxScalerExample")
+      .config("spark.master", "local[*]")
       .getOrCreate()
 
     // $example on$

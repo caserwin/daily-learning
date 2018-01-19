@@ -29,6 +29,7 @@ object NaiveBayesExample {
     val spark = SparkSession
       .builder
       .appName("NaiveBayesExample")
+      .config("spark.master", "local[*]")
       .getOrCreate()
 
     // $example on$

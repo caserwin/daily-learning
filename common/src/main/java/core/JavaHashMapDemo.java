@@ -17,7 +17,7 @@ public class JavaHashMapDemo {
         HashMap<String, Integer> hashMap = new LinkedHashMap<>();
         // get None Key
         hashMap.put("a", 1);
-        System.out.println(hashMap.get("b"));
+        System.out.println(hashMap.get("b")==null);
 
         //初始化Map
         Map<String, String> map = new HashMap<String, String>() {{

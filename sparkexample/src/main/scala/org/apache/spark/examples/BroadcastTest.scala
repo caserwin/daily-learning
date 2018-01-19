@@ -32,6 +32,7 @@ object BroadcastTest {
       .builder()
       .appName("Broadcast Test")
       .config("spark.broadcast.blockSize", blockSize)
+      .config("spark.master", "local[*]")
       .getOrCreate()
 
     val sc = spark.sparkContext

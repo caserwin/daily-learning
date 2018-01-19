@@ -36,6 +36,7 @@ object LDAExample {
     val spark = SparkSession
       .builder
       .appName(s"${this.getClass.getSimpleName}")
+      .config("spark.master", "local[*]")
       .getOrCreate()
 
     // $example on$
