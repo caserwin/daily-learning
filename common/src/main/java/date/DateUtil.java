@@ -62,6 +62,6 @@ public class DateUtil {
 
 
     public static void main(String[] args){
-
+        System.out.println(isValidDate("2017-11-11"));
     }
 }

@@ -28,7 +28,5 @@ public class RegexDemo {
             System.out.println("Found value: " + m.group(2));
             System.out.println("Found value: " + m.group(3));
         }
-
-
     }
 }
