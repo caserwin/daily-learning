@@ -2,7 +2,7 @@ package json;
 
 import com.google.gson.Gson;
 
-public class ClassToJsonDemo {
+public class GoogleGsonDemo {
 
     class Person {
         String firstName;
@@ -17,7 +17,7 @@ public class ClassToJsonDemo {
     }
 
     public static void main(String[] args) {
-        Person spock = new ClassToJsonDemo().new Person("Leonard", "Nimoy", 81);
+        Person spock = new GoogleGsonDemo().new Person("Leonard", "Nimoy", 81);
         Gson gson = new Gson();
         System.out.println(gson.toJson(spock));
     }

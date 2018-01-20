@@ -3,21 +3,38 @@ package json;
 import com.alibaba.fastjson.JSON;
 import json.bean.Group;
 import json.bean.User;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author yidxue
+ * very good , this code can meet my json task need
  */
 public class AliFastJsonDemo {
     public static void main(String[] args) {
+
+        // class to json
         String jsonString = basicFunc();
-
         System.out.println(jsonString);
-        // jsonString 转类
-        Group group = JSON.parseObject(jsonString, Group.class);
 
+        // json to class
+        Group group = JSON.parseObject(jsonString, Group.class);
         System.out.println(group.getId() + "->" + group.getName() + "->" + group.getUser());
-        // 获得jsonString 指定key
+
+        // get json specified key
         System.out.println(JSON.parseObject(jsonString).get("name"));
+
+        // map to json
+        Map<String,String> dataMap = new HashMap<>();
+        dataMap.put("name", "erwin");
+        dataMap.put("gender", "male");
+        String str = JSON.toJSONString(dataMap);
+        System.out.println(str);
+
+        // json to map
+        Map map = JSON.parseObject(jsonString, Map.class);
+        System.out.println(map);
+
     }
 
     private static String basicFunc() {
