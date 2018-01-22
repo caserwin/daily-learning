@@ -3,6 +3,7 @@ package json;
 import com.alibaba.fastjson.JSON;
 import json.bean.Group;
 import json.bean.User;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,10 +23,10 @@ public class AliFastJsonDemo {
         System.out.println(group.getId() + "->" + group.getName() + "->" + group.getUser());
 
         // get json specified key
-        System.out.println(JSON.parseObject(jsonString).get("name"));
+        System.out.println(JSON.parseObject(jsonString).get("user"));
 
         // map to json
-        Map<String,String> dataMap = new HashMap<>();
+        Map<String, String> dataMap = new HashMap<>();
         dataMap.put("name", "erwin");
         dataMap.put("gender", "male");
         String str = JSON.toJSONString(dataMap);
@@ -34,6 +35,10 @@ public class AliFastJsonDemo {
         // json to map
         Map map = JSON.parseObject(jsonString, Map.class);
         System.out.println(map);
+
+        // multi json
+        String json = "{ \"message\": {\"this\": 174065352} }";
+        System.out.println(JSON.parseObject(JSON.parseObject(json).get("message").toString()).get("this"));
 
     }
 

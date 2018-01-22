@@ -37,6 +37,7 @@ object ChiSquareTestExample {
     val spark = SparkSession
       .builder
       .appName("ChiSquareTestExample")
+      .config("spark.master", "local[*]")
       .getOrCreate()
     import spark.implicits._
 
@@ -51,6 +52,7 @@ object ChiSquareTestExample {
     )
 
     val df = data.toDF("label", "features")
+    df.show()
     val chi = ChiSquareTest.test(df, "features", "label").head
     println("pValues = " + chi.getAs[Vector](0))
     println("degreesOfFreedom = " + chi.getSeq[Int](1).mkString("[", ",", "]"))
