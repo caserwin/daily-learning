@@ -46,6 +46,7 @@ object SparkHiveExample {
       .builder()
       .appName("Spark Hive Example")
       .config("spark.sql.warehouse.dir", warehouseLocation)
+      .config("spark.master", "local[*]")
       .enableHiveSupport()
       .getOrCreate()
 
