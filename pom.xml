@@ -17,18 +17,32 @@
         <module>flink-examples</module>
     </modules>
 
-    <!--<repositories>-->
-        <!--<repository>-->
-            <!--<id>twttrmaven</id>-->
-            <!--<name>repo4</name>-->
-            <!--<url>http://maven.twttr.com</url>-->
-        <!--</repository>-->
+    <repositories>
+        <repository>
+            <id>twttrmaven</id>
+            <url>http://maven.twttr.com</url>
+        </repository>
 
-        <!--<repository>-->
-            <!--<id>cloudera</id>-->
-            <!--<url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>-->
-        <!--</repository>-->
-    <!--</repositories>-->
+        <repository>
+            <id>cloudera</id>
+            <url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>
+        </repository>
+
+        <repository>
+            <id>alibaba</id>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+        </repository>
+
+        <repository>
+            <id>central</id>
+            <url>http://repo1.maven.org/maven2</url>
+        </repository>
+
+        <repository>
+            <id>other</id>
+            <url>http://mvnrepository.com/</url>
+        </repository>
+    </repositories>
 
     <dependencies>
 
