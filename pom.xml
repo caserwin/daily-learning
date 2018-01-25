@@ -14,20 +14,21 @@
         <module>spark22</module>
         <module>common</module>
         <module>spark-examples</module>
+        <module>flink-examples</module>
     </modules>
 
-    <repositories>
-        <repository>
-            <id>twttrmaven</id>
-            <name>repo4</name>
-            <url>http://maven.twttr.com</url>
-        </repository>
+    <!--<repositories>-->
+        <!--<repository>-->
+            <!--<id>twttrmaven</id>-->
+            <!--<name>repo4</name>-->
+            <!--<url>http://maven.twttr.com</url>-->
+        <!--</repository>-->
 
-        <repository>
-            <id>cloudera</id>
-            <url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>
-        </repository>
-    </repositories>
+        <!--<repository>-->
+            <!--<id>cloudera</id>-->
+            <!--<url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>-->
+        <!--</repository>-->
+    <!--</repositories>-->
 
     <dependencies>
 
