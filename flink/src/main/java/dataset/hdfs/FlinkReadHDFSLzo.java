@@ -1,4 +1,4 @@
-package core.hdfs;
+package dataset.hdfs;
 
 import org.apache.flink.api.common.restartstrategy.RestartStrategies;
 import org.apache.flink.api.java.DataSet;

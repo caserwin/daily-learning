@@ -16,9 +16,9 @@
  * limitations under the License.
  */
 
-package core.cogroup;
+package dataset.cogroup;
 
-import core.cogroup.util.WebLogData;
+import dataset.cogroup.util.WebLogData;
 import org.apache.flink.api.common.functions.CoGroupFunction;
 import org.apache.flink.api.common.functions.FilterFunction;
 import org.apache.flink.api.java.DataSet;

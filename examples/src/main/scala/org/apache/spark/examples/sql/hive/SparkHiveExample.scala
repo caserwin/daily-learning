@@ -57,7 +57,7 @@ object SparkHiveExample {
     sql("LOAD DATA LOCAL INPATH 'examples/src/main/resources/kv1.txt' INTO TABLE src")
 
     // Queries are expressed in HiveQL
-    sql("SELECT * FROM src").show()
+    sql("SELECT * FROM src;").show()
     // +---+-------+
     // |key|  value|
     // +---+-------+

@@ -16,8 +16,9 @@
  * limitations under the License.
  */
 
-package core.cogroup.util;
+package dataset.cogroup.util;
 
+import dataset.cogroup.WebLogAnalysis;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Calendar;
