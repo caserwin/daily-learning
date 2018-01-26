@@ -1,7 +1,9 @@
-package dataset.kafka.method1;
+package dataset.kafka;
 
 import com.alibaba.fastjson.JSON;
 import dataset.kafka.bean.Json;
+import dataset.kafka.method1.SinkToKafka;
+import dataset.kafka.method2.KafkaOutputFormat;
 import org.apache.flink.api.java.DataSet;
 import org.apache.flink.api.java.ExecutionEnvironment;
 
@@ -16,10 +18,23 @@ public class Demo {
         ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
         DataSet<String> value = env.fromElements(jsonBuilder());
 
-        // 发送 json 格式数据
-        List<String> resLs = value.collect();
-//        resLs.forEach(System.out::println);
-        SinkToKafka.kafkaProducer(resLs);
+        // meyhod1: 发送 json 格式数据
+//        List<String> resLs = value.collect();
+//        SinkToKafka.kafkaProducer(resLs);
+
+        // method2: sink to Kafka
+        value.output(
+            KafkaOutputFormat.buildKafkaOutputFormat()
+                .setBootstrapServers("localhost:9092")
+                .setTopic("Test_Topic_1")
+                .setAcks("all")
+                .setBatchSize("10")
+                .setBufferMemory("10240")
+                .setLingerMs("1")
+                .setRetries("0")
+                .finish()
+        );
+        env.execute();
     }
 
     private static String[] jsonBuilder() throws InterruptedException {

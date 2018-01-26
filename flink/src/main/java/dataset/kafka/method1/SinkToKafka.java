@@ -29,7 +29,7 @@ public class SinkToKafka {
         Producer<String, String> producer = new KafkaProducer<>(props);
 
         for (String context : resLS) {
-            producer.send(new ProducerRecord<>(config.getString("kafka_producer.topic"), String.valueOf(System.currentTimeMillis()), context));
+            producer.send(new ProducerRecord<>("Test_Topic", String.valueOf(System.currentTimeMillis()), context));
         }
 
         producer.close();
