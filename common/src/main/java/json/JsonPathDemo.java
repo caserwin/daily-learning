@@ -447,6 +447,6 @@ public class JsonPathDemo {
                           "}";
 
         DocumentContext dc = JsonPath.parse(json);
-        System.out.println(dc.read("$.values.extVal.JMTReport1").toString());
+        System.out.println(dc.read("$.values.extVal.JMTReport").toString());
     }
 }

@@ -35,8 +35,9 @@ public class AliFastJsonDemo {
         // json to map
         Map map = JSON.parseObject(jsonString, Map.class);
         System.out.println(map);
+        System.out.println(map instanceof HashMap);
 
-        // multi json
+        // multi json, 获得指定的多层嵌套key
         String json = "{ \"message\": {\"this\": 174065352} }";
         System.out.println(JSON.parseObject(JSON.parseObject(json).get("message").toString()).get("this"));
 

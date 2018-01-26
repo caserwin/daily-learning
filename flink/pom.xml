@@ -19,6 +19,19 @@
         <!--</dependency>-->
 
         <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.44</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.14.8</version>
+        </dependency>
+
+
+        <dependency>
             <groupId>com.cisco.wx2</groupId>
             <artifactId>hadoop-lzo</artifactId>
             <version>1.0</version>
