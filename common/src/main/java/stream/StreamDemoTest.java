@@ -6,7 +6,7 @@ import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
-public class Test {
+public class StreamDemoTest {
     public static void main(String[] args){
         // 通过数组得到 Stream
         String[] names = {"chaimm","peter","john"};
