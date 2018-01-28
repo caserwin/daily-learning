@@ -1,4 +1,4 @@
-package sparkPerformaceTest
+package sparkPerformace
 
 import org.apache.spark.sql.{Row, SQLContext}
 import org.apache.spark.{SparkConf, SparkContext}
