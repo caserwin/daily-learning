@@ -1,10 +1,10 @@
 package dataset.hdfs;
 
-import org.apache.flink.api.common.restartstrategy.RestartStrategies;
 import org.apache.flink.api.java.DataSet;
 import org.apache.flink.api.java.ExecutionEnvironment;
 import org.apache.flink.api.java.hadoop.mapred.HadoopInputFormat;
 import org.apache.flink.api.java.tuple.Tuple2;
+import org.apache.flink.api.java.typeutils.TypeExtractor;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
@@ -22,19 +22,17 @@ public class FlinkReadHDFSLzo {
     private static JobConf getConfiguration() {
         JobConf conf = new JobConf();
         conf.set("io.compression.codecs", "com.hadoop.compression.lzo.LzopCodec");
-        TextInputFormat.addInputPath(conf, new Path(TIMING_PROD_PATH));
         return conf;
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         final ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
-        env.setRestartStrategy(RestartStrategies.fixedDelayRestart(1000, 1000));
-        env.setParallelism(10);
 
-        // Set up the Hadoop TextInputFormat for JMTCall.
         JobConf jmtCallConf = getConfiguration();
-        HadoopInputFormat<LongWritable, Text> inputSet = new HadoopInputFormat<>(new TextInputFormat(), LongWritable.class, Text.class, jmtCallConf);
-        DataSet<Tuple2<LongWritable, Text>> rawCall = env.createInput(inputSet);
+        HadoopInputFormat<LongWritable, Text> inputFormat = new HadoopInputFormat<>(new TextInputFormat(), LongWritable.class, Text.class, jmtCallConf);
+        TextInputFormat.addInputPath(jmtCallConf, new Path(TIMING_PROD_PATH));
+//        DataSet<Tuple2<LongWritable, Text>> rawCall = env.createInput(inputFormat);
+        DataSet<Tuple2<LongWritable, Text>> rawCall = env.createInput(inputFormat, TypeExtractor.getInputFormatTypes(inputFormat));
 
         try {
             System.out.println(rawCall.count());
