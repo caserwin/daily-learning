@@ -10,8 +10,7 @@ import org.apache.spark.sql.SparkSession
   * Description: 
   */
 
-
-object SparkReadPhoenix {
+object SparkReadPhoenixDemo {
 
   def main(args: Array[String]): Unit = {
 

@@ -7,7 +7,7 @@ import org.apache.spark.sql.SparkSession
   * Date: 17/11/7 下午12:43
   * Description: 
   */
-object SparkSQLInferSchemaDemo {
+object SparkReadLocalFileDemo {
 
   def main(args: Array[String]): Unit = {
 
@@ -20,7 +20,7 @@ object SparkSQLInferSchemaDemo {
 
 
     val peopleDF = spark.sparkContext
-      .textFile("src/main/resources/people.txt").map(_.split(","))
+      .textFile("spark22/src/main/resources/people.txt").map(_.split(","))
       .map(attributes => (attributes(0), attributes(1).trim.toInt))
       .toDF("id", "name")
 

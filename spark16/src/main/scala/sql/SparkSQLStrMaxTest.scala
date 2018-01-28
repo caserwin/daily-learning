@@ -1,4 +1,4 @@
-package core
+package sql
 
 import org.apache.spark.sql.SQLContext
 import org.apache.spark.sql.functions._
@@ -23,7 +23,6 @@ object SparkSQLStrMaxTest {
 
     val input = sc.parallelize(dataSeq).toDF("id", "name", "eventtype")
     input.printSchema()
-
 
     input.groupBy("id").agg(max("eventtype")).show(truncate = false)
   }

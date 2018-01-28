@@ -8,7 +8,7 @@ import org.apache.spark.{SparkConf, SparkContext}
   * Description:
   * http://blog.csdn.net/lsshlsw/article/details/48627737
   */
-object SparkMapPartitionsTest {
+object SparkMapPartitionsDemo2 {
   def doubleFunc(iter: Iterator[Int]): Iterator[(Int, Int)] = {
     var res = List[(Int, Int)]()
     while (iter.hasNext) {

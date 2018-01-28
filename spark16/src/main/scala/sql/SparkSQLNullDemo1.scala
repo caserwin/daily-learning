@@ -1,9 +1,12 @@
-package core
+package sql
 
 import org.apache.spark.sql.{Row, SQLContext}
 import org.apache.spark.{SparkConf, SparkContext}
 
-object SparkSQLNullDemo {
+/**
+  * Spark dataframe with null value to rdd
+  */
+object SparkSQLNullDemo1 {
 
   def main(args: Array[String]): Unit = {
     val conf = new SparkConf().setAppName("Scala UDAF Example").setMaster("local[*]")
@@ -17,19 +20,14 @@ object SparkSQLNullDemo {
       (3, "wangwu", "shanghai")
     )
 
-    val input = sc.parallelize(dataSeq).toDF("id", "name", "city")
-    input.printSchema()
+    val inputDF = sc.parallelize(dataSeq).toDF("id", "name", "city")
+    inputDF.printSchema()
 
-    val res = input.select($"id", $"name", $"city").rdd.map {
-      r: Row =>
-        val id = r.getInt(0)
-        val name = r.getString(1)
-        val fuck = r.getString(2)
-        println("===="+ (fuck ==null))
-        (id, name, fuck)
+    val resRDD = inputDF.select($"id", $"name", $"city").na.fill("").rdd.map {
+      case Row(id: Integer, name: String, city: String) => (id, name, city)
     }
 
-    for (r <- res.collect()) {
+    for (r <- resRDD.collect()) {
       println(r)
     }
   }

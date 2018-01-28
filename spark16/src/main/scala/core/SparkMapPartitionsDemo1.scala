@@ -7,7 +7,7 @@ import org.apache.spark.{SparkConf, SparkContext}
   * Date: 17/11/21 下午5:02
   * Description: 
   */
-object SparkMapPartitionsTest1 {
+object SparkMapPartitionsDemo1 {
 
   def main(args: Array[String]): Unit = {
     val conf = new SparkConf().setAppName("Example").setMaster("local[*]")

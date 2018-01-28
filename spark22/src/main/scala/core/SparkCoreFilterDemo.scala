@@ -2,7 +2,7 @@ package core
 
 import org.apache.spark.sql.SparkSession
 
-object SparkCoreDemo2 {
+object SparkCoreFilterDemo {
 
   def main(args: Array[String]) {
     val logFile = "data/README.md" // Should be some file on your system

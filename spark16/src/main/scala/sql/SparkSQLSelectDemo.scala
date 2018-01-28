@@ -13,8 +13,8 @@ object SparkSQLSelectDemo {
     val df = sqlContext.read.json("data/cityinfo.json")
     df.show()
 
-    // 只显示"name"
-    df.select("name").show()
+    // 只显示3行"name"
+    df.select("name").limit(3).show()
 
     // 将Cindex + 1
     df.select(df("name"), df("Cindex") + 1).show()
@@ -27,7 +27,7 @@ object SparkSQLSelectDemo {
 
     // 使用SQL语句进行操作
     df.registerTempTable("cityinfo") // 旧版API
-    val result = sqlContext.sql("SELECT * FROM cityinfo WHERE Cindex >= 2") // 执行 SQL 查询
-    result.show() // 输出结果
+    sqlContext.sql("SELECT * FROM cityinfo WHERE Cindex >= 2").show() // 执行 SQL 查询
+
   }
 }
