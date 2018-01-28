@@ -1,4 +1,4 @@
-package sparkPerformace
+package performace
 
 import org.apache.spark.{SparkConf, SparkContext}
 
