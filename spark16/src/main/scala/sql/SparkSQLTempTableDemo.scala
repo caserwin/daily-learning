@@ -20,7 +20,6 @@ object SparkSQLTempTableDemo {
     val input1 = sc.parallelize(dataSeq1).toDF("id", "name", "city")
 
     input1.registerTempTable("cityinfo")
-    val df1 = sqlContext.sql("select * from cityinfo")
-    df1.show()
+    sqlContext.sql("select * from cityinfo").show()
   }
 }

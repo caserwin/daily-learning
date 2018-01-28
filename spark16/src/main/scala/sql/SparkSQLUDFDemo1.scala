@@ -4,7 +4,7 @@ import org.apache.spark.sql.SQLContext
 import org.apache.spark.sql.functions.{udf, when}
 import org.apache.spark.{SparkConf, SparkContext}
 
-object SparkSQLUDFDemo {
+object SparkSQLUDFDemo1 {
 
   def main(args: Array[String]): Unit = {
     val conf = new SparkConf().setAppName("Spark SQL Example").setMaster("local[1]")
