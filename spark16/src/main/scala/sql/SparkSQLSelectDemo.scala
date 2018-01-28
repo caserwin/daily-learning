@@ -1,12 +1,12 @@
-package core
+package sql
 
 import org.apache.spark.sql.SQLContext
 import org.apache.spark.{SparkConf, SparkContext}
 
-object SparkSQLDemo1 {
+object SparkSQLSelectDemo {
 
   def main(args: Array[String]): Unit = {
-    val conf = new SparkConf().setAppName("Scala UDAF Example").setMaster("local[*]")
+    val conf = new SparkConf().setAppName("Spark Common Example").setMaster("local[*]")
     val sc = new SparkContext(conf)
     val sqlContext = new SQLContext(sc)
 
@@ -26,10 +26,8 @@ object SparkSQLDemo1 {
     df.groupBy("country").count().show()
 
     // 使用SQL语句进行操作
-//    df.registerTempTable("cityinfo")     // 旧版API
-    df.createOrReplaceTempView("cityinfo")
-    val result = sqlContext.sql("SELECT * FROM cityinfo WHERE Cindex >= 2")  // 执行 SQL 查询
-    result.show()        // 输出结果
-
+    df.registerTempTable("cityinfo") // 旧版API
+    val result = sqlContext.sql("SELECT * FROM cityinfo WHERE Cindex >= 2") // 执行 SQL 查询
+    result.show() // 输出结果
   }
 }

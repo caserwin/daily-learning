@@ -3,7 +3,7 @@ package sql
 import org.apache.spark.sql.SQLContext
 import org.apache.spark.{SparkConf, SparkContext}
 
-object WhenCaseSQLDemo {
+object SparkSQLWhenCaseSQLDemo {
 
   def main(args: Array[String]): Unit = {
     val conf = new SparkConf().setAppName("Spark SQL Example").setMaster("local[1]")
