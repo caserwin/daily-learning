@@ -16,8 +16,7 @@ object SparkSQLUDFDemo1 {
     df.show()
 
     val isGreen = udf((color: String) => {
-      if (color == "Green") 1
-      else 0
+      if (color == "Green") 1 else 0
     })
 
     df.withColumn("Green_Ind", isGreen($"color")).show()
