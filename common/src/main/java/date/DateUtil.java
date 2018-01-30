@@ -15,6 +15,7 @@ public class DateUtil {
 
     /**
      * 日期加1天
+     * inFormat demo:
      */
     public static String getAfterDay(String str, String inFormat, String outFormat) {
         DateTimeFormatter formatter = DateTimeFormat.forPattern(inFormat);
@@ -25,9 +26,10 @@ public class DateUtil {
 
     /**
      * 得到日期范围
+     * inFormat demo:
      */
-    public static List<String> getDayListBetween(String start, String end, String dateFormatter) {
-        DateTimeFormatter formatter = DateTimeFormat.forPattern(dateFormatter);
+    public static List<String> getDayListBetween(String start, String end, String format) {
+        DateTimeFormatter formatter = DateTimeFormat.forPattern(format);
         DateTime dateStart = formatter.parseDateTime(start);
         DateTime dateEnd = formatter.parseDateTime(end);
         if (dateStart.isAfter(dateEnd)) {
@@ -35,7 +37,7 @@ public class DateUtil {
         }
         List<String> res = new ArrayList<>();
         while (dateStart.isBefore(dateEnd)) {
-            res.add(DateTimeFormat.forPattern(dateFormatter).print(dateStart));
+            res.add(DateTimeFormat.forPattern(format).print(dateStart));
             dateStart = dateStart.plusDays(1);
         }
         res.add(end);
