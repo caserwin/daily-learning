@@ -7,7 +7,7 @@ package core.regex
 import scala.util.control.Breaks._
 import scala.util.matching.Regex
 
-object ScalaRegexFindValue {
+object ScalaRegexFindValueDemo {
 
   private val IEPattern = "msie ([0-9\\.]+)".r
   private val TridentPattern = "trident.*rv:([0-9\\.]+)".r
