@@ -8,7 +8,7 @@ package core.collections
 object ScalaSeqDemo {
 
   /**
-    *  1 Seq这个数据结构非常奇怪，删除元素默认从1开始，获取元素默认从0开始。
+    * 1 Seq这个数据结构非常奇怪，删除元素默认从1开始，获取元素默认从0开始。
     *
     */
 
@@ -24,6 +24,13 @@ object ScalaSeqDemo {
 
 
     fields.foreach(str => println(str))
+    fields.foreach(println(_))
+
+    if (Seq(1, 2.0, "===").contains(2)) {
+      println("====")
+    } else {
+      println("___")
+    }
 
   }
 }

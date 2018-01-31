@@ -1,9 +1,8 @@
-package core
+package core.matcht
 
-object ScalaMatchCaseTest {
+object ScalaMatchCaseIfDemo {
 
   def main(args: Array[String]): Unit = {
-
 
     val JMTEventTypes = "dd ee ff"
     val JMTRefnum6s ="11 22 33"

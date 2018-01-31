@@ -1,7 +1,6 @@
 package core.collections
 
 import scala.collection.mutable
-//import scala.collection.mutable.MutableList
 
 /**
   * User: Erwin
@@ -19,25 +18,21 @@ object ScalaListDemo {
     // 定义一个List
     val x = List(1)
 
-    // List 添加元素，然后赋值给新的常量y、z
+    // List 添加元素
     val y = x.+:(2)
     val z = x.:+(3)
     println(y)
     println(z)
 
+    // List 添加元素
+    val y1 = 2 +: x
+    val z1 = x :+ 3
+    println(y1)
+    println(z1)
+
     // 两个列表合并
-    println(y ++ z)
-    println(y ::: z)
-
-    // 定义一个可变列表, 只能存放Int类型
-    val mlsInt = mutable.MutableList[Int](1, 2, 3, 4)
-    mlsInt += 5
-    println(mlsInt)
-
-    // 定义一个可变列表, 可以存放任何类型
-    val mls = mutable.MutableList(1, 2, 3, 4, "str")
-    mls += 5
-    println(mls)
+    println((y ++ z).mkString(","))
+    println((y ::: z).mkString(","))
 
   }
 }

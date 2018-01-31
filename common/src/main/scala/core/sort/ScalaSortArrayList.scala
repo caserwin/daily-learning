@@ -4,7 +4,7 @@ import java.util
 import java.util.{Collections, Comparator}
 import scala.collection.JavaConversions._
 
-object SortArrayList {
+object ScalaSortArrayList {
 
   def main(args: Array[String]): Unit = {
     val res = new util.ArrayList[Integer]()
@@ -18,8 +18,6 @@ object SortArrayList {
       override def compare(s: Integer, o: Integer): Int = s.compareTo(o)
     })
 
-    for (a <- res) {
-      println(a)
-    }
+    for(x <- res) println(x)
   }
 }

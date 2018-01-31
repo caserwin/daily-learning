@@ -14,5 +14,7 @@ object ScalaArrayDemo {
     arr(1) = "1"
     arr(2) = "2"
     println(arr.mkString(","))
+
+    arr.foreach(println(_))
   }
 }

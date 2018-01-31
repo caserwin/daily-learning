@@ -1,4 +1,4 @@
-package core
+package core.map
 
 import java.util
 import java.util.concurrent.ConcurrentHashMap

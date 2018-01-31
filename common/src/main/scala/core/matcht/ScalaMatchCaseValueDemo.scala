@@ -1,11 +1,11 @@
-package core
+package core.matcht
 
 /**
   * User: Erwin
   * Date: 17/12/5 上午10:48
   * Description: 
   */
-object ScalaMatchCaseTest3 {
+object ScalaMatchCaseValueDemo {
 
   def main(args: Array[String]): Unit = {
     val JMTEventTypes = "1"
