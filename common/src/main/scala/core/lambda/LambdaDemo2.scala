@@ -1,6 +1,6 @@
-package core
+package core.lambda
 
-object LambdaTest2 {
+object LambdaDemo2 {
 
   def main(args: Array[String]): Unit = {
     // 定义一个普通函数

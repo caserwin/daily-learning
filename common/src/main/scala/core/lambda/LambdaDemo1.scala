@@ -1,6 +1,6 @@
-package core
+package core.lambda
 
-object LambdaTest1 {
+object LambdaDemo1 {
   def main(args: Array[String]): Unit = {
     // 定义一个普通函数
     def foo(s: String): Unit = {println(s)}

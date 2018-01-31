@@ -1,6 +1,6 @@
-package core
+package core.lambda
 
-object MyTest {
+object LambdaDemo3 {
 
   def addInt(a: Int, b: Int): Int = {
     var sum: Int = 0

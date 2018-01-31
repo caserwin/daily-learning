@@ -1,6 +1,6 @@
-package core
+package core.collections
 
-object ScalaTupleTest {
+object ScalaTupleDemo {
 
   def main(args: Array[String]): Unit = {
     def getUserInfo = ("Al", 42, 200.0)
