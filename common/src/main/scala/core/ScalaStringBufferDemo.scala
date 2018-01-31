@@ -1,6 +1,6 @@
 package core
 
-object ScalaStringBufferTest {
+object ScalaStringBufferDemo {
 
   def main(args: Array[String]): Unit = {
     val Statement = StringBuilder.newBuilder

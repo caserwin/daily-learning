@@ -5,7 +5,7 @@ package core
   * Date: 17/11/22 下午12:44
   * Description: 
   */
-object ScalaForYieldTest {
+object ScalaForYieldDemo {
 
   def main(args: Array[String]): Unit = {
 
