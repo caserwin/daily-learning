@@ -20,7 +20,7 @@ object SparkSQLSelectDemo {
     df.select(df("name"), df("Cindex") + 1).show()
 
     // 过滤语句
-    df.filter(df("Cindex") > 2).show()
+    df.where(df("Cindex") > 2).show()
 
     // 聚合操作
     df.groupBy("country").count().show()
@@ -29,5 +29,10 @@ object SparkSQLSelectDemo {
     df.registerTempTable("cityinfo") // 旧版API
     sqlContext.sql("SELECT * FROM cityinfo WHERE Cindex >= 2").show() // 执行 SQL 查询
 
+    // 删除 name 字段
+    df.drop("name").show()
+
+    // 工具 Cindex 字段排序： desc降序， asc升序
+    df.orderBy(df("Cindex").asc).show(false)
   }
 }

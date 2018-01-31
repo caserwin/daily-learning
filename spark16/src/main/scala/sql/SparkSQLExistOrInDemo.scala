@@ -2,12 +2,11 @@ package sql
 
 import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.sql.SQLContext
-import org.apache.spark.sql.functions.{count, lit}
 
 /**
-  * Created by yidxue on 2018/1/29
+  * Created by yidxue on 2018/1/31
   */
-object SparkSQLGroupByDemo {
+object SparkSQLExistOrInDemo {
   def main(args: Array[String]): Unit = {
     val conf = new SparkConf().setAppName("Spark SQL Example").setMaster("local[1]")
     val sc = new SparkContext(conf)
@@ -15,13 +14,16 @@ object SparkSQLGroupByDemo {
     import sqlContext.implicits._
 
     val dataSeq = Seq(
-      ("1", "lisi"),
-      ("1", "lisi"),
-      ("1", "wangwu"),
-      ("2", "wangwu")
+      (1, "zhangsan", "hangzhou"),
+      (2, "lisi", "beijing"),
+      (3, "wangwu", "shanghai")
     )
-    val inputDF = sc.parallelize(dataSeq).toDF("id", "name")
+    val inputDF = sc.parallelize(dataSeq).toDF("id", "name", "city")
 
-    inputDF.groupBy("id").agg(count(lit(1)).alias("COUNT")).show()
+    inputDF.printSchema()
+
+    inputDF.filter($"id".isin(List(1, 2): _*)).show()
+    inputDF.filter($"id".isin(Seq(1, 2): _*)).show()
+
   }
 }

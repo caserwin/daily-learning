@@ -27,8 +27,6 @@ object SparkSQLNullDemo2 {
       r: Row => (r.getInt(0), r.getString(1), r.getString(2))
     }
 
-    for (r <- resRDD.collect()) {
-      println(r)
-    }
+    resRDD.foreach(println(_))
   }
 }

@@ -61,9 +61,18 @@ public class DateUtil {
         return convertSuccess;
     }
 
+    /**
+     * 格式转换
+     */
+    public static String transFormat(String str, String inFormat, String outFormat) {
+        DateTimeFormatter formatter = DateTimeFormat.forPattern(inFormat);
+        DateTime dateTime = formatter.parseDateTime(str);
+        return DateTimeFormat.forPattern(outFormat).print(dateTime);
+    }
 
 
     public static void main(String[] args){
         System.out.println(isValidDate("2017-11-11"));
+        System.out.println(transFormat("2017-11-11", "yyyy-MM-dd","yyyy-MM-dd HH:mm"));
     }
 }
