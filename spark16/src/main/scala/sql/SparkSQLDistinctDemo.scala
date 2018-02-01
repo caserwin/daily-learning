@@ -1,7 +1,7 @@
 package sql
 
-import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.sql.SQLContext
+import org.apache.spark.{SparkConf, SparkContext}
 
 /**
   * Created by yidxue on 2018/1/30
