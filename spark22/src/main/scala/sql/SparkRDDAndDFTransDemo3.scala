@@ -5,7 +5,7 @@ import org.apache.spark.sql.{Row, SparkSession}
 /**
   * Spark dataframe with null value to rdd
   */
-object SparkSQLNullDemo2 {
+object SparkRDDAndDFTransDemo3 {
 
   def main(args: Array[String]): Unit = {
     val spark = SparkSession.builder.appName("SQL Application").config("spark.master", "local[*]").getOrCreate()

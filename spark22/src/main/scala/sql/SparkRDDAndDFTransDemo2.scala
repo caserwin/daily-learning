@@ -5,7 +5,7 @@ import org.apache.spark.sql.{Row, SparkSession}
 /**
   * Spark dataframe with null value to rdd
   */
-object SparkSQLNullDemo1 {
+object SparkRDDAndDFTransDemo2 {
 
   def main(args: Array[String]): Unit = {
     val spark = SparkSession.builder.appName("SQL Application").config("spark.master", "local[*]").getOrCreate()
@@ -24,8 +24,6 @@ object SparkSQLNullDemo1 {
       case Row(id: Integer, name: String, city: String) => (id, name, city)
     }
 
-    for (r <- resRDD.collect()) {
-      println(r)
-    }
+    resRDD.foreach(println(_))
   }
 }
