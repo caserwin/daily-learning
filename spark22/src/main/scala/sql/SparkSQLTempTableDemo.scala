@@ -16,7 +16,16 @@ object SparkSQLTempTableDemo {
 
     val input1 = spark.sparkContext.parallelize(dataSeq1).toDF("id", "name", "city")
 
-    input1.createOrReplaceTempView("cityinfo")
-    spark.sql("select * from cityinfo").show()
+    // 创建局部视图
+    input1.createOrReplaceTempView("people")
+    spark.sql("select * from people").show()
+    // 以下code报错
+//    spark.newSession().sql("SELECT * FROM people").show()
+
+    // 创建全局视图
+    input1.createGlobalTempView("people1")
+    spark.sql("select * from global_temp.people1").show()
+    spark.newSession().sql("SELECT * FROM global_temp.people1").show()
+
   }
 }
