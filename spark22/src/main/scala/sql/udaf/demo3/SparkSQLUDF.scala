@@ -10,7 +10,6 @@ object SparkSQLUDF {
 
     val spark = SparkSession.builder.appName("SQL Application").config("spark.master", "local[*]").getOrCreate()
 
-
     val bigData = Array("Spark","Hadoop","Flink","Spark","Hadoop","Flink","Spark","Hadoop","Flink","Spark","Hadoop","Flink")
     val bigDataRDD = spark.sparkContext.parallelize(bigData)
 

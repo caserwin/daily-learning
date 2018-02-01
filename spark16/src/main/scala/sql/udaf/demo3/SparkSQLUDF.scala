@@ -12,24 +12,24 @@ object SparkSQLUDF {
     val conf = new SparkConf().setMaster("local[*]").setAppName("SparkSQLWindowFunctionOps")
     val sc = new SparkContext(conf)
 
-    val hiveContext = new SQLContext(sc)
+    val sqlContext = new SQLContext(sc)
 
     val bigData = Array("Spark","Hadoop","Flink","Spark","Hadoop","Flink","Spark","Hadoop","Flink","Spark","Hadoop","Flink")
     val bigDataRDD = sc.parallelize(bigData)
 
     val bigDataRowRDD = bigDataRDD.map(line => Row(line))
     val structType = StructType(Array(StructField("name",StringType,true)))
-    val bigDataDF = hiveContext.createDataFrame(bigDataRowRDD, structType)
+    val bigDataDF = sqlContext.createDataFrame(bigDataRowRDD, structType)
 
     bigDataDF.registerTempTable("bigDataTable")
 
     /* * 通过HiveContext注册UDF，在scala2.10.x版本UDF函数最多可以接受22个输入参数 */
-    hiveContext.udf.register("computeLength",(input:String) => input.length)
-    hiveContext.sql("select name,computeLength(name) as length from bigDataTable").show
+    sqlContext.udf.register("computeLength",(input:String) => input.length)
+    sqlContext.sql("select name,computeLength(name) as length from bigDataTable").show
 
     //while(true){}
 
-    hiveContext.udf.register("wordCount",new MyUDAF)
-    hiveContext.sql("select name,wordCount(name) as count,computeLength(name) as length from bigDataTable group by name ").show
+    sqlContext.udf.register("wordCount",new MyUDAF)
+    sqlContext.sql("select name,wordCount(name) as count,computeLength(name) as length from bigDataTable group by name ").show
   }
 }
