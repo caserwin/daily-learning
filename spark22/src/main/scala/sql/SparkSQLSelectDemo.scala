@@ -1,16 +1,13 @@
 package sql
 
-import org.apache.spark.sql.SQLContext
-import org.apache.spark.{SparkConf, SparkContext}
+import org.apache.spark.sql.SparkSession
 
 object SparkSQLSelectDemo {
 
   def main(args: Array[String]): Unit = {
-    val conf = new SparkConf().setAppName("Spark SQL Example").setMaster("local[*]")
-    val sc = new SparkContext(conf)
-    val sqlContext = new SQLContext(sc)
+    val spark = SparkSession.builder.appName("SQL Application").config("spark.master", "local[*]").getOrCreate()
 
-    val df = sqlContext.read.json("data/cityinfo.json")
+    val df = spark.read.json("data/cityinfo.json")
     df.show()
 
     // 只显示3行"name"
@@ -26,8 +23,8 @@ object SparkSQLSelectDemo {
     df.groupBy("country").count().show()
 
     // 使用SQL语句进行操作
-    df.registerTempTable("cityinfo") // 旧版API
-    sqlContext.sql("SELECT * FROM cityinfo WHERE Cindex >= 2").show() // 执行 SQL 查询
+    df.createOrReplaceTempView("cityinfo") // 旧版API
+    spark.sql("SELECT * FROM cityinfo WHERE Cindex >= 2").show() // 执行 SQL 查询
 
     // 删除 name 字段
     df.drop("name").show()

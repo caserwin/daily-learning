@@ -1,22 +1,19 @@
 package sql
 
-import org.apache.spark.sql.SQLContext
-import org.apache.spark.{SparkConf, SparkContext}
+import org.apache.spark.sql.SparkSession
 
 object SparkSQLJoinDemo {
 
   def main(args: Array[String]): Unit = {
-    val conf = new SparkConf().setAppName("Spark SQL Example").setMaster("local[1]")
-    val sc = new SparkContext(conf)
-    val sqlContext = new SQLContext(sc)
-    import sqlContext.implicits._
+    val spark = SparkSession.builder.appName("SQL Application").config("spark.master", "local[*]").getOrCreate()
+    import spark.implicits._
 
     val dataSeq1 = Seq(
       (1, "zhangsan", "hangzhou"),
       (2, "lisi", "beijing"),
       (3, "wangwu", "shanghai")
     )
-    val input1 = sc.parallelize(dataSeq1).toDF("id", "name", "city")
+    val input1 = spark.sparkContext.parallelize(dataSeq1).toDF("id", "name", "city")
 
 
     val dataSeq2 = Seq(
@@ -24,7 +21,7 @@ object SparkSQLJoinDemo {
       (1, "US-2"),
       (2, "CN")
     )
-    val input2 = sc.parallelize(dataSeq2).toDF("id", "country")
+    val input2 = spark.sparkContext.parallelize(dataSeq2).toDF("id", "country")
 
     input1.join(input2, Seq("id"), "left").show()
     /* 左边数据全部保留。且相同key 的数据做笛卡尔积
