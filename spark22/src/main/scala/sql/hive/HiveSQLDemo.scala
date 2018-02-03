@@ -1,16 +1,25 @@
 package sql.hive
 
+import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Date
+
 import org.apache.spark.sql.SparkSession
 
 /**
   * Created by yidxue on 2018/1/28
   */
 object HiveSQLDemo {
+  private val warehouseLocation = new File("spark-warehouse").getAbsolutePath
+
   def main(args: Array[String]): Unit = {
 
-    val spark = SparkSession.builder.appName("SQL Application").config("spark.master", "local[*]").getOrCreate()
+    val spark = SparkSession
+      .builder.appName("SQL Application")
+      .config("spark.master", "local[*]")
+      .config("spark.sql.warehouse.dir", warehouseLocation)
+      .enableHiveSupport()
+      .getOrCreate()
     import spark.implicits._
 
     val curDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date)
