@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 /**
  * @author yidxue
  */
-public class RegexUtil {
+public class RegexDemo2 {
 
     public static String getJMA(String text) {
         String pattern1 = ".+,jma:([\\d.]+),.+";

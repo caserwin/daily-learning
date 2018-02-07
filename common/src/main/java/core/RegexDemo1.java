@@ -3,7 +3,10 @@ package core;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class RegexDemo {
+/**
+ * @author yidxue
+ */
+public class RegexDemo1 {
     public static void main(String[] args) {
         String text = "jme#Download[atmgr.exe][WebEx_V]";
         String pattern = "jme#Download\\[[A-Za-z0-9_.]+]\\[\\w+]";
