@@ -1,7 +1,5 @@
 package core.collections
 
-import scala.collection.mutable
-
 /**
   * User: Erwin
   * Date: 17/11/28 上午9:29
