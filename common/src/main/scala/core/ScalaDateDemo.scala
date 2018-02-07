@@ -24,5 +24,9 @@ object ScalaDateDemo {
     // format date
     val dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
     println(dateFormat.format(new Date()))
+
+    //
+    val format = safeFormatter.get()
+    println(format.parse("2000-01-01 00:00:00").getTime > format.parse(" 1999-01-01 00:00:00").getTime)
   }
 }

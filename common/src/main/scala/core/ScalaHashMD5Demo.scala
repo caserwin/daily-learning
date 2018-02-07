@@ -26,6 +26,5 @@ object ScalaHashMD5Demo {
   def main(args: Array[String]): Unit = {
     println(md5("Hello"))
     println(md5("Hello1"))
-
   }
 }

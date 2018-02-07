@@ -1,13 +1,12 @@
-package core.json
+package core
 
-import net.minidev.json.JSONObject
-import net.minidev.json.JSONValue
+import net.minidev.json.{JSONObject, JSONValue}
 /**
   * User: Erwin
   * Date: 17/12/5 上午9:29
   * Description: 
   */
-object ScalaJsonTest1 {
+object ScalaStrToJsonDemo {
 
   def getJMTTemplate(pipeLine: String, sendTime: String, jobType: String): String = {
     val message =
