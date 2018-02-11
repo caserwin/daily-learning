@@ -1,4 +1,4 @@
-package dataset.transformation.cogroup;
+package dataset.transformation;
 
 import org.apache.flink.api.common.functions.CoGroupFunction;
 import org.apache.flink.api.common.functions.MapFunction;
@@ -10,13 +10,11 @@ import org.apache.flink.util.Collector;
 
 /**
  * @author yidxue
- *
  * code from: https://gist.github.com/mxm/c2e9c459a9d82c18d789
- *
  */
-public class LeftOuterJoinExample {
+public class FlinkCoGroupLeftJoinDemo {
 
-    public static class LeftOuterJoin implements CoGroupFunction<Tuple2<Integer, String>, Tuple2<Integer, String>, Tuple2<Integer, Integer>> {
+    public static class LeftJoin implements CoGroupFunction<Tuple2<Integer, String>, Tuple2<Integer, String>, Tuple2<Integer, Integer>> {
         @Override
         public void coGroup(Iterable<Tuple2<Integer, String>> leftElements, Iterable<Tuple2<Integer, String>> rightElements, Collector<Tuple2<Integer, Integer>> out) {
             final int nullElement = -1;
@@ -40,26 +38,26 @@ public class LeftOuterJoinExample {
 
         DataSource<Integer> leftSide = env.fromElements(1, 2, 3, 4, 5);
         DataSet<Tuple2<Integer, String>> leftSide2 = leftSide.map(
-                new MapFunction<Integer, Tuple2<Integer, String>>() {
-                    @Override
-                    public Tuple2<Integer, String> map(Integer integer) {
-                        return new Tuple2<>(integer, "some data");
-                    }
-                });
+            new MapFunction<Integer, Tuple2<Integer, String>>() {
+                @Override
+                public Tuple2<Integer, String> map(Integer integer) {
+                    return new Tuple2<>(integer, "some data");
+                }
+            });
 
         DataSource<Integer> rightSide = env.fromElements(4, 5, 6, 7, 8, 9, 10);
         DataSet<Tuple2<Integer, String>> rightSide2 = rightSide.map(
-                new MapFunction<Integer, Tuple2<Integer, String>>() {
-                    @Override
-                    public Tuple2<Integer, String> map(Integer integer) {
-                        return new Tuple2<>(integer, "some other data");
-                    }
-                });
+            new MapFunction<Integer, Tuple2<Integer, String>>() {
+                @Override
+                public Tuple2<Integer, String> map(Integer integer) {
+                    return new Tuple2<>(integer, "some other data");
+                }
+            });
 
         DataSet<Tuple2<Integer, Integer>> leftOuterJoin = leftSide2.coGroup(rightSide2)
-                .where(0)
-                .equalTo(0)
-                .with(new LeftOuterJoin());
+                                                              .where(0)
+                                                              .equalTo(0)
+                                                              .with(new LeftJoin());
 
         leftOuterJoin.print();
     }

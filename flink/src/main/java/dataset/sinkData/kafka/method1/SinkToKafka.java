@@ -1,4 +1,4 @@
-package dataset.kafka.method1;
+package dataset.sinkData.kafka.method1;
 
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;

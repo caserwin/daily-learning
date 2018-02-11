@@ -22,7 +22,6 @@ public class FlinkDistinctDemo {
             Tuple3.of(6, 7.0, "er")
         );
 
-
         // distinct 集合元素
         DistinctOperator<Tuple> out = inData.project(2,0).distinct();
         out.print();

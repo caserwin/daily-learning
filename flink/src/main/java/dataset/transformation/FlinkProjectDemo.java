@@ -14,8 +14,8 @@ public class FlinkProjectDemo {
         final ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
 
         DataSet<Tuple3<Integer, Double, String>> inData = env.fromElements(
-            Tuple3.of(2, 6.0, "erwin"),
-            Tuple3.of(2, 4.0, "erwin"),
+            Tuple3.of(2, 5.0, "erwin"),
+            Tuple3.of(2, 5.0, "erwin"),
             Tuple3.of(1, 3.0, "erwin"),
             Tuple3.of(1, 5.0, "ydx"),
             Tuple3.of(6, 7.0, "win"),

@@ -1,13 +1,11 @@
-package dataset.kafka;
+package dataset.sinkData.kafka;
 
 import com.alibaba.fastjson.JSON;
-import dataset.kafka.bean.Json;
-import dataset.kafka.method1.SinkToKafka;
-import dataset.kafka.method2.KafkaOutputFormat;
+import dataset.sinkData.kafka.bean.Json;
+import dataset.sinkData.kafka.method2.KafkaOutputFormat;
 import org.apache.flink.api.java.DataSet;
 import org.apache.flink.api.java.ExecutionEnvironment;
 
-import java.util.List;
 import java.util.Random;
 
 /**

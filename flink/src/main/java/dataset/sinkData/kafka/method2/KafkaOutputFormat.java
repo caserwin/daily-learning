@@ -1,4 +1,4 @@
-package dataset.kafka.method2;
+package dataset.sinkData.kafka.method2;
 
 import org.apache.flink.api.common.io.RichOutputFormat;
 import org.apache.flink.configuration.Configuration;

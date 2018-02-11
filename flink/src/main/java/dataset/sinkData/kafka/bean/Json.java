@@ -1,4 +1,4 @@
-package dataset.kafka.bean;
+package dataset.sinkData.kafka.bean;
 
 import lombok.Data;
 

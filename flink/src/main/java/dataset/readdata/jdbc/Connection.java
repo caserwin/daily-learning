@@ -1,4 +1,4 @@
-package dataset.jdbc;
+package dataset.readdata.jdbc;
 
 /**
  * Created by yidxue on 2018/2/8
