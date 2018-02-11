@@ -32,6 +32,7 @@ object SparkSQLSelectDemo {
     // 删除 name 字段
     df.drop("name").show()
 
+    df.show()
     // 工具 Cindex 字段排序： desc降序， asc升序
     df.orderBy(df("Cindex").asc).show(false)
   }

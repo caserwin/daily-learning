@@ -1,4 +1,4 @@
-package dataset.hdfs;
+package dataset.readdata.hdfs;
 
 import org.apache.flink.api.java.DataSet;
 import org.apache.flink.api.java.ExecutionEnvironment;
