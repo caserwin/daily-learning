@@ -1,4 +1,4 @@
-package dataset.transformation;
+package dataset.transformation.cogroup;
 
 import org.apache.flink.api.common.functions.CoGroupFunction;
 import org.apache.flink.api.common.functions.MapFunction;
@@ -11,15 +11,13 @@ import org.apache.flink.util.Collector;
 /**
  * Created by yidxue on 2018/2/11
  */
-public class FlinkCoGroupInnerJoinDemo {
-    public static class InnerJoin implements CoGroupFunction<Tuple2<Integer, String>, Tuple2<Integer, String>, Tuple2<Integer, Integer>> {
+public class FlinkCoGroupOutJoinDemo {
+
+    public static class OutJoin implements CoGroupFunction<Tuple2<Integer, String>, Tuple2<Integer, String>, Tuple2<Integer, Integer>> {
         @Override
         public void coGroup(Iterable<Tuple2<Integer, String>> leftElements, Iterable<Tuple2<Integer, String>> rightElements, Collector<Tuple2<Integer, Integer>> out) {
-
             for (Tuple2<Integer, String> leftElem : leftElements) {
-                for (Tuple2<Integer, String> rightElem : rightElements) {
-                    out.collect(new Tuple2<>(leftElem.f0, rightElem.f0));
-                }
+                out.collect(new Tuple2<>(leftElem.f0, 1));
             }
         }
     }
@@ -47,12 +45,11 @@ public class FlinkCoGroupInnerJoinDemo {
             });
 
 
-        // where() 的参数是leftSide2 的字段索引，equalTo() 的参数是rightSide2 的字段索引。
-        DataSet<Tuple2<Integer, Integer>> innerJoin = leftSide2.coGroup(rightSide2)
-                                                          .where(0)
-                                                          .equalTo(0)
-                                                          .with(new InnerJoin());
+        DataSet<Tuple2<Integer, Integer>> leftOuterJoin = leftSide2.coGroup(rightSide2)
+                                                              .where(0)
+                                                              .equalTo(0)
+                                                              .with(new OutJoin());
 
-        innerJoin.print();
+        leftOuterJoin.print();
     }
 }

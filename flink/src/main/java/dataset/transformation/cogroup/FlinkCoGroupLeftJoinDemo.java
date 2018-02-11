@@ -1,4 +1,4 @@
-package dataset.transformation;
+package dataset.transformation.cogroup;
 
 import org.apache.flink.api.common.functions.CoGroupFunction;
 import org.apache.flink.api.common.functions.MapFunction;
