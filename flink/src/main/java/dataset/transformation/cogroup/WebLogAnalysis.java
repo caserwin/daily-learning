@@ -1,21 +1,3 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package dataset.transformation.cogroup;
 
 import dataset.transformation.cogroup.util.WebLogData;
@@ -33,62 +15,8 @@ import org.apache.flink.util.Collector;
 import java.util.List;
 
 /**
- * This program processes web logs and relational data.
- * It implements the following relational query:
- * <p>
- * <pre>{@code
- * SELECT
- *       r.pageURL,
- *       r.pageRank,
- *       r.avgDuration
- * FROM documents d JOIN rankings r
- *                  ON d.url = r.url
- * WHERE CONTAINS(d.text, [keywords])
- *       AND r.rank > [rank]
- *       AND NOT EXISTS
- *           (
- *              SELECT * FROM Visits v
- *              WHERE v.destUrl = d.url
- *                    AND v.visitDate < [date]
- *           );
- * }</pre>
- * <p>
- * <p>Input files are plain text CSV files using the pipe character ('|') as field separator.
- * The tables referenced in the query can be generated using the {@link } and
- * have the following schemas
- * <pre>{@code
- * CREATE TABLE Documents (
- *                url VARCHAR(100) PRIMARY KEY,
- *                contents TEXT );
- *
- * CREATE TABLE Rankings (
- *                pageRank INT,
- *                pageURL VARCHAR(100) PRIMARY KEY,
- *                avgDuration INT );
- *
- * CREATE TABLE Visits (
- *                sourceIP VARCHAR(16),
- *                destURL VARCHAR(100),
- *                visitDate DATE,
- *                adRevenue FLOAT,
- *                userAgent VARCHAR(64),
- *                countryCode VARCHAR(3),
- *                languageCode VARCHAR(6),
- *                searchWord VARCHAR(32),
- *                duration INT );
- * }</pre>
- * <p>
- * <p>Usage: <code>WebLogAnalysis --documents &lt;path&gt; --ranks &lt;path&gt; --visits &lt;path&gt; --result &lt;path&gt;</code><br>
- * If no parameters are provided, the program is run with default data from {@link WebLogData}.
- * <p>
- * <p>This example shows how to use:
- * <ul>
- * <li> tuple data types
- * <li> projection and join projection
- * <li> the CoGroup transformation for an anti-join
- * </ul>
+ * Code from: https://github.com/apache/flink/tree/master/flink-examples/flink-examples-batch/src/main/java/org/apache/flink/examples/java/relational
  */
-@SuppressWarnings("serial")
 public class WebLogAnalysis {
 
     // *************************************************************************

@@ -5,8 +5,6 @@ import org.apache.spark.{SparkConf, SparkContext}
 
 /**
   * Created by yidxue on 2018/1/30
-  *
-  * http://blog.csdn.net/dabokele/article/details/52802150
   */
 object SparkSQLDistinctDemo {
 

@@ -10,6 +10,9 @@ import org.apache.flink.util.Collector;
 
 /**
  * @author yidxue
+ *
+ * code from: https://gist.github.com/mxm/c2e9c459a9d82c18d789
+ *
  */
 public class LeftOuterJoinExample {
 
