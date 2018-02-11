@@ -21,7 +21,7 @@ public class FlinkMapDemo {
     public static void main(String[] args) throws Exception {
         final ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
 
-        DataSet<Tuple2<Integer, Integer>> intPairs = env.fromElements(
+        DataSet<Tuple2<Integer, Integer>> inData = env.fromElements(
             Tuple2.of(2, 6),
             Tuple2.of(2, 4),
             Tuple2.of(1, 3),
@@ -31,7 +31,7 @@ public class FlinkMapDemo {
             Tuple2.of(1, 17),
             Tuple2.of(1, 2));
 
-        DataSet<Integer> intSums = intPairs.map(new FlinkMapDemo().new IntAdder());
+        DataSet<Integer> intSums = inData.map(new FlinkMapDemo().new IntAdder());
         intSums.print();
     }
 }

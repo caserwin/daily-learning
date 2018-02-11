@@ -3,7 +3,6 @@ package dataset.transformation;
 import org.apache.flink.api.common.functions.FlatMapFunction;
 import org.apache.flink.api.java.DataSet;
 import org.apache.flink.api.java.ExecutionEnvironment;
-import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.util.Collector;
 
 /**
@@ -22,8 +21,8 @@ public class FlinkFlatMapDemo {
 
     public static void main(String[] args) throws Exception {
         final ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
-        DataSet<String> text = env.fromElements("aa bb cc dd", "a bb cc ee");
-        DataSet<String> wordCounts = text.flatMap(new FlinkFlatMapDemo().new Tokenizer());
+        DataSet<String> inData = env.fromElements("aa bb cc dd", "a bb cc ee");
+        DataSet<String> wordCounts = inData.flatMap(new FlinkFlatMapDemo().new Tokenizer());
         wordCounts.print();
     }
 }

@@ -14,11 +14,11 @@ public class FlinkGroupByDemo {
     public static void main(String[] args) throws Exception {
         final ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
 
-        DataSet<String> text = env.fromElements(
+        DataSet<String> inData = env.fromElements(
             "Who's there?",
             "I think I hear them. Stand, ho! Who's there?");
 
-        DataSet<Tuple2<String, Integer>> wordCounts = text.flatMap(new LineSplitter()).groupBy(0).sum(1);
+        DataSet<Tuple2<String, Integer>> wordCounts = inData.flatMap(new LineSplitter()).groupBy(0).sum(1);
         wordCounts.print();
     }
 
