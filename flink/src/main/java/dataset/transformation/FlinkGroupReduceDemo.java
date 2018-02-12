@@ -13,7 +13,6 @@ import java.util.Set;
  */
 public class FlinkGroupReduceDemo {
 
-
     /**
      * 一次获得一个分组的全部数据
      */
