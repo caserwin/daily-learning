@@ -19,6 +19,18 @@
         <!--</dependency>-->
 
         <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>2.9.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.9.4</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
             <version>1.2.44</version>
@@ -30,7 +42,6 @@
             <version>1.14.8</version>
         </dependency>
 
-
         <dependency>
             <groupId>com.cisco.wx2</groupId>
             <artifactId>hadoop-lzo</artifactId>
@@ -41,8 +52,8 @@
 
         <dependency>
             <groupId>org.apache.flink</groupId>
-            <artifactId>flink-hadoop-compatibility_2.10</artifactId>
-            <version>1.3.2</version>
+            <artifactId>flink-hadoop-compatibility_2.11</artifactId>
+            <version>1.4.0</version>
         </dependency>
 
         <dependency>
@@ -54,31 +65,31 @@
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-streaming-java_2.11</artifactId>
-            <version>1.3.2</version>
+            <version>1.4.0</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-java</artifactId>
-            <version>1.3.2</version>
+            <version>1.4.0</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-connector-kafka-0.10_2.11</artifactId>
-            <version>1.3.2</version>
+            <version>1.4.0</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-streaming-scala_2.11</artifactId>
-            <version>1.3.2</version>
+            <version>1.4.0</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.flink</groupId>
             <artifactId>flink-table_2.11</artifactId>
-            <version>1.3.2</version>
+            <version>1.4.0</version>
         </dependency>
     </dependencies>
 

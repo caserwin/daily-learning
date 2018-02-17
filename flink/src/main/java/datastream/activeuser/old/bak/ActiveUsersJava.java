@@ -70,6 +70,7 @@ public class ActiveUsersJava {
                 }).name("Timestamp extractor");
 
         DataStream<Tuple1<ObjectNode>> transformedSource = inputStream.flatMap(new FlatMapFunction<ObjectNode, Tuple1<ObjectNode>>() {
+            @Override
             public void flatMap(ObjectNode value, Collector<Tuple1<ObjectNode>> out) throws Exception {
                 String message = value.get("@message").asText();
                 ObjectMapper mapper = new ObjectMapper();

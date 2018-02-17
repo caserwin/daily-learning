@@ -39,7 +39,6 @@ public class FlinkGroupReduceDemo {
     public static void main(String[] args) throws Exception {
         final ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
 
-
         DataSet<Tuple2<Integer, String>> inData = env.fromElements(
             Tuple2.of(1, "erwin"),
             Tuple2.of(1, "erwin"),

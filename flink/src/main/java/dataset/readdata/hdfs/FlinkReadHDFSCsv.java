@@ -2,21 +2,20 @@ package dataset.readdata.hdfs;
 
 import org.apache.flink.api.java.DataSet;
 import org.apache.flink.api.java.ExecutionEnvironment;
-import org.apache.flink.api.java.tuple.Tuple2;
-import org.apache.hadoop.io.LongWritable;
-import org.apache.hadoop.io.Text;
-import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
+import org.apache.flink.api.java.tuple.Tuple3;
 
 /**
- * @author yidxue
+ * Created by yidxue on 2018/2/17
  */
-public class FlinkReadHDFS {
+public class FlinkReadHDFSCsv {
+
     private static final String SAP_PATH = "hdfs://10.29.42.40:8020/user/pda/jmtForCall/jmtdata/jmtdata_AllSites_2018-01-01.csv";
 
     public static void main(String[] args) throws Exception {
-        final ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
-        DataSet<Tuple2<LongWritable, Text>> tuples = env.readHadoopFile(new TextInputFormat(), LongWritable.class, Text.class, SAP_PATH);
 
-        System.out.println(tuples.collect().size());
+        final ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
+        DataSet<Tuple3<Integer, String, Double>> csvInput = env.readCsvFile(SAP_PATH).types(Integer.class, String.class, Double.class);
+        csvInput.print();
+
     }
 }

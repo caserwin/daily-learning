@@ -42,17 +42,19 @@ public class ActiveUsersApp {
         final StreamTableEnvironment tableEnv = TableEnvironment.getTableEnvironment(env);
         props.setProperty("bootstrap.servers", props.getProperty("input.bootstrap.servers"));
 
-        FlinkKafkaConsumer010<ObjectNode> consumer010 = new FlinkKafkaConsumer010<>(props.getProperty("input-topic"), new JSONDeserializationSchema(), props);
+//        new FlinkKafkaConsumer010<>("dsdd", new JSONDeserializationSchema(), props);
+
+        FlinkKafkaConsumer010<ObjectNode> consumer010 = new FlinkKafkaConsumer010(props.getProperty("input-topic"), new JSONDeserializationSchema(), props);
         consumer010.setStartFromEarliest();
 
         DataStream<ObjectNode> inputStream = env.addSource(consumer010).name("Kafka 0.10 Source")
-                .assignTimestampsAndWatermarks(new BoundedOutOfOrdernessTimestampExtractor<ObjectNode>(Time.seconds(1)) {
-                    @Override
-                    public long extractTimestamp(ObjectNode jsonNodes) {
-                        DateTime dateTime = DateTime.parse(jsonNodes.get("@timestamp").asText(), ISODateTimeFormat.dateTime());
-                        return dateTime.getMillis();
-                    }
-                }).name("Timestamp extractor");
+                                                 .assignTimestampsAndWatermarks(new BoundedOutOfOrdernessTimestampExtractor<ObjectNode>(Time.seconds(1)) {
+                                                     @Override
+                                                     public long extractTimestamp(ObjectNode jsonNodes) {
+                                                         DateTime dateTime = DateTime.parse(jsonNodes.get("@timestamp").asText(), ISODateTimeFormat.dateTime());
+                                                         return dateTime.getMillis();
+                                                     }
+                                                 }).name("Timestamp extractor");
 
         DataStream<Tuple1<ObjectNode>> transformedSource = inputStream.flatMap(new FlatMapFunction<ObjectNode, Tuple1<ObjectNode>>() {
             @Override
@@ -73,28 +75,28 @@ public class ActiveUsersApp {
         tableEnv.registerDataStream("kafka_raw_table", transformedSource, "node, rowtime.rowtime");
 
         String query1 = "SELECT node, rowtime FROM kafka_raw_table WHERE (extract_field(node, '_appname')='conv' " +
-                "AND extract_field(node,'SM.uaType')<>'Messenger' AND extract_field(node,'SM.uaType')<>'Hydra' " +
-                "AND extract_field(node,'SM.uaType')<>'UCConnector' AND ((extract_field(node,'SM.verb')='acknowledge' " +
-                "AND extract_field(node,'SM.object.objectType')='activity') OR (extract_field(node,'SM.verb')='post' " +
-                "AND extract_field(node,'SM.object.objectType')='comment') OR (extract_field(node,'SM.verb')='share' " +
-                "AND extract_field(node,'SM.object.objectType')='content') OR (extract_field(node,'SM.verb')='create' " +
-                "AND (extract_field(node,'SM.object.objectType')='conversation' " +
-                "OR extract_field(node,'SM.object.objectType')='team')) OR (extract_field(node,'SM.verb')='add' " +
-                "AND extract_field(node,'SM.object.objectType')='person' " +
-                "AND (extract_field(node,'SM.target.objectType')='conversation' " +
-                "OR extract_field(node,'SM.object.objectType')='team')))) " +
-                "OR (extract_field(node, '_appname')='locus' AND (extract_field(node,'SM.metricType')='PARTICIPANT' " +
-                "AND extract_field(node,'SM.callType')='TERMINATED' AND extract_field(node,'SM.squared')='true' " +
-                "AND extract_field(node,'SM.locusType')<>'JABBER'))";
+                            "AND extract_field(node,'SM.uaType')<>'Messenger' AND extract_field(node,'SM.uaType')<>'Hydra' " +
+                            "AND extract_field(node,'SM.uaType')<>'UCConnector' AND ((extract_field(node,'SM.verb')='acknowledge' " +
+                            "AND extract_field(node,'SM.object.objectType')='activity') OR (extract_field(node,'SM.verb')='post' " +
+                            "AND extract_field(node,'SM.object.objectType')='comment') OR (extract_field(node,'SM.verb')='share' " +
+                            "AND extract_field(node,'SM.object.objectType')='content') OR (extract_field(node,'SM.verb')='create' " +
+                            "AND (extract_field(node,'SM.object.objectType')='conversation' " +
+                            "OR extract_field(node,'SM.object.objectType')='team')) OR (extract_field(node,'SM.verb')='add' " +
+                            "AND extract_field(node,'SM.object.objectType')='person' " +
+                            "AND (extract_field(node,'SM.target.objectType')='conversation' " +
+                            "OR extract_field(node,'SM.object.objectType')='team')))) " +
+                            "OR (extract_field(node, '_appname')='locus' AND (extract_field(node,'SM.metricType')='PARTICIPANT' " +
+                            "AND extract_field(node,'SM.callType')='TERMINATED' AND extract_field(node,'SM.squared')='true' " +
+                            "AND extract_field(node,'SM.locusType')<>'JABBER'))";
 
         Table table1 = tableEnv.sql(query1);
         tableEnv.registerTable("filtered_table", table1);
 
         String query2 = "SELECT coalesce(extract_field(node,'userId'), extract_field(node,'@fields.USER_ID'), " +
-                "extract_field(node,'SM.actor.id'), extract_field(node,'SM.participant.userId'), " +
-                "extract_field(node,'SM.userId'), extract_field(node,'SM.uid'), extract_field(node,'SM_C.userId'), " +
-                "extract_field(node,'SM.onBoardedUser'), 'unknown') as userId, " +
-                "extract_field(node,'@timestamp') as time_stamp FROM filtered_table";
+                            "extract_field(node,'SM.actor.id'), extract_field(node,'SM.participant.userId'), " +
+                            "extract_field(node,'SM.userId'), extract_field(node,'SM.uid'), extract_field(node,'SM_C.userId'), " +
+                            "extract_field(node,'SM.onBoardedUser'), 'unknown') as userId, " +
+                            "extract_field(node,'@timestamp') as time_stamp FROM filtered_table";
 
         Table table2 = tableEnv.sql(query2);
 
@@ -102,26 +104,26 @@ public class ActiveUsersApp {
         DataStream<Row> rowStream = tableEnv.toAppendStream(table2, Row.class);
 
         // count active users
-        DataStream<Tuple2<String, Integer>> dailyStream = rowStream.
-                map(new UserMapFunction.DailyMap()).
-                keyBy(0).
-                flatMap(new UserFlatMapFunction()).
-                keyBy(0).
-                sum(1);
+        DataStream<Tuple2<String, Integer>> dailyStream = rowStream
+                                                              .map(new UserMapFunction.DailyMap())
+                                                              .keyBy(0)
+                                                              .flatMap(new UserFlatMapFunction())
+                                                              .keyBy(0)
+                                                              .sum(1);
 
-        DataStream<Tuple2<String, Integer>> weeklyStream = rowStream.
-                map(new UserMapFunction.WeeklyMap()).
-                keyBy(0).
-                flatMap(new UserFlatMapFunction()).
-                keyBy(0).
-                sum(1);
+        DataStream<Tuple2<String, Integer>> weeklyStream = rowStream
+                                                               .map(new UserMapFunction.WeeklyMap())
+                                                               .keyBy(0)
+                                                               .flatMap(new UserFlatMapFunction())
+                                                               .keyBy(0)
+                                                               .sum(1);
 
-        DataStream<Tuple2<String, Integer>> monthlyStream = rowStream.
-                map(new UserMapFunction.MonthlyMap()).
-                keyBy(0).
-                flatMap(new UserFlatMapFunction()).
-                keyBy(0).
-                sum(1);
+        DataStream<Tuple2<String, Integer>> monthlyStream = rowStream
+                                                                .map(new UserMapFunction.MonthlyMap())
+                                                                .keyBy(0)
+                                                                .flatMap(new UserFlatMapFunction())
+                                                                .keyBy(0)
+                                                                .sum(1);
 
         // output
         dailyStream.map(new UserMapFunction.FormatFieldMap()).print();
