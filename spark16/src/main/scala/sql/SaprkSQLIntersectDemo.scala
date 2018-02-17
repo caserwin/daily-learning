@@ -28,7 +28,7 @@ object SaprkSQLIntersectDemo {
     )
     val inputDF2 = sc.parallelize(dataSeq2).toDF("id", "name", "city")
 
-
+    // 求交集
     inputDF1.intersect(inputDF2).show(truncate = false)
   }
 }

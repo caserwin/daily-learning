@@ -18,13 +18,18 @@ object SparkSQLJoinDemo {
     )
     val input1 = sc.parallelize(dataSeq1).toDF("id", "name", "city")
 
-
     val dataSeq2 = Seq(
       (1, "US-1"),
       (1, "US-2"),
       (2, "CN")
     )
     val input2 = sc.parallelize(dataSeq2).toDF("id", "country")
+
+    /**
+      * 两个集合根据某个字段求差集，在spark2.2 中可以通过 leftanti join 方式实现。
+      * 但是在spark 1.6中不存在。
+      */
+
 
     input1.join(input2, Seq("id"), "left").show()
     /* 左边数据全部保留。且相同key 的数据做笛卡尔积

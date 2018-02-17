@@ -28,8 +28,7 @@ object SparkSQLExceptDemo {
     )
     val inputDF2 = sc.parallelize(dataSeq2).toDF("id", "name", "city")
 
-    inputDF1
-      .except(inputDF2)
-      .show()
+    // 求差集
+    inputDF1.except(inputDF2).show()
   }
 }
