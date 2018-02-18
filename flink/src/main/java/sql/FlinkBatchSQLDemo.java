@@ -13,7 +13,6 @@ import org.apache.flink.table.api.java.BatchTableEnvironment;
 public class FlinkBatchSQLDemo {
 
     public static void main(String[] args) throws Exception {
-        // set up execution environment
         ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
         BatchTableEnvironment tEnv = TableEnvironment.getTableEnvironment(env);
 
