@@ -10,7 +10,7 @@ import org.apache.flink.table.api.java.BatchTableEnvironment;
 /**
  * @author yidxue
  */
-public class WordCountTable {
+public class FlinkBatchTableDemo {
 
     public static void main(String[] args) throws Exception {
         ExecutionEnvironment env = ExecutionEnvironment.createCollectionsEnvironment();
