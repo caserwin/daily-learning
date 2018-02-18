@@ -14,7 +14,7 @@ public class FlinkGroupByKeySelectorDemo {
     public static class WordCounterReduce implements ReduceFunction<WCBean> {
         @Override
         public WCBean reduce(WCBean in1, WCBean in2) {
-            return new WCBean(in1.word, in1.count + in2.count);
+            return new WCBean(in1.word, in1.frequency + in2.frequency);
         }
     }
 

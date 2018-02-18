@@ -5,18 +5,18 @@ package bean;
  */
 public class WCBean {
     public String word;
-    public int count;
+    public int frequency;
 
     public WCBean() {
     }
 
-    public WCBean(String word, int count) {
+    public WCBean(String word, int frequency) {
         this.word = word;
-        this.count = count;
+        this.frequency = frequency;
     }
 
     @Override
     public String toString() {
-        return this.word + "\t" + this.count;
+        return this.word + "\t" + this.frequency;
     }
 }
