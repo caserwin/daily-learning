@@ -1,5 +1,6 @@
 package dataset.transformation.groupby;
 
+import bean.WCBean;
 import org.apache.flink.api.common.functions.ReduceFunction;
 import org.apache.flink.api.java.DataSet;
 import org.apache.flink.api.java.ExecutionEnvironment;

@@ -1,8 +1,8 @@
-package dataset.sinkData.kafka;
+package dataset.sinkdata.kafka;
 
 import com.alibaba.fastjson.JSON;
-import dataset.sinkData.kafka.bean.Json;
-import dataset.sinkData.kafka.method2.KafkaOutputFormat;
+import dataset.sinkdata.kafka.bean.Json;
+import dataset.sinkdata.kafka.method2.KafkaOutputFormat;
 import org.apache.flink.api.java.DataSet;
 import org.apache.flink.api.java.ExecutionEnvironment;
 

@@ -1,4 +1,4 @@
-package dataset.transformation.groupby;
+package bean;
 
 /**
  * Created by yidxue on 2018/2/11
@@ -6,6 +6,9 @@ package dataset.transformation.groupby;
 public class WCBean {
     public String word;
     public int count;
+
+    public WCBean() {
+    }
 
     public WCBean(String word, int count) {
         this.word = word;

@@ -1,4 +1,4 @@
-package dataset.sinkData;
+package dataset.sinkdata;
 
 import org.apache.flink.api.java.DataSet;
 import org.apache.flink.api.java.ExecutionEnvironment;
