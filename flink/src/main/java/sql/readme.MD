@@ -60,3 +60,9 @@ input table 可以通过以下方式注册：<br>
    
 output table 通过 TableSink 方式注册。
 
+## 4 Table API/SQL/两者混合使用
+
+
+
+
+## 5 保存查询结果(Emit a Table)
