@@ -7,7 +7,7 @@ import org.apache.flink.table.api.java.BatchTableEnvironment;
 /**
  * Created by yidxue on 2018/2/18
  */
-public class FlinkBatchTableRegisterDemo {
+public class FlinkBatchRegisterTableDemo {
     public static void main(String[] args) {
         ExecutionEnvironment env = ExecutionEnvironment.createCollectionsEnvironment();
         BatchTableEnvironment tEnv = TableEnvironment.getTableEnvironment(env);

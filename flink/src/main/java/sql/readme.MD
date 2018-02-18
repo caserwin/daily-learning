@@ -53,16 +53,37 @@ TableEnvironment可以认为是一个目录，这个目录维护已经注册了�
 input table 可以通过以下方式注册：<br>
    - 已经存在的 table 对象。通常是Table API或者SQL 查询的结果集。使用：<br>
    tableEnv.registerTable("table1", ...)
-   - 通过外部数据得到的数据源，例如：文件，数据库，消息系统等得到的 TableSource。使用：<br>
+   - 通过外部数据得到的数据源。例如：文件，数据库，消息系统等得到的 TableSource。使用：<br>
    tableEnv.registerTableSource("table2", ...);
    - 通过DataStream 或 DataSet 注册表。使用：<br>
    tableEnv.registerExternalCatalog("extCat", ...);
    
 output table 通过 TableSink 方式注册。
 
+### 3.1 Register a TableSource
+具体参考:<br>
+[Table Sources & Sinks](https://ci.apache.org/projects/flink/flink-docs-release-1.4/dev/table/sourceSinks.html)
+
+
 ## 4 Table API/SQL/两者混合使用
 
 
 
-
 ## 5 保存查询结果(Emit a Table)
+具体参考:<br>
+[Table Sources & Sinks](https://ci.apache.org/projects/flink/flink-docs-release-1.4/dev/table/sourceSinks.html)
+
+有两种方式保存结果:<br>
+方式 1:<br>
+Emit the result Table to the TableSink via the writeToSink() method<br>
+方式 2:<br>
+Register the TableSink with a specific schema<br>
+
+
+
+
+
+
+
+
+
