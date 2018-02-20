@@ -1,11 +1,11 @@
-package sql.function;
+package sql.stream.function;
 
 import bean.WCBean;
-import org.apache.flink.api.java.DataSet;
-import org.apache.flink.api.java.ExecutionEnvironment;
+import org.apache.flink.streaming.api.datastream.DataStream;
+import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.table.api.Table;
 import org.apache.flink.table.api.TableEnvironment;
-import org.apache.flink.table.api.java.BatchTableEnvironment;
+import org.apache.flink.table.api.java.StreamTableEnvironment;
 import org.apache.flink.table.functions.ScalarFunction;
 
 /**
@@ -26,15 +26,15 @@ public class FlinkScalarFunctionDemo {
     }
 
     public static void main(String[] args) {
-        ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
-        BatchTableEnvironment tableEnv = TableEnvironment.getTableEnvironment(env);
+        StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+        StreamTableEnvironment tableEnv = TableEnvironment.getTableEnvironment(env);
 
-        DataSet<WCBean> input = env.fromElements(
+        DataStream<WCBean> input = env.fromElements(
             new WCBean("Hello", 1),
             new WCBean("Ciao", 1),
             new WCBean("Hello", 1));
 
-        Table myTable = tableEnv.fromDataSet(input);
+        Table myTable = tableEnv.fromDataStream(input);
 
         // 1. register the function
         tableEnv.registerFunction("hashCode", new HashCode(10));
@@ -42,11 +42,8 @@ public class FlinkScalarFunctionDemo {
         // 2. use the function in Java Table API
         myTable.select("word, word.hashCode(), hashCode(word)");
 
-
-
-
         // 3. use the function in SQL API
-        tableEnv.registerDataSet("WordCount", input, "word, frequency");
+        tableEnv.registerDataStream("WordCount", input, "word, frequency");
         tableEnv.sqlQuery("SELECT word, hashCode(word) FROM WordCount");
     }
 }
