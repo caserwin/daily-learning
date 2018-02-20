@@ -7,7 +7,7 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 /**
  * Created by yidxue on 2018/2/8
  */
-public class FlinkReadDataDemo {
+public class FlinkReadDataFromCollection {
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
