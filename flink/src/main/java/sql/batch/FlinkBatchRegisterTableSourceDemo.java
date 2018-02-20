@@ -1,4 +1,4 @@
-package sql;
+package sql.batch;
 
 import org.apache.flink.api.java.ExecutionEnvironment;
 import org.apache.flink.table.api.TableEnvironment;
@@ -15,10 +15,10 @@ public class FlinkBatchRegisterTableSourceDemo {
         BatchTableEnvironment tableEnv = TableEnvironment.getTableEnvironment(env);
 
         // create a TableSource
-        TableSource csvSource = new CsvTableSource("/path/to/file", ...);
+//        TableSource csvSource = new CsvTableSource("/path/to/file", ...);
 
         // register the TableSource as table "CsvTable"
-        tableEnv.registerTableSource("CsvTable", csvSource);
+//        tableEnv.registerTableSource("CsvTable", csvSource);
 
 
     }

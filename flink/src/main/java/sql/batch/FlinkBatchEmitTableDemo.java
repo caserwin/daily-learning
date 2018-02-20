@@ -1,4 +1,4 @@
-package sql;
+package sql.batch;
 
 /**
  * Created by yidxue on 2018/2/18

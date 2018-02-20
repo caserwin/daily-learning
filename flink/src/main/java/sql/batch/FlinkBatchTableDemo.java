@@ -1,4 +1,4 @@
-package sql;
+package sql.batch;
 
 import bean.WCBean;
 import org.apache.flink.api.java.DataSet;
@@ -10,10 +10,10 @@ import org.apache.flink.table.api.java.BatchTableEnvironment;
 /**
  * @author yidxue
  */
-public class FlinkBatchSQLDemo {
+public class FlinkBatchTableDemo {
 
     public static void main(String[] args) throws Exception {
-        ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
+        ExecutionEnvironment env = ExecutionEnvironment.createCollectionsEnvironment();
         BatchTableEnvironment tEnv = TableEnvironment.getTableEnvironment(env);
 
         DataSet<WCBean> input = env.fromElements(
@@ -21,14 +21,14 @@ public class FlinkBatchSQLDemo {
             new WCBean("Ciao", 1),
             new WCBean("Hello", 1));
 
-        // register the DataSet as table "WordCount"
-        tEnv.registerDataSet("WordCount", input, "word, frequency");
+        Table table = tEnv.fromDataSet(input);
 
-        // run a SQL query on the Table and retrieve the result as a new Table
-        Table table = tEnv.sqlQuery(
-            "SELECT word, SUM(frequency) as frequency FROM WordCount GROUP BY word");
+        Table filtered = table
+                             .groupBy("word")
+                             .select("word, frequency.sum as frequency")
+                             .filter("frequency = 2");
 
-        DataSet<WCBean> result = tEnv.toDataSet(table, WCBean.class);
+        DataSet<WCBean> result = tEnv.toDataSet(filtered, WCBean.class);
 
         result.print();
     }
