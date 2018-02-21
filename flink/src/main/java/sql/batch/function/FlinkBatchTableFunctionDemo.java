@@ -29,20 +29,6 @@ public class FlinkBatchTableFunctionDemo {
     }
 
 
-//    public static class Split extends TableFunction<String> {
-//        private String separator = " ";
-//
-//        public Split(String separator) {
-//            this.separator = separator;
-//        }
-//
-//        public void eval(String str) {
-//            for (String s : str.split(separator)) {
-//                collect(s);
-//            }
-//        }
-//    }
-
     public static void main(String[] args) throws Exception {
         ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
         BatchTableEnvironment tableEnv = TableEnvironment.getTableEnvironment(env);
@@ -61,11 +47,6 @@ public class FlinkBatchTableFunctionDemo {
         Table table22 =tableEnv.sqlQuery("SELECT f0, word, length FROM MyTable LEFT JOIN LATERAL TABLE(split(f0)) as T(word, length) ON TRUE");
         tableEnv.toDataSet(table21, Row.class).print();
         tableEnv.toDataSet(table22, Row.class).print();
-
-
-// Use the table function in the Java Table API. "as" specifies the field names of the table.
-//        myTable.join("split(a) as (word, length)").select("a, word, length");
-//        myTable.leftOuterJoin("split(a) as (word, length)").select("a, word, length");
 
     }
 }
