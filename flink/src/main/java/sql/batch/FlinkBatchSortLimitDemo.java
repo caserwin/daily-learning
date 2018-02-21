@@ -9,9 +9,10 @@ import org.apache.flink.table.api.java.BatchTableEnvironment;
 import org.apache.flink.types.Row;
 
 /**
- * Created by yidxue on 2018/2/18
+ * Created by yidxue on 2018/2/21
+ * @author cisco
  */
-public class FlinkBatchRegisterTableDemo {
+public class FlinkBatchSortLimitDemo {
     public static void main(String[] args) throws Exception {
         ExecutionEnvironment env = ExecutionEnvironment.createCollectionsEnvironment();
         BatchTableEnvironment tableEnv = TableEnvironment.getTableEnvironment(env);
@@ -26,14 +27,14 @@ public class FlinkBatchRegisterTableDemo {
 
         tableEnv.registerDataSet("userInfo", input, "name, point, level");
 
-        //
-        Table tapiResult = tableEnv.scan("userInfo").select("*");
+        // create a Table from a Table API query
+        Table tapiResult = tableEnv.scan("userInfo").select("name, point, level").orderBy("level").offset(1).fetch(3);;
         tableEnv.toDataSet(tapiResult, Row.class).print();
 
-        System.out.println("============================");
-        //
-        Table sqlResult = tableEnv.sqlQuery("select * from userInfo");
+        System.out.println("====================================");
+        // create a Table from a SQL query
+        // limit 必须和 order by 一起使用，否则报错
+        Table sqlResult = tableEnv.sqlQuery("select name, point, level from userInfo order by level desc limit 4");
         tableEnv.toDataSet(sqlResult, Row.class).print();
-
     }
 }

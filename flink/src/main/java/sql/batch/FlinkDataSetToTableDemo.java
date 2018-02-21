@@ -9,9 +9,9 @@ import org.apache.flink.table.api.java.BatchTableEnvironment;
 import org.apache.flink.types.Row;
 
 /**
- * Created by yidxue on 2018/2/18
+ * Created by yidxue on 2018/2/21
  */
-public class FlinkBatchRegisterTableDemo {
+public class FlinkDataSetToTableDemo {
     public static void main(String[] args) throws Exception {
         ExecutionEnvironment env = ExecutionEnvironment.createCollectionsEnvironment();
         BatchTableEnvironment tableEnv = TableEnvironment.getTableEnvironment(env);
@@ -24,16 +24,14 @@ public class FlinkBatchRegisterTableDemo {
             Tuple3.of("erw2", 0.7f, 6),
             Tuple3.of("erw1", 0.7f, 6));
 
+        // method 1:
+        Table in = tableEnv.fromDataSet(input, "a, b, c");
+        tableEnv.toDataSet(in, Row.class).print();
+
+        System.out.println("==========================================");
+        // method 2:
         tableEnv.registerDataSet("userInfo", input, "name, point, level");
-
-        //
-        Table tapiResult = tableEnv.scan("userInfo").select("*");
-        tableEnv.toDataSet(tapiResult, Row.class).print();
-
-        System.out.println("============================");
-        //
         Table sqlResult = tableEnv.sqlQuery("select * from userInfo");
         tableEnv.toDataSet(sqlResult, Row.class).print();
-
     }
 }
