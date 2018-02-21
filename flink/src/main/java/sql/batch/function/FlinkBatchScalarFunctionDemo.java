@@ -7,11 +7,12 @@ import org.apache.flink.table.api.Table;
 import org.apache.flink.table.api.TableEnvironment;
 import org.apache.flink.table.api.java.BatchTableEnvironment;
 import org.apache.flink.table.functions.ScalarFunction;
+import org.apache.flink.types.Row;
 
 /**
  * Created by yidxue on 2018/2/20
  */
-public class FlinkScalarFunctionDemo {
+public class FlinkBatchScalarFunctionDemo {
 
     public static class HashCode extends ScalarFunction {
         private int factor = 12;
@@ -20,33 +21,32 @@ public class FlinkScalarFunctionDemo {
             this.factor = factor;
         }
 
-        public int eval(String s) {
-            return s.hashCode() * factor;
+        public int eval(String s, int frequency) {
+            return s.hashCode() * factor + frequency;
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
         BatchTableEnvironment tableEnv = TableEnvironment.getTableEnvironment(env);
 
         DataSet<WCBean> input = env.fromElements(
             new WCBean("Hello", 1),
-            new WCBean("Ciao", 1),
-            new WCBean("Hello", 1));
+            new WCBean("Ciao", 2),
+            new WCBean("Hello", 3));
 
-        Table myTable = tableEnv.fromDataSet(input);
 
         // 1. register the function
         tableEnv.registerFunction("hashCode", new HashCode(10));
 
         // 2. use the function in Java Table API
-        myTable.select("word, word.hashCode(), hashCode(word)");
-
-
-
+        Table myTable = tableEnv.fromDataSet(input);
+        Table table1 = myTable.select("word, hashCode(word,frequency)");
+        tableEnv.toDataSet(table1, Row.class).print();
 
         // 3. use the function in SQL API
         tableEnv.registerDataSet("WordCount", input, "word, frequency");
-        tableEnv.sqlQuery("SELECT word, hashCode(word) FROM WordCount");
+        Table table2 = tableEnv.sqlQuery("SELECT word, hashCode(word,frequency) FROM WordCount");
+        tableEnv.toDataSet(table2, Row.class).print();
     }
 }
