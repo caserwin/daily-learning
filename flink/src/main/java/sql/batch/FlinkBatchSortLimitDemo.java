@@ -28,7 +28,7 @@ public class FlinkBatchSortLimitDemo {
         tableEnv.registerDataSet("userInfo", input, "name, point, level");
 
         // create a Table from a Table API query
-        Table tapiResult = tableEnv.scan("userInfo").select("name, point, level").orderBy("level").offset(1).fetch(3);;
+        Table tapiResult = tableEnv.scan("userInfo").select("name, point, level").orderBy("level").offset(1).fetch(3);
         tableEnv.toDataSet(tapiResult, Row.class).print();
 
         System.out.println("====================================");

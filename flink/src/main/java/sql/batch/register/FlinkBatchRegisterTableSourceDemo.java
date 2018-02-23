@@ -1,4 +1,4 @@
-package sql.batch;
+package sql.batch.register;
 
 import org.apache.flink.api.java.ExecutionEnvironment;
 import org.apache.flink.table.api.TableEnvironment;

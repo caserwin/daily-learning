@@ -24,8 +24,8 @@ public class FlinkMapPartitionDemo {
     public static void main(String[] args) throws Exception {
         final ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
 
-        // mapPartition 是按分区操作的，所以设置 setParallelism =3 调试
-        DataSet<String> inData = env.fromElements("aa bb cc dd", "a bb cc ee", "a").setParallelism(3);
+        // mapPartition 是按分区操作的，所以设置 setParallelism =3 调试，可以多设置几个数字进行调试。
+        DataSet<String> inData = env.fromElements("aa bb cc dd", "a bb cc ee", "a").setParallelism(2);
         DataSet<Long> counts = inData.flatMap(new FlinkFlatMapDemo().new Tokenizer()).mapPartition(new FlinkMapPartitionDemo().new PartitionCounter());
 
         counts.print();
