@@ -23,6 +23,7 @@ object SparkSQLFilterDemo {
     )
     val inputDF = sc.parallelize(dataSeq1).toDF("id", "name", "city")
     inputDF.filter($"city" !== "").show()
+    inputDF.where($"city" !== "").show()
 
     // rdd filter
     val data = sc.parallelize(Seq(

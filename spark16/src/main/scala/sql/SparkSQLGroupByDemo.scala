@@ -22,6 +22,8 @@ object SparkSQLGroupByDemo {
     )
     val inputDF = sc.parallelize(dataSeq).toDF("id", "name")
 
+    // 聚合操作
     inputDF.groupBy("id").agg(count(lit(1)).alias("COUNT")).show()
+    inputDF.groupBy("id").count().show()
   }
 }

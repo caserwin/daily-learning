@@ -36,8 +36,6 @@ object SparkSQLJoinDemo2 {
     )
     val input3 = sc.parallelize(dataSeq3).toDF("city", "flag")
 
-
-
     input1.join(input2, Seq("id"), "left").join(input3, Seq("city"), "left").show()
 
   }
