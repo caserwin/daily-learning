@@ -7,14 +7,18 @@ import scala.collection.mutable
 /**
   *
   * 这部分代码参考资料如下：
-  *             1. http://viralpatel.net/blogs/batch-insert-in-java-jdbc/
-  *             2. https://stackoverflow.com/questions/37995067/jdbc-delete-insert-using-batch
-  *             3. https://stackoverflow.com/questions/3784197/efficient-way-to-do-batch-inserts-with-jdbc
-  *             4. why setAutoCommit(false) : https://stackoverflow.com/questions/32739719/what-happens-on-connection-setautocommit-false
+  *             1. 批量插入(重要)：http://viralpatel.net/blogs/batch-insert-in-java-jdbc/
+  *             2. 查询(重要)：https://alvinalexander.com/java/edu/pj/jdbc/jdbc0003
+  *             3. https://stackoverflow.com/questions/37995067/jdbc-delete-insert-using-batch
+  *             4. https://stackoverflow.com/questions/3784197/efficient-way-to-do-batch-inserts-with-jdbc
+  *             5. why setAutoCommit(false) : https://stackoverflow.com/questions/32739719/what-happens-on-connection-setautocommit-false
   *
   */
 object PhoenixJDBCService {
 
+  /**
+    * 建表
+    */
   def createPhoenixTable(tableName: String, fields: Seq[String], conn: Connection, buckets: Long = 50, TTL: Long = 31536000): Int = {
     val tableNameDecorator = if (tableName.contains("-")) "\"" + tableName + "\"" else tableName
     conn.createStatement.executeUpdate("CREATE TABLE IF NOT EXISTS " + tableNameDecorator
@@ -30,15 +34,15 @@ object PhoenixJDBCService {
     */
   def selectPhoenix(conn: Connection, sql: String): mutable.MutableList[RowsBean] = {
     val mls = mutable.MutableList[RowsBean]()
-    val stmt = conn.prepareStatement(sql)
-    val results = stmt.executeQuery()
+    val stmt = conn.createStatement()
+    val results = stmt.executeQuery(sql)
     while (results.next()) {
       val rowb = new RowsBean
       rowb.rowkey = results.getString("ROWKEY")
       rowb.name = results.getString("NAME")
       rowb.city = results.getString("CITY")
-      rowb.discount = results.getString("DISCOUNT")
-      mls.:+(rowb)
+      rowb.discount = results.getString("NUM")
+      mls += rowb
     }
     stmt.close()
     conn.close()
@@ -59,8 +63,8 @@ object PhoenixJDBCService {
     * 批处理：批量插入
     */
   def insertBatchPhoenix(conn: Connection, BeanLS: Seq[RowsBean], batchSize: Int): Unit = {
-    conn.setAutoCommit(false)
-    val preStmt = conn.prepareStatement("INSERT INTO ROWKEYTEST (ROWKEY, NAME, CITY, DISCOUNT) VALUES (?, ?, ?, ?)")
+    //    conn.setAutoCommit(false)
+    val preStmt = conn.prepareStatement("UPSERT INTO ROWKEYTEST_JDBC (ROWKEY, NAME, CITY, NUM) VALUES (?, ?, ?, ?)")
     var count = 0
 
     BeanLS.foreach(
@@ -69,16 +73,18 @@ object PhoenixJDBCService {
         preStmt.setString(2, rowBean.name)
         preStmt.setString(3, rowBean.city)
         preStmt.setString(4, rowBean.discount)
+        // 把当前sql添加到批命令中。
+        preStmt.addBatch()
+
         count = count + 1
         if (count % batchSize == 0) {
-          preStmt.addBatch()
+          preStmt.executeBatch()
         }
       }
     )
-
     preStmt.executeBatch()
-    conn.commit()
     // 参考资料1, 这里貌似不需要 conn.commit()
+    //    conn.commit()
     preStmt.close()
     conn.close()
   }
