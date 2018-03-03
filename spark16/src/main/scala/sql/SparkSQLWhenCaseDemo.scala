@@ -29,7 +29,7 @@ object SparkSQLWhenCaseDemo {
 
     resDF1
       .join(resDF2, Seq("color"), "left")
-      .withColumn("name", when($"name".isNotNull, $"name").otherwise($"color"))
+      .withColumn("name", when(($"name" !== "ggg") && $"name".isNotNull, $"name").otherwise($"color"))
       .show()
   }
 }

@@ -2,7 +2,7 @@ package sql
 
 import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.sql.SQLContext
-import org.apache.spark.sql.functions.{count, lit}
+import org.apache.spark.sql.functions._
 
 /**
   * Created by yidxue on 2018/1/29
@@ -15,15 +15,25 @@ object SparkSQLGroupByDemo {
     import sqlContext.implicits._
 
     val dataSeq = Seq(
-      ("1", "lisi"),
-      ("1", "lisi"),
-      ("1", "wangwu"),
-      ("2", "wangwu")
+      ("1", "lisi", 1),
+      ("1", "lisi", 2),
+      ("1", "wangwu", 3),
+      ("2", "wangwu", 4)
     )
-    val inputDF = sc.parallelize(dataSeq).toDF("id", "name")
+    val inputDF = sc.parallelize(dataSeq).toDF("id", "name", "num")
 
-    // 聚合操作
-    inputDF.groupBy("id").agg(count(lit(1)).alias("COUNT")).show()
+    // 常用聚合操作
     inputDF.groupBy("id").count().show()
+    inputDF
+      .groupBy("id", "name")
+      .agg(
+        count(lit(1)).alias("count"),
+        max("num").cast("string").alias("max_num"),
+        sum("num").cast("string").alias("sum_num"),
+        min("num").cast("string").alias("min_num"),
+        first($"num").alias("f_num"),
+        last($"num").alias("l_num")
+      )
+      .show()
   }
 }
