@@ -36,5 +36,10 @@ object ScalaOOPDemo {
     attBean.card = new CardInfo("23456", "信用卡")
     println(attBean.card)
     println(attBean)
+
+    println("=======================")
+    val attBean1 = new Customer()
+    println(attBean1.card)
+    println(attBean1)
   }
 }
