@@ -68,7 +68,7 @@ object Main {
     val afterDay = "2018-01-08"
 
     val tableName = "test"
-    val tableFields = "col1, col2"
+    val tableFields = "col1, col2, TIMESTAMP"
 
     val dbConf: util.HashMap[String, String] = setConf()
 

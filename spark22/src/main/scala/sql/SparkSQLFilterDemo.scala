@@ -2,6 +2,7 @@ package sql
 
 import com.jayway.jsonpath.JsonPath
 import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.types.{IntegerType, StringType}
 
 /**
   * Created by yidxue on 2018/1/29
@@ -14,12 +15,14 @@ object SparkSQLFilterDemo {
 
     // dataframe filter
     val dataSeq1 = Seq(
-      (1, "zhangsan", ""),
-      (2, "lisi", "beijing"),
-      (3, "wangwu", "shanghai")
+      ("1", "zhangsan", ""),
+      ("2", "lisi", "beijing"),
+      ("3", "wangwu", "shanghai")
     )
     val inputDF = spark.sparkContext.parallelize(dataSeq1).toDF("id", "name", "city")
-    inputDF.filter($"city" !== "").show()
+    // NOTICE：在spark1.6中如下code会报错。
+    inputDF.filter($"id".cast(IntegerType) < 3).show()
+    inputDF.filter($"city" =!= "").show()
 
     // rdd filter
     val data = spark.sparkContext.parallelize(Seq(

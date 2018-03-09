@@ -23,6 +23,8 @@ object SparkSQLGroupByDemo {
     val inputDF = sc.parallelize(dataSeq).toDF("id", "name", "num")
 
     // 常用聚合操作
+    println(inputDF.groupBy("id").agg(max("num").alias("max")).count())
+    // groupBy() 反回的是 GroupedData ，所以groupBy() 后调用 count() 会执行分组统计
     inputDF.groupBy("id").count().show()
     inputDF
       .groupBy("id", "name")

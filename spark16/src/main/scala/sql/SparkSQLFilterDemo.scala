@@ -1,8 +1,8 @@
 package sql
 
 import com.jayway.jsonpath.JsonPath
-import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.spark.sql.SQLContext
+import org.apache.spark.{SparkConf, SparkContext}
 
 /**
   * Created by yidxue on 2018/1/29
@@ -17,11 +17,13 @@ object SparkSQLFilterDemo {
 
     // dataframe filter
     val dataSeq1 = Seq(
-      (1, "zhangsan", ""),
-      (2, "lisi", "beijing"),
-      (3, "wangwu", "shanghai")
+      ("1", "zhangsan", ""),
+      ("2", "lisi", "beijing"),
+      ("3", "wangwu", "shanghai")
     )
     val inputDF = sc.parallelize(dataSeq1).toDF("id", "name", "city")
+    // notice 注意这里，字符类型直接和数字类型比大小也没报错。
+    inputDF.filter($"id" < 2).show()
     inputDF.filter($"city" !== "").show()
     inputDF.where($"city" !== "").show()
 
