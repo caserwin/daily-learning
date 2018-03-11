@@ -38,6 +38,16 @@ object OracleUtils {
     df
   }
 
+  def selectOracleSimpleDF(sqlContext: SQLContext, dbConf: util.HashMap[String, String], sql: String, predicates: Array[String] = Array()): DataFrame = {
+    println(sql)
+    val connType = if (dbConf.get("SERVICENAME") != null) ("SERVICENAME", dbConf.get("SERVICENAME")) else ("SID", dbConf.get("SID"))
+    if (predicates.length > 0) {
+      sqlContext.read.jdbc(getJDBCURL(dbConf.get("HOSTNAME"), dbConf.get("PORT"), connType), sql, predicates, getConnectionProperties(dbConf.get("USERANME"), dbConf.get("PASSWORD")))
+    } else {
+      sqlContext.read.jdbc(getJDBCURL(dbConf.get("HOSTNAME"), dbConf.get("PORT"), connType), sql, getConnectionProperties(dbConf.get("USERANME"), dbConf.get("PASSWORD")))
+    }
+  }
+
   def selectOracleDF(sqlContext: SQLContext, tableName: String, tableFields: String, dbConf: util.HashMap[String, String], whereConf: util.HashMap[String, String] = new util.HashMap[String, String](), predicates: Array[String] = Array()): DataFrame = {
     var jdbcQuery = s"(select $tableFields from $tableName "
     for (condition <- whereConf) {

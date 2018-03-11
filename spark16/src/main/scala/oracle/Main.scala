@@ -11,11 +11,11 @@ object Main {
 
   def setConf(): util.HashMap[String, String] = {
     val dbConf: util.HashMap[String, String] = new util.HashMap[String, String]
-    dbConf.put("USERANME", "eriwn")
-    dbConf.put("PASSWORD", "xxxx")
-    dbConf.put("HOSTNAME", "localhost")
-    dbConf.put("PORT", "1560")
-    dbConf.put("SERVICENAME", "ss")
+    dbConf.put("USERANME", "xxx")
+    dbConf.put("PASSWORD", "xxx")
+    dbConf.put("HOSTNAME", "xxx")
+    dbConf.put("PORT", "1660")
+    dbConf.put("SERVICENAME", "xxx.com")
     dbConf
   }
 
@@ -64,17 +64,18 @@ object Main {
     val sc = new SparkContext(conf)
     val sqlContext = new SQLContext(sc)
 
-    val day = "2018-01-07"
-    val afterDay = "2018-01-08"
+    val day = "2018-03-07"
+    val afterDay = "2018-03-08"
 
-    val tableName = "test"
-    val tableFields = "col1, col2, TIMESTAMP"
+    val tableName = "TEST.wbxeventlog"
+    val tableFields = "confid, uid_, gid, TIMESTAMP"
 
     val dbConf: util.HashMap[String, String] = setConf()
 
-    val whereConf: util.HashMap[String, String] = new util.HashMap[String, String]
-    whereConf.put("TIMESTAMP", s">= TO_DATE('$day', 'yyyy-MM-dd HH24:mi') AND TIMESTAMP <= TO_DATE('$afterDay', 'yyyy-MM-dd HH24:mi')")
+    val query = s"select $tableFields from $tableName where TIMESTAMP>= TO_DATE('$day 00:00', 'yyyy-MM-dd HH24:mi') AND TIMESTAMP <= TO_DATE('$afterDay 00:00', 'yyyy-MM-dd HH24:mi')"
+    // 这里必须前后包个括号，并且重命名临时表为 tmp。
+    val sql = s"($query) tmp"
 
-    OracleUtils.selectOracleDF(sqlContext, tableName, tableFields, dbConf = dbConf, whereConf = whereConf, predicates = getPredicates(day)).show()
+    OracleUtils.selectOracleSimpleDF(sqlContext, dbConf = dbConf, sql, predicates = getPredicates(day)).show()
   }
 }
