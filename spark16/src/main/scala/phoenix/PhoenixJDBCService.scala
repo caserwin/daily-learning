@@ -1,7 +1,9 @@
 package phoenix
 
-import java.sql.Connection
+import java.sql.{Connection, DriverManager}
+
 import phoenix.bean.RowsBean
+
 import scala.collection.mutable
 
 /**
@@ -47,6 +49,17 @@ object PhoenixJDBCService {
     stmt.close()
     conn.close()
     mls
+  }
+
+  /**
+    * 用于判断某条记录/某类型记录是否存在
+    */
+  def selectTelemetryRowkey(zkAddr: String, dataType: String, tableName: String): Boolean = {
+    val conn = DriverManager.getConnection(s"jdbc:phoenix:$zkAddr")
+    val sql = s"select rowkey from $tableName where rowkey like '$dataType%'"
+    println(sql)
+    val result = conn.createStatement.executeQuery(sql)
+    if (result.next()) true else false
   }
 
   /**

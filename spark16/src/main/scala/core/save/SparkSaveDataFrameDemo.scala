@@ -1,9 +1,9 @@
-package core
+package core.save
 
 import org.apache.spark.sql.SQLContext
 import org.apache.spark.{SparkConf, SparkContext}
 
-object SparkDataFrameSaveAsTextDemo {
+object SparkSaveDataFrameDemo {
 
   def main(args: Array[String]): Unit = {
     val sparkConf = new SparkConf().setAppName("WordCount").setMaster("local[*]")

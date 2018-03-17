@@ -1,4 +1,4 @@
-package core
+package core.create
 
 import org.apache.spark.sql.SQLContext
 import org.apache.spark.sql.functions.{explode, udf}
@@ -7,7 +7,7 @@ import org.apache.spark.{SparkConf, SparkContext}
 /**
   * Created by yidxue on 2018/1/31
   */
-object SparkReadDataSourceDemo {
+object SparkReadJsonToDFDemo {
 
   def main(args: Array[String]): Unit = {
     val sparkConf = new SparkConf().setAppName("simple demo").setMaster("local[*]")

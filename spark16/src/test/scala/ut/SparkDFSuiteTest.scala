@@ -10,7 +10,7 @@ import org.scalatest.junit.JUnitRunner
 @RunWith(classOf[JUnitRunner])
 class SparkDFSuiteTest extends SparkFunSuite {
 
-  test("event log transformer test") {
+//  test("event log transformer test") {
 
 //    val inputFileName = "SparkDFInput.csv"
 //    val expectFileName = "SparkDFOutput.csv"
@@ -18,5 +18,5 @@ class SparkDFSuiteTest extends SparkFunSuite {
 //    val outputDF = EventLogTransformer.transform(sparkContext, inputDF)
 //    val expectDF = getDFFromResourceCSV(expectFileName)
 //    assert(outputDF.asDataFrameEquals(expectDF))
-  }
+//  }
 }
