@@ -1,4 +1,4 @@
-package concurrentdemo;
+package workflow.concurrentdemo;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -20,6 +20,7 @@ public class CountDownLatchDemo {
 
         Boss boss = new Boss(latch);
 
+        // NOTICE submit 和 execute有什么区别
         executor.execute(w3);
         executor.execute(w2);
         executor.execute(w1);

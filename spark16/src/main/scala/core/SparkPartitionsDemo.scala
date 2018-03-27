@@ -13,14 +13,24 @@ object SparkPartitionsDemo {
 
     // 读数据时，设置分区个数
     val rdd = sc.parallelize(Array("job of day last for"), 3).flatMap(line => line.split("\\s+"))
-    rdd.foreach(println(_))
 
     // 查看rdd分区个数
-    println("getNumPartitions 查看分区个数："+rdd.getNumPartitions.toString)
-    println("partitionsLength 查看分区个数："+rdd.partitions.length)
+    println("getNumPartitions 查看分区个数：" + rdd.getNumPartitions.toString)
+    println("partitionsLength 查看分区个数：" + rdd.partitions.length)
 
     // 重新调整分区
     val rddRepart = rdd.repartition(2)
-    println("分区个数："+rddRepart.getNumPartitions.toString)
+    println("分区个数：" + rddRepart.getNumPartitions.toString)
+
+    // 打印全部数据
+    rddRepart.foreach(print(_))
+
+    // 打印第一个分区的数据
+    rddRepart.mapPartitionsWithIndex((idx, iter) =>
+      if (idx == 0) {
+        iter
+      } else {
+        Iterator.empty
+      }).foreach(print(_))
   }
 }

@@ -3,6 +3,7 @@ package core.trydemo
 /**
   * Created by yidxue on 2018/3/8
   * reference: https://windor.gitbooks.io/beginners-guide-to-scala/content/chp6-error-handling-with-try.html
+  * 一般都是这种用法
   */
 object ScalaTryCatchDemo {
 
@@ -25,7 +26,7 @@ object ScalaTryCatchDemo {
       println(buyCigarettes(youngCustomer))
     } catch {
       case UnderAgeException(msg) => println(msg)
-      case _ => println("this is other exception")
+      case _: Throwable => println("this is other exception")
     }
   }
 }

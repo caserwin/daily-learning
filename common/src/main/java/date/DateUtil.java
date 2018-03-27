@@ -5,10 +5,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author yidxue
@@ -25,6 +22,16 @@ public class DateUtil {
         DateTimeFormatter formatter = DateTimeFormat.forPattern(inFormat);
         DateTime dateTime = formatter.parseDateTime(str);
         DateTime d = dateTime.plusDays(1);
+        return DateTimeFormat.forPattern(outFormat).print(d);
+    }
+
+    /**
+     * 分钟加减
+     */
+    public static String modifyMins(String str, String inFormat, String outFormat, int mins) {
+        DateTimeFormatter formatter = DateTimeFormat.forPattern(inFormat);
+        DateTime dateTime = formatter.parseDateTime(str);
+        DateTime d = dateTime.plusMinutes(mins);
         return DateTimeFormat.forPattern(outFormat).print(d);
     }
 
@@ -50,13 +57,14 @@ public class DateUtil {
 
     /**
      * 判断是否是指定格式的日期
+     * TODO 改成joda time的写法
      */
     public static boolean isValidDate(String str, String inFormat) {
         boolean convertSuccess = true;
         // 指定日期格式为四位年/两位月份/两位日期，注意yyyy/MM/dd区分大小写；
         SimpleDateFormat format = new SimpleDateFormat(inFormat);
         try {
-            // 设置lenient为false. 否则SimpleDateFormat会比较宽松地验证日期，比如2007/02/29会被接受，并转换成2007/03/01
+            // 设置lenient为 false. 否则SimpleDateFormat会比较宽松地验证日期，比如2007/02/29会被接受，并转换成2007/03/01
             format.setLenient(false);
             format.parse(str);
         } catch (ParseException e) {
@@ -96,6 +104,62 @@ public class DateUtil {
         return String.valueOf(hashMap.get(part.toLowerCase()));
     }
 
+    /**
+     * 每个小时的时间按 minutes=range，进行分段
+     */
+    public static String[] getTimeMinutesRange(String date, String inFormat, String outFormat, int range) {
+        String[] timeRange = new String[2];
+        DateTimeFormatter formatter = DateTimeFormat.forPattern(inFormat);
+        DateTime dateTime = formatter.parseDateTime(date);
+
+        int startMin = (dateTime.getMinuteOfHour() / range) * range;
+        timeRange[0] = DateTimeFormat.forPattern(outFormat).print(dateTime.withMinuteOfHour(startMin).withSecondOfMinute(0));
+        timeRange[1] = modifyMins(timeRange[0], outFormat, outFormat, range);
+
+        return timeRange;
+    }
+
+    /**
+     * 判断一个日期是否是周末
+     * TODO 改成joda time的写法
+     */
+    public static boolean weekendCheck(String date) {
+        Calendar cal = Calendar.getInstance();
+        try {
+            cal.setTime(new SimpleDateFormat("yyyy-MM-dd").parse(date));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return cal.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY || cal.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY;
+    }
+
+    /**
+     * 返回当前时间所在的分段
+     */
+    public static String[] getTimeArrays(String starttime, String endtime, String inFormat, int num) {
+        DateTimeFormatter formatter = DateTimeFormat.forPattern(inFormat);
+        long startTimeStamp = formatter.parseDateTime(starttime).getMillis() / 1000;
+        long endTimeStamp = formatter.parseDateTime(endtime).getMillis() / 1000;
+        long range = (endTimeStamp - startTimeStamp) / num;
+        String[] timeArrays = new String[num + 2];
+        timeArrays[0] = starttime;
+        timeArrays[num + 1] = endtime;
+
+        for (int i = 1; i < timeArrays.length - 1; i++) {
+            if (startTimeStamp + range <= endTimeStamp) {
+                timeArrays[i] = DateTimeFormat.forPattern(inFormat).print(new DateTime((startTimeStamp + range) * 1000L));
+            } else {
+                timeArrays[i] = DateTimeFormat.forPattern(inFormat).print(new DateTime(endTimeStamp * 1000L));
+            }
+            startTimeStamp += range;
+        }
+
+        if (timeArrays[timeArrays.length - 1].equals(timeArrays[timeArrays.length - 2])) {
+            return Arrays.copyOfRange(timeArrays, 0, timeArrays.length - 1);
+        } else {
+            return timeArrays;
+        }
+    }
 
     public static void main(String[] args) {
         // 是否是指定格式的日期
@@ -109,5 +173,14 @@ public class DateUtil {
         System.out.println(getDatePart("2017-11-11", "yyyy-MM-dd", "day"));
         System.out.println(getDatePart("2018-01-02T00:02:36Z", "yyyy-MM-dd'T'HH:mm:ss'Z'", "minute"));
 
+        // 获得指定时间所在的分段
+        String[] timeRange = getTimeMinutesRange("2018-02-28T23:55:36Z", "yyyy-MM-dd'T'HH:mm:ss'Z'", "yyyy-MM-dd HH:mm:ss", 15);
+        System.out.println(timeRange[0] + "\t\t" + timeRange[1]);
+
+        // 对于给定的时间区间进行分段
+        String[] timeArrays = getTimeArrays("2018-03-21 18:10:00", "2018-03-21 18:20:00", "yyyy-MM-dd HH:mm:ss", 10);
+        for (String time : timeArrays) {
+            System.out.println(time);
+        }
     }
 }

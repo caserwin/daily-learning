@@ -1,4 +1,4 @@
-package concurrentdemo;
+package workflow.concurrentdemo;
 
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;

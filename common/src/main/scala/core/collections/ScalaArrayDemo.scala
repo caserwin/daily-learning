@@ -14,7 +14,10 @@ object ScalaArrayDemo {
     arr(1) = "1"
     arr(2) = "2"
     println(arr.mkString(","))
-
     arr.foreach(println(_))
+
+    println("============")
+    val arr1 = Array(1, 2, 3, 4, 5)
+    arr1.sliding(2).map(a => a(0) + "\t" + a(1)).toArray.foreach(println(_))
   }
 }

@@ -1,4 +1,4 @@
-package concurrentdemo;
+package workflow.concurrentdemo;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -9,7 +9,6 @@ import java.util.concurrent.TimeUnit;
 public class Boss implements Runnable {
 
     private CountDownLatch downLatch;
-
     public Boss(CountDownLatch downLatch) {
         this.downLatch = downLatch;
     }
