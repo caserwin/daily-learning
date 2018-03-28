@@ -4,6 +4,7 @@ import java.util.concurrent.*;
 
 /**
  * @author yidxue
+ * 超时退出示例
  * code from: https://stackoverflow.com/questions/2275443/how-to-timeout-a-thread
  */
 public class TimeoutDemo1 {

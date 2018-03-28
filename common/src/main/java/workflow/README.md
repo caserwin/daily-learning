@@ -15,8 +15,18 @@
 问题5基于Timer类和TimeTask类<br>
 
 ## 2. Timer和TimeTask类说明
-job 定时执行、周期执行、固定延时执行<br>
+job 定时执行、周期执行、固定延时执行<br> 多个job之间的延时执行，只能是同步的。
    Timer 和 TimeTask 类<br>
+   
+   
+
+### Timer类的缺陷
+
+Timer 类是项目中常用的定时器，比如每隔一段时间清理项目中的一些垃圾文件，每个一段时间进行数据清洗。
+然而Timer是存在一些缺陷的，因为Timer在执行定时任务时只会创建一个线程，多任务之间只能串行执行。
+即一个任务执行完，才能执行另一个任务。
+
+   
 
 ## 3. concurrent包相关说明
 
@@ -32,7 +42,6 @@ ExecutorService接口有一个非常重要的子接口： ScheduledExecutorServi
 
 异步延时执行
 ScheduledExecutorService.schedule(Runnable command,long delay, TimeUnit unit)<br>
-异步延时执行
 ScheduledExecutorService.schedule(Callable<V> callable,long delay, TimeUnit unit)<br>
 异步周期执行
 ScheduledExecutorService.scheduleAtFixedRate(Runnable command,long initialDelay,long period,TimeUnit unit)<br>

@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by yidxue on 2018/3/27
  * 参考：https://stackoverflow.com/questions/2758612/executorservice-that-interrupts-tasks-after-a-timeout
+ * 超时退出示例
  * 思路如下：
  * 1. 先起一个job，这个job就是你实际要监控是否会timeout的job。
  * 2. 再起一个新的job可以测试你之前的那个job是否会在指定的时间内timeout，如果超时了，则把之前的那个job退出。

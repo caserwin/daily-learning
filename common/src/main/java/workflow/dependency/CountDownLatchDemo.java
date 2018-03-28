@@ -1,4 +1,4 @@
-package workflow.concurrentdemo;
+package workflow.dependency;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -6,6 +6,7 @@ import java.util.concurrent.Executors;
 
 /**
  * @author yidxue
+ * job 等待依赖示例
  */
 public class CountDownLatchDemo {
 
