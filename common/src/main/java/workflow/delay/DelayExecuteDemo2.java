@@ -5,7 +5,7 @@ import java.util.TimerTask;
 
 /**
  * @author cisco
- * 延时执行示例
+ * 多个job 延时执行示例
  */
 public class DelayExecuteDemo2 {
     private static long start;

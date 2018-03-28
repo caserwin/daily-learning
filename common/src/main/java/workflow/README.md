@@ -14,14 +14,13 @@
 问题4可基于concurrent.ScheduledExecutorService或concurrent.ExecutorService 实现<br>
 问题5基于Timer类和TimeTask类<br>
 
-## 2. Timer和TimeTask类说明
+
+## 2. Timer和 TimeTask 类说明   
+### Timer、TimeTask类业务场景
 job 定时执行、周期执行、固定延时执行<br> 多个job之间的延时执行，只能是同步的。
-   Timer 和 TimeTask 类<br>
-   
-   
-
-### Timer类的缺陷
-
+### Timer、TimeTask类代码解析
+参考：http://wiki.jikexueyuan.com/project/java-enhancement/java-add1.html
+### Timer、TimeTask类的缺陷
 Timer 类是项目中常用的定时器，比如每隔一段时间清理项目中的一些垃圾文件，每个一段时间进行数据清洗。
 然而Timer是存在一些缺陷的，因为Timer在执行定时任务时只会创建一个线程，多任务之间只能串行执行。
 即一个任务执行完，才能执行另一个任务。
@@ -31,11 +30,13 @@ Timer 类是项目中常用的定时器，比如每隔一段时间清理项目�
 ## 3. concurrent包相关说明
 
 ### 3.1 CountDownLatch
-运行等待机制
+#### 业务场景
+#### 代码解析
 
-### 3.2 ExecutorService
+### 3.2 ExecutorService 和 ScheduledExecutorService
+#### 业务场景
+#### 代码解析
 
-### 3.3 ScheduledExecutorService
 ExecutorService接口有一个非常重要的子接口： ScheduledExecutorService，从它的名字，
 我们就能看出此service是为了支持时间可控的任务执行而设计，其中包括：异步固定延迟执行，周期性执行；
 不过他还不支持制定特定date执行，这个工作可以交给Timer来做(稍后参看timer讲解)
@@ -53,3 +54,4 @@ https://stackoverflow.com/questions/19456313/simple-timeout-in-java
 https://stackoverflow.com/questions/2758612/executorservice-that-interrupts-tasks-after-a-timeout
 https://stackoverflow.com/questions/2275443/how-to-timeout-a-thread
 
+https://blog.csdn.net/lmj623565791/article/details/27109467

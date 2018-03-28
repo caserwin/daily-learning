@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @author yidxue
+ * 多个job之间的异步执行示例
  */
 public class AsynchronousExecuteDemo1 {
     private static long start;

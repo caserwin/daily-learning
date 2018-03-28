@@ -1,4 +1,4 @@
-package workflow.timeout;
+package workflow.timeout.runable;
 
 import java.util.concurrent.*;
 
@@ -10,20 +10,16 @@ import java.util.concurrent.*;
 public class TimeoutDemo1 {
     public static void main(String[] args) {
         ExecutorService executor = Executors.newSingleThreadExecutor();
-        Future<String> future = executor.submit(new Task());
-
+        Future<?> future = executor.submit(new TaskRun());
         try {
-            System.out.println("Started..");
-            System.out.println(future.get(5, TimeUnit.SECONDS));
-            System.out.println("Finished!");
+            future.get(3, TimeUnit.SECONDS);
         } catch (TimeoutException e) {
             // mayInterruptIfRunning设成false话，不允许在线程运行时中断，设成true的话就直接终端。
             future.cancel(true);
-            System.out.println("Terminated!");
+            System.out.println("it is time out!");
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
-
         executor.shutdownNow();
     }
 }

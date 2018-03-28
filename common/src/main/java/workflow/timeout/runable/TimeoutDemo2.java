@@ -1,4 +1,4 @@
-package workflow.timeout;
+package workflow.timeout.runable;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
@@ -16,13 +16,11 @@ import java.util.concurrent.TimeUnit;
 public class TimeoutDemo2 {
 
     public static void main(String[] args) {
-
-        ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-        final Future<String> handler = executor.submit(new Task());
-
+        ScheduledExecutorService executor = Executors.newScheduledThreadPool(2);
+         Future<?> future = executor.submit(new TaskRun());
         // 再起一个job，延迟5秒执行kill之前的job。
         executor.schedule(() -> {
-            handler.cancel(true);
+            future.cancel(true);
         }, 5, TimeUnit.SECONDS);
 
         // NOTICE: shutdownNow() 和 shutdown() 有什么区别？？

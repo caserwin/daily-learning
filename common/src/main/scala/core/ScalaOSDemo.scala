@@ -12,10 +12,10 @@ object ScalaOSDemo {
 
   def main(args: Array[String]): Unit = {
     val command = "ls -l /Users/"
-    command !
+    command.!
 
     val command1 = conf.getString("sqoop.command")
-    command1!
+    command1.!
 
   }
 }
