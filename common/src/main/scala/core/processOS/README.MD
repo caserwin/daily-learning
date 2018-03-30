@@ -1,7 +1,7 @@
 # 说明
 
 这个包都是通过scala运行系统的命令行。<br>
-其中demo2是执行sqoop把oracle的数据写到Hbase的示例。其中隐去了用户名、密码、主机地址等信息。
+其中demo2是执行sqoop把oracle的数据写到Hbase的示例，并且隐去了用户名、密码、主机地址等信息。
 
 
 这里两个demo中，demo2比demo1要好，推荐demo2的实现方式。
