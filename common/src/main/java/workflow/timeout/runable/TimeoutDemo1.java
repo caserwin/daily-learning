@@ -6,6 +6,7 @@ import java.util.concurrent.*;
  * @author yidxue
  * 超时退出示例
  * code from: https://stackoverflow.com/questions/2275443/how-to-timeout-a-thread
+ * NOTICE: 比demo2的实现方式要好，因为现在监控线程是一个守护线程，被监控线程（TaskRun）是一个用户线程。
  */
 public class TimeoutDemo1 {
     public static void main(String[] args) {
@@ -20,7 +21,6 @@ public class TimeoutDemo1 {
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
-        executor.shutdownNow();
+        executor.shutdown();
     }
 }
-

@@ -6,7 +6,7 @@ import workflow.timeout.runable.TaskRun
 /**
   * Created by yidxue on 2018/3/28
   */
-object TimeoutDemo {
+object TimeoutDemo2 {
 
   def main(args: Array[String]): Unit = {
     val executor = Executors.newScheduledThreadPool(2)

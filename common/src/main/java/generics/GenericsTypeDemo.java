@@ -19,6 +19,7 @@ public class GenericsTypeDemo {
     }
 
     public static void main(String[] args) throws Exception {
+        // 父类用子类实例化
         BaseGroup basegroup = parser(Group.class);
         System.out.println(basegroup.toString());
     }
