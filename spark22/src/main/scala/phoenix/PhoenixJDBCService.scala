@@ -1,7 +1,6 @@
 package phoenix
 
-import java.sql.DriverManager
-
+import java.sql.{Connection, DriverManager}
 import scala.collection.mutable
 
 /**
@@ -11,12 +10,14 @@ import scala.collection.mutable
   */
 object PhoenixJDBCService {
 
-  def createPhoenixTable(tableName: String, fields: String, zkAddr: String, buckets: Long = 50, TTL: Long = 31536000): Int = {
-    val conn = DriverManager.getConnection(s"jdbc:phoenix:$zkAddr")
+  /**
+    * 建表
+    */
+  def createPhoenixTable(tableName: String, fields: Seq[String], conn: Connection, buckets: Long = 50, TTL: Long = 31536000): Int = {
     val tableNameDecorator = if (tableName.contains("-")) "\"" + tableName + "\"" else tableName
     conn.createStatement.executeUpdate("CREATE TABLE IF NOT EXISTS " + tableNameDecorator
-      + s"(${fields.split(",")(0)} VARCHAR PRIMARY KEY,"
-      + fields.split(",").toList.drop(1).mkString("INFO.", " VARCHAR, INFO.", " VARCHAR)")
+      + s"(${fields.head} VARCHAR PRIMARY KEY,"
+      + fields.drop(1).mkString("INFO.", " VARCHAR, INFO.", " VARCHAR)")
       + " SALT_BUCKETS=" + buckets + ","
       + " TTL=" + TTL
     )

@@ -1,11 +1,12 @@
 package sql
 
 import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.expressions.UserDefinedFunction
 import org.apache.spark.sql.functions.udf
 
 object SparkSQLUDFDemo1 {
 
-  private val isGreen = udf((color: String) => if (color == "Green") 1 else 0)
+  private val isGreen: UserDefinedFunction = udf((color: String) => if (color == "Green") 1 else 0)
 
   def main(args: Array[String]): Unit = {
     val spark = SparkSession.builder.appName("SQL Application").config("spark.master", "local[*]").getOrCreate()

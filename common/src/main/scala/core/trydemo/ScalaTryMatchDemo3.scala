@@ -7,7 +7,7 @@ import scala.util.{Failure, Success, Try}
   * Created by yidxue on 2018/3/8
   *
   * 这是最直观的形式：
-  * try{
+  * Try{
   *
   * } match {
   *   case Success(_) => ...

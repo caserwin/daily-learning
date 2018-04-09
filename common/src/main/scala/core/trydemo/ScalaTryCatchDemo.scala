@@ -26,7 +26,7 @@ object ScalaTryCatchDemo {
       println(buyCigarettes(youngCustomer))
     } catch {
       case UnderAgeException(msg) => println(msg)
-      case _: Throwable => println("this is other exception")
+      case e: Throwable => println("this is other error: " + e.getMessage)
     }
   }
 }

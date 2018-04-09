@@ -8,7 +8,12 @@ import org.apache.spark.sql.SparkSession
 object SaprkSQLExplodeDemo {
 
   def main(args: Array[String]): Unit = {
-    val spark = SparkSession.builder.appName("SQL Application").config("spark.master", "local[*]").getOrCreate()
+    val spark = SparkSession.builder.appName("SQL Application")
+      //      .config("spark.master", "local[*]")
+      .config("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
+      .config("spark.network.timeout", "3600")
+      .config("spark.yarn.executor.memoryOverhead", "8192")
+      .getOrCreate()
     import spark.implicits._
 
     val dataSeq1 = Seq(
