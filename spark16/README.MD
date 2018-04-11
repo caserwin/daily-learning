@@ -1,1 +1,1 @@
-![spark](https://github.com/caserwin/daily-learning/raw/master/spark16/pic/spark-logo-trademark.png)
+<div align=center>![spark](https://github.com/caserwin/daily-learning/raw/master/spark16/pic/spark-logo-trademark.png=100x100)</div>
