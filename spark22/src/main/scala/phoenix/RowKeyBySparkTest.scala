@@ -34,7 +34,7 @@ object RowKeyBySparkTest {
     inputDF.saveToPhoenix(tableName, zkUrl = Some(zkAddr))
 
     // 查询phoenix表。
-    val df = new SparkSqlContextFunctions(spark.sqlContext).phoenixTableAsDataFrame(tableName, columns = fields, zkUrl = Some(zkAddr))
+    val df = spark.sqlContext.phoenixTableAsDataFrame(tableName, columns = fields, zkUrl = Some(zkAddr))
     df.show()
 
     // 删除表中数据

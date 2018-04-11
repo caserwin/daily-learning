@@ -13,12 +13,6 @@
 
     <dependencies>
 
-        <dependency>
-            <groupId>cas.myself</groupId>
-            <artifactId>common</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-
         <!-- JACKSON SCALA -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>

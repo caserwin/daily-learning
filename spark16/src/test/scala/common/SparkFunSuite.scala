@@ -8,8 +8,6 @@ import org.scalatest.{BeforeAndAfterAll, FunSuite}
 
 /**
   * Spark Fun Suite for Spark 1.6x
-  *
-  * Created by dubin on 12/12/2017.
   */
 class SparkFunSuite extends FunSuite with BeforeAndAfterAll {
 
