@@ -20,7 +20,7 @@ object SparkAccumulatorsDemo {
     println(accum.value)
 
     // 使用reduce
-    val resRDD = rdd.reduce((a, b) => a + b)
-    println(resRDD)
+    val res = rdd.reduce((a, b) => a + b)
+    println(res)
   }
 }
