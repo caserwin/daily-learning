@@ -3,9 +3,9 @@ package sql
 import org.apache.spark.sql.{Row, SparkSession}
 
 /**
-  * Spark dataframe with null value to rdd
+  * Created by yidxue on 2018/4/12
   */
-object SparkRDDAndDFTransDemo3 {
+object SparkSQLNullDemo1 {
 
   def main(args: Array[String]): Unit = {
     val spark = SparkSession.builder.appName("SQL Application").config("spark.master", "local[*]").getOrCreate()
@@ -20,8 +20,8 @@ object SparkRDDAndDFTransDemo3 {
     val inputDF = spark.sparkContext.parallelize(dataSeq).toDF("id", "name", "city")
     inputDF.printSchema()
 
-    val resRDD = inputDF.select($"id", $"name", $"city").rdd.map {
-      r: Row => (r.getInt(0), r.getString(1), r.getString(2))
+    val resRDD = inputDF.select($"id", $"name", $"city").na.fill("").rdd.map {
+      case Row(id: Integer, name: String, city: String) => (id, name, city)
     }
 
     resRDD.foreach(println(_))

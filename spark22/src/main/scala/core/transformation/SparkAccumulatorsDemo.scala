@@ -1,4 +1,4 @@
-package core
+package core.transformation
 
 import org.apache.spark.{SparkConf, SparkContext}
 

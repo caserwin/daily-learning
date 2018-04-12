@@ -17,7 +17,7 @@ object SparkSQLSortDemo {
     val df = sqlContext.read.json("data/cityinfo.json")
 
     // 工具 Cindex 字段排序： desc降序， asc升序
-    df.orderBy(df("Cindex").asc).show(false)
+    df.orderBy(df("Cindex").desc).show(false)
 
     df.orderBy(col("Cindex").asc).show(false)
   }

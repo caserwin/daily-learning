@@ -1,4 +1,4 @@
-package sql
+package core
 
 import org.apache.spark.sql.types.{StringType, StructField, StructType}
 import org.apache.spark.sql.{Row, SparkSession}
@@ -6,7 +6,7 @@ import org.apache.spark.sql.{Row, SparkSession}
 /**
   * Created by yidxue on 2018/1/29
   */
-object SparkRDDAndDFTransDemo1 {
+object SparkRDDAndDFTransDemo {
 
   def main(args: Array[String]): Unit = {
     val spark = SparkSession.builder.appName("SQL Application").config("spark.master", "local[*]").getOrCreate()
