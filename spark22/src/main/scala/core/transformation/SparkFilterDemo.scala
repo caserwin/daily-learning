@@ -2,7 +2,7 @@ package core.transformation
 
 import org.apache.spark.sql.SparkSession
 
-object SparkCoreFilterDemo {
+object SparkFilterDemo {
 
   def main(args: Array[String]) {
     val logFile = "data/README.md" // Should be some file on your system

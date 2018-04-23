@@ -125,6 +125,26 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>sql/*</exclude>   <!--exclude sql下所有的类/对象-->
+                        <exclude>sql/**</exclude>  <!--exclude sql下所有的目录-->
+                    </excludes>
+                </configuration>
+                <executions>                       <!--该 module 所引用的module覆盖率-->
+                    <execution>
+                        <id>report-aggregate</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report-aggregate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
                 <groupId>net.alchim31.maven</groupId>
                 <artifactId>scala-maven-plugin</artifactId>
                 <version>3.2.2</version>

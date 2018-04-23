@@ -6,7 +6,7 @@ import org.apache.spark.{SparkConf, SparkContext}
   * Created by yidxue on 2018/4/12
   *
   * takeSample(withReplacement, num, [seed])
-  * takeSample(withReplacement, fraction, [seed])
+  * Sample(withReplacement, fraction, [seed])
   * 这里 withReplacement 表示是否能重复采样，seed是指随机数种子。
   * takeSample 的num 表示采样多少个数。 sample 的fraction 表示采样比例。
   */

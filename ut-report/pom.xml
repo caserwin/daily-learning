@@ -23,8 +23,8 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <configuration>
                     <excludes>
-                        <!--这种写法可以过滤包是有效的，但是不知道其他写法如何-->
-                        <exclude>performace/*</exclude>
+                        <exclude>sql/*</exclude>   <!--exclude sql下所有的类/对象-->
+                        <exclude>sql/**</exclude>  <!--exclude sql下所有的目录-->
                     </excludes>
                 </configuration>
                 <executions>
