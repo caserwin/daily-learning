@@ -11,6 +11,12 @@
     <dependencies>
         <dependency>
             <groupId>cas.myself</groupId>
+            <artifactId>common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>cas.myself</groupId>
             <artifactId>spark16</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
@@ -23,8 +29,17 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <configuration>
                     <excludes>
+                        <!--exclude spark16-->
                         <exclude>sql/*</exclude>   <!--exclude sql下所有的类/对象-->
                         <exclude>sql/**</exclude>  <!--exclude sql下所有的目录-->
+                        <exclude>oracle/OracleUtils*.*</exclude> <!--exclude 某个类-->
+                        <!--exclude common-->
+                        <include>cassandra/*</include>
+                        <include>cassandra/**</include>
+                        <include>workflow/*</include>
+                        <include>workflow/**</include>
+                        <include>json/*</include>
+                        <include>json/**</include>
                     </excludes>
                 </configuration>
                 <executions>

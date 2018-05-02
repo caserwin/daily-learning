@@ -1,6 +1,5 @@
 package core.matcht
 
-
 import scala.util.control.Breaks._
 import scala.util.matching.Regex
 
@@ -49,5 +48,9 @@ object ScalaMultiMatchCaseDemo {
       }
     }
     resVersion
+  }
+
+  def main(args: Array[String]): Unit = {
+    println(getVersion("android", "Android/10.0 Mozilla/5.0(Linux; U; Android 7.0; en-GB; samsung_dreamltexx_24_7.0_10.0.0.21000142_21000142 B"))
   }
 }

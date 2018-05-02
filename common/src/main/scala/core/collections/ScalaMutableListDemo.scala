@@ -21,5 +21,11 @@ object ScalaMutableListDemo {
     // 可变集合合并
     println(mls ++ mlsInt)
 
+    val buf = scala.collection.mutable.ArrayBuffer.empty[String]
+    buf+= "aa"
+    buf+= "bb"
+    buf+= "cc"
+
+    println(buf.mkString(", "))
   }
 }
