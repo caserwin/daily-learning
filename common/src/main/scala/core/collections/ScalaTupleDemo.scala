@@ -1,4 +1,4 @@
-package core.collections
+package util.collections
 
 object ScalaTupleDemo {
 

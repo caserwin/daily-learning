@@ -1,4 +1,4 @@
-package core.oop
+package util.oop
 
 class Customer(var name: String, var age: Int, var card: CardInfo) {
 

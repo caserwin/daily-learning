@@ -1,4 +1,4 @@
-package core.oop
+package util.oop
 
 class EventLog(var eventtype:String, var timestamp:String, var remotehost:String){
   def this() {

@@ -1,4 +1,4 @@
-package core
+package util
 
 import org.apache.hadoop.conf.Configuration
 import org.apache.phoenix.spark._

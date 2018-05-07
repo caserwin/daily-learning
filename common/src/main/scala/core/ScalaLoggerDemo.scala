@@ -1,4 +1,4 @@
-package core
+package util
 
 import org.slf4j.{Logger, LoggerFactory}
 import org.apache.log4j.BasicConfigurator

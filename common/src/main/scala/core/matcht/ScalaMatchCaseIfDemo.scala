@@ -1,4 +1,4 @@
-package core.matcht
+package util.matcht
 
 object ScalaMatchCaseIfDemo {
 

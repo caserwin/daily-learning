@@ -1,4 +1,4 @@
-package core.sort
+package util.sort
 
 /**
   * User: Erwin

@@ -1,4 +1,4 @@
-package core.action
+package util.action
 
 import org.apache.spark.sql.{Row, SparkSession}
 import scala.collection.mutable.ArrayBuffer

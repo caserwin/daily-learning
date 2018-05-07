@@ -1,4 +1,4 @@
-package core.workflow.dependency
+package util.workflow.dependency
 
 import java.util.concurrent.CountDownLatch
 

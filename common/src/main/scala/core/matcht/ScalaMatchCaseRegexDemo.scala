@@ -1,4 +1,4 @@
-package core.matcht
+package util.matcht
 
 import scala.util.matching.Regex
 

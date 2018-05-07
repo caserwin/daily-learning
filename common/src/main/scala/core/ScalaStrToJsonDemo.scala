@@ -1,4 +1,4 @@
-package core
+package util
 
 import net.minidev.json.{JSONObject, JSONValue}
 /**

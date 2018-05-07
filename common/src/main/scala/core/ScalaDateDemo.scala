@@ -1,4 +1,4 @@
-package core
+package util
 
 import java.text.SimpleDateFormat
 import java.util.Date

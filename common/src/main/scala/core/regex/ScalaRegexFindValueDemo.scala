@@ -1,4 +1,4 @@
-package core.regex
+package util.regex
 
 /**
   * Created by yidxue on 2018/1/31

@@ -1,4 +1,4 @@
-package core.collections
+package util.collections
 
 /**
   * Created by yidxue on 2018/5/3

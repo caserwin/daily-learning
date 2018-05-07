@@ -1,4 +1,4 @@
-package core.create
+package util.create
 
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions.{explode, udf}
