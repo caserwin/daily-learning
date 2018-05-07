@@ -1,4 +1,4 @@
-package core.workflow.timeout
+package util.workflow.timeout
 
 import java.util.concurrent.{Executors, TimeUnit, TimeoutException}
 import org.apache.log4j.{LogManager, Logger}

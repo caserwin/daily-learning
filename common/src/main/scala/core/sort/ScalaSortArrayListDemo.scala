@@ -1,4 +1,4 @@
-package util.sort
+package core.sort
 
 import java.util
 import java.util.{Collections, Comparator}

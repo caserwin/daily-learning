@@ -1,4 +1,4 @@
-package util.trydemo
+package core.trydemo
 
 /**
   * Created by yidxue on 2018/3/8

@@ -1,9 +1,10 @@
-package phoenix
+package util.phoenix
 
 import org.apache.spark.sql.SQLContext
 import org.apache.spark.{SparkConf, SparkContext}
-import phoenix.bean.RowsBean
-import phoenix.conn.PhoenixConn
+import util.phoenix.bean.RowsBean
+import util.phoenix.conn.PhoenixConn
+
 import scala.collection.mutable
 
 /**

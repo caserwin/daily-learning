@@ -80,11 +80,11 @@ under the License.
 				<configuration>
 					<downloadSources>true</downloadSources>
 					<projectnatures>
-						<projectnature>org.scala-ide.sdt.core.scalanature</projectnature>
-						<projectnature>org.eclipse.jdt.core.javanature</projectnature>
+						<projectnature>org.scala-ide.sdt.util.scalanature</projectnature>
+						<projectnature>org.eclipse.jdt.util.javanature</projectnature>
 					</projectnatures>
 					<buildcommands>
-						<buildcommand>org.scala-ide.sdt.core.scalabuilder</buildcommand>
+						<buildcommand>org.scala-ide.sdt.util.scalabuilder</buildcommand>
 					</buildcommands>
 					<classpathContainers>
 						<classpathContainer>org.scala-ide.sdt.launching.SCALA_CONTAINER</classpathContainer>

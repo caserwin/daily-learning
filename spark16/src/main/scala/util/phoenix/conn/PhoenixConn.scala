@@ -1,4 +1,4 @@
-package phoenix.conn
+package util.phoenix.conn
 
 import java.sql.{Connection, DriverManager, SQLException}
 import java.util.Properties

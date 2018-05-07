@@ -1,4 +1,4 @@
-package util
+package core.transformation
 
 import org.apache.spark.{SparkConf, SparkContext}
 
@@ -7,7 +7,7 @@ import org.apache.spark.{SparkConf, SparkContext}
   * Date: 17/11/21 下午4:46
   * Description: 
   */
-object SparkMapDemo {
+object SparkMapDemo2 {
 
   def main(args: Array[String]): Unit = {
     val conf = new SparkConf().setAppName("Example").setMaster("local[*]")

@@ -1,4 +1,4 @@
-package util.matcht
+package core.matcht
 
 import scala.util.control.Breaks._
 import scala.util.matching.Regex

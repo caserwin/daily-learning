@@ -1,4 +1,4 @@
-package util
+package core
 
 import org.apache.spark.sql.types.{StringType, StructField, StructType}
 import org.apache.spark.sql.{Row, SparkSession}

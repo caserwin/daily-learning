@@ -1,4 +1,4 @@
-package util.workflow.timeout
+package core.workflow.timeout
 
 import java.util.concurrent.{Executors, TimeUnit}
 import workflow.timeout.runable.TaskRun

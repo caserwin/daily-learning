@@ -1,4 +1,4 @@
-package util.map
+package core.map
 
 import scala.collection.mutable
 

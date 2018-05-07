@@ -1,4 +1,4 @@
-package oracle
+package util.oracle
 
 import java.util
 import org.apache.spark.sql.SQLContext

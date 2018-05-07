@@ -1,4 +1,4 @@
-package core.logger
+package util.logger
 
 import org.apache.spark.sql.SQLContext
 import org.apache.spark.{SparkConf, SparkContext}

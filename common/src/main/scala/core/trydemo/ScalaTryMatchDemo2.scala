@@ -1,4 +1,4 @@
-package util.trydemo
+package core.trydemo
 
 import java.io.{FileNotFoundException, PrintWriter, StringWriter}
 import scala.util.{Failure, Success, Try}

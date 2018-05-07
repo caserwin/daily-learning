@@ -1,4 +1,4 @@
-package util.regex
+package core.regex
 
 /**
   * User: Erwin

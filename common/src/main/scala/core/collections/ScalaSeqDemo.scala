@@ -1,4 +1,4 @@
-package util.collections
+package core.collections
 
 /**
   * User: Erwin

@@ -1,4 +1,4 @@
-package util
+package core
 
 import org.apache.spark.{SparkConf, SparkContext}
 

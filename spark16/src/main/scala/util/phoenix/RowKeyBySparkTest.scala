@@ -1,10 +1,10 @@
-package phoenix
+package util.phoenix
 
 import org.apache.spark.sql.{SQLContext, SaveMode}
 import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.phoenix.spark._
 import org.apache.spark.sql.functions.when
-import phoenix.conn.PhoenixConn
+import util.phoenix.conn.PhoenixConn
 
 
 /**

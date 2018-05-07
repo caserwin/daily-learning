@@ -1,4 +1,4 @@
-package hdfs
+package util.hdfs
 
 import org.apache.spark.{SparkConf, SparkContext}
 

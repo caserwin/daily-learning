@@ -1,4 +1,4 @@
-package util.trydemo
+package core.trydemo
 
 import scala.io.Source
 import scala.util.{Failure, Success, Try}

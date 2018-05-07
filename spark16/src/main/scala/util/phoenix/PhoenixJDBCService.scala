@@ -1,9 +1,7 @@
-package phoenix
+package util.phoenix
 
 import java.sql.{Connection, DriverManager}
-
-import phoenix.bean.RowsBean
-
+import util.phoenix.bean.RowsBean
 import scala.collection.mutable
 
 /**

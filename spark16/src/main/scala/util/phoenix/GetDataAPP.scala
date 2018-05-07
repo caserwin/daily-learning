@@ -1,10 +1,10 @@
-package phoenix
+package util.phoenix
 
-import csv.SparkCSVUtil
 import org.apache.phoenix.spark._
 import org.apache.spark.sql.SQLContext
 import org.apache.spark.{SparkConf, SparkContext}
 import org.joda.time.format.DateTimeFormat
+import util.csv.SparkCSVUtil
 
 /**
   * Created by yidxue on 2018/3/11

@@ -1,4 +1,4 @@
-package util.lambda
+package core.lambda
 
 object LambdaDemo3 {
 

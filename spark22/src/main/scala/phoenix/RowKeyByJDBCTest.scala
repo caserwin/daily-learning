@@ -1,11 +1,18 @@
 package phoenix
 
-import org.apache.phoenix.spark._
-import org.apache.spark.sql.{SaveMode, SparkSession}
 import phoenix.conn.PhoenixConn
+import org.apache.spark.sql.SparkSession
 
-object RowKeyBySparkTest {
+/**
+  * User: Erwin
+  * Date: 17/12/28 上午10:04
+  * Description:
+  */
+object RowKeyByJDBCTest {
+
   def main(args: Array[String]): Unit = {
+    val spark = SparkSession.builder().appName("Spark SQL basic example").config("spark.master", "local[*]").getOrCreate()
+    import spark.implicits._
 
     // 数据源
     val tableName = "ROWKEYTEST_JDBC_SPARK22"
@@ -18,9 +25,6 @@ object RowKeyBySparkTest {
     // 创建phoenix表
     PhoenixJDBCService.createPhoenixTable(tableName, fields, conn)
 
-    val spark = SparkSession.builder().appName("Spark SQL basic example").config("spark.master", "local[*]").getOrCreate()
-    import spark.implicits._
-
     // 数据源
     val dataSeq1 = Seq(
       ("a1dsc", "zhangsan", "hangzhou"),
@@ -30,18 +34,14 @@ object RowKeyBySparkTest {
     val inputDF = spark.sparkContext.parallelize(dataSeq1).toDF("ROWKEY", "NAME", "CITY")
 
     // 写入phoenix表
-//    inputDF.write.format("org.apache.phoenix.spark").mode(SaveMode.Overwrite).options(Map("table" -> tableName, "zkUrl" -> zkAddr)).save()
-    inputDF.saveToPhoenix(tableName, zkUrl = Some(zkAddr))
+//    PhoenixJDBCService.upsertPhoenix(conn, s"upsert into $tableName values ('2017-12-01_id1234','lisa','hangzhou','0.75')")
 
-    // 查询phoenix表。
-    val df = spark.sqlContext.phoenixTableAsDataFrame(tableName, columns = fields, zkUrl = Some(zkAddr))
-    df.show()
+    // 查询phoenix表
 
     // 删除表中数据
 
     // 修改表中数据
 
     // 删除表
-
   }
 }

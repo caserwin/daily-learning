@@ -1,13 +1,13 @@
-package util
+package sql
 
-import org.apache.spark.{SparkConf, SparkContext}
-import org.apache.spark.sql.{Row, SQLContext}
 import org.apache.spark.sql.types.{StringType, StructField, StructType}
+import org.apache.spark.sql.{Row, SQLContext}
+import org.apache.spark.{SparkConf, SparkContext}
 
 /**
   * Created by yidxue on 2018/1/29
   */
-object SparkRDDAndDFTransDemo {
+object SparkSQLRDDAndDFTransDemo {
 
   def main(args: Array[String]): Unit = {
     val conf = new SparkConf().setAppName("Scala UDAF Example").setMaster("local[*]")

@@ -1,4 +1,4 @@
-package phoenix;
+package util.phoenix;
 
 import java.sql.*;
 

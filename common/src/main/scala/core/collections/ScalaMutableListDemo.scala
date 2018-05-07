@@ -1,4 +1,4 @@
-package util.collections
+package core.collections
 
 import scala.collection.mutable
 
