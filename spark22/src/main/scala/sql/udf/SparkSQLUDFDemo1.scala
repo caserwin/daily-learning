@@ -1,4 +1,4 @@
-package sql
+package sql.udf
 
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.expressions.UserDefinedFunction

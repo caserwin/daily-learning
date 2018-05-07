@@ -17,7 +17,6 @@ object SparkReadPhoenixDemo {
     val spSess = SparkSession.builder().appName("Spark SQL basic example").config("spark.master", "local[*]").getOrCreate()
     import spSess.implicits._
 
-
     val jmtDF = {
       val configuration = new Configuration
       configuration.set("hbase.zookeeper.quorum", "rpbt1hmn001.webex.com:2181")

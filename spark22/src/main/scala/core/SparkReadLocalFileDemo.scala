@@ -11,13 +11,8 @@ object SparkReadLocalFileDemo {
 
   def main(args: Array[String]): Unit = {
 
-    val spark = SparkSession
-      .builder()
-      .appName("Spark SQL basic example")
-      .config("spark.master", "local[*]")
-      .getOrCreate()
+    val spark = SparkSession.builder().appName("Spark SQL basic example").config("spark.master", "local[*]").getOrCreate()
     import spark.implicits._
-
 
     val peopleDF = spark.sparkContext
       .textFile("spark22/src/main/resources/people.txt").map(_.split(","))

@@ -1,8 +1,7 @@
 package core.create
 
-import org.apache.spark.sql.SQLContext
+import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions.{explode, udf}
-import org.apache.spark.{SparkConf, SparkContext}
 
 /**
   * Created by yidxue on 2018/1/31
@@ -10,19 +9,18 @@ import org.apache.spark.{SparkConf, SparkContext}
 object SparkReadJsonToDFDemo {
 
   def main(args: Array[String]): Unit = {
-    val sparkConf = new SparkConf().setAppName("simple demo").setMaster("local[*]")
-    val sc = new SparkContext(sparkConf)
-    val sqlContext = new SQLContext(sc)
-    import sqlContext.implicits._
+    val spark = SparkSession.builder.appName("Simple Application").config("spark.master", "local[*]").getOrCreate()
 
-    val data = sc.parallelize(Seq(
+    import spark.implicits._
+
+    val data = spark.sparkContext.parallelize(Seq(
       """{"userId": 1, "someString": "example1",
         "varA": [0, 2, 5], "varB": [1, 2, 9]}""",
       """{"userId": 2, "someString": "example2",
         "varA": [1, 20, 5], "varB": [9, null, 6]}"""
     ))
 
-    val df = sqlContext.read.json(data)
+    val df = spark.sqlContext.read.json(data.toDS())
     df.show()
 
     val zip = udf((xs: Seq[Long], ys: Seq[Long]) => xs.zip(ys))

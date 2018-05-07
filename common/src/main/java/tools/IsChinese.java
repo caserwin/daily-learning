@@ -22,9 +22,9 @@ public class IsChinese {
     }
 
     public static void main(String[] args){
-        String str = "dhdhdhdj, (ddd)";
+        String str = "dhdhdhdj, *.(ddd)";
         //判断字符串是否全为英文字母，是则返回true
-        boolean isWord = str.matches("[a-zA-Z\\s,()]+");
+        boolean isWord = str.matches("[a-zA-Z\\s,().]+");
         System.out.println(isWord);
     }
 }
