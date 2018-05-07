@@ -1,4 +1,4 @@
-package core
+package sql.createDF
 
 import org.apache.spark.sql.SparkSession
 
@@ -7,7 +7,7 @@ import org.apache.spark.sql.SparkSession
   * Date: 17/11/7 下午12:43
   * Description: 
   */
-object SparkReadLocalFileDemo {
+object SparkSQLTextFileDemo {
 
   def main(args: Array[String]): Unit = {
 

@@ -1,11 +1,11 @@
-package core
+package core.transformation
 
 import org.apache.spark.{SparkConf, SparkContext}
 
 /**
   * Created by yidxue on 2018/3/17
   */
-object SparkPartitionsDemo {
+object SparkPartitionsDemo1 {
 
   def main(args: Array[String]): Unit = {
     val sparkConf = new SparkConf().setAppName("WordCount").setMaster("local[*]")
@@ -23,14 +23,6 @@ object SparkPartitionsDemo {
     println("分区个数：" + rddRepart.getNumPartitions.toString)
 
     // 打印全部数据
-    rddRepart.foreach(print(_))
-
-    // 打印第一个分区的数据
-    rddRepart.mapPartitionsWithIndex((idx, iter) =>
-      if (idx == 0) {
-        iter
-      } else {
-        Iterator.empty
-      }).foreach(print(_))
+    rddRepart.foreach(println(_))
   }
 }
