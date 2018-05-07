@@ -1,4 +1,4 @@
-package core.transformation
+package core.transformation.basic
 
 import org.apache.spark.{SparkConf, SparkContext}
 
@@ -24,5 +24,6 @@ object SparkPartitionsDemo1 {
 
     // 打印全部数据
     rddRepart.foreach(println(_))
+    sc.stop()
   }
 }

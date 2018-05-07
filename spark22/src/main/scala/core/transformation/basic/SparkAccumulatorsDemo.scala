@@ -1,10 +1,10 @@
-package core.transformation
+package core.transformation.basic
 
 import org.apache.spark.{SparkConf, SparkContext}
 
 /**
   * Created by yidxue on 2018/4/10
-  * RDD 元素求和两种方式： 累加器和reduce 算子
+  * RDD 元素求和两种方式：累加器和reduce 算子
   */
 object SparkAccumulatorsDemo {
 
@@ -22,5 +22,7 @@ object SparkAccumulatorsDemo {
     // 使用reduce
     val res = rdd.reduce((a, b) => a + b)
     println(res)
+
+    sc.stop()
   }
 }

@@ -1,4 +1,4 @@
-package core.transformation
+package core.transformation.basic
 
 import org.apache.spark.sql.SparkSession
 
@@ -18,5 +18,6 @@ object SparkIntersectionDemo {
     rdd2.foreach(println(_))
 
     rdd1.intersection(rdd2).foreach(println(_))
+    spark.stop()
   }
 }

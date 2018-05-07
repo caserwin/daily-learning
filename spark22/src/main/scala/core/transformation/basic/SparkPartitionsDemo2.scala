@@ -1,4 +1,4 @@
-package core.transformation
+package core.transformation.basic
 
 import org.apache.spark.{SparkConf, SparkContext}
 
@@ -34,5 +34,7 @@ object SparkPartitionsDemo2 {
       } else {
         Iterator.empty
       }).foreach(println(_))
+
+    sc.stop()
   }
 }

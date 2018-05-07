@@ -1,4 +1,4 @@
-package core.transformation
+package core.transformation.basic
 
 import org.apache.spark.sql.SparkSession
 
@@ -14,5 +14,6 @@ object SparkRandomSplitDemo {
 
     val RDDArray = rdd.randomSplit(Array(1.0, 2.0, 3.0, 4.0))
     println(RDDArray.length)
+    spark.stop()
   }
 }

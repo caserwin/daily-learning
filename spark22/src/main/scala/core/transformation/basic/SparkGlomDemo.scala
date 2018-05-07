@@ -1,4 +1,4 @@
-package core.transformation
+package core.transformation.basic
 
 import org.apache.spark.sql.SparkSession
 
@@ -14,5 +14,6 @@ object SparkGlomDemo {
 
     val arrayRDD = rdd.glom()
     arrayRDD.foreach(array => println(array.mkString(",")))
+    spark.stop()
   }
 }
