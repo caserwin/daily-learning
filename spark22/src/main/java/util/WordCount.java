@@ -8,7 +8,6 @@ import org.apache.spark.api.java.function.FlatMapFunction;
 import org.apache.spark.api.java.function.Function2;
 import org.apache.spark.api.java.function.PairFunction;
 import scala.Tuple2;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;

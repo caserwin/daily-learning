@@ -1,17 +1,17 @@
-package core.create
+package core.transformation
 
 import org.apache.spark.sql.SparkSession
 
 /**
   * Created by yidxue on 2018/5/7
   */
-object SparkReadDemo1 {
-  def main(args: Array[String]): Unit = {
-    val logFile = "data/README.md" // Should be some file on your system
-    val spark = SparkSession.builder.appName("Simple Application").config("spark.master", "local[*]").getOrCreate()
-    val logData = spark.read.textFile(logFile).cache()
-    logData.filter(line => line.contains("which")).foreach(println(_))
+object SparkFlatMapDemo {
 
+  def main(args: Array[String]): Unit = {
+    val spark = SparkSession.builder.appName("Simple Application").config("spark.master", "local[*]").getOrCreate()
+    val rdd = spark.sparkContext.parallelize(Array("erwin", "caroline"))
+
+    rdd.flatMap(_.toUpperCase).foreach(println(_))
     spark.stop()
   }
 }

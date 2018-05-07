@@ -6,7 +6,7 @@ import org.apache.spark.sql.functions.{explode, udf}
 /**
   * Created by yidxue on 2018/1/31
   */
-object SparkReadJsonToDFDemo {
+object SparkReadJsonDemo {
 
   def main(args: Array[String]): Unit = {
     val spark = SparkSession.builder.appName("Simple Application").config("spark.master", "local[*]").getOrCreate()
