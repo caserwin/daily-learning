@@ -1,4 +1,4 @@
-package dataset.transformation;
+package dataset.transformation.aggregate;
 
 import org.apache.flink.api.common.functions.GroupReduceFunction;
 import org.apache.flink.api.java.DataSet;
@@ -10,6 +10,7 @@ import java.util.Set;
 
 /**
  * Created by yidxue on 2018/2/12
+ * @author yidxue
  */
 public class FlinkGroupReduceDemo {
 

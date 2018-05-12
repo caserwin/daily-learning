@@ -4,6 +4,7 @@ import scala.collection.mutable
 
 /**
   * Created by yidxue on 2018/1/31
+  * 可变集合
   */
 object ScalaMutableListDemo {
 

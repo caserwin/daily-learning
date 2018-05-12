@@ -1,4 +1,4 @@
-package dataset.transformation.groupby;
+package dataset.transformation.aggregate;
 
 import org.apache.flink.api.common.functions.FlatMapFunction;
 import org.apache.flink.api.common.functions.MapFunction;
@@ -10,6 +10,7 @@ import java.util.Arrays;
 
 /**
  * Created by yidxue on 2018/4/4
+ * @author yidxue
  */
 public class FlinkWordCountDemo {
     public static void main(String[] args) throws Exception {

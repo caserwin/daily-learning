@@ -1,4 +1,4 @@
-package dataset.transformation.groupby;
+package dataset.transformation.aggregate;
 
 import bean.WCBean;
 import org.apache.flink.api.common.functions.ReduceFunction;
