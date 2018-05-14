@@ -1,4 +1,4 @@
-package datastream.readdata;
+package datastream.datasource;
 
 import bean.WCBean;
 import org.apache.flink.streaming.api.datastream.DataStream;

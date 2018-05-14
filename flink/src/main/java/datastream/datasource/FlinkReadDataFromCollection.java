@@ -1,4 +1,4 @@
-package datastream.readdata;
+package datastream.datasource;
 
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.streaming.api.datastream.DataStream;

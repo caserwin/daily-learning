@@ -1,4 +1,4 @@
-package datastream.kafka;
+package datastream.datasource.kafka;
 
 import org.apache.flink.streaming.api.TimeCharacteristic;
 import org.apache.flink.streaming.api.datastream.DataStream;
