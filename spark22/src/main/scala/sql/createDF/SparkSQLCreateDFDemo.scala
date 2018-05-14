@@ -1,11 +1,11 @@
-package core.create
+package sql.createDF
 
 import org.apache.spark.sql.SparkSession
 
 /**
   * Created by yidxue on 2018/4/25
   */
-object SparkCreateDataFrameDemo {
+object SparkSQLCreateDFDemo {
 
   val COUNTRY_MAP = Map(
     "日本" -> "JAPAN",

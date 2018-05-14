@@ -5,7 +5,7 @@ import org.apache.spark.sql.{Row, SparkSession}
 /**
   * Created by yidxue on 2018/4/12
   */
-object SparkSQLNullDemo2 {
+object SparkSQLCreateRDDByDFDemo2 {
 
   def main(args: Array[String]): Unit = {
     val spark = SparkSession.builder.appName("SQL Application").config("spark.master", "local[*]").getOrCreate()

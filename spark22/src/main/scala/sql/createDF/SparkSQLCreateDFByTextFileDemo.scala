@@ -7,7 +7,7 @@ import org.apache.spark.sql.SparkSession
   * Date: 17/11/7 下午12:43
   * Description: 
   */
-object SparkSQLTextFileDemo {
+object SparkSQLCreateDFByTextFileDemo {
 
   def main(args: Array[String]): Unit = {
 

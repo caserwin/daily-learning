@@ -7,7 +7,7 @@ import org.apache.spark.{SparkConf, SparkContext}
 /**
   * Created by yidxue on 2018/1/29
   */
-object SparkSQLRDDAndDFTransDemo {
+object SparkSQLCreateDFByRDDDemo {
 
   def main(args: Array[String]): Unit = {
     val conf = new SparkConf().setAppName("Scala UDAF Example").setMaster("local[*]")

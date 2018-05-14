@@ -6,10 +6,10 @@ import org.apache.spark.{SparkConf, SparkContext}
 /**
   * Spark dataframe with null value to rdd
   */
-object SparkSQLNullDemo1 {
+object SparkSQLCreateRDDByDFDemo1 {
 
   def main(args: Array[String]): Unit = {
-    val conf = new SparkConf().setAppName("Scala UDAF Example").setMaster("local[*]")
+    val conf = new SparkConf().setAppName("Spark create RDD by DF Example").setMaster("local[*]")
     val sc = new SparkContext(conf)
     val sqlContext = new SQLContext(sc)
     import sqlContext.implicits._
@@ -27,8 +27,6 @@ object SparkSQLNullDemo1 {
       case Row(id: Integer, name: String, city: String) => (id, name, city)
     }
 
-    for (r <- resRDD.collect()) {
-      println(r)
-    }
+    resRDD.foreach(println(_))
   }
 }
