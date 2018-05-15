@@ -15,10 +15,10 @@ object SparkSQLGroupByDemo {
     import sqlContext.implicits._
 
     val dataSeq = Seq(
-      ("1", "lisi", 1),
-      ("1", "lisi", 2),
-      ("1", "wangwu", 3),
-      ("2", "wangwu", 4)
+      ("1", "lisi", "1"),
+      ("1", "lisi", "2"),
+      ("1", "wangwu", "3"),
+      ("2", "wangwu", "4")
     )
     val inputDF = sc.parallelize(dataSeq).toDF("id", "name", "num")
 

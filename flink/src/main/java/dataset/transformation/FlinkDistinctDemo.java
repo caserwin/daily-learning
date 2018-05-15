@@ -48,7 +48,7 @@ public class FlinkDistinctDemo {
             new CustomType("name2", 2),
             new CustomType("name3", 2));
         // DataSet<CustomType> out2 = input.distinct("*");
-        DataSet<CustomType> out2 = input.distinct( "aNumber");
+        DataSet<CustomType> out2 = input.distinct("aNumber");
         out2.map(new FlinkDistinctDemo().new CustomMap()).print();
     }
 }

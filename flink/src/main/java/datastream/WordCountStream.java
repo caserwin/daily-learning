@@ -22,7 +22,7 @@ public class WordCountStream {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
         DataStream<Tuple2<String, Integer>> dataStream = env
-                .socketTextStream("localhost", 9999)
+                .socketTextStream("localhost", 9998)
                 .flatMap(new Splitter())
                 .keyBy(0)
                 .timeWindow(Time.seconds(5))

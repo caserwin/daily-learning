@@ -22,4 +22,9 @@ public class CustomType {
         this.aName = aName;
         this.aNumber = aNumber;
     }
+
+    @Override
+    public String toString() {
+        return this.aName + ":" + this.aNumber;
+    }
 }
