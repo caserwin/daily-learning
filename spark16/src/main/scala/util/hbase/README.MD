@@ -45,9 +45,10 @@ scan 'student'
 <div align=left><img width="1200" height="400" src="https://github.com/caserwin/daily-learning/raw/master/spark16/pic/spark-hbase-read.png"/></div>
 
 
-### TableInputFormat
+### 其他
+#### TableInputFormat
 要继承重写 TableInputFormat 这个类。
 
-### TableOutputFormat
+#### TableOutputFormat
 要继承重写 TableOutputFormat 这个类。
 
