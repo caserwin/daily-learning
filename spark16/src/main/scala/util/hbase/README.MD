@@ -1,5 +1,6 @@
 ### 参考：<br>
-[Spark入门：读写HBase数据](http://dblab.xmu.edu.cn/blog/1094-2/)  比较旧，内容需要更新。<br>
+[Spark入门：读写HBase数据](http://dblab.xmu.edu.cn/blog/1094-2/)<br>
+该参考资料比较旧，内容需要更新。<br>
 
 
 ### 1 创建 hbase 表
@@ -7,7 +8,7 @@
 2 create 'student','info' 建表<br>
 
 ### 2 maven pom.xml
-读取 Hbase 数据，添加以下jar包
+读写 Hbase 数据，添加以下jar包
 ```
 <dependency>
     <groupId>org.apache.hbase</groupId>
@@ -35,13 +36,13 @@
 见 SparkWriteHbaseDemo1 <br>
 查询：
 scan 'student'
-<div align=left><img width="300" height="200" src="https://github.com/caserwin/daily-learning/raw/master/spark16/pic/spark-hbase-1.png"/></div>
+<div align=left><img width="1200" height="250" src="https://github.com/caserwin/daily-learning/raw/master/spark16/pic/spark-hbase-write.png"/></div>
 
 
 ### 4 读取 hbase code
 实际运行需要改下，logical.scan.start 和 logical.scan.stop 参数。<br>
 见 SparkReadHbaseDemo1
-<div align=left><img width="300" height="200" src="https://github.com/caserwin/daily-learning/raw/master/spark16/pic/spark-hbase-2.png"/></div>
+<div align=left><img width="1200" height="400" src="https://github.com/caserwin/daily-learning/raw/master/spark16/pic/spark-hbase-read.png"/></div>
 
 
 ### TableInputFormat

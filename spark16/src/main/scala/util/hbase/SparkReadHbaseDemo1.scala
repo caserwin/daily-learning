@@ -27,8 +27,8 @@ object SparkReadHbaseDemo1 {
 
     val hbaseconf = createHbaseConf
     // 包括起始和终止所有记录。
-    hbaseconf.set("logical.scan.start", "2018-05-18 09:49:20")
-    hbaseconf.set("logical.scan.stop", "2018-05-18 09:49:20")
+    hbaseconf.set("logical.scan.start", "2018-05-18")
+    hbaseconf.set("logical.scan.stop", "2018-05-18")
     hbaseconf.set(TableInputFormat.INPUT_TABLE, "student")
 
     val resRdd = sc.newAPIHadoopRDD(hbaseconf, classOf[TableInputFormat],
