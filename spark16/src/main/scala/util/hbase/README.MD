@@ -35,14 +35,17 @@
 见 SparkWriteHbaseDemo1 <br>
 查询：
 scan 'student'
+<div align=left><img width="300" height="200" src="https://github.com/caserwin/daily-learning/raw/master/spark16/pic/spark-hbase-1.png"/></div>
+
 
 ### 4 读取 hbase code
 实际运行需要改下，logical.scan.start 和 logical.scan.stop 参数。<br>
 见 SparkReadHbaseDemo1
+<div align=left><img width="300" height="200" src="https://github.com/caserwin/daily-learning/raw/master/spark16/pic/spark-hbase-2.png"/></div>
+
 
 ### TableInputFormat
 要继承重写 TableInputFormat 这个类。
-输出如下：
 
 ### TableOutputFormat
 要继承重写 TableOutputFormat 这个类。
