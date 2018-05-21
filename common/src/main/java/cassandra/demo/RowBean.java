@@ -1,4 +1,4 @@
-package cassandra;
+package cassandra.demo;
 
 /**
  * User: Erwin

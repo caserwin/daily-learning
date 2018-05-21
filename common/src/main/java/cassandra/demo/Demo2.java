@@ -1,4 +1,4 @@
-package cassandra;
+package cassandra.demo;
 
 import cassandra.conn.CassConnSimple;
 import com.datastax.driver.core.*;
@@ -13,7 +13,7 @@ import java.util.HashSet;
 /**
  * @author yiding
  */
-public class Process {
+public class Demo2 {
 
     /**
      * 按行读取文件

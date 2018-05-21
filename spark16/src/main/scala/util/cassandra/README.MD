@@ -22,6 +22,7 @@ insert into emp (empid, emp_first, emp_last, emp_dept) values (2,'eng','smith','
 select * from emp;
 ```
 如下：
+<div align=center><img width="750" height="150" src="https://github.com/caserwin/daily-learning/raw/master/spark16/pic/spark-cassandra-demo1.png"/></div>
 
 ## Spark 读写
 maven pom.xml。这里需要注意scala版本、spark版本一致即可。
@@ -34,11 +35,11 @@ maven pom.xml。这里需要注意scala版本、spark版本一致即可。
 ```
 
 读结果
-
+<div align=center><img width="550" height="150" src="https://github.com/caserwin/daily-learning/raw/master/spark16/pic/spark-cassandra-demo2.png"/></div>
 
 写结果
+<div align=center><img width="550" height="200" src="https://github.com/caserwin/daily-learning/raw/master/spark16/pic/spark-cassandra-demo3.png"/></div>
 
-
-## 错误参考
+## 错误
 [Not enough replica available for query at consistency ONE (1 required but only 0 alive)
 ](https://stackoverflow.com/questions/27974911/not-enough-replica-available-for-query-at-consistency-one-1-required-but-only-0?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa)

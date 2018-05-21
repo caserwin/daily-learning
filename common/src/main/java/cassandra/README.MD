@@ -82,7 +82,8 @@ DROP KEYSPACE <identifier>
     <version>1.2.4</version>
 </dependency>
 ```
-//
+// code
+见 demo/demo1, demo/demo2
 
 注意：
 亲测：Cassandra sql insert 如果primary key有重复的话，insert的数据会直接覆盖旧数据。
