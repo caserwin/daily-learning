@@ -20,8 +20,8 @@ object SparkWriteHbaseDemo1 {
 
   def createHbaseConf: Configuration = {
     val hbaseConf = HBaseConfiguration.create()
-    hbaseConf.set("hbase.zookeeper.quorum", "127.0.0.1")
-    hbaseConf.set("hbase.master", "127.0.0.1:60010")
+    hbaseConf.set("hbase.zookeeper.quorum", "10.29.42.41,10.29.42.42,10.29.42.43")
+    hbaseConf.set("hbase.master", "10.29.42.40:60010")
     hbaseConf.set("hbase.zookeeper.property.clientPort", "2181")
     hbaseConf
   }

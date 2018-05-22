@@ -15,8 +15,8 @@ object SparkReadHbaseDemo1 {
 
   def createHbaseConf: Configuration = {
     val hbaseConf = HBaseConfiguration.create()
-    hbaseConf.set("hbase.zookeeper.quorum", "127.0.0.1")
-    hbaseConf.set("hbase.master", "127.0.0.1:60010")
+    hbaseConf.set("hbase.zookeeper.quorum", "10.29.42.41,10.29.42.42,10.29.42.43")
+    hbaseConf.set("hbase.master", "10.29.42.40:60010")
     hbaseConf.set("hbase.zookeeper.property.clientPort", "2181")
     hbaseConf
   }
@@ -27,8 +27,8 @@ object SparkReadHbaseDemo1 {
 
     val hbaseconf = createHbaseConf
     // 包括起始和终止所有记录。
-    hbaseconf.set("logical.scan.start", "2018-05-18")
-    hbaseconf.set("logical.scan.stop", "2018-05-18")
+    hbaseconf.set("hbase.mapreduce.scan.row.start", "2018-05-18")
+    hbaseconf.set("hbase.mapreduce.scan.row.stop", "2018-05-19")
     hbaseconf.set(TableInputFormat.INPUT_TABLE, "student")
 
     val resRdd = sc.newAPIHadoopRDD(hbaseconf, classOf[TableInputFormat],
@@ -39,12 +39,13 @@ object SparkReadHbaseDemo1 {
     resRdd.map(transformMap).collect().foreach(println(_))
   }
 
-  def transformMap(tuple: (ImmutableBytesWritable, Result)): (String, String, String) = {
+  def transformMap(tuple: (ImmutableBytesWritable, Result)): (String, String, String, String) = {
     val result = tuple._2
+    val rowkey = Bytes.toString(result.getRow)
     val name = Bytes.toString(result.getValue("info".getBytes, "name".getBytes))
     val gender = Bytes.toString(result.getValue("info".getBytes, "gender".getBytes))
     val age = Bytes.toString(result.getValue("info".getBytes, "age".getBytes))
 
-    (name, gender, age)
+    (rowkey, name, gender, age)
   }
 }
