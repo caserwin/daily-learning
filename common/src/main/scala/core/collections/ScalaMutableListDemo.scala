@@ -19,6 +19,11 @@ object ScalaMutableListDemo {
     mls += 5
     println(mls)
 
+    // 定义一个可变列表, 可以存放任何类型
+    val mlsb = mutable.ListBuffer(1, 2, 3, 4, "str")
+    mlsb += 5
+    println(mlsb)
+
     // 可变集合合并
     println(mls ++ mlsInt)
 

@@ -33,16 +33,16 @@
 ```
 
 ### 3 写入 hbase code
-见 SparkWriteHbaseDemo1 <br>
+代码见 SparkWriteHbaseDemo1 <br>
 查询：
 scan 'student'
-<div align=left><img width="1400" height="220" src="https://github.com/caserwin/daily-learning/raw/master/spark16/pic/spark-hbase-write.png"/></div>
+<div align=left><img width="1300" height="420" src="https://github.com/caserwin/daily-learning/raw/master/spark16/pic/spark-hbase-write.png"/></div>
 
 
 ### 4 读取 hbase code
-实际运行需要改下，logical.scan.start 和 logical.scan.stop 参数。<br>
+实际运行需要改下，hbase.mapreduce.scan.row.start 和 hbase.mapreduce.scan.row.stop 参数。实际select的结果rowkey范围包括start，不包括stop。<br>
 见 SparkReadHbaseDemo1
-<div align=left><img width="1400" height="400" src="https://github.com/caserwin/daily-learning/raw/master/spark16/pic/spark-hbase-read.png"/></div>
+<div align=left><img width="1200" height="600" src="https://github.com/caserwin/daily-learning/raw/master/spark16/pic/spark-hbase-read.png"/></div>
 
 
 ### 其他
