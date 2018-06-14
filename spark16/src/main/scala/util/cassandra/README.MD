@@ -40,6 +40,12 @@ maven pom.xml。这里需要注意scala版本、spark版本一致即可。
 写结果
 <div align=center><img width="550" height="200" src="https://github.com/caserwin/daily-learning/raw/master/spark16/pic/spark-cassandra-demo3.png"/></div>
 
+## 关于参数
+通过spark code 确认 Cassandra 所有参数：
+
+
+
+
 ## 错误
 [Not enough replica available for query at consistency ONE (1 required but only 0 alive)
 ](https://stackoverflow.com/questions/27974911/not-enough-replica-available-for-query-at-consistency-one-1-required-but-only-0?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa)

@@ -1,7 +1,7 @@
 package sql
 
 import org.apache.spark.sql.SQLContext
-import org.apache.spark.sql.functions.{lit, when}
+import org.apache.spark.sql.functions.{concat, lit, when}
 import org.apache.spark.{SparkConf, SparkContext}
 
 /**
@@ -24,8 +24,9 @@ object SparkSQLAddOrUpdateColumnDemo {
 
     inputDF
       .select($"id", $"name", $"city")
-      .withColumn("city", when($"city".isNull, "hangzhou").otherwise($"city"))   // update column
-      .withColumn("date", lit("2018-01-18"))           // add column
+      .withColumn("city", when($"city".isNull, "hangzhou").otherwise($"city")) // update column
+      // notice: it is a error when lit(null)
+      .withColumn("date", concat(lit("2018-01-18"), lit("_"), lit(null))) // add column
       .show()
   }
 }

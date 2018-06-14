@@ -8,6 +8,17 @@ import org.apache.spark.sql.functions._
   * Created by yidxue on 2018/1/29
   */
 object SparkSQLGroupByDemo {
+
+  private val dealNUM = udf((num: String) => {
+    val res1 = num.toFloat.toInt
+    val res2 = num.toFloat
+    if (res1 != res2) res1 + 1 else res1
+  })
+
+  private val minusNum = udf((num1: Int, num2: Int) => {
+    num1 - num2
+  })
+
   def main(args: Array[String]): Unit = {
     val conf = new SparkConf().setAppName("Spark SQL Example").setMaster("local[1]")
     val sc = new SparkContext(conf)
@@ -15,8 +26,12 @@ object SparkSQLGroupByDemo {
     import sqlContext.implicits._
 
     val dataSeq = Seq(
-      ("1", "lisi", "1"),
-      ("1", "lisi", "2"),
+      ("1", "lisi", "4"),
+      ("1", "lisi", "10"),
+      ("1", "lisi", "4"),
+      ("1", "lisi", "10"),
+      ("1", "lisi", "4"),
+      ("1", "lisi", "10"),
       ("1", "wangwu", "3"),
       ("2", "wangwu", "4")
     )
@@ -30,12 +45,15 @@ object SparkSQLGroupByDemo {
       .groupBy("id", "name")
       .agg(
         count(lit(1)).alias("count"),
-        max("num").cast("string").alias("max_num"),
-        sum("num").cast("string").alias("sum_num"),
-        min("num").cast("string").alias("min_num"),
-        first($"num").alias("f_num"),
-        last($"num").alias("l_num")
+        avg($"num".cast("int")).alias("avg_num"),
+        max($"num").cast("string").alias("max_num"),
+        sum($"num").cast("string").alias("sum_num"),
+        min($"num".cast("int")).cast("string").alias("min_num"),
+        first($"num".cast("int")).alias("f_num"),
+        last($"num".cast("int")).alias("l_num")
       )
+      .withColumn("minus_col", minusNum($"sum_num", $"max_num"))
+      .withColumn("avg_num", dealNUM($"avg_num"))
       .show()
   }
 }

@@ -89,7 +89,7 @@ object LinearRegression {
   }
 
   def run(params: Params): Unit = {
-    val conf = new SparkConf().setAppName(s"LinearRegression with $params")
+    val conf = new SparkConf().setAppName(s"LinearRegression with $params").setMaster("local[*]")
     val sc = new SparkContext(conf)
 
     Logger.getRootLogger.setLevel(Level.WARN)

@@ -30,7 +30,7 @@ import org.apache.spark.mllib.regression.LinearRegressionWithSGD
 object LinearRegressionWithSGDExample {
 
   def main(args: Array[String]): Unit = {
-    val conf = new SparkConf().setAppName("LinearRegressionWithSGDExample")
+    val conf = new SparkConf().setAppName("LinearRegressionWithSGDExample").setMaster("local[*]")
     val sc = new SparkContext(conf)
 
     // $example on$
