@@ -4,8 +4,16 @@ package reflection;
  * @author yidxue
  */
 public class Service2 {
-    public void doService2(int i){
+    private int i;
+    public Service2(int i){
+        this.i = i;
+    }
+
+    public void doService2(){
         System.out.println("业务方法 "+i);
     }
-}
 
+    public static void main(String[] args){
+        new Service2(11).doService2();
+    }
+}
