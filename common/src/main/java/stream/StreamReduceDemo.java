@@ -5,7 +5,7 @@ import java.util.HashSet;
 /**
  * @author yidxue
  */
-public class CollectionsSumDemo {
+public class StreamReduceDemo {
     public static void main(String[] args){
         HashSet<Integer> set = new HashSet<>();
         set.add(1);

@@ -7,7 +7,7 @@ import java.util.Arrays;
  *
  *  Java Array Stream Demo
  */
-public class ArraysDemo {
+public class StreamMatchDemo {
     public static void main(String[] args){
 
         String[] dateParts = new String[]{"year", "month", "day", "hour", "minute", "second"};

@@ -21,12 +21,18 @@ public class CreateStreamDemo {
         List<String> list = Arrays.asList(names);
         Stream<String> stream3 = list.stream();
 
+        // 通过 generate
+        Stream<String> stream4 = Stream.generate(() -> "test").limit(10);
+
         List<String> result1 = stream1.map(String::toUpperCase).collect(toList());
-        List<String> result2 = stream2.map(str -> str.toUpperCase()).collect(toList());
-        List<String> result3 = stream3.map(str -> str.toUpperCase()).collect(toList());
+        List<String> result2 = stream2.map(String::toUpperCase).collect(toList());
+        List<String> result3 = stream3.map(String::toUpperCase).collect(toList());
+        List<String> result4 = stream4.map(String::toUpperCase).collect(toList());
 
         System.out.println(result1);
         System.out.println(result2);
         System.out.println(result3);
+        System.out.println(result4);
+
     }
 }

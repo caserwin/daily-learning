@@ -12,7 +12,7 @@ import org.apache.commons.lang.StringUtils;
  */
 public class HiveService {
 
-    private static final String URLHIVE = "jdbc:hive2://localhost:10000/default";
+    private static final String URLHIVE = "jdbc:hive2://10.29.42.49:10000/default";
     private static Connection connection = null;
 
     public static Connection getHiveConnection() {
