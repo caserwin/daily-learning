@@ -32,41 +32,8 @@ public class PersonRecord {
         return new String[]{"id", "name", "age", "gender"};
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getAge() {
-        return age;
-    }
-
-    public void setAge(String age) {
-        this.age = age;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-
     @Override
     public String toString() {
-        return this.id + "\t" + this.name + "\t" + this.age+ "\t" + this.gender;
+        return this.id + "\t" + this.name + "\t" + this.age + "\t" + this.gender;
     }
 }

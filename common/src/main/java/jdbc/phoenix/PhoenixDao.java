@@ -10,10 +10,11 @@ import java.util.stream.Collectors;
 
 /**
  * Created by yidxue on 2018/6/28
+ * https://my.vertica.com/docs/8.1.x/HTML/index.htm#Authoring/ConnectingToVertica/ClientJDBC/BatchInsertsUsingJDBCPreparedStatements.htm
  */
 public class PhoenixDao {
 
-    private String URLHIVE = "jdbc:hive2://10.29.42.49:10000/default";
+    private String URLHIVE = "jdbc:hive2://localhost:10001/default";
     private String DBType = "phoenix";
     private Connection conn;
 

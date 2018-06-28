@@ -16,11 +16,15 @@ import java.util.Set;
 public class FileUtil {
 
     public static void main(String[] args) {
-        List<String> list = new ArrayList<>();
-        list.add("111");
-        list.add("222");
-        writeByStream(list, "/Users/cisco/file/tmp1.txt");
-        changeFolderPermission(new File("/Users/cisco/file/tmp1.txt"));
+//        List<String> list = new ArrayList<>();
+//        list.add("111");
+//        list.add("222");
+//        writeByStream(list, "/Users/cisco/file/tmp1.txt");
+//        changeFolderPermission(new File("/Users/cisco/file/tmp1.txt"));
+        ArrayList<String> arrayList = readByStream("/Users/cisco/anomaly/anomalysample_2018-06-01_2018-06-02.txt");
+        for (String str : arrayList) {
+            System.out.println(str);
+        }
     }
 
     private static void changeFolderPermission(File dirFile) {
@@ -45,7 +49,7 @@ public class FileUtil {
 
     public static void writeByStream(List<String> data, String path) {
         try {
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path),"utf-8"));
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path)));
             for (String aData : data) {
                 bw.append(aData).append("\r\n");
             }
@@ -55,5 +59,18 @@ public class FileUtil {
         }
     }
 
+    public static ArrayList<String> readByStream(String path) {
+        ArrayList<String> resLs = new ArrayList<>();
+        try {
 
+            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path)));
+            String line;
+            while ((line = br.readLine()) != null) {
+                resLs.add(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return resLs;
+    }
 }
