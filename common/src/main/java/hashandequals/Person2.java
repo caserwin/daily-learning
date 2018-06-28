@@ -1,11 +1,11 @@
-package core.hashandequals;
+package hashandequals;
 
 /**
  * User: Erwin
  * Date: 17/12/30 下午12:55
  * Description:
  */
-public class Person3 {
+public class Person2 {
     /**
      * 姓名
      */
@@ -15,15 +15,15 @@ public class Person3 {
      */
     private int id;
 
-    public Person3(int id, String name) {
+    public Person2(int id, String name) {
         this.name = name;
         this.id = id;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (obj instanceof Person3) {
-            Person3 p = (Person3) obj;
+        if (obj instanceof Person2) {
+            Person2 p = (Person2) obj;
             if (this.id == p.id) {
                 return true;
             }
@@ -32,12 +32,9 @@ public class Person3 {
     }
 
     public static void main(String[] args) {
-        Person3 p1 = new Person3(12345, "张三");
-        Person3 p2 = new Person3(12345, "张三三");
+        Person2 p1 = new Person2(12345, "张三");
+        Person2 p2 = new Person2(12345, "张三三");
 
         System.out.println(p1.equals(p2));
-
-        System.out.println(p1.hashCode());
-        System.out.println(p2.hashCode());
     }
 }

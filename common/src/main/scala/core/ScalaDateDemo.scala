@@ -2,7 +2,8 @@ package core
 
 import java.text.SimpleDateFormat
 import java.util.Date
-import date.DateUtil
+
+import tools.DateUtil
 
 /**
   * User: Erwin

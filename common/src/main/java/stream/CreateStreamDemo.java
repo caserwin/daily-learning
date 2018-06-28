@@ -8,13 +8,14 @@ import static java.util.stream.Collectors.toList;
 /**
  * Created by erwin on 2018/6/21
  */
+@SuppressWarnings("AlibabaRemoveCommentedCode")
 public class CreateStreamDemo {
     public static void main(String[] args) {
         // 通过数组得到 Stream
         String[] names = {"chaimm", "peter", "john"};
         Stream<String> stream1 = Arrays.stream(names);
 
-        // 单个值，构造生成
+        // of()方式：这样也是可以的：Stream<String> stream2 = Stream.of(names);
         Stream<String> stream2 = Stream.of("chaimm", "peter", "john");
 
         // 通过集合得到 Stream

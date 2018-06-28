@@ -1,4 +1,4 @@
-package core.hashandequals;
+package hashandequals;
 
 /**
  * User: Erwin

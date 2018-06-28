@@ -1,4 +1,4 @@
-package file;
+package tools;
 
 import java.io.*;
 import java.nio.file.Files;
@@ -19,7 +19,7 @@ public class FileUtil {
         List<String> list = new ArrayList<>();
         list.add("111");
         list.add("222");
-        writeToText(list, "/Users/cisco/file/tmp1.txt");
+        writeByStream(list, "/Users/cisco/file/tmp1.txt");
         changeFolderPermission(new File("/Users/cisco/file/tmp1.txt"));
     }
 
@@ -43,9 +43,9 @@ public class FileUtil {
         }
     }
 
-    private static void writeToText(List<String> data, String path) {
+    public static void writeByStream(List<String> data, String path) {
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(path, true));
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path),"utf-8"));
             for (String aData : data) {
                 bw.append(aData).append("\r\n");
             }
@@ -55,15 +55,5 @@ public class FileUtil {
         }
     }
 
-    private static void writeToTextByStream(List<String> data, String path) {
-        try {
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(path)));
-            for (String aData : data) {
-                bw.append(aData).append("\r\n");
-            }
-            bw.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+
 }

@@ -16,7 +16,6 @@ object ScalaTupleDemo {
     println(things._2)
     println(things._3)
 
-
     println("==========================")
     val str = "1,2,3"
     val numList = str.split(",").map(Integer.parseInt).toSet

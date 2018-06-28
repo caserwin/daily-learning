@@ -1,4 +1,4 @@
-package date;
+package tools;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
@@ -182,5 +182,9 @@ public class DateUtil {
         for (String time : timeArrays) {
             System.out.println(time);
         }
+
+        // 检查是否是周末
+        System.out.println(weekendCheck("2018-06-17"));
+        System.out.println(weekendCheck("2018-06-18"));
     }
 }

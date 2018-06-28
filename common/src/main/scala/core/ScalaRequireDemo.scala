@@ -1,6 +1,6 @@
 package core
 
-import date.DateUtil
+import tools.DateUtil
 
 object ScalaRequireDemo {
 
