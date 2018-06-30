@@ -1,4 +1,4 @@
-package jdbc;
+package jdbc.conn;
 
 /**
  * Created by yidxue on 2018/6/28

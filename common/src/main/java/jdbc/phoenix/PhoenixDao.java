@@ -1,6 +1,6 @@
 package jdbc.phoenix;
 
-import jdbc.DBConnection;
+import jdbc.conn.DBConnection;
 import org.apache.commons.lang.StringUtils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -55,9 +55,5 @@ public class PhoenixDao {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public static void main(String[] args){
-
     }
 }

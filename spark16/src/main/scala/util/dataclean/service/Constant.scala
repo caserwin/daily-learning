@@ -1,4 +1,4 @@
-package util.dataclean.app
+package util.dataclean.service
 
 import com.typesafe.config.ConfigFactory
 

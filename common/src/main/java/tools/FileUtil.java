@@ -27,7 +27,8 @@ public class FileUtil {
         }
     }
 
-    private static void changeFolderPermission(File dirFile) {
+    public static void changeFolderPermission(String path, boolean curr) {
+        File dirFile = new File(path);
         Set<PosixFilePermission> perms = new HashSet<>();
         perms.add(PosixFilePermission.OWNER_READ);
         perms.add(PosixFilePermission.OWNER_WRITE);
@@ -39,11 +40,17 @@ public class FileUtil {
         perms.add(PosixFilePermission.OTHERS_WRITE);
         perms.add(PosixFilePermission.OTHERS_EXECUTE);
 
-        Path path = Paths.get(dirFile.getAbsolutePath());
         try {
-            Files.setPosixFilePermissions(path, perms);
+            Files.setPosixFilePermissions(Paths.get(dirFile.getAbsolutePath()), perms);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Operation not permitted !!");
+        }
+
+        if (curr) {
+            File parentFile = dirFile.getParentFile();
+            if (parentFile != null) {
+                changeFolderPermission(parentFile.getPath(), true);
+            }
         }
     }
 

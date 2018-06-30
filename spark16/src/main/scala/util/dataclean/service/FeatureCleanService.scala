@@ -2,7 +2,7 @@ package util.dataclean.service
 
 import org.apache.spark.sql.DataFrame
 import org.apache.spark.sql.functions.{lit, _}
-import util.dataclean.app.Constant
+import Constant
 import util.dataclean.strategy.{CheckStrategy, ValueStrategy}
 
 /**

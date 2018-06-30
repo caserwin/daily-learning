@@ -1,4 +1,4 @@
-package jdbc;
+package jdbc.conn;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -57,20 +57,4 @@ public class DBConnection {
                 return URLConstant.MYSQL_DRIVER;
         }
     }
-
-
-    public static void main(String[] args){
-        System.out.println(getDBDriver("hive"));
-    }
-
-//    public Connection getPhoenixConn(String zkAddr) {
-//        Connection conn = null;
-//        try {
-//            Class.forName("");
-//            conn = DriverManager.getConnection("jdbc:phoenix:" + zkAddr);
-//        } catch (ClassNotFoundException | SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return conn;
-//    }
 }
