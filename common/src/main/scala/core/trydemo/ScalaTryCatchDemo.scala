@@ -21,12 +21,22 @@ object ScalaTryCatchDemo {
   }
 
   def main(args: Array[String]): Unit = {
-    val youngCustomer = Customer(15)
+    val youngCustomer = Customer(18)
+    println("=============demo1=============")
+    val out = try {
+      buyCigarettes(youngCustomer)
+    } catch {
+      case UnderAgeException(msg) => "success"
+      case e: Throwable => "fail"
+    }
+
+    println(out)
+    println("=============demo2=============")
     try {
       println(buyCigarettes(youngCustomer))
     } catch {
-      case UnderAgeException(msg) => println(msg)
-      case e: Throwable => println("this is other error: " + e.getMessage)
+      case UnderAgeException(msg) => println("success")
+      case e: Throwable => println("fail")
     }
   }
 }

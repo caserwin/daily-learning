@@ -25,10 +25,7 @@ import org.apache.spark.sql.SparkSession
 
 object OneHotEncoderExample {
   def main(args: Array[String]): Unit = {
-    val spark = SparkSession
-      .builder
-      .appName("OneHotEncoderExample")
-      .getOrCreate()
+    val spark = SparkSession.builder.appName("OneHotEncoderExample").config("spark.master", "local[*]").getOrCreate()
 
     // $example on$
     val df = spark.createDataFrame(Seq(
@@ -40,18 +37,15 @@ object OneHotEncoderExample {
       (5, "c")
     )).toDF("id", "category")
 
-    val indexer = new StringIndexer()
-      .setInputCol("category")
-      .setOutputCol("categoryIndex")
-      .fit(df)
+    df.show()
+    val indexer = new StringIndexer().setInputCol("category").setOutputCol("categoryIndex").fit(df)
     val indexed = indexer.transform(df)
 
-    val encoder = new OneHotEncoder()
-      .setInputCol("categoryIndex")
-      .setOutputCol("categoryVec")
-
+    val encoder = new OneHotEncoder().setInputCol("categoryIndex").setOutputCol("categoryVec")
     val encoded = encoder.transform(indexed)
-    encoded.show()
+    encoded.select("id", "categoryVec").show()
+
+//    encoded.show()
     // $example off$
 
     spark.stop()

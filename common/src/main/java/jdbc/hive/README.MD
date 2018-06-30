@@ -11,5 +11,3 @@
     <version>2.6.5</version>
 </dependency>
 ```
-
-## 首先创建表

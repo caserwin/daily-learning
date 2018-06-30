@@ -29,6 +29,7 @@ object NormalizerExample {
     val spark = SparkSession
       .builder
       .appName("NormalizerExample")
+      .config("spark.master", "local[*]")
       .getOrCreate()
 
     // $example on$
