@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 /**
  * Created by yidxue on 2018/6/30
  */
-public class MysqlDao {
+public class MysqlDAO {
 
     private String url = "jdbc:mysql://xxx:3306/dbname";
     private String username = "";
