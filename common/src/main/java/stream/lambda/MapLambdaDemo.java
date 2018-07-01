@@ -12,5 +12,6 @@ public class MapLambdaDemo {
         hmap.put("b", "2");
 
         hmap.forEach((key, value) -> System.out.println(key + "," + value));
+        hmap.entrySet().stream().map(x -> x.getKey() + "\t" + x.getValue()).forEach(System.out::println);
     }
 }

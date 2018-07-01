@@ -1,46 +1,55 @@
 package jdbc.mysql;
 
 import jdbc.DBOperate;
+import jdbc.bean.PersonRecord;
 import jdbc.conn.DBConnection;
+import org.apache.commons.lang.StringUtils;
 
+import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Created by yidxue on 2018/6/30
  */
-public class MysqlDao implements DBOperate {
+public class MysqlDao {
 
     private String url = "jdbc:mysql://xxx:3306/dbname";
     private String username = "";
     private String password = "";
     private String DBType = "phoenix";
-    private Connection conn;
 
 
-    public MysqlDao(String url, String username, String password) {
-        this.conn = DBConnection.getConnection(DBType, url, username, password);
-    }
 
-    @Override
-    public void create(String tablename, String cl) {
-
-    }
-
-    @Override
-    public void insert() {
-//        Connection conn = DBConnection.getConnection();
-//        String sql = "INSERT INTO ebk_teen_student_cls_hour (sid, cls_type, cls_hour, create_time, expire_time," +
-//                         " for_free, order_id, use_level, cls_hour_bak, cls_type_bak, expire_time_bak)" +
-//                         " VALUES(?,?,?,?,?,?,?,?,?,?,?)";
-//
-//        PreparedStatement pstmt;
+//    @Override
+//    public void insert(String tablename, ArrayList records) {
+//        if (records.size() == 0) {
+//            System.out.println("record is null !!");
+//            return;
+//        }
+//        Connection conn = DBConnection.getConnection(DBType, url, username, password);
 //        try {
+//            String[] cols = (String[]) records.get(0).getClass().getMethod("getAttributes").invoke(null);
+//            String fields = Stream.of(cols).map(x -> x.split("\\s+")[0]).collect(Collectors.joining(","));
+//            String valueNUM = StringUtils.repeat("?,", cols.length);
+//            String sql = "INSERT INTO " + tablename + " (" + fields + ") VALUES(" + valueNUM.substring(0, valueNUM.length() - 1) + ")";
+//
 //            conn.setAutoCommit(false);
-//            pstmt = conn.prepareStatement(sql);
-//            for (StudentClsHour record : recordLS) {
-//                pstmt.setInt(1, record.getSid());
+//            PreparedStatement pstmt = conn.prepareStatement(sql);
+//
+//            for (int i = 0; i <records.size() ; i++) {
+//                for (int j = 0; j < cols.length; j++) {
+//
+//                }
+//                pstmt.addBatch();
+//            }
+//
+//            for (StudentClsHour record : records) {
+//                pstmt.set(1, record.getSid());
 //                pstmt.setInt(2, record.getCls_type());
 //                pstmt.setInt(3, record.getCls_hour());
 //                pstmt.setInt(4, record.getCreate_time());
@@ -58,13 +67,22 @@ public class MysqlDao implements DBOperate {
 //            pstmt.executeBatch();
 //            conn.commit();
 //            conn.close();
-//        } catch (SQLException e) {
+//
+//        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+//            System.out.println("get attribute error !!");
+//            e.printStackTrace();
+//        }catch (SQLException e) {
+//            System.out.println("get sql error !!");
 //            e.printStackTrace();
 //        }
-    }
+//    }
 
-    @Override
-    public void select() {
 
-    }
+//    public static void main(String[] args) {
+//        MysqlDao mysqlDao = new MysqlDao();
+//        ArrayList<PersonRecord> ls = new ArrayList<>();
+//        ls.add(new PersonRecord(1, "erwin", 3, "male"));
+//        mysqlDao.insert("tb_Name", ls);
+//
+//    }
 }

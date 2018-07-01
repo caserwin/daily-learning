@@ -13,4 +13,8 @@ public class Group extends BaseGroup{
     public void setDepart(String depart) {
         this.depart = depart;
     }
+
+    public static String setDepart() {
+        return "this is static method";
+    }
 }

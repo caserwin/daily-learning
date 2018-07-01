@@ -4,18 +4,19 @@ import generics.bean.BaseGroup;
 import generics.bean.Group;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 
 /**
  * @author yidxue
  */
-public class GenericsTypeDemo {
+public class GenericsTypeDemo1 {
 
     private static <T> T parser(Class<T> clazz) throws Exception {
-        Class<?> cls = Class.forName(clazz.getTypeName());
+//        Class<?> cls = Class.forName(clazz.getTypeName());
         // 获取构造器
-        Constructor<?> c = cls.getConstructor();
+        Constructor<?> c = clazz.getConstructor();
         // 根据构造器，实例化出对象
-        return (T)c.newInstance();
+        return (T) c.newInstance();
     }
 
     public static void main(String[] args) throws Exception {

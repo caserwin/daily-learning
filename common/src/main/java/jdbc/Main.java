@@ -2,9 +2,6 @@ package jdbc;
 
 import jdbc.bean.PersonRecord;
 import jdbc.hive.HiveDAO;
-
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 /**
@@ -27,9 +24,9 @@ public class Main {
 
         HiveDAO hiveDAO = new HiveDAO();
         // create table
-        hiveDAO.create(table, "PersonRecord");
+        hiveDAO.create(table, PersonRecord.class);
 
         // load data
-        hiveDAO.loadToHive(records, path, table);
+        hiveDAO.loadToHive(records, table, path);
     }
 }
