@@ -13,13 +13,17 @@ public class Demo1 {
 
         // 根据类名创建类对象
         Class<?> cls = Class.forName(className);
+
+        System.out.println("==============一般无参方法==============");
         // 根据方法名获取方法
         Method m =cls.getMethod(methodName);
-        // 获取构造器
         Constructor<?> c = cls.getConstructor();
-        // 根据构造器，实例化出对象
         Object obj = c.newInstance();
-        // 调用对象的指定方法
         m.invoke(obj);
+
+        System.out.println("==============static无参方法==============");
+        Method m2 =cls.getMethod("doService2");
+        m2.invoke(null);
+
     }
 }

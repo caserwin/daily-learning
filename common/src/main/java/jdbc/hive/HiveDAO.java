@@ -1,6 +1,7 @@
 package jdbc.hive;
 
 import jdbc.DBOperate;
+import jdbc.Service;
 import jdbc.bean.PersonRecord;
 import jdbc.conn.DBConnection;
 import tools.FileUtil;
@@ -14,7 +15,7 @@ import java.util.stream.Stream;
  * @author yidxue
  * https://my.vertica.com/docs/8.1.x/HTML/index.htm#Authoring/ConnectingToVertica/ClientJDBC/BatchInsertsUsingJDBCPreparedStatements.htm
  */
-public class HiveDAO implements DBOperate{
+public class HiveDAO implements DBOperate {
 
     private String URLHIVE = "jdbc:hive2://localhost:10000/default";
     private String DBType = "hive";
@@ -25,8 +26,9 @@ public class HiveDAO implements DBOperate{
     }
 
     @Override
-    public void create(String tablename, String[] cols) {
+    public void create(String tablename, String cls) {
         try {
+            String[] cols = Service.getCols(tablename);
             Statement stmt = this.conn.createStatement();
             String fields = Stream.of(cols).collect(Collectors.joining(","));
             String sql = "create table if not exists " + tablename + "(" + fields + ")"

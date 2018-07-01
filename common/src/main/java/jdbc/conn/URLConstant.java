@@ -6,5 +6,5 @@ package jdbc.conn;
 public class URLConstant {
     public static final String PHOENIX_DRIVER = "org.apache.phoenix.jdbc.PhoenixDriver";
     public static final String HIVE_DRIVER = "org.apache.hive.jdbc.HiveDriver";
-    public static final String MYSQL_DRIVER = "com.mysql.jdbc.Driver";
+    public static final String MYSQL_DRIVER = "com.mysql.cj.jdbc.Driver";
 }

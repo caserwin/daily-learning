@@ -7,7 +7,7 @@ public interface DBOperate {
     /**
      * 建表
      */
-    public void create(String tablename, String[] cols);
+    public void create(String tablename, String cls);
 
     /**
      * 插入数据
