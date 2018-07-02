@@ -14,14 +14,14 @@ public class URLConstant {
     public static final String MYSQL_DRIVER = "com.mysql.cj.jdbc.Driver";
 
     public static String[] getPrimaryKey(String cls) {
-        return conf.getString("database.been." + cls + ".primarykey").split(",");
+        return conf.getString("database.been." + cls + ".primarykey").toLowerCase().split(",");
     }
 
     public static String[] getCols(String cls) {
-        return conf.getString("database.been." + cls + ".cols").split(",");
+        return conf.getString("database.been." + cls + ".cols").toLowerCase().split(",");
     }
 
     public static String[] getType(String cls) {
-        return conf.getString("database.been." + cls + ".type").split(",");
+        return conf.getString("database.been." + cls + ".type").toLowerCase().split(",");
     }
 }

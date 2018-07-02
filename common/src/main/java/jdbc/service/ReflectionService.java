@@ -1,7 +1,8 @@
-package jdbc;
+package jdbc.service;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -62,5 +63,16 @@ public class ReflectionService {
             e.printStackTrace();
         }
         return colAndValue;
+    }
+
+    public static <T> ArrayList<String> getValues(Object obj, Class<T> clazz) {
+        ArrayList<String> values = null;
+        try {
+            Method m = clazz.getMethod("getValues");
+            values = (ArrayList<String>) m.invoke(clazz.cast(obj));
+        } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        return values;
     }
 }

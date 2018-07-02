@@ -18,15 +18,15 @@ public class Main {
         String path = args[1];
 
         ArrayList<PersonRecord> records = new ArrayList<>();
-        records.add(new PersonRecord(1, "AA", 17, "male"));
-        records.add(new PersonRecord(1, "BB", 19, "female"));
-        records.add(new PersonRecord(1, "CC", 23, "male"));
+        records.add(new PersonRecord("person").buildFields("1", "erwin1", "19", "male"));
+        records.add(new PersonRecord("person").buildFields("2", "erwin2", "29", "male"));
+        records.add(new PersonRecord("person").buildFields("3", "erwin3", "25", "female"));
 
         HiveDAO hiveDAO = new HiveDAO();
         // create table
         hiveDAO.create(table, PersonRecord.class);
 
         // load data
-        hiveDAO.loadToHive(records, table, path);
+        hiveDAO.loadToHive(records, PersonRecord.class, table, path);
     }
 }

@@ -1,10 +1,8 @@
 package jdbc.hive;
 
-import jdbc.ReflectionService;
-import jdbc.bean.PersonRecord;
+import jdbc.service.ReflectionService;
 import jdbc.conn.DBConnection;
 import tools.FileUtil;
-
 import java.sql.Connection;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -13,7 +11,6 @@ import java.util.stream.Collectors;
 
 /**
  * @author yidxue
- * https://my.vertica.com/docs/8.1.x/HTML/index.htm#Authoring/ConnectingToVertica/ClientJDBC/BatchInsertsUsingJDBCPreparedStatements.htm
  */
 public class HiveDAO {
 
@@ -41,9 +38,9 @@ public class HiveDAO {
         }
     }
 
-    public void loadToHive(ArrayList<PersonRecord> records, String tableName, String path) {
+    public <T> void loadToHive(ArrayList<T> records, Class<T> clazz, String tableName, String path) {
         try {
-            FileUtil.writeByStream(records.stream().map(x -> x.getValues().stream().collect(Collectors.joining("\t"))).collect(Collectors.toList()), path);
+            FileUtil.writeByStream(records.stream().map(x -> ReflectionService.getValues(x, clazz).stream().collect(Collectors.joining("\t"))).collect(Collectors.toList()), path);
             // 每一层目录都设置 777 权限
             FileUtil.changeFolderPermission(path, true);
             Statement stmt = this.conn.createStatement();
