@@ -2,9 +2,7 @@ package generics;
 
 import generics.bean.BaseGroup;
 import generics.bean.Group;
-
 import java.lang.reflect.Constructor;
-import java.lang.reflect.Method;
 
 /**
  * @author yidxue

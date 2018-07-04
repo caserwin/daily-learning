@@ -4,6 +4,10 @@ package reflection;
  * @author yidxue
  */
 public class Service1 {
+
+    public String col1 = "field1";
+    public static String col2 = "field2";
+
     public void doService1() {
         System.out.println("无参业务方法！");
     }

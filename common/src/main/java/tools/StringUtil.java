@@ -22,6 +22,11 @@ public class StringUtil {
         //判断字符串是否全为英文字母，是则返回true
         boolean isWord = str.matches("[a-zA-Z\\s,().]+");
         System.out.println(isWord);
+
+        // 创建String 数组
+        System.out.println(StringUtils.repeat(" ,", 5).split(",").length);
+        String strnum[] = StringUtils.repeat(",", 5).split(",");
+        System.out.println(strnum.length);
     }
 
     public static boolean isChinese(char c) {
