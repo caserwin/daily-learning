@@ -27,6 +27,6 @@ object SQLTest {
 //    df1.write.mode(SaveMode.Overwrite).option("delimiter", "\t").format("com.databricks.spark.csv").save("data/home.csv")
 //    df1.groupBy("country").count().rdd.repartition(1).saveAsTextFile("data/out")
 
-    df1.groupBy("country").agg(constr($"Et").as("et"), max($"Cindex").as("Cindex")).show(truncate = false)
+    df1.groupBy("country").agg(constr($"et").as("et"), max($"Cindex").as("Cindex")).show(truncate = false)
   }
 }
