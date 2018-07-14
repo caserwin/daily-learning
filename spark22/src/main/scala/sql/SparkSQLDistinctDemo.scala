@@ -4,8 +4,6 @@ import org.apache.spark.sql.SparkSession
 
 /**
   * Created by yidxue on 2018/1/30
-  *
-  * http://blog.csdn.net/dabokele/article/details/52802150
   */
 object SparkSQLDistinctDemo {
 

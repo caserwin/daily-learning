@@ -23,16 +23,16 @@ object SparkSQLExceptDemo {
 
     val dataSeq2 = Seq(
       (1, "zhangsan", "hangzhou"),
-      (3, "lisi", "beijing"),
-      (4, "wangwu", "shanghai")
+      (2, "lisi", "beijing"),
+      (3, "wangwu", "wenzhou")
     )
     val inputDF2 = sc.parallelize(dataSeq2).toDF("id", "name", "city")
 
     // 求差集，也就是出现在 inputDF1 ，但是没出现在 inputDF2的数据
     inputDF1.except(inputDF2).show()
 
-    // 根据指定字段求差集，这里根据 id 字段求差集。
-    val missID = inputDF1.select($"id").distinct().except(inputDF2.select($"id"))
-    inputDF1.join(missID, Seq("id"), "inner").show()
+    // 根据指定字段求差集，这里根据 city 字段求差集。
+    val miss = inputDF1.select($"city").distinct().except(inputDF2.select($"city"))
+    inputDF1.join(miss, Seq("city"), "inner").show()
   }
 }
