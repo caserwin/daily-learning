@@ -14,7 +14,7 @@ object SQLTest {
     val constr = new ConcatStrUDAF()
 //    val constr = new EventTypeUDAF()
 
-    df1.groupBy("country").agg(constr($"Et").as("et"), max($"Cindex").as("Cindex")).show(truncate = false)
-    df1.groupBy("country").agg(collect_list($"Et").as("et"), max($"Cindex").as("Cindex")).show(truncate = false)
+    df1.groupBy("country").agg(constr($"et").as("et"), max($"Cindex").as("Cindex")).show(truncate = false)
+    df1.groupBy("country").agg(collect_list($"et").as("et"), max($"Cindex").as("Cindex")).show(truncate = false)
   }
 }

@@ -8,6 +8,7 @@ import datastream.activeuser.service.ExtractJsonField;
 import datastream.activeuser.service.UserFlatMapFunction;
 import datastream.activeuser.service.UserMapFunction;
 import org.apache.flink.api.common.functions.FlatMapFunction;
+import org.apache.flink.api.common.serialization.SimpleStringSchema;
 import org.apache.flink.api.java.tuple.Tuple1;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.streaming.api.TimeCharacteristic;
@@ -16,7 +17,6 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.timestamps.BoundedOutOfOrdernessTimestampExtractor;
 import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer010;
-import org.apache.flink.streaming.util.serialization.JSONDeserializationSchema;
 import org.apache.flink.table.api.Table;
 import org.apache.flink.table.api.TableEnvironment;
 import org.apache.flink.table.api.java.StreamTableEnvironment;
@@ -42,9 +42,9 @@ public class ActiveUsersApp {
         final StreamTableEnvironment tableEnv = TableEnvironment.getTableEnvironment(env);
         props.setProperty("bootstrap.servers", props.getProperty("input.bootstrap.servers"));
 
-//        new FlinkKafkaConsumer010<>("dsdd", new JSONDeserializationSchema(), props);
-
-        FlinkKafkaConsumer010<ObjectNode> consumer010 = new FlinkKafkaConsumer010(props.getProperty("input-topic"), new JSONDeserializationSchema(), props);
+        //        new FlinkKafkaConsumer010<>("dsdd", new JSONDeserializationSchema(), props);
+//        FlinkKafkaConsumer010<ObjectNode> consumer010 = new FlinkKafkaConsumer010(props.getProperty("input-topic"), new JSONDeserializationSchema(), props);
+        FlinkKafkaConsumer010<ObjectNode> consumer010 = new FlinkKafkaConsumer010(props.getProperty("input-topic"), new SimpleStringSchema(), props);
         consumer010.setStartFromEarliest();
 
         DataStream<ObjectNode> inputStream = env.addSource(consumer010).name("Kafka 0.10 Source")

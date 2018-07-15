@@ -1,7 +1,7 @@
-package sql
+package sql.createDF
 
-import org.apache.spark.sql.{Row, SparkSession}
 import org.apache.spark.sql.types.{StringType, StructField, StructType}
+import org.apache.spark.sql.{Row, SparkSession}
 
 /**
   * Created by yidxue on 2018/7/9

@@ -13,7 +13,7 @@ object ScalaTryMatchDemo {
       Try(Source.fromFile(filename).getLines.toList)
     }
 
-    val filename = "/etc/passwd"
+    val filename = "data/data"
     readTextFile(filename) match {
       case Success(lines) => lines.foreach(println)
       case Failure(f) => println(f)

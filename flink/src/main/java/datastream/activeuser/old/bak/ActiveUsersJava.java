@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.flink.api.common.functions.FlatMapFunction;
 import org.apache.flink.api.common.functions.MapFunction;
+import org.apache.flink.api.common.serialization.SimpleStringSchema;
 import org.apache.flink.api.java.tuple.Tuple1;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.api.java.utils.ParameterTool;
@@ -60,7 +61,7 @@ public class ActiveUsersJava {
 
         final StreamTableEnvironment tableEnv = TableEnvironment.getTableEnvironment(env);
 
-        DataStream<ObjectNode> inputStream = env.addSource(new FlinkKafkaConsumer010(parameterTool.getRequired("input-topic"), new JSONDeserializationSchema(), parameterTool.getProperties()).setStartFromEarliest()).name("Kafka 0.10 Source")
+        DataStream<ObjectNode> inputStream = env.addSource(new FlinkKafkaConsumer010(parameterTool.getRequired("input-topic"), new SimpleStringSchema(), parameterTool.getProperties()).setStartFromEarliest()).name("Kafka 0.10 Source")
                 .assignTimestampsAndWatermarks(new BoundedOutOfOrdernessTimestampExtractor<ObjectNode>(Time.seconds(1)) {
                     @Override
                     public long extractTimestamp(ObjectNode jsonNodes) {

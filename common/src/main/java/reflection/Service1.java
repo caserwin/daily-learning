@@ -9,7 +9,7 @@ public class Service1 {
     public static String col2 = "field2";
 
     public void doService1() {
-        System.out.println("无参业务方法！");
+        System.out.println("无参方法！");
     }
 
     public void doService1(int i) {

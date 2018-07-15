@@ -3,10 +3,10 @@ scala 的异常处理方式可以分两种<br>
 1 类似java的 try...catch...形式
 ```
     try {
-      println(buyCigarettes(youngCustomer))
+      ...
     } catch {
-      case UnderAgeException(msg) => 
-      case e:
+      case UnderAgeException(msg) => ...
+      case e: => _
     }
 ```
 

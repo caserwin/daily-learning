@@ -3,35 +3,17 @@ package core.implicitdemo
 import scala.language.implicitConversions
 
 /**
-  * Created by yidxue on 2018/5/22
+  * 类型隐式转换
   */
 object ScalaImplicitDemo1 {
 
-  case class Caller[T >: Null <: AnyRef](klass: T) {
-    def call(methodName: String, args: AnyRef*): AnyRef = {
-      def argtypes = args.map(_.getClass)
-
-      def method = klass.getClass.getMethod(methodName, argtypes: _*)
-
-      method.invoke(klass, args: _*)
-    }
-  }
-
-  object UserMethod {
-    def method1(num: String): Unit = {
-      println(s"this is method $num")
-    }
-
-    def method2(): Unit = {
-      println("this is method 2")
-    }
-  }
-
+  implicit def int2Range(num: Int): Range = 1 to num
 
   def main(args: Array[String]): Unit = {
-    implicit def anyref2callable[T >: Null <: AnyRef](klass: T): Caller[T] = Caller(klass)
+    println(spreadNum(5))
+  }
 
-    UserMethod.call("method1", "1")
-    UserMethod.call("method2")
+  def spreadNum(range: Range): String = {
+    range.mkString(",")
   }
 }
