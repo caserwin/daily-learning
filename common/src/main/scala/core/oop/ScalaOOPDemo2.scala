@@ -1,6 +1,6 @@
 package core.oop
 
-class EventLog(var eventtype:String, var timestamp:String, var remotehost:String){
+class EventLog(var et:String, var timestamp:String, var name:String){
   def this() {
     this("1","2","3")
   }
@@ -8,9 +8,9 @@ class EventLog(var eventtype:String, var timestamp:String, var remotehost:String
 
 object ScalaOOPDemo2{
   def main(args: Array[String]): Unit = {
-    val aa = new EventLog
-    println(aa.eventtype)
-    aa.eventtype="sss"
-    println(aa.eventtype)
+    val log = new EventLog()
+    println(log.et)
+    log.et="no log ouput!"
+    println(log.et)
   }
 }

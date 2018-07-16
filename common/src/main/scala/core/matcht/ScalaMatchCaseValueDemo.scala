@@ -9,7 +9,7 @@ object ScalaMatchCaseValueDemo {
 
   def main(args: Array[String]): Unit = {
     val JMTEventTypes = "1"
-    val JMTRefnum6s = "bb"
+    val JMTRefnum6s = "b"
 
     (JMTEventTypes, JMTRefnum6s) match {
       case ("1", "a") => println("=====1====")

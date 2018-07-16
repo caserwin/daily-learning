@@ -15,13 +15,11 @@ object ScalaMultiMatchCaseDemo {
   private val AndroidPattern = "android/([0-9]+\\.[0-9]+)".r
 
   def getVersion(platform: String, userAgent: String): String = {
-    if ("Other".equals(platform) || "None".equals(platform)) return "Other"
-
-    var version = (platform.toLowerCase, userAgent.toLowerCase) match {
+    val version = (platform.toLowerCase, userAgent.toLowerCase) match {
       case (os, ua) if os.equals("windows") => getResByRegex(List(WindowsPattern), ua) match {
         case "5.0" => "2000"
         case "5.1" => "XP"
-        case "5.2" => "2003 or XP64bit"
+        case "5.2" => "2003"
         case "6.0" => "Vista"
         case "6.1" => "7.0"
         case "6.2" => "8.0"
@@ -35,7 +33,6 @@ object ScalaMultiMatchCaseDemo {
       case _ => ""
     }
 
-    version = if ("".equals(version)) "Other" else version
     version
   }
 
@@ -51,6 +48,6 @@ object ScalaMultiMatchCaseDemo {
   }
 
   def main(args: Array[String]): Unit = {
-    println(getVersion("android", "Android/10.0 Mozilla/5.0(Linux; U; Android 7.0; en-GB; samsung_dreamltexx_24_7.0_10.0.0.21000142_21000142 B"))
+    println(getVersion("android", "Android/10.0 Mozilla/5.0"))
   }
 }

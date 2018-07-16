@@ -1,7 +1,5 @@
 package core.matcht
 
-import scala.util.matching.Regex
-
 /**
   * Created by yidxue on 2018/1/31
   */
