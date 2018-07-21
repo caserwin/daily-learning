@@ -41,6 +41,5 @@ object ScalaStrToJsonDemo {
     val jsonObj = JSONValue.parse(getJMTTemplate("4", "2017-12-01", "workend")).asInstanceOf[JSONObject]
     println(jsonObj.get("data"))
     println(jsonObj.toJSONString)
-
   }
 }

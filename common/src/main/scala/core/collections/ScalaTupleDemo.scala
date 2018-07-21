@@ -3,39 +3,24 @@ package core.collections
 object ScalaTupleDemo {
 
   def main(args: Array[String]): Unit = {
-    def getUserInfo = ("Al", 42, 200.0)
-    val(name, age, weight) = getUserInfo
 
-    println(name)
-    println(age)
-    println(weight)
+    // 在元组中定义了三个元素，对应的类型分别为[Int, Double, java.lang.String]。
+    val t1 = (1, 3.14, "Fred")
 
-    println()
-    val things = ("a", 1, 3.5)
-    println(things._1)
-    println(things._2)
-    println(things._3)
+    // 也可以如下定义
+    val t2 = Tuple3(1, 3.14, "Fred")
+    println(t2._1 + " " + t2._2 + " " + t2._3)
 
-    println("==========================")
-    val str = "1,2,3"
-    val numList = str.split(",").map(Integer.parseInt).toSet
+    println("======================")
+    // 传参打印
+    printTuple3(t2)
 
+    println("======================")
+    // 遍历
+    t2.productIterator.foreach(i => println("Value = " + i))
+  }
 
-    val b = Set(2,4)
-    val a = Set(1,2,3)
-
-    val c = b intersect a
-
-    println(c.nonEmpty)
-
-    println("==========================")
-
-    var t = (1, 3.14, "Fred")
-    val (t1, t2, t3) = (2, 3.14, "Fred")
-
-    println(t3)
-
-    val aaa=String.valueOf(null)
-    println(aaa)
+  def printTuple3(tuple3: (Int, Double, String)): Unit = {
+    println(tuple3._1 + " " + tuple3._2 + " " + tuple3._3)
   }
 }

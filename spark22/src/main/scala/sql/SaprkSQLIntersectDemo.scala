@@ -4,6 +4,8 @@ import org.apache.spark.sql.SparkSession
 
 /**
   * Created by yidxue on 2018/1/30
+  * 两个 dataframe 取交集。
+  * 缺点：不能根据指定字段取交集记录。
   */
 object SaprkSQLIntersectDemo {
 
