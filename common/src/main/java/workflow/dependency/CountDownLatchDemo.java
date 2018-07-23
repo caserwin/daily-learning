@@ -15,11 +15,11 @@ public class CountDownLatchDemo {
 
         CountDownLatch latch = new CountDownLatch(3);
 
-        Worker w1 = new Worker(latch,"张三");
-        Worker w2 = new Worker(latch,"李四");
-        Worker w3 = new Worker(latch,"王二");
+        JobA w1 = new JobA(latch,"w1");
+        JobA w2 = new JobA(latch,"w2");
+        JobA w3 = new JobA(latch,"w3");
 
-        Boss boss = new Boss(latch);
+        JobB boss = new JobB(latch);
 
         // NOTICE submit 和 execute有什么区别
         executor.execute(w3);

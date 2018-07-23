@@ -20,7 +20,8 @@ public class AsynchronousExecuteDemo1 {
             public void run() {
                 try {
                     System.out.println("task1 invoked ! " + (System.currentTimeMillis() - start));
-                    Thread.sleep(3000);
+                    Thread.sleep(5000);
+                    System.out.println("task1 is done in " + (System.currentTimeMillis() - start));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -30,7 +31,7 @@ public class AsynchronousExecuteDemo1 {
         TimerTask task2 = new TimerTask() {
             @Override
             public void run() {
-                System.out.println("task2 invoked ! "+ (System.currentTimeMillis() - start));
+                System.out.println("task2 invoked ! " + (System.currentTimeMillis() - start));
             }
         };
         start = System.currentTimeMillis();

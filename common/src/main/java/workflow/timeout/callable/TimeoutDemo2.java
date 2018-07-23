@@ -21,7 +21,7 @@ public class TimeoutDemo2 {
         // 再起一个job，延迟5秒执行kill之前的job。
         executor.schedule(() -> {
             future.cancel(true);
-        }, 5, TimeUnit.SECONDS);
+        }, 3, TimeUnit.SECONDS);
 
         // NOTICE: shutdownNow() 和 shutdown() 有什么区别？？
         executor.shutdown();

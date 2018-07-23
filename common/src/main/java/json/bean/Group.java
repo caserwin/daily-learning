@@ -1,7 +1,13 @@
 package json.bean;
 
+import java.util.AbstractCollection;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+/**
+ * @author yidxue
+ */
 public class Group {
     private long id;
     private String name;
@@ -33,5 +39,10 @@ public class Group {
 
     public void addUser(User user) {
         this.users.add(user);
+    }
+
+    @Override
+    public String toString() {
+        return this.id + "\t" + this.name + "\t" + Stream.of(users).map(AbstractCollection::toString).collect(Collectors.joining(","));
     }
 }

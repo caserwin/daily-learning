@@ -4,7 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * @author cisco
+ * @author yidxue
  * 多个job 延时执行示例
  */
 public class DelayExecuteDemo2 {
@@ -17,7 +17,8 @@ public class DelayExecuteDemo2 {
             public void run() {
                 System.out.println("task1 invoked ! " + (System.currentTimeMillis() - start));
                 try {
-                    Thread.sleep(3000);
+                    Thread.sleep(5000);
+                    System.out.println("task1 is done in " + (System.currentTimeMillis() - start));
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

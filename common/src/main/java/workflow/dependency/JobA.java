@@ -7,12 +7,12 @@ import java.util.concurrent.TimeUnit;
 /**
  * @author yidxue
  */
-public class Worker implements Runnable {
+public class JobA implements Runnable {
 
     private CountDownLatch downLatch;
     private String name;
 
-    public Worker(CountDownLatch downLatch, String name) {
+    public JobA(CountDownLatch downLatch, String name) {
         this.downLatch = downLatch;
         this.name = name;
     }
@@ -20,12 +20,12 @@ public class Worker implements Runnable {
     @Override
     public void run() {
         this.doWork();
-        System.out.println(this.name + "活干完了！");
+        System.out.println(this.name + "运行结束！");
         this.downLatch.countDown();
     }
 
     private void doWork() {
-        System.out.println(this.name + "正在干活!");
+        System.out.println(this.name + "正在运行!");
         try {
             TimeUnit.SECONDS.sleep(new Random().nextInt(10));
         } catch (InterruptedException ignored) {
