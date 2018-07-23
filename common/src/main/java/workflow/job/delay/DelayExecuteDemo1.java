@@ -1,7 +1,6 @@
 package workflow.job.delay;
 
-import workflow.task.JobTask;
-
+import workflow.task.MyTimerTask2;
 import java.util.Timer;
 
 /**
@@ -10,9 +9,10 @@ import java.util.Timer;
  */
 public class DelayExecuteDemo1 {
     public static void main(String[] args) {
+        long start = System.currentTimeMillis();
+
         Timer timer = new Timer();
-        System.out.println("程序开始时间：" + System.currentTimeMillis() / 1000);
         // 延时5秒执行 MyTimerTask()
-        timer.schedule(new JobTask(), 5000);
+        timer.schedule(new MyTimerTask2(start), 5000);
     }
 }

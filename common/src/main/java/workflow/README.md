@@ -70,6 +70,19 @@ ScheduledExecutorService.schedule(Callable<V> callable,long delay, TimeUnit unit
 ScheduledExecutorService.scheduleAtFixedRate(Runnable command,long initialDelay,long period,TimeUnit unit)<br>
 
 
+
+## ScheduledExecutorService
+
+这个借口一共定义了4个方法。
+ScheduledExecutorService.schedule(Runnable command,long delay, TimeUnit unit)   // 异步延时执行<br>
+ScheduledExecutorService.schedule(Callable<V> callable,long delay, TimeUnit unit)   // 异步延时执行<br>
+ScheduledExecutorService.scheduleAtFixedRate(Runnable command,long initialDelay,long period,TimeUnit unit) // 异步周期执行<br>
+ScheduledExecutorService.scheduleWithFixedDelay(Runnable command, long initialDelay, long delay, TimeUnit unit);
+
+scheduleAtFixedRate 和 scheduleWithFixedDelay 有啥区别？？
+
+
+
 ## 参考
 http://shift-alt-ctrl.iteye.com/blog/1841088
 https://stackoverflow.com/questions/19456313/simple-timeout-in-java

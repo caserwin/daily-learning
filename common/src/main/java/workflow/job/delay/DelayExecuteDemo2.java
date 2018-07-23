@@ -1,5 +1,7 @@
 package workflow.job.delay;
 
+import workflow.task.MyTimerTask1;
+import workflow.task.MyTimerTask2;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -8,32 +10,15 @@ import java.util.TimerTask;
  * 多个job 延时执行示例
  */
 public class DelayExecuteDemo2 {
-    private static long start;
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
+        long start = System.currentTimeMillis();
 
-        TimerTask task1 = new TimerTask() {
-            @Override
-            public void run() {
-                System.out.println("task1 invoked ! " + (System.currentTimeMillis() - start));
-                try {
-                    Thread.sleep(5000);
-                    System.out.println("task1 is done in " + (System.currentTimeMillis() - start));
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        };
-
-        TimerTask task2 = new TimerTask() {
-            @Override
-            public void run() {
-                System.out.println("task2 invoked ! " + (System.currentTimeMillis() - start));
-            }
-        };
+        TimerTask task1 = new MyTimerTask1(start);
+        TimerTask task2 = new MyTimerTask2(start);
 
         Timer timer = new Timer();
-        start = System.currentTimeMillis();
+
         timer.schedule(task1, 1000);
         timer.schedule(task2, 3000);
     }

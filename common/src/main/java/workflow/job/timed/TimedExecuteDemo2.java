@@ -1,21 +1,24 @@
 package workflow.job.timed;
 
+import workflow.task.MyTimerTask1;
 import workflow.task.MyTimerTask2;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Timer;
+import java.util.TimerTask;
 
 /**
- * Created by yidxue on 2018/3/31
+ * Created by yidxue on 2018/7/23
  */
-public class TimedExecuteDemo1 {
+public class TimedExecuteDemo2 {
 
     public static void main(String[] args) throws ParseException {
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date timeDate = dateFormat.parse("2018-07-23 13:16:00");
+        Date timeDate = dateFormat.parse("2018-07-23 13:18:00");
+
         long start = timeDate.getTime();
 
         if (start < System.currentTimeMillis()) {
@@ -23,8 +26,12 @@ public class TimedExecuteDemo1 {
             return;
         }
 
+        TimerTask task1 = new MyTimerTask1(start);
+        TimerTask task2 = new MyTimerTask2(start);
+
         Timer timer = new Timer();
-        // 在指定timeDate执行
-        timer.schedule(new MyTimerTask2(start), timeDate);
+
+        timer.schedule(task1, timeDate);
+        timer.schedule(task2, timeDate);
     }
 }
