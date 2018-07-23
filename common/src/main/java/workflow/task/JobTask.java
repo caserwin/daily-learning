@@ -1,4 +1,4 @@
-package workflow.timed;
+package workflow.task;
 
 import java.util.TimerTask;
 
@@ -8,6 +8,6 @@ import java.util.TimerTask;
 public class JobTask extends TimerTask {
     @Override
     public void run() {
-        System.out.println("timestamp: " + System.currentTimeMillis() / 1000);
+        System.out.println("程序结束时间：" + System.currentTimeMillis() / 1000);
     }
 }

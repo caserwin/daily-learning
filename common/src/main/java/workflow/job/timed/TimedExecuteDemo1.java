@@ -1,5 +1,6 @@
-package workflow.timed;
+package workflow.job.timed;
 
+import workflow.task.JobTask;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -9,7 +10,8 @@ import java.util.Timer;
 /**
  * Created by yidxue on 2018/3/31
  */
-public class TimedExecuteDemo2 {
+public class TimedExecuteDemo1 {
+
     public static void main(String[] args) throws ParseException {
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

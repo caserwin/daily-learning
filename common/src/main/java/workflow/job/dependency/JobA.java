@@ -1,4 +1,4 @@
-package workflow.dependency;
+package workflow.job.dependency;
 
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;

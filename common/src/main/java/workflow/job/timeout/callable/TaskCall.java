@@ -1,4 +1,4 @@
-package workflow.timeout.callable;
+package workflow.job.timeout.callable;
 
 import java.util.concurrent.Callable;
 

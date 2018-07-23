@@ -1,4 +1,4 @@
-package workflow.dependency;
+package workflow.job.dependency;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
