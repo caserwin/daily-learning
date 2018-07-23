@@ -1,7 +1,6 @@
 package workflow.job.delay;
 
-import workflow.task.MyTimerTask1;
-import workflow.task.MyTimerTask2;
+import workflow.task.MyTimerTask;
 import java.util.TimerTask;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -17,11 +16,10 @@ public class AsynchronousDelayExecuteDemo1 {
         ScheduledExecutorService newScheduledThreadPool = Executors.newScheduledThreadPool(2);
         long start = System.currentTimeMillis();
 
-        TimerTask task1 = new MyTimerTask1(start);
-        TimerTask task2 = new MyTimerTask2(start);
+        TimerTask task1 = new MyTimerTask(start, 3000,"task1");
+        TimerTask task2 = new MyTimerTask(start,2000,"task2");
 
         newScheduledThreadPool.schedule(task1, 1000, TimeUnit.MILLISECONDS);
         newScheduledThreadPool.schedule(task2, 3000, TimeUnit.MILLISECONDS);
     }
 }
-

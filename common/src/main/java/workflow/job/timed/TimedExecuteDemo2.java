@@ -1,7 +1,6 @@
 package workflow.job.timed;
 
-import workflow.task.MyTimerTask1;
-import workflow.task.MyTimerTask2;
+import workflow.task.MyTimerTask;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -26,8 +25,8 @@ public class TimedExecuteDemo2 {
             return;
         }
 
-        TimerTask task1 = new MyTimerTask1(start);
-        TimerTask task2 = new MyTimerTask2(start);
+        TimerTask task1 = new MyTimerTask(start, 5000, "task1");
+        TimerTask task2 = new MyTimerTask(start, 0, "task2");
 
         Timer timer = new Timer();
 

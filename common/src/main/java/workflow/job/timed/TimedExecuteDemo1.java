@@ -1,6 +1,6 @@
 package workflow.job.timed;
 
-import workflow.task.MyTimerTask2;
+import workflow.task.MyTimerTask;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -25,6 +25,6 @@ public class TimedExecuteDemo1 {
 
         Timer timer = new Timer();
         // 在指定timeDate执行
-        timer.schedule(new MyTimerTask2(start), timeDate);
+        timer.schedule(new MyTimerTask(start,0,"task1"), timeDate);
     }
 }

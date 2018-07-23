@@ -1,7 +1,6 @@
 package workflow.job.timed;
 
-import workflow.task.MyTimerTask1;
-import workflow.task.MyTimerTask2;
+import workflow.task.MyTimerTask;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,8 +21,8 @@ public class AsynchronousTimedExecuteDemo {
         Date timeDate = dateFormat.parse("2018-07-23 13:49:00");
         long fixRunTime = timeDate.getTime();
 
-        TimerTask task1 = new MyTimerTask1(fixRunTime);
-        TimerTask task2 = new MyTimerTask2(fixRunTime);
+        TimerTask task1 = new MyTimerTask(fixRunTime,5000,"task1");
+        TimerTask task2 = new MyTimerTask(fixRunTime,0,"task2");
 
         // 只能通过延时方式来设定。
         long delayTime = fixRunTime - System.currentTimeMillis();

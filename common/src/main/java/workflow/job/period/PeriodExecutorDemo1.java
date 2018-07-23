@@ -1,6 +1,6 @@
 package workflow.job.period;
 
-import workflow.task.MyTimerTask2;
+import workflow.task.MyTimerTask;
 import java.util.Timer;
 
 /**
@@ -10,6 +10,6 @@ public class PeriodExecutorDemo1 {
     public static void main(String[] args) {
         Timer timer = new Timer();
         // 从现在开始 2 秒钟之后启动
-        timer.schedule(new MyTimerTask2(System.currentTimeMillis()), 3000, 2000);
+        timer.schedule(new MyTimerTask(System.currentTimeMillis(),0,"task1"), 3000, 2000);
     }
 }
