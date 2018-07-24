@@ -9,6 +9,6 @@ application.conf中引用该配置的写法为：include file("security")
 #### 2 不把文件打包到jar包中，作为外部配置读取<br>
 --conf spark.driver.extraJavaOptions="-Dconfig.resource=sap.conf"
 application.conf中引用该配置的写法为：include "security"
-
+<br>
 对于示例Code，有以下输出：
 <div align=center><img width="250" height="100" src="https://github.com/caserwin/daily-learning/raw/master/spark16/pic/spark_config_demo1.png"/></div>
