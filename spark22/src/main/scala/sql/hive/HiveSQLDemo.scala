@@ -32,7 +32,7 @@ object HiveSQLDemo {
     )
     val inputDF = spark.sparkContext.parallelize(dataSeq1).toDF(fields: _*)
 
-    HiveUtil.createHiveTable(spark, "testTable", curDate, fields)
+    HiveUtil.createHiveTable(spark, "testTable", fields)
     HiveUtil.insertHiveTable(spark, "testTable", curDate, inputDF, fields)
   }
 }

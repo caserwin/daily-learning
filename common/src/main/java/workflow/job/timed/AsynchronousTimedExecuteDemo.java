@@ -18,11 +18,11 @@ public class AsynchronousTimedExecuteDemo {
         ScheduledExecutorService newScheduledThreadPool = Executors.newScheduledThreadPool(2);
 
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date timeDate = dateFormat.parse("2018-07-23 13:49:00");
+        Date timeDate = dateFormat.parse("2018-07-23 23:55:50");
         long fixRunTime = timeDate.getTime();
 
         TimerTask task1 = new MyTimerTask(fixRunTime,5000,"task1");
-        TimerTask task2 = new MyTimerTask(fixRunTime,0,"task2");
+        TimerTask task2 = new MyTimerTask(fixRunTime,3000,"task2");
 
         // 只能通过延时方式来设定。
         long delayTime = fixRunTime - System.currentTimeMillis();

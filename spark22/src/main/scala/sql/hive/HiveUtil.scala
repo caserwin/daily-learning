@@ -10,7 +10,7 @@ object HiveUtil {
   /**
     * create hive table with date partition
     */
-  def createHiveTable(spark: SparkSession, tableName: String, date: String, fields: Seq[String]): Unit = {
+  def createHiveTable(spark: SparkSession, tableName: String, fields: Seq[String]): Unit = {
     val cols = fields.map(field => s"$field  string  comment  '$field'").mkString(",")
 
     val createTableHQL =

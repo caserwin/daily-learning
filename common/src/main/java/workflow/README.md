@@ -48,7 +48,7 @@ Timer 类是项目中常用的定时器，比如每隔一段时间清理项目�
 
    
 
-## 3. concurrent包相关说明
+## 3. concurrent包
 
 ### 3.1 CountDownLatch
 #### 业务场景
@@ -71,15 +71,6 @@ ScheduledExecutorService.scheduleAtFixedRate(Runnable command,long initialDelay,
 
 
 
-## ScheduledExecutorService
-
-这个借口一共定义了4个方法。
-ScheduledExecutorService.schedule(Runnable command,long delay, TimeUnit unit)   // 异步延时执行<br>
-ScheduledExecutorService.schedule(Callable<V> callable,long delay, TimeUnit unit)   // 异步延时执行<br>
-ScheduledExecutorService.scheduleAtFixedRate(Runnable command,long initialDelay,long period,TimeUnit unit) // 异步周期执行<br>
-ScheduledExecutorService.scheduleWithFixedDelay(Runnable command, long initialDelay, long delay, TimeUnit unit);
-
-scheduleAtFixedRate 和 scheduleWithFixedDelay 有啥区别？？
 
 
 
