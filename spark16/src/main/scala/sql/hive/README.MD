@@ -1,10 +1,10 @@
 ## HiveSQLDemo1
 关于插入分区表的写法。执行结果如下：
-<div align=center><img width="650" height="200" src="https://github.com/caserwin/daily-learning/raw/master/spark16/pic/spark_hive_demo1.png"/></div>
+<div align=center><img width="850" height="300" src="https://github.com/caserwin/daily-learning/raw/master/spark16/pic/spark_hive_demo1.png"/></div>
 
 ## HiveSQLDemo2
 关于动态插入分区表的写法。执行结果如下：
-<div align=center><img width="650" height="200" src="https://github.com/caserwin/daily-learning/raw/master/spark16/pic/spark_hive_demo2.png"/></div>
+<div align=center><img width="850" height="300" src="https://github.com/caserwin/daily-learning/raw/master/spark16/pic/spark_hive_demo2.png"/></div>
 
 
 ## 参考：
