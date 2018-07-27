@@ -8,6 +8,4 @@
 
 
 ## 参考：
-[Partition columns when inserting into a Hive table from a select
- Ask Question
-](https://stackoverflow.com/questions/21651464/partition-columns-when-inserting-into-a-hive-table-from-a-select)
+[Partition columns when inserting into a Hive table from a select Ask Question](https://stackoverflow.com/questions/21651464/partition-columns-when-inserting-into-a-hive-table-from-a-select)
