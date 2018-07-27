@@ -15,7 +15,6 @@ object FunctionDemo2 {
     2 * x
   }
 
-  // 高阶函数
   def hf(f1: Int => Int): Int = {
     f1(2)
   }

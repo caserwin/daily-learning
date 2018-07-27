@@ -1,4 +1,4 @@
-package core.lambda
+package core.function.lambda
 
 object LambdaDemo3 {
 

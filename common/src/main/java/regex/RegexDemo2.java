@@ -1,4 +1,4 @@
-package core;
+package regex;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -32,9 +32,7 @@ public class RegexDemo2 {
 
     public static void main(String[] args) {
         String text = "/opt/webex/mmp/logs/wbxmcs-01_metrics_01022018_0.28919.log";
-
         System.out.println(getMcsInstancdId(text));
-
     }
 }
 

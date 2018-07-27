@@ -4,7 +4,7 @@ import java.util
 import java.util.{Collections, Comparator}
 import scala.collection.JavaConversions._
 
-object ScalaSortArrayListDemo {
+object ScalaCollectionsSortDemo {
 
   def main(args: Array[String]): Unit = {
     val res = new util.ArrayList[Integer]()

@@ -1,6 +1,6 @@
 package ut;
 
-import core.RegexDemo2;
+import regex.RegexDemo2;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

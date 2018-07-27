@@ -54,5 +54,13 @@ object ScalaRegexDemo2 {
     val AndroidPattern = "Android/([0-9\\.]+)".r
     println(AndroidPattern.findAllIn(str7).matchData.map(m => m.group(1)).mkString(""))
 
+    println("============== demo8 ===============")
+    // demo8: 判断给定字符串是否符合某种模式
+    val str8 = "123456"
+    val str9 = "aa123456"
+    val pattern8 = "\\d+"
+    println("判断是否正则匹配：" + str8.matches(pattern8))
+    println("判断是否正则匹配：" + str9.matches(pattern8))
+
   }
 }

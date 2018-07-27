@@ -20,7 +20,7 @@ object SparkSQLTempTableDemo {
     input1.createOrReplaceTempView("people")
     spark.sql("select * from people").show()
     // 以下code报错
-//    spark.newSession().sql("SELECT * FROM people").show()
+    //    spark.newSession().sql("SELECT * FROM people").show()
 
     // 创建全局视图
     input1.createGlobalTempView("people1")
