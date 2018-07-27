@@ -10,7 +10,7 @@ object HiveUtil {
   /**
     * create hive table with date partition
     */
-  def createHiveTable(spark: SparkSession, tableName: String, fields: Seq[String]): Unit = {
+  def createHiveTable(tableName: String, fields: Seq[String])(implicit spark: SparkSession): Unit = {
     val cols = fields.map(field => s"$field  string  comment  '$field'").mkString(",")
 
     val createTableHQL =
@@ -30,7 +30,7 @@ object HiveUtil {
   /**
     * insert dataframe to hive table
     */
-  def insertHiveTable(spark: SparkSession, targetTableName: String, date: String, df: DataFrame, fields: Seq[String]): Unit = {
+  def insertHiveTable(targetTableName: String, date: String, df: DataFrame, fields: Seq[String])(implicit spark: SparkSession): Unit = {
     df.createOrReplaceTempView("tmpTable")
     val cols = fields.mkString(",")
     val insertTableHQL = s"insert overwrite TABLE $targetTableName PARTITION (l_date='$date') select $cols from tmpTable"

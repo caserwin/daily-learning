@@ -14,7 +14,7 @@ object HiveSQLDemo {
 
   def main(args: Array[String]): Unit = {
 
-    val spark = SparkSession
+    implicit val spark: SparkSession = SparkSession
       .builder.appName("SQL Application")
       .config("spark.master", "local[*]")
       .config("spark.sql.warehouse.dir", warehouseLocation)
@@ -32,7 +32,7 @@ object HiveSQLDemo {
     )
     val inputDF = spark.sparkContext.parallelize(dataSeq1).toDF(fields: _*)
 
-    HiveUtil.createHiveTable(spark, "testTable", fields)
-    HiveUtil.insertHiveTable(spark, "testTable", curDate, inputDF, fields)
+    HiveUtil.createHiveTable("testTable", fields)
+    HiveUtil.insertHiveTable("testTable", curDate, inputDF, fields)
   }
 }
