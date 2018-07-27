@@ -11,7 +11,7 @@ object HiveUtil {
   /**
     * create hive table with date partition
     */
-  def createHiveTable(hqlContext: HiveContext, tableName: String, date: String, fields: Seq[String]): Unit = {
+  def createHiveTable(hqlContext: HiveContext, tableName: String, fields: Seq[String]): Unit = {
     val cols = fields.map(field => s"$field  string  comment  '$field'").mkString(",")
 
     val createTableHQL =
@@ -24,7 +24,6 @@ object HiveUtil {
         """
 
     println(createTableHQL)
-
     hqlContext.sql(createTableHQL)
   }
 
@@ -37,7 +36,18 @@ object HiveUtil {
     val insertTableHQL = s"insert overwrite TABLE $targetTableName PARTITION (l_date='$date') select $cols from tmpTable"
 
     println(insertTableHQL)
+    hqlContext.sql(insertTableHQL)
+  }
 
+  /**
+    * insert hive table by dynamic partition
+    */
+  def insertByDynamic(hqlContext: HiveContext, targetTableName: String, df: DataFrame, fields: Seq[String]): Unit = {
+    df.registerTempTable("tmpTable")
+    val cols = fields.mkString(",")
+    val insertTableHQL = s"insert overwrite TABLE $targetTableName PARTITION (l_date) select $cols from tmpTable"
+
+    println(insertTableHQL)
     hqlContext.sql(insertTableHQL)
   }
 }

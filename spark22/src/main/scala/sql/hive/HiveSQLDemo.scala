@@ -10,7 +10,7 @@ import org.apache.spark.sql.SparkSession
   * Created by yidxue on 2018/1/28
   */
 object HiveSQLDemo {
-  private val warehouseLocation = new File("spark-warehouse").getAbsolutePath
+  private val warehouseLocation = new File("/user/hive/warehouse").getAbsolutePath
 
   def main(args: Array[String]): Unit = {
 
