@@ -1,7 +1,5 @@
 package sql.hive
 
-import java.text.SimpleDateFormat
-import java.util.Date
 import org.apache.spark.{SparkConf, SparkContext}
 
 /**

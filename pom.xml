@@ -11,7 +11,7 @@
     <modules>
         <module>flink</module>
         <module>spark16</module>
-        <module>spark22</module>
+        <module>spark23</module>
         <module>common</module>
         <module>spark-examples</module>
         <module>flink-examples</module>
