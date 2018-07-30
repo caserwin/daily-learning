@@ -11,6 +11,5 @@ object SparkSaveDataFrameDemo {
     df.show()
 
     df.rdd.map(x=>x.mkString("\t\t")).repartition(1).saveAsTextFile("output")
-
   }
 }

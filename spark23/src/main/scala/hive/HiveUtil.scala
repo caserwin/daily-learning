@@ -1,4 +1,4 @@
-package sql.hive
+package hive
 
 import org.apache.spark.sql.{DataFrame, SparkSession}
 

@@ -1,4 +1,4 @@
-package sql.hive
+package hive
 
 import java.io.File
 import java.text.SimpleDateFormat

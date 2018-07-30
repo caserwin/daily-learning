@@ -1,4 +1,4 @@
-package core.create
+package hbase
 
 import org.apache.hadoop.hbase.HBaseConfiguration
 import org.apache.hadoop.hbase.mapreduce.TableInputFormat
