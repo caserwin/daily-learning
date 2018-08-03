@@ -21,9 +21,9 @@ public class ComplexConnection {
             return;
         }
 
-        String nodes = "10.224.38.202";
+        String nodes = "localhost";
         int port = 9042;
-        String localDCName = "HFDEVDC1";
+        String localDCName = "dc";
         String userName = "cassandra";
         String password = "cassandra";
 

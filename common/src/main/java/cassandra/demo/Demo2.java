@@ -66,7 +66,7 @@ public class Demo2 {
         int count = 1;
         for (RowBean rowBean : arrRowBean) {
             System.out.println(count++);
-            sess.execute("INSERT INTO ks_global_pda.siteurltositeidtable (siteurl, siteid) VALUES (?,?)", rowBean.getSiteurl(), rowBean.getSiteid());
+            sess.execute("INSERT INTO test (siteurl, siteid) VALUES (?,?)", rowBean.getSiteurl(), rowBean.getSiteid());
         }
 
         System.out.println((System.currentTimeMillis() - start) / 1000 + "s");

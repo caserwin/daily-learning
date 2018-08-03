@@ -5,7 +5,7 @@ import org.apache.spark.sql.SparkSession
 /**
   * Created by yidxue on 2018/4/25
   */
-object SparkSQLCreateDFDemo {
+object SparkSQLCreateDFDemo2 {
 
   val COUNTRY_MAP = Map(
     "日本" -> "JAPAN",

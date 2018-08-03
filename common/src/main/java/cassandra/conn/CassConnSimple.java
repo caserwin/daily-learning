@@ -9,16 +9,13 @@ public class CassConnSimple {
 
     public static Session getConn() {
         //要连接的库，可以不写
-        String keyspace = "ks_global_pda";
+        String keyspace = "ks";
         //cassandra主机地址
-        String[] hosts = new String[]{"10.252.7.13"};
+        String[] hosts = new String[]{"localhost"};
         //认证配置
-        AuthProvider authProvider = new PlainTextAuthProvider("pdaadmin", "Prod4%pdaAdmin");
+        AuthProvider authProvider = new PlainTextAuthProvider("username", "password");
         // 创建连接到Cassandra的客户端
-        Cluster cluster = Cluster.builder()
-                .addContactPoints(hosts)
-                .withAuthProvider(authProvider)
-                .build();
+        Cluster cluster = Cluster.builder().addContactPoints(hosts).withAuthProvider(authProvider).build();
         // 创建用户会话
         return cluster.connect(keyspace);
     }
