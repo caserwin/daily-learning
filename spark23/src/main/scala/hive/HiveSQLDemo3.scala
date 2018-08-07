@@ -1,18 +1,22 @@
 package hive
 
 import java.io.File
-import org.apache.spark.sql.SparkSession
+
+import org.apache.spark.sql.{SaveMode, SparkSession}
 
 /**
-  * Created by yidxue on 2018/7/27
+  * Created by yidxue on 2018/8/7
   */
-object HiveSQLDemo2 {
+object HiveSQLDemo3 {
+
   private val warehouseLocation = new File("/user/hive/warehouse").getAbsolutePath
 
   def main(args: Array[String]): Unit = {
     implicit val spark: SparkSession = SparkSession
       .builder.appName("SQL Application")
       .config("spark.sql.warehouse.dir", warehouseLocation)
+      .config("hive.exec.dynamic.partition", "true")
+      .config("hive.exec.dynamic.partition.mode", "nonstrict")
       .enableHiveSupport()
       .getOrCreate()
     import spark.implicits._
@@ -26,12 +30,13 @@ object HiveSQLDemo2 {
     )
     val inputDF = spark.sparkContext.parallelize(dataSeq1).toDF(fields: _*)
 
-    HiveUtil.createHiveTable("testtable2", Seq("id", "name", "city"))
+    // 存储表，不分区
+    inputDF.write.mode(SaveMode.Overwrite).saveAsTable("testtable3")
 
     // 动态存储分区表
     spark.sqlContext.setConf("hive.exec.dynamic.partition", "true")
     spark.sqlContext.setConf("hive.exec.dynamic.partition.mode", "nonstrict")
-    HiveUtil.insertByDynamic("testtable2", inputDF, fields)
+    inputDF.write.partitionBy("l_date").format("hive").saveAsTable("testtable4")
 
     spark.stop()
   }

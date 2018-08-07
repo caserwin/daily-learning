@@ -26,6 +26,8 @@ object SparkSQLUDF {
     //while(true){}
 
     spark.udf.register("wordCount",new MyUDAF)
-    spark.sql("select name,wordCount(name) as count,computeLength(name) as length from bigDataTable group by name ").show
+    spark.sql("select name,wordCount(name) as count,computeLength(name) as length from bigDataTable group by name ").show()
+
+    spark.stop()
   }
 }

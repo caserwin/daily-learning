@@ -33,5 +33,7 @@ object Test {
 
     // Calculate average value for each group
     df.groupBy("key").agg(customMean(df.col("value")).as("custom_mean"), avg("value").as("avg")).show()
+
+    spark.stop()
   }
 }

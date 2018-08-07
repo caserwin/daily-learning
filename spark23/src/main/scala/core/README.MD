@@ -1,19 +1,3 @@
-##
-Spark 初始化 demo1
-```
- val sparkConf = new SparkConf().setAppName("spark demo").setMaster("local[*]")
- val sc = new SparkContext(sparkConf)
-```
-见：
-
-Spark 初始化 demo2
-```
- val spark = SparkSession.builder.appName("Simple Application").config("spark.master", "local[*]").getOrCreate()
-```
-见：SparkMapDemo
-
-
-
 ## transform 算子
 
 ### 读数据

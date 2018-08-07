@@ -19,5 +19,7 @@ object SparkSQLUDFDemo1 {
     // method2
     df.select($"color", isGreen($"color").alias("Green_Ind")).show()
     df.select(isGreen($"color").alias("color")).show()
+
+    spark.stop()
   }
 }

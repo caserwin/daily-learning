@@ -16,5 +16,7 @@ object SQLTest {
 
     df1.groupBy("country").agg(constr($"et").as("et"), max($"Cindex").as("Cindex")).show(truncate = false)
     df1.groupBy("country").agg(collect_list($"et").as("et"), max($"Cindex").as("Cindex")).show(truncate = false)
+
+    spark.stop()
   }
 }

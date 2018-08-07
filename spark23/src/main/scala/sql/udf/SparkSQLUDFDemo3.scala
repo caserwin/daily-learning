@@ -13,6 +13,8 @@ object SparkSQLUDFDemo3 {
     // Register the UDF with our SQLContext
     spark.udf.register("CTOF", test _)
     spark.sql("SELECT city, CTOF(avgLow) AS avgLowF, CTOF(avgHigh) AS avgHighF FROM citytemps").show()
+
+    spark.stop()
   }
 
   def test(degreesCelcius: Double): Double = {
