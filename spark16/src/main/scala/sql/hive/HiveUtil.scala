@@ -41,6 +41,7 @@ object HiveUtil {
 
   /**
     * insert hive table by dynamic partition
+    * https://stackoverflow.com/questions/21651464/partition-columns-when-inserting-into-a-hive-table-from-a-select
     */
   def insertByDynamic(hqlContext: HiveContext, targetTableName: String, df: DataFrame, fields: Seq[String]): Unit = {
     df.registerTempTable("tmpTable")

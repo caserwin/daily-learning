@@ -16,33 +16,12 @@
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-core_2.11</artifactId>
             <version>2.3.0</version>
-            <!--<scope>provided</scope>-->
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-sql_2.11</artifactId>
-            <version>2.3.0</version>
-            <!--<scope>provided</scope>-->
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.ignite</groupId>
-            <artifactId>ignite-spark</artifactId>
-            <version>2.6.0</version>
-            <!--<scope>provided</scope>-->
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.ignite</groupId>
-            <artifactId>ignite-spring</artifactId>
-            <version>2.6.0</version>
-            <!--<scope>provided</scope>-->
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.spark</groupId>
-            <artifactId>spark-streaming_2.11</artifactId>
             <version>2.3.0</version>
             <scope>provided</scope>
         </dependency>
@@ -55,16 +34,23 @@
         </dependency>
 
         <dependency>
-            <groupId>org.apache.phoenix</groupId>
-            <artifactId>phoenix-spark</artifactId>
-            <version>4.11.0-HBase-1.2</version>
+            <groupId>org.apache.ignite</groupId>
+            <artifactId>ignite-spark</artifactId>
+            <version>2.6.0</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
-            <groupId>org.apache.phoenix</groupId>
-            <artifactId>phoenix-core</artifactId>
-            <version>4.11.0-HBase-1.2</version>
+            <groupId>org.apache.ignite</groupId>
+            <artifactId>ignite-spring</artifactId>
+            <version>2.6.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-streaming_2.11</artifactId>
+            <version>2.3.0</version>
             <scope>provided</scope>
         </dependency>
 

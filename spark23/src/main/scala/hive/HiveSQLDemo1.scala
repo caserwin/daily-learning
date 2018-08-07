@@ -3,20 +3,18 @@ package hive
 import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Date
-
 import org.apache.spark.sql.SparkSession
 
 /**
   * Created by yidxue on 2018/1/28
   */
-object HiveSQLDemo {
+object HiveSQLDemo1 {
   private val warehouseLocation = new File("/user/hive/warehouse").getAbsolutePath
 
   def main(args: Array[String]): Unit = {
 
     implicit val spark: SparkSession = SparkSession
       .builder.appName("SQL Application")
-      .config("spark.master", "local[*]")
       .config("spark.sql.warehouse.dir", warehouseLocation)
       .enableHiveSupport()
       .getOrCreate()
@@ -32,7 +30,9 @@ object HiveSQLDemo {
     )
     val inputDF = spark.sparkContext.parallelize(dataSeq1).toDF(fields: _*)
 
-    HiveUtil.createHiveTable("testTable", fields)
-    HiveUtil.insertHiveTable("testTable", curDate, inputDF, fields)
+    HiveUtil.createHiveTable("testtable", fields)
+    HiveUtil.insertHiveTable("testtable", curDate, inputDF, fields)
+
+    spark.stop()
   }
 }

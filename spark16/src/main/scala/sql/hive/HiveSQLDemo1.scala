@@ -11,8 +11,6 @@ object HiveSQLDemo1 {
   def main(args: Array[String]): Unit = {
 
     val conf = new SparkConf().setAppName("Spark Hive Example").setMaster("local[*]")
-    // TODO modify here
-    //    conf.set("spark.executor.extraClassPat","")
     val sc = new SparkContext(conf)
     val hqlContext = new org.apache.spark.sql.hive.HiveContext(sc)
     import hqlContext.implicits._
