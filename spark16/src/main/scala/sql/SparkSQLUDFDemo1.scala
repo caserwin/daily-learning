@@ -30,5 +30,6 @@ object SparkSQLUDFDemo1 {
       isGreen($"color").alias("color")
     ).show()
 
+    sc.stop()
   }
 }

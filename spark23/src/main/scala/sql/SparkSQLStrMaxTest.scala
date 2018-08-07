@@ -22,5 +22,7 @@ object SparkSQLStrMaxTest {
     input.printSchema()
 
     input.groupBy("id").agg(max("eventtype")).show(truncate = false)
+
+    spark.stop()
   }
 }

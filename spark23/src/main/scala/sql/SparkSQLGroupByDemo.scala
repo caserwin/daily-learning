@@ -22,5 +22,6 @@ object SparkSQLGroupByDemo {
     inputDF.groupBy("id").agg(count(lit(1)).alias("COUNT")).show()
     inputDF.groupBy("id").agg(sum($"num".cast("integer")).alias("COUNT")).show()
 
+    spark.stop()
   }
 }

@@ -29,5 +29,7 @@ object SparkSQLSelectDemo {
     val cols = "name,country,et".split(",").map(name => col(name))
     df.select(cols: _*).show()
 
+
+    spark.stop()
   }
 }

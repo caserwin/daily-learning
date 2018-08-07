@@ -38,5 +38,6 @@ object SparkSQLJoinDemo2 {
 
     input1.join(input2, Seq("id"), "left").join(input3, Seq("city"), "left").show()
 
+    sc.stop()
   }
 }

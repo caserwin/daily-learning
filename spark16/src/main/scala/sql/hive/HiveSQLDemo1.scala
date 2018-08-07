@@ -28,5 +28,7 @@ object HiveSQLDemo1 {
 
     HiveUtil.createHiveTable(hqlContext, "testtable1", fields)
     HiveUtil.insertHiveTable(hqlContext, "testtable1", curDate, inputDF, fields)
+
+    sc.stop()
   }
 }

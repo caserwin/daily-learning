@@ -20,5 +20,7 @@ object SparkSQLSortDemo {
     df.orderBy(df("Cindex").desc).show(false)
 
     df.orderBy(col("Cindex").asc).show(false)
+
+    sc.stop()
   }
 }

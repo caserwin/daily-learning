@@ -19,7 +19,8 @@ object SparkSQLWhenCaseDemo {
     df
       .withColumn("sex", when($"sex" === "1", "男").otherwise("女"))
       .withColumn("ddd", lit(null))
-
       .show()
+
+    spark.stop()
   }
 }

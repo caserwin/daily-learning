@@ -55,5 +55,7 @@ object SparkSQLGroupByDemo {
       .withColumn("minus_col", minusNum($"sum_num", $"max_num"))
       .withColumn("avg_num", dealNUM($"avg_num"))
       .show()
+
+    sc.stop()
   }
 }

@@ -27,5 +27,8 @@ object SparkSQLExtractFieldFromDFDemo {
     println("列名为name，第2行：" + inputDF.select("name").map(r => r.getString(0)).collect.toList(1))
     println("把DF中第一行，放到List中，并返回DF中的第1行：" + inputDF.takeAsList(1))
     println("把DF中第一行，放到List中，并返回DF中的第1行，第2列：" + inputDF.takeAsList(1).get(0).get(1))
+
+
+    spark.stop()
   }
 }

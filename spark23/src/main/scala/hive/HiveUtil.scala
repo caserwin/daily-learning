@@ -39,4 +39,17 @@ object HiveUtil {
 
     spark.sql(insertTableHQL)
   }
+
+  /**
+    * insert hive table by dynamic partition
+    * https://stackoverflow.com/questions/21651464/partition-columns-when-inserting-into-a-hive-table-from-a-select
+    */
+  def insertByDynamic(targetTableName: String, df: DataFrame, fields: Seq[String])(implicit spark: SparkSession): Unit = {
+    df.createOrReplaceTempView("tmpTable")
+    val cols = fields.mkString(",")
+    val insertTableHQL = s"insert overwrite TABLE $targetTableName PARTITION (l_date) select $cols from tmpTable"
+
+    println(insertTableHQL)
+    spark.sql(insertTableHQL)
+  }
 }

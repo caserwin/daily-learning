@@ -52,5 +52,7 @@ object SparkSQLFunctionsDemo {
         kurtosis($"num1") // num1 字段的 kurtosis 峰度
       )
       .show()
+
+    sc.stop()
   }
 }

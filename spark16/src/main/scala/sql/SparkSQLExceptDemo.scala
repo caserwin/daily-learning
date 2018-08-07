@@ -34,5 +34,7 @@ object SparkSQLExceptDemo {
     // 根据指定字段求差集，这里根据 city 字段求差集。
     val miss = inputDF1.select($"city").distinct().except(inputDF2.select($"city"))
     inputDF1.join(miss, Seq("city"), "inner").show()
+
+    sc.stop()
   }
 }

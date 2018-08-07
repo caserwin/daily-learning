@@ -25,5 +25,6 @@ object SparkSQLExistOrInDemo {
     inputDF.filter($"id".isin(List(1, 2): _*)).show()
     inputDF.filter($"id".isin(Seq(1, 2): _*)).show()
 
+    sc.stop()
   }
 }

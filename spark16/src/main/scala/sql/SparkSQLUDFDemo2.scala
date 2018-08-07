@@ -17,5 +17,7 @@ object SparkSQLUDFDemo2 {
     sqlContext.udf.register("CTOF", (degreesCelcius: Double) => (degreesCelcius * 9.0 / 5.0) + 32.0)
 
     sqlContext.sql("SELECT city, CTOF(avgLow) AS avgLowF, CTOF(avgHigh) AS avgHighF FROM citytemps").show()
+
+    sc.stop()
   }
 }

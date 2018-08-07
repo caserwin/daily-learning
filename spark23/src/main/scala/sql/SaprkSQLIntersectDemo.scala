@@ -28,5 +28,7 @@ object SaprkSQLIntersectDemo {
     val inputDF2 = spark.sparkContext.parallelize(dataSeq2).toDF("id", "name", "city")
 
     inputDF1.intersect(inputDF2).show(truncate = false)
+
+    spark.stop()
   }
 }

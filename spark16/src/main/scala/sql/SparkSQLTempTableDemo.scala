@@ -21,5 +21,7 @@ object SparkSQLTempTableDemo {
 
     input1.registerTempTable("cityinfo")
     sqlContext.sql("select * from cityinfo").show()
+
+    sc.stop()
   }
 }

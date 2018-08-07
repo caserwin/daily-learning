@@ -27,5 +27,7 @@ object SparkSQLTempTableDemo {
     spark.sql("select * from global_temp.people1").show()
     spark.newSession().sql("SELECT * FROM global_temp.people1").show()
 
+
+    spark.stop()
   }
 }

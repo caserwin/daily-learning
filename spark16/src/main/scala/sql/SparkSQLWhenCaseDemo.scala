@@ -31,5 +31,7 @@ object SparkSQLWhenCaseDemo {
       .join(resDF2, Seq("color"), "left")
       .withColumn("name", when(($"color" !== "yellow") && $"color".isNotNull, $"color").otherwise($"name"))
       .show()
+
+    sc.stop()
   }
 }

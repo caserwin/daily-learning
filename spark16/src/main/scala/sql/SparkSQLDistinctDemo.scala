@@ -26,5 +26,7 @@ object SparkSQLDistinctDemo {
     inputDF.distinct().show()
     // method2: dropDuplicates
     inputDF.dropDuplicates(Seq("id")).show()
+
+    sc.stop()
   }
 }

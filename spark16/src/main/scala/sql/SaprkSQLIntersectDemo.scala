@@ -30,5 +30,7 @@ object SaprkSQLIntersectDemo {
 
     // 求交集
     inputDF1.intersect(inputDF2).show(truncate = false)
+
+    sc.stop()
   }
 }

@@ -23,5 +23,7 @@ object SparkSQLWhenCaseSQLDemo {
 
     val df1 = sqlContext.sql(sql)
     df1.show()
+
+    sc.stop()
   }
 }

@@ -31,6 +31,7 @@ object SparkSQLFilterDemo {
     ))
     data.filter(json => jsonFilter(json, "$.message.this", "1")).foreach(println(_))
 
+    spark.stop()
   }
 
 

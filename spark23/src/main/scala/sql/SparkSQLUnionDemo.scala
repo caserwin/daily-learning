@@ -27,5 +27,6 @@ object SparkSQLUnionDemo {
 
     inputDF1.union(inputDF2).show()
 
+    spark.stop()
   }
 }

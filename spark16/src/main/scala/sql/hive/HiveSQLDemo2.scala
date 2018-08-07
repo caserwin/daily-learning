@@ -26,5 +26,7 @@ object HiveSQLDemo2 {
 
     HiveUtil.createHiveTable(hqlContext, "testtable2", Seq("id", "name", "city"))
     HiveUtil.insertByDynamic(hqlContext, "testtable2", inputDF, fields)
+
+    sc.stop()
   }
 }

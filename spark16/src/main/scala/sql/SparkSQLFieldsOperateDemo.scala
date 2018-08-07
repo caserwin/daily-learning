@@ -31,5 +31,7 @@ object SparkSQLFieldsOperateDemo {
     inputDF1.printSchema()
     val inputDF2 = df.withColumn("Cindex", $"Cindex".cast(IntegerType))
     inputDF2.printSchema()
+
+    sc.stop()
   }
 }

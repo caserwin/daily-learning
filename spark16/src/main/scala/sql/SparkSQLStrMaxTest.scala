@@ -26,5 +26,7 @@ object SparkSQLStrMaxTest {
 
     input.withColumn("name", upper($"name")).filter(!(upper($"name") === "ZHANGSAN1")).show()
     input.groupBy("id").agg(max("eventtype")).show(truncate = false)
+
+    sc.stop()
   }
 }

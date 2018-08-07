@@ -24,5 +24,7 @@ object SparkSQLAddOrUpdateColumnDemo {
       .withColumn("city", when($"city".isNull, "hangzhou").otherwise($"city"))   // update column
       .withColumn("date", lit("2018-01-18"))           // add column
       .show()
+
+    spark.stop()
   }
 }

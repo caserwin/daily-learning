@@ -21,5 +21,7 @@ object SparkSQLWhenCaseSQLDemo {
 
     val df1 = spark.sql(sql)
     df1.show()
+
+    spark.stop()
   }
 }

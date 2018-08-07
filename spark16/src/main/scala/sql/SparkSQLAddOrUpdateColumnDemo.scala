@@ -28,5 +28,7 @@ object SparkSQLAddOrUpdateColumnDemo {
       // notice: it is a error when lit(null)
       .withColumn("date", concat(lit("2018-01-18"), lit("_"), lit(null))) // add column
       .show()
+
+    sc.stop()
   }
 }

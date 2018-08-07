@@ -27,5 +27,7 @@ object SaprkSQLExplodeDemo {
         $"age",
         $"interests"
       ).show()
+
+    spark.stop()
   }
 }

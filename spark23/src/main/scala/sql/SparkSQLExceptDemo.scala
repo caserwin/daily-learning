@@ -30,5 +30,7 @@ object SparkSQLExceptDemo {
 
     // method 2: 根据指定字段，求差集
     inputDF1.join(inputDF2, Seq("city"), "leftanti").show()
+
+    spark.stop()
   }
 }

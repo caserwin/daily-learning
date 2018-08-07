@@ -30,5 +30,7 @@ object SparkSQLCreateDFByRDDDemo {
     val jmtJoinMethodDF = sqlContext.createDataFrame(resRdd, schema)
 
     jmtJoinMethodDF.show()
+
+    sc.stop()
   }
 }

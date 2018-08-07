@@ -106,5 +106,6 @@ object SparkSQLJoinDemo {
       |  3|  wangwu|shanghai|  2|     CN|
       +---+--------+--------+---+-------+
       */
+    sc.stop()
   }
 }

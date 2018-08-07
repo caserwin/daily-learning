@@ -25,5 +25,7 @@ object SparkSQLCreateRDDByDFDemo2 {
     }
 
     resRDD.foreach(println(_))
+
+    spark.stop()
   }
 }

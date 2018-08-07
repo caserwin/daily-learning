@@ -28,5 +28,7 @@ object SparkSQLArrayTypeDemo {
       .agg(collect_list($"et").alias("et"))
       .withColumn("FLAG", when(array_contains($"et", "aaa") || array_contains($"et", "bbb"), "TRUE").otherwise("FALSE"))
       .show(truncate = false)
+
+    sc.stop()
   }
 }
