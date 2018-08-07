@@ -1,7 +1,6 @@
 package hive
 
 import java.io.File
-
 import org.apache.spark.sql.{SaveMode, SparkSession}
 
 /**
@@ -15,8 +14,6 @@ object HiveSQLDemo3 {
     implicit val spark: SparkSession = SparkSession
       .builder.appName("SQL Application")
       .config("spark.sql.warehouse.dir", warehouseLocation)
-      .config("hive.exec.dynamic.partition", "true")
-      .config("hive.exec.dynamic.partition.mode", "nonstrict")
       .enableHiveSupport()
       .getOrCreate()
     import spark.implicits._

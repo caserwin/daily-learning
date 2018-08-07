@@ -7,6 +7,7 @@ import org.apache.spark.sql.SparkSession
   * Created by yidxue on 2018/7/27
   */
 object HiveSQLDemo2 {
+
   private val warehouseLocation = new File("/user/hive/warehouse").getAbsolutePath
 
   def main(args: Array[String]): Unit = {
@@ -26,6 +27,7 @@ object HiveSQLDemo2 {
     )
     val inputDF = spark.sparkContext.parallelize(dataSeq1).toDF(fields: _*)
 
+    // 建表
     HiveUtil.createHiveTable("testtable2", Seq("id", "name", "city"))
 
     // 动态存储分区表

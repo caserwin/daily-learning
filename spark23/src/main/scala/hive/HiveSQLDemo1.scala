@@ -28,7 +28,10 @@ object HiveSQLDemo1 {
     )
     val inputDF = spark.sparkContext.parallelize(dataSeq1).toDF(fields: _*)
 
+    // 建表
     HiveUtil.createHiveTable("testtable1", fields)
+
+    // 插入分区表
     HiveUtil.insertHiveTable("testtable1", curDate, inputDF, fields)
 
     spark.stop()
