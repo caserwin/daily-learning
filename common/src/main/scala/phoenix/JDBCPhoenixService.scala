@@ -5,7 +5,6 @@ import phoenix.bean.RowsBean
 import scala.collection.mutable
 
 /**
-  *
   * 这部分代码参考资料如下：
   *             1. 批量插入(重要)：http://viralpatel.net/blogs/batch-insert-in-java-jdbc/
   *             2. 查询(重要)：https://alvinalexander.com/java/edu/pj/jdbc/jdbc0003
@@ -40,7 +39,6 @@ object JDBCPhoenixService {
       mls += rowb
     }
     stmt.close()
-//    conn.close()
     mls
   }
 
@@ -61,7 +59,6 @@ object JDBCPhoenixService {
   def upsertPhoenix(conn: Connection, sql: String): Int = {
     val num = conn.createStatement.executeUpdate(sql)
     conn.commit()
-//    conn.close()
     num
   }
 
@@ -69,7 +66,7 @@ object JDBCPhoenixService {
     * 批处理：批量插入
     */
   def insertBatchPhoenix(conn: Connection, BeanLS: Seq[RowsBean], batchSize: Int): Unit = {
-    //    conn.setAutoCommit(false)
+    conn.setAutoCommit(false)
     val preStmt = conn.prepareStatement("UPSERT INTO ROWKEYTEST_JDBC (ROWKEY, NAME, CITY, NUM) VALUES (?, ?, ?, ?)")
     var count = 0
 
@@ -81,7 +78,6 @@ object JDBCPhoenixService {
         preStmt.setString(4, rowBean.discount)
         // 把当前sql添加到批命令中。
         preStmt.addBatch()
-
         count = count + 1
         if (count % batchSize == 0) {
           preStmt.executeBatch()
@@ -89,10 +85,9 @@ object JDBCPhoenixService {
       }
     )
     preStmt.executeBatch()
-    // 参考资料1, 这里貌似不需要 conn.commit()
-    //    conn.commit()
+    conn.commit()
+    conn.setAutoCommit(true)
     preStmt.close()
-//    conn.close()
   }
 
   /**
@@ -103,7 +98,6 @@ object JDBCPhoenixService {
     conn.setAutoCommit(false)
     val stmt = conn.createStatement()
     var count = 0
-
     sqlLS.foreach(
       sql => {
         stmt.addBatch(sql)
@@ -113,11 +107,9 @@ object JDBCPhoenixService {
         }
       }
     )
-
     stmt.executeBatch()
     conn.commit()
-    // 参考资料1, 这里貌似不需要 conn.commit()
+    conn.setAutoCommit(true)
     stmt.close()
-//    conn.close()
   }
 }
