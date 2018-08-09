@@ -4,6 +4,7 @@ import org.apache.spark.sql.{SQLContext, SaveMode}
 import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.phoenix.spark._
 import org.apache.spark.sql.functions.when
+import phoenix.JDBCPhoenixService
 import util.phoenix.conn.PhoenixConn
 
 
@@ -12,7 +13,7 @@ import util.phoenix.conn.PhoenixConn
   * 2 github参考: https://github.com/apache/phoenix/tree/master/phoenix-spark
   */
 
-object RowKeyBySparkTest {
+object SparkPhoenixDemo1 {
   def main(args: Array[String]): Unit = {
     val conf = new SparkConf().setAppName("RowKey Example").setMaster("local[*]")
     val sc = new SparkContext(conf)
@@ -28,7 +29,7 @@ object RowKeyBySparkTest {
     val tableName = "ROWKEYTEST"
     val fields = Seq("ROWKEY", "NAME", "CITY", "NUM")
     val conn = new PhoenixConn(zkAddr).getConn
-    PhoenixJDBCService.createPhoenixTable(tableName, fields, conn)
+    JDBCPhoenixService.createPhoenixTable(tableName, fields, conn)
 
     // 数据源
     val dataSeq1 = Seq(

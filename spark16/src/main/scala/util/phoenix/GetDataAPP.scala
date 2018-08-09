@@ -16,7 +16,7 @@ object GetDataAPP {
     val sc = new SparkContext(conf)
     val sqlContext = new SQLContext(sc)
 
-    val zkAddr = "10.29.42.42:2181"
+    val zkAddr = "localhost:2181"
     val day = args(0)
     val afterDay = getAfterDay(day, "yyyy-MM-dd", "yyyy-MM-dd")
     val fields = "CONFID,GID,UID_,USERTYPE,USEROS,OSVERSION,USERBROWSER,BROWSERVERSION,JOINMETHOD,REFNUM3,REFNUM4,REFNUM5,REFNUM6FIRST,REFNUM6LAST,SERVICETYPE,SERVICEID,SITEID,SITEVERSION,STARTJOINTIME,USERJMT,COUNTRY,PLATFORM,SYSTEM,ISHOST".split(",")

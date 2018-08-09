@@ -1,7 +1,7 @@
-package util.phoenix
+package phoenix
 
 import java.sql.{Connection, DriverManager}
-import util.phoenix.bean.RowsBean
+import phoenix.bean.RowsBean
 import scala.collection.mutable
 
 /**
@@ -12,21 +12,16 @@ import scala.collection.mutable
   *             3. https://stackoverflow.com/questions/37995067/jdbc-delete-insert-using-batch
   *             4. https://stackoverflow.com/questions/3784197/efficient-way-to-do-batch-inserts-with-jdbc
   *             5. why setAutoCommit(false) : https://stackoverflow.com/questions/32739719/what-happens-on-connection-setautocommit-false
-  *
   */
-object PhoenixJDBCService {
+object JDBCPhoenixService {
 
   /**
     * 建表
     */
-  def createPhoenixTable(tableName: String, fields: Seq[String], conn: Connection, buckets: Long = 50, TTL: Long = 31536000): Int = {
-    val tableNameDecorator = if (tableName.contains("-")) "\"" + tableName + "\"" else tableName
-    conn.createStatement.executeUpdate("CREATE TABLE IF NOT EXISTS " + tableNameDecorator
-      + s"(${fields.head} VARCHAR PRIMARY KEY,"
-      + fields.drop(1).mkString("INFO.", " VARCHAR, INFO.", " VARCHAR)")
-      + " SALT_BUCKETS=" + buckets + ","
-      + " TTL=" + TTL
-    )
+  def createPhoenixTable(tableName: String, fields: Seq[String], conn: Connection, buckets: Long = 20, TTL: Long = 31536000): Int = {
+    val sql = "CREATE TABLE IF NOT EXISTS " + tableName + s"(${fields.head} VARCHAR PRIMARY KEY," + fields.drop(1).mkString("INFO.", " VARCHAR, INFO.", " VARCHAR)") + " SALT_BUCKETS=" + buckets + "," + " TTL=" + TTL
+    println(sql)
+    conn.createStatement.executeUpdate(sql)
   }
 
   /**
@@ -45,7 +40,7 @@ object PhoenixJDBCService {
       mls += rowb
     }
     stmt.close()
-    conn.close()
+//    conn.close()
     mls
   }
 
@@ -66,7 +61,7 @@ object PhoenixJDBCService {
   def upsertPhoenix(conn: Connection, sql: String): Int = {
     val num = conn.createStatement.executeUpdate(sql)
     conn.commit()
-    conn.close()
+//    conn.close()
     num
   }
 
@@ -97,7 +92,7 @@ object PhoenixJDBCService {
     // 参考资料1, 这里貌似不需要 conn.commit()
     //    conn.commit()
     preStmt.close()
-    conn.close()
+//    conn.close()
   }
 
   /**
@@ -123,6 +118,6 @@ object PhoenixJDBCService {
     conn.commit()
     // 参考资料1, 这里貌似不需要 conn.commit()
     stmt.close()
-    conn.close()
+//    conn.close()
   }
 }

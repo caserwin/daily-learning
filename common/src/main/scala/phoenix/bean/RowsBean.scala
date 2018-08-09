@@ -1,4 +1,4 @@
-package util.phoenix.bean
+package phoenix.bean
 
 /**
   * User: Erwin
