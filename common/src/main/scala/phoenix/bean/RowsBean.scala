@@ -6,7 +6,7 @@ package phoenix.bean
   * Description: 
   */
 
-class RowsBean(var rowkey: String, var name: String, var city: String, var discount: String) {
+class RowsBean(var id: String, var name: String, var city: String, var discount: String) {
   def this() {
     this("null", "null", "null", "null")
   }

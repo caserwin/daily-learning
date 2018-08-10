@@ -32,7 +32,7 @@ object JDBCPhoenixService {
     val results = stmt.executeQuery(sql)
     while (results.next()) {
       val rowb = new RowsBean
-      rowb.rowkey = results.getString("ROWKEY")
+      rowb.id = results.getString("ID")
       rowb.name = results.getString("NAME")
       rowb.city = results.getString("CITY")
       rowb.discount = results.getString("NUM")
@@ -40,17 +40,6 @@ object JDBCPhoenixService {
     }
     stmt.close()
     mls
-  }
-
-  /**
-    * 用于判断某条记录/某类型记录是否存在
-    */
-  def selectTelemetryRowkey(zkAddr: String, dataType: String, tableName: String): Boolean = {
-    val conn = DriverManager.getConnection(s"jdbc:phoenix:$zkAddr")
-    val sql = s"select rowkey from $tableName where rowkey like '$dataType%'"
-    println(sql)
-    val result = conn.createStatement.executeQuery(sql)
-    if (result.next()) true else false
   }
 
   /**
@@ -65,14 +54,13 @@ object JDBCPhoenixService {
   /**
     * 批处理：批量插入
     */
-  def insertBatchPhoenix(conn: Connection, BeanLS: Seq[RowsBean], batchSize: Int): Unit = {
+  def insertBatchPhoenix(conn: Connection, table: String, BeanLS: Seq[RowsBean], batchSize: Int): Unit = {
     conn.setAutoCommit(false)
-    val preStmt = conn.prepareStatement("UPSERT INTO ROWKEYTEST_JDBC (ROWKEY, NAME, CITY, NUM) VALUES (?, ?, ?, ?)")
+    val preStmt = conn.prepareStatement(s"UPSERT INTO $table (ID, NAME, CITY, NUM) VALUES (?, ?, ?, ?)")
     var count = 0
-
     BeanLS.foreach(
       rowBean => {
-        preStmt.setString(1, rowBean.rowkey)
+        preStmt.setString(1, rowBean.id)
         preStmt.setString(2, rowBean.name)
         preStmt.setString(3, rowBean.city)
         preStmt.setString(4, rowBean.discount)

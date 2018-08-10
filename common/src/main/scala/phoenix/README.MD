@@ -55,3 +55,7 @@
         <!--<scope>provided</scope>-->
     </dependency>
 ```
+## 运行命令
+```
+java -jar common-1.0-SNAPSHOT.jar phoenix_demo1
+```
