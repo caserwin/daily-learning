@@ -79,7 +79,6 @@ object JDBCPhoenixService {
   }
 
   /**
-    *
     * 批处理：这方法参考资料2，资料3. 可发现用于批量删除或者插入。
     */
   def insertOrDeleteBatchPhoenix(conn: Connection, sqlLS: Seq[String], batchSize: Int): Unit = {

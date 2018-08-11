@@ -1,10 +1,10 @@
 package util.phoenix
 
+import java.sql.Connection
 import org.apache.spark.sql.{SQLContext, SaveMode}
 import org.apache.spark.{SparkConf, SparkContext}
 import org.apache.phoenix.spark._
 import org.apache.spark.sql.functions.when
-import phoenix.JDBCPhoenixService
 import util.phoenix.conn.PhoenixConn
 
 
@@ -29,7 +29,7 @@ object SparkPhoenixDemo1 {
     val tableName = "ROWKEYTEST"
     val fields = Seq("ROWKEY", "NAME", "CITY", "NUM")
     val conn = new PhoenixConn(zkAddr).getConn
-    JDBCPhoenixService.createPhoenixTable(tableName, fields, conn)
+    createPhoenixTable(tableName, fields, conn)
 
     // 数据源
     val dataSeq1 = Seq(
@@ -65,5 +65,14 @@ object SparkPhoenixDemo1 {
 
     // 把更新的数据写入phoenix
     newDF.write.format("org.apache.phoenix.spark").mode(SaveMode.Overwrite).options(Map("table" -> tableName, "zkUrl" -> zkAddr)).save()
+  }
+
+  /**
+    * 建表
+    */
+  def createPhoenixTable(tableName: String, fields: Seq[String], conn: Connection, buckets: Long = 20, TTL: Long = 31536000): Int = {
+    val sql = "CREATE TABLE IF NOT EXISTS " + tableName + s"(${fields.head} VARCHAR PRIMARY KEY," + fields.drop(1).mkString("INFO.", " VARCHAR, INFO.", " VARCHAR)") + " SALT_BUCKETS=" + buckets + "," + " TTL=" + TTL
+    println(sql)
+    conn.createStatement.executeUpdate(sql)
   }
 }
