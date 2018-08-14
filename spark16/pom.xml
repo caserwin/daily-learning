@@ -13,20 +13,6 @@
 
     <dependencies>
 
-        <!-- JACKSON SCALA -->
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.7.4</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.fasterxml.jackson.module</groupId>
-            <artifactId>jackson-module-scala_2.10</artifactId>
-            <version>2.7.4</version>
-        </dependency>
-        <!-- JACKSON SCALA -->
-
         <dependency>
             <groupId>com.databricks</groupId>
             <artifactId>spark-csv_2.10</artifactId>
@@ -70,14 +56,14 @@
         <dependency>
             <groupId>org.apache.phoenix</groupId>
             <artifactId>phoenix-spark</artifactId>
-            <version>4.8.0-HBase-1.2</version>
+            <version>4.13.2-cdh5.11.2</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>org.apache.phoenix</groupId>
             <artifactId>phoenix-core</artifactId>
-            <version>4.8.0-HBase-1.2</version>
+            <version>4.13.2-cdh5.11.2</version>
             <scope>provided</scope>
         </dependency>
 
