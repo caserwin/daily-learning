@@ -20,7 +20,7 @@ object SparkPhoenixDemo1 {
     import sqlContext.implicits._
 
     // 参数
-    val zkAddr = "10.29.42.42:2181"
+    val zkAddr = "localhost:2181"
 
     // 创建phoenix表
     val tableName = "ROWKEYTEST"
