@@ -1,0 +1,32 @@
+特别备注下。以前的pom.xml用的包，也是可行的
+```
+<dependency>
+    <groupId>org.apache.phoenix</groupId>
+    <artifactId>phoenix-spark</artifactId>
+    <version>4.8.0-HBase-1.2</version>
+    <scope>provided</scope>
+</dependency>
+
+<dependency>
+    <groupId>org.apache.phoenix</groupId>
+    <artifactId>phoenix-core</artifactId>
+    <version>4.8.0-HBase-1.2</version>
+    <scope>provided</scope>
+</dependency>
+```
+但是现在集群环境变了，改成：
+```
+<dependency>
+    <groupId>org.apache.phoenix</groupId>
+    <artifactId>phoenix-spark</artifactId>
+    <version>4.13.2-cdh5.11.2</version>
+    <scope>provided</scope>
+</dependency>
+
+<dependency>
+    <groupId>org.apache.phoenix</groupId>
+    <artifactId>phoenix-core</artifactId>
+    <version>4.13.2-cdh5.11.2</version>
+    <scope>provided</scope>
+</dependency>
+```

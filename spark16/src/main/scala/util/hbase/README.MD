@@ -41,8 +41,11 @@ scan 'student'
 
 ### 4 读取 hbase code
 实际运行需要改下，hbase.mapreduce.scan.row.start 和 hbase.mapreduce.scan.row.stop 参数。实际select的结果rowkey范围包括start，不包括stop。<br>
-见 SparkReadHbaseDemo1
+见 SparkReadHbaseDemo1<br>
+SparkReadHbaseDemo1 输出：
 <div align=left><img width="1200" height="600" src="https://github.com/caserwin/daily-learning/raw/master/spark16/pic/spark-hbase-read.png"/></div>
+SparkReadHbaseDemo2 输出：
+<div align=left><img width="800" height="400" src="https://github.com/caserwin/daily-learning/raw/master/spark16/pic/spark-hbase-read2.png"/></div>
 
 
 ### 其他

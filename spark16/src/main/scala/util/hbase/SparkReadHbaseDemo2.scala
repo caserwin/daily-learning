@@ -17,11 +17,11 @@ import scala.collection.mutable.ListBuffer
 object SparkReadHbaseDemo2 {
 
   def main(args: Array[String]): Unit = {
-    val sparkConf = new SparkConf().setAppName("HostDailyReportApp")
+    val sparkConf = new SparkConf().setAppName("SparkReadHBaseDemo2")
     val sc = new SparkContext(sparkConf)
     val sqlContext = new SQLContext(sc)
 
-    val rawDF = getSourceTableDF("10.29.42.42:2181", "student", sqlContext, "rowkey,name,gender,age")
+    val rawDF = getSourceTableDF("localhost:2181", "student", sqlContext, "rowkey,name,gender,age")
     rawDF.show(truncate = false)
     sc.stop()
   }

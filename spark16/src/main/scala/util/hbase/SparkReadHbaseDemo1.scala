@@ -15,14 +15,14 @@ object SparkReadHbaseDemo1 {
 
   def createHbaseConf: Configuration = {
     val hbaseConf = HBaseConfiguration.create()
-    hbaseConf.set("hbase.zookeeper.quorum", "10.29.42.41,10.29.42.42,10.29.42.43")
-    hbaseConf.set("hbase.master", "10.29.42.40:60010")
+    hbaseConf.set("hbase.zookeeper.quorum", "localhost")
+    hbaseConf.set("hbase.master", "localhost:60010")
     hbaseConf.set("hbase.zookeeper.property.clientPort", "2181")
     hbaseConf
   }
 
   def main(args: Array[String]): Unit = {
-    val sparkConf = new SparkConf().setAppName("SparkReadHBaseDemo")
+    val sparkConf = new SparkConf().setAppName("SparkReadHBaseDemo1")
     val sc = new SparkContext(sparkConf)
 
     val hbaseconf = createHbaseConf
