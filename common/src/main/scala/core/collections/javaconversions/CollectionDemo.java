@@ -1,4 +1,4 @@
-package javaconversions;
+package core.collections.javaconversions;
 
 import java.util.ArrayList;
 import java.util.HashMap;

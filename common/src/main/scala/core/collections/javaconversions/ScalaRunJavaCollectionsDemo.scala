@@ -1,4 +1,4 @@
-package javaconversions
+package core.collections.javaconversions
 
 import scala.collection.JavaConversions._
 

@@ -1,6 +1,7 @@
-package core.collections
+package core.collections.javaconversions
 
 import java.util.Calendar
+
 import scala.collection.JavaConversions._
 
 /**

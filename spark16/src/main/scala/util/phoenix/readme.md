@@ -14,7 +14,7 @@
     <scope>provided</scope>
 </dependency>
 ```
-但是现在集群环境变了，改成：
+但是现在集群环境变了，必须改成如下版本，否则报错：
 ```
 <dependency>
     <groupId>org.apache.phoenix</groupId>

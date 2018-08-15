@@ -15,7 +15,7 @@ object JDBCPhoenixDemo {
     // 数据源
     val tableName = args(0)
     val fields = Seq("ID", "NAME", "CITY", "NUM")
-    val zkAddr = "10.29.42.42:2181"
+    val zkAddr = "localhost:2181"
 
     // 获取连接
     val conn = new PhoenixConn(zkAddr).getConn
