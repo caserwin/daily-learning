@@ -6,7 +6,6 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 
 /**
  * Created by yidxue on 2018/5/14
- * DataStream → DataStream
  */
 public class FlinkFilterDemo {
 

@@ -48,9 +48,9 @@ public class FlinkLeftOuterJoinDemo {
         );
 
         DataSet<Tuple2<String, Integer>> weightedRatings = weights.leftOuterJoin(ratings)
-                                                              .where("f0")
-                                                              .equalTo("name")
-                                                              .with(new OutJoinPointAssigner());
+                                                               .where("f0")
+                                                               .equalTo("name")
+                                                               .with(new OutJoinPointAssigner());
         weightedRatings.print();
     }
 }

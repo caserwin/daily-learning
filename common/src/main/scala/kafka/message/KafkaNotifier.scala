@@ -10,7 +10,7 @@ object KafkaNotifier {
 
   def sendMsgToKafka(jsonStr: String): Unit = {
     val props = new Properties()
-    props.put("bootstrap.servers", "sj1-kafka-s.webex.com:9092")
+    props.put("bootstrap.servers", "localhost:9092")
     props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer")
     props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer")
 
