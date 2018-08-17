@@ -48,7 +48,6 @@ public class CollectionExecutionExample {
 			this.userIdentifier = userIdentifier; this.name = name;
 		}
 
-		@Override
 		public String toString() {
 			return "User{userIdentifier=" + userIdentifier + " name=" + name + "}";
 		}
@@ -68,7 +67,6 @@ public class CollectionExecutionExample {
 			this.userId = userId; this.subject = subject; this.body = body;
 		}
 
-		@Override
 		public String toString() {
 			return "eMail{userId=" + userId + " subject=" + subject + " body=" + body + "}";
 		}

@@ -25,30 +25,30 @@ under the License.
 		<groupId>cas.myself</groupId>
 		<artifactId>flink-examples</artifactId>
 		<version>1.0-SNAPSHOT</version>
+		<relativePath>..</relativePath>
 	</parent>
 
 	<artifactId>flink-examples-batch_2.11</artifactId>
-	<name>flink-examples-batch</name>
+	<!--<name>flink-examples-batch</name>-->
 	<packaging>jar</packaging>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.flink</groupId>
 			<artifactId>flink-java</artifactId>
-			<version>1.4.0</version>
+			<version>1.6.0</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.flink</groupId>
 			<artifactId>flink-scala_2.11</artifactId>
-			<version>1.4.0</version>
+			<version>1.6.0</version>
 		</dependency>
 	</dependencies>
-	
-	
+
+
 	<build>
 		<plugins>
-
 			<!-- Scala Compiler -->
 			<plugin>
 				<groupId>net.alchim31.maven</groupId>
@@ -80,11 +80,11 @@ under the License.
 				<configuration>
 					<downloadSources>true</downloadSources>
 					<projectnatures>
-						<projectnature>org.scala-ide.sdt.util.scalanature</projectnature>
-						<projectnature>org.eclipse.jdt.util.javanature</projectnature>
+						<projectnature>org.scala-ide.sdt.core.scalanature</projectnature>
+						<projectnature>org.eclipse.jdt.core.javanature</projectnature>
 					</projectnatures>
 					<buildcommands>
-						<buildcommand>org.scala-ide.sdt.util.scalabuilder</buildcommand>
+						<buildcommand>org.scala-ide.sdt.core.scalabuilder</buildcommand>
 					</buildcommands>
 					<classpathContainers>
 						<classpathContainer>org.scala-ide.sdt.launching.SCALA_CONTAINER</classpathContainer>
@@ -144,13 +144,13 @@ under the License.
 					<configLocation>${project.basedir}/../../tools/maven/scalastyle-config.xml</configLocation>
 				</configuration>
 			</plugin>
-			
+
 			<!-- create the example JAR files -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
 				<executions>
-				
+
 					<!-- KMeans -->
 					<execution>
 						<id>KMeans</id>
@@ -186,13 +186,13 @@ under the License.
 						</goals>
 						<configuration>
 							<classifier>TransitiveClosure</classifier>
-				
+
 							<archive>
 								<manifestEntries>
 									<program-class>org.apache.flink.examples.java.graph.TransitiveClosureNaive</program-class>
 								</manifestEntries>
 							</archive>
-				
+
 							<includes>
 								<include>**/java/graph/TransitiveClosureNaive.class</include>
 								<include>**/java/graph/TransitiveClosureNaive$*.class</include>
@@ -224,7 +224,7 @@ under the License.
 							</includes>
 						</configuration>
 					</execution>
-					
+
 					<!-- EnumTriangles Basic -->
 					<execution>
 						<id>EnumTriangles</id>
@@ -250,7 +250,7 @@ under the License.
 							</includes>
 						</configuration>
 					</execution>
-					
+
 					<!-- PageRank -->
 					<execution>
 						<id>PageRank</id>
@@ -360,16 +360,16 @@ under the License.
 						<goals>
 							<goal>run</goal>
 						</goals>
-						<configuration> 
+						<configuration>
 							<target>
-								<copy file="${project.basedir}/target/flink-examples-batch_2.11-1.0-SNAPSHOT-KMeans.jar" tofile="${project.basedir}/target/KMeans.jar" />
-								<copy file="${project.basedir}/target/flink-examples-batch_2.11-1.0-SNAPSHOT-ConnectedComponents.jar" tofile="${project.basedir}/target/ConnectedComponents.jar" />
-								<copy file="${project.basedir}/target/flink-examples-batch_2.11-1.0-SNAPSHOT-EnumTriangles.jar" tofile="${project.basedir}/target/EnumTriangles.jar" />
-								<copy file="${project.basedir}/target/flink-examples-batch_2.11-1.0-SNAPSHOT-PageRank.jar" tofile="${project.basedir}/target/PageRank.jar" />
-								<copy file="${project.basedir}/target/flink-examples-batch_2.11-1.0-SNAPSHOT-TransitiveClosure.jar" tofile="${project.basedir}/target/TransitiveClosure.jar" />
-								<copy file="${project.basedir}/target/flink-examples-batch_2.11-1.0-SNAPSHOT-WebLogAnalysis.jar" tofile="${project.basedir}/target/WebLogAnalysis.jar" />
-								<copy file="${project.basedir}/target/flink-examples-batch_2.11-1.0-SNAPSHOT-WordCount.jar" tofile="${project.basedir}/target/WordCount.jar" />
-								<copy file="${project.basedir}/target/flink-examples-batch_2.11-1.0-SNAPSHOT-DistCp.jar" tofile="${project.basedir}/target/DistCp.jar" />
+								<copy file="${project.basedir}/target/flink-examples-batch_${scala.binary.version}-${project.version}-KMeans.jar" tofile="${project.basedir}/target/KMeans.jar" />
+								<copy file="${project.basedir}/target/flink-examples-batch_${scala.binary.version}-${project.version}-ConnectedComponents.jar" tofile="${project.basedir}/target/ConnectedComponents.jar" />
+								<copy file="${project.basedir}/target/flink-examples-batch_${scala.binary.version}-${project.version}-EnumTriangles.jar" tofile="${project.basedir}/target/EnumTriangles.jar" />
+								<copy file="${project.basedir}/target/flink-examples-batch_${scala.binary.version}-${project.version}-PageRank.jar" tofile="${project.basedir}/target/PageRank.jar" />
+								<copy file="${project.basedir}/target/flink-examples-batch_${scala.binary.version}-${project.version}-TransitiveClosure.jar" tofile="${project.basedir}/target/TransitiveClosure.jar" />
+								<copy file="${project.basedir}/target/flink-examples-batch_${scala.binary.version}-${project.version}-WebLogAnalysis.jar" tofile="${project.basedir}/target/WebLogAnalysis.jar" />
+								<copy file="${project.basedir}/target/flink-examples-batch_${scala.binary.version}-${project.version}-WordCount.jar" tofile="${project.basedir}/target/WordCount.jar" />
+								<copy file="${project.basedir}/target/flink-examples-batch_${scala.binary.version}-${project.version}-DistCp.jar" tofile="${project.basedir}/target/DistCp.jar" />
 							</target>
 						</configuration>
 					</execution>

@@ -26,10 +26,11 @@ under the License.
 		<groupId>cas.myself</groupId>
 		<artifactId>flink-examples</artifactId>
 		<version>1.0-SNAPSHOT</version>
+		<relativePath>..</relativePath>
 	</parent>
 
-	<name>flink-examples-table</name>
 	<artifactId>flink-examples-table_2.11</artifactId>
+	<!--<name>flink-examples-table</name>-->
 	<packaging>jar</packaging>
 
 	<dependencies>
@@ -37,13 +38,13 @@ under the License.
 		<dependency>
 			<groupId>org.apache.flink</groupId>
 			<artifactId>flink-table_2.11</artifactId>
-			<version>1.4.0</version>
+			<version>1.6.0</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.flink</groupId>
 			<artifactId>flink-streaming-scala_2.11</artifactId>
-			<version>1.4.0</version>
+			<version>1.6.0</version>
 		</dependency>
 	</dependencies>
 
