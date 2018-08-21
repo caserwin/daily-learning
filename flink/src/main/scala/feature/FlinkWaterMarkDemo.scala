@@ -46,8 +46,7 @@ object FlinkWaterMarkDemo {
       val format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS")
 
       override def getCurrentWatermark: Watermark = {
-        a = new Watermark(currentMaxTimestamp - maxOutOfOrderness)
-        a
+        new Watermark(currentMaxTimestamp - maxOutOfOrderness)
       }
 
       override def extractTimestamp(t: (String, Long), l: Long): Long = {
@@ -76,4 +75,5 @@ object FlinkWaterMarkDemo {
       out.collect(key, input.size, format.format(list.head._2), format.format(list.last._2), format.format(window.getStart), format.format(window.getEnd))
     }
   }
+
 }

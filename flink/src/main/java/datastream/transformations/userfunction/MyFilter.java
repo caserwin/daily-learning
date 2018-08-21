@@ -1,4 +1,4 @@
-package datastream.userfunction;
+package datastream.transformations.userfunction;
 
 import org.apache.flink.api.common.functions.FilterFunction;
 import org.apache.flink.api.java.tuple.Tuple2;
