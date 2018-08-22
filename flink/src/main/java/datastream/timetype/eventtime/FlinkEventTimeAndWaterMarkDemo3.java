@@ -1,9 +1,8 @@
-//package datastream.watermark;
+//package datastream.timetype.eventtime;
 //
-//import bean.WCBean;
+//import bean.MyEvent;
 //import org.apache.flink.api.common.functions.FilterFunction;
 //import org.apache.flink.api.java.functions.KeySelector;
-//import org.apache.flink.api.java.tuple.Tuple;
 //import org.apache.flink.streaming.api.TimeCharacteristic;
 //import org.apache.flink.streaming.api.datastream.DataStream;
 //import org.apache.flink.streaming.api.datastream.KeyedStream;
@@ -63,7 +62,7 @@
 //        KeyedStream<MyEvent, String> keyedStream = stream.keyBy(new SelectMess());
 //
 //        // 指定时间窗口、聚合计算
-//        keyedStream.window(TumblingEventTimeWindows.of(Time.seconds(10))).apply().setParallelism(1).print();
+////        keyedStream.window(TumblingEventTimeWindows.of(Time.seconds(10))).apply().setParallelism(1).print();
 //
 //        env.execute("WindowWordCount");
 //    }

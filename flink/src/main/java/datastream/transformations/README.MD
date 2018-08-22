@@ -24,3 +24,5 @@ Windows可以在已分区的KeyedStream上定义。 Windows根据某些特性（
 Union: DataStream* → DataStream
 
 Connect: DataStream,DataStream → ConnectedStreams
+
+AggregateFunction: 接着windows函数后使用。
