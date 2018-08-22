@@ -24,10 +24,10 @@ public class FlinkTimeWindowsDemo {
         DataStream<Tuple3<Integer, String, Long>> source = env.fromElements(
 //            Tuple3.of(1, "c", 1534582000000L),
             Tuple3.of(1, "a", 1534581003500L),
-            Tuple3.of(4, "a", 1534581004500L),
+            Tuple3.of(4, "a", 1534581004400L),
             Tuple3.of(8, "a", 1534581006000L),
-            Tuple3.of(2, "b", 1534581002500L),
-            Tuple3.of(4, "b", 1534581004500L)
+            Tuple3.of(2, "b", 1534581002600L),
+            Tuple3.of(4, "b", 1534581004400L)
         );
 
         // 设置水位线
@@ -41,7 +41,7 @@ public class FlinkTimeWindowsDemo {
         );
 
         // 窗口聚合
-        stream.keyBy(1).timeWindow(Time.seconds(3)).sum(0).print();
+        stream.keyBy(1).timeWindow(Time.seconds(1)).sum(0).print();
 
         env.execute("TimeWindowDemo");
     }
