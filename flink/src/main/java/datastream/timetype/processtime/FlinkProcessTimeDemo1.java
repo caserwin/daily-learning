@@ -16,7 +16,7 @@ public class FlinkProcessTimeDemo1 {
     public static class StrToEventMap implements MapFunction<String, MyEvent> {
         @Override
         public MyEvent map(String in) {
-            String[] tmp = in.trim().split("\\s+");
+            String[] tmp = in.trim().split("\\W+");
 
             return new MyEvent(Integer.parseInt(tmp[0]), tmp[1], 123456789);
         }

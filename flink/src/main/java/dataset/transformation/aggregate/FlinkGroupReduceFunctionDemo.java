@@ -12,7 +12,7 @@ import java.util.Set;
  * Created by yidxue on 2018/2/12
  * @author yidxue
  */
-public class FlinkGroupReduceDemo {
+public class FlinkGroupReduceFunctionDemo {
 
     /**
      * 一次获得一个分组的全部数据
@@ -47,6 +47,7 @@ public class FlinkGroupReduceDemo {
             Tuple2.of(1, "win"));
 
         DataSet<Tuple2<Integer, String>> output = inData.groupBy(0).reduceGroup(new DistinctReduce());
+//        DataSet<Tuple2<Integer, String>> output = inData.reduceGroup(new DistinctReduce());
 
         output.print();
     }

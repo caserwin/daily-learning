@@ -12,7 +12,7 @@ import java.util.Arrays;
  * Created by yidxue on 2018/4/4
  * @author yidxue
  */
-public class FlinkWordCountDemo {
+public class FlinkAggregateDemo3 {
     public static void main(String[] args) throws Exception {
         final ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
         String[] arrays = new String[]{"hello", "flink cluster", "hello"};

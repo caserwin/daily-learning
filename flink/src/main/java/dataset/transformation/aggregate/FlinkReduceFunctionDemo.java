@@ -9,7 +9,7 @@ import org.apache.flink.api.java.functions.KeySelector;
 /**
  * @author yidxue
  */
-public class FlinkGroupByKeySelectorDemo {
+public class FlinkReduceFunctionDemo {
 
     public static class WordCounterReduce implements ReduceFunction<WCBean> {
         @Override
