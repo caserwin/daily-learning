@@ -1,6 +1,7 @@
 package datastream.window.windowfunctions;
 
 import bean.MyEvent;
+import datastream.window.windowfunctions.function.MyAggregateFunction;
 import org.apache.flink.api.java.functions.KeySelector;
 import org.apache.flink.streaming.api.TimeCharacteristic;
 import org.apache.flink.streaming.api.datastream.DataStream;

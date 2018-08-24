@@ -11,8 +11,9 @@ import org.apache.flink.util.Collector;
 
 /**
  * @author yidxue
+ * 全局状态记录统计
  */
-public class CountWindowAverage extends RichFlatMapFunction<Tuple2<Long, Long>, Tuple2<Long, Long>> {
+public class CountWindowAverage1 extends RichFlatMapFunction<Tuple2<Long, Long>, Tuple2<Long, Long>> {
 
     /**
      * The ValueState handle. The first field is the count, the second field a running sum.
@@ -35,23 +36,20 @@ public class CountWindowAverage extends RichFlatMapFunction<Tuple2<Long, Long>, 
         sum.update(currentSum);
 
         // if the count reaches 2, emit the average and clear the state
-        if (currentSum.f0 >= 2) {
-            out.collect(new Tuple2<>(input.f0, currentSum.f1 / currentSum.f0));
-            sum.clear();
-        }
+        out.collect(new Tuple2<>(input.f0, currentSum.f1 / currentSum.f0));
     }
 
     @Override
     public void open(Configuration config) {
         ValueStateDescriptor<Tuple2<Long, Long>> descriptor =
-                new ValueStateDescriptor<>(
-                        // the state name
-                        "average",
-                        // type information
-                        TypeInformation.of(new TypeHint<Tuple2<Long, Long>>() {
-                        }),
-                        // default value of the state, if nothing was set
-                        Tuple2.of(0L, 0L));
+            new ValueStateDescriptor<>(
+                // the state name
+                "average",
+                // type information
+                TypeInformation.of(new TypeHint<Tuple2<Long, Long>>() {
+                }),
+                // default value of the state, if nothing was set
+                Tuple2.of(0L, 0L));
         sum = getRuntimeContext().getState(descriptor);
     }
 }

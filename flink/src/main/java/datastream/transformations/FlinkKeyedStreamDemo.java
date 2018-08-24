@@ -2,15 +2,18 @@ package datastream.transformations;
 
 import bean.CustomType;
 import org.apache.flink.api.java.DataSet;
+import org.apache.flink.api.java.functions.KeySelector;
+import org.apache.flink.api.java.tuple.Tuple;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.streaming.api.datastream.DataStream;
+import org.apache.flink.streaming.api.datastream.KeyedStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 
 /**
  * Created by yidxue on 2018/5/14
  * DataStream → KeyedStream
  */
-public class FlinkKeyByDemo {
+public class FlinkKeyedStreamDemo {
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
@@ -30,8 +33,23 @@ public class FlinkKeyByDemo {
             new CustomType("name2", 2),
             new CustomType("name3", 2));
 
-        dStream1.keyBy(0).print();
-        dStream2.keyBy("aName").print();
+        // 根据第一个字段分成 3 组
+        KeyedStream<Tuple2<Integer, Integer>, Tuple> kstream1 = dStream1.keyBy(0);
+
+        // 根据 aName 分成4组
+        KeyedStream<CustomType, Tuple> kstream2 = dStream2.keyBy("aName");
+
+        // 根据奇数和偶数分成两组
+        KeyedStream<Tuple2<Integer, Integer>, Integer> kstream3 = dStream1.keyBy(new KeySelector<Tuple2<Integer, Integer>, Integer>() {
+            @Override
+            public Integer getKey(Tuple2<Integer, Integer> value) {
+                return value.f0 % 2;
+            }
+        });
+
+//        kstream1.print();
+        kstream2.print();
+//        kstream3.print();
 
         // start run
         env.execute("Demo");

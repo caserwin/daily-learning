@@ -1,7 +1,7 @@
 package datastream.timetype.processtime;
 
 import bean.MyEvent;
-import datastream.window.windowfunctions.MyAggregateFunction;
+import datastream.window.windowfunctions.function.MyAggregateFunction;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.java.functions.KeySelector;
 import org.apache.flink.streaming.api.datastream.DataStream;

@@ -23,15 +23,16 @@ public class FlinkWatermarkWithPeriodicDemo1 {
         env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
         DataStream<Tuple3<String, String, Long>> dataStream = env.addSource(new DataSource()).name("Demo Source");
 
+//        dataStream.print();
         // 设置水位线
         DataStream<Tuple3<String, String, Long>> watermark = dataStream.assignTimestampsAndWatermarks(new AssignerWithPeriodicWatermarks<Tuple3<String, String, Long>>() {
             // //最大允许的乱序时间是10s
-            private final long maxOutOfOrderness = 10000L;
+            private final long maxOutOfOrderness = 100000L;
             private long currentMaxTimestamp = 0L;
 
             @Override
             public Watermark getCurrentWatermark() {
-                System.out.println("getCurrentWatermark: " + (currentMaxTimestamp - maxOutOfOrderness));
+//                System.out.println("getCurrentWatermark: " + (currentMaxTimestamp - maxOutOfOrderness));
                 return new Watermark(currentMaxTimestamp - maxOutOfOrderness);
             }
 
@@ -44,18 +45,19 @@ public class FlinkWatermarkWithPeriodicDemo1 {
             }
         });
 
+        watermark.print();
 
-        // 窗口函数进行处理
-        DataStream<Tuple3<String, String, Long>> resStream = watermark.keyBy(0).timeWindow(Time.seconds(3)).reduce(
-            new ReduceFunction<Tuple3<String, String, Long>>() {
-                @Override
-                public Tuple3<String, String, Long> reduce(Tuple3<String, String, Long> value1, Tuple3<String, String, Long> value2) throws Exception {
-                    return Tuple3.of(value1.f0, value1.f1 + "" + value2.f1, 1L);
-                }
-            }
-        );
-
-        resStream.print();
+//        // 窗口函数进行处理
+//        DataStream<Tuple3<String, String, Long>> resStream = watermark.keyBy(0).timeWindow(Time.seconds(3)).reduce(
+//            new ReduceFunction<Tuple3<String, String, Long>>() {
+//                @Override
+//                public Tuple3<String, String, Long> reduce(Tuple3<String, String, Long> value1, Tuple3<String, String, Long> value2) throws Exception {
+//                    return Tuple3.of(value1.f0, value1.f1 + "" + value2.f1, 1L);
+//                }
+//            }
+//        );
+//
+//        resStream.print();
 
         env.execute("event time demo");
     }
@@ -67,17 +69,18 @@ public class FlinkWatermarkWithPeriodicDemo1 {
         public void run(SourceContext<Tuple3<String, String, Long>> ctx) throws InterruptedException {
             // 这是我设置watermark 都比 timestamp 早两秒
             Tuple3[] elements = new Tuple3[]{
-                Tuple3.of("a", "1", 1000000052000L),
-                Tuple3.of("a", "2", 1000000063000L),
-                Tuple3.of("a", "3", 1000000055000L),
-                Tuple3.of("b", "4", 1000000062000L),
-                Tuple3.of("b", "5", 1000000059000L)
+                Tuple3.of("a", "1", 1000000052000L)
+//                Tuple3.of("a", "2", 1000000063000L),
+//                Tuple3.of("a", "3", 1000000055000L),
+//                Tuple3.of("b", "4", 1000000062000L),
+//                Tuple3.of("b", "5", 1000000059000L)
             };
 
             int count = 0;
             while (running && count < elements.length) {
                 ctx.collect(new Tuple3<>((String) elements[count].f0, (String) elements[count].f1, (Long) elements[count].f2));
                 count++;
+                Thread.sleep(1000);
             }
         }
 

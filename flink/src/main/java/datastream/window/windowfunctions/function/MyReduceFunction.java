@@ -1,4 +1,4 @@
-package datastream.window.windowfunctions;
+package datastream.window.windowfunctions.function;
 
 import bean.MyEvent;
 import org.apache.flink.api.common.functions.ReduceFunction;

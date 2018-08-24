@@ -1,6 +1,7 @@
 package datastream.window.windowfunctions;
 
 import bean.MyEvent;
+import datastream.window.windowfunctions.function.MyReduceFunction;
 import org.apache.flink.streaming.api.TimeCharacteristic;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;

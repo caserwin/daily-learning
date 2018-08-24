@@ -10,3 +10,6 @@ https://blog.csdn.net/lmalds/article/details/52704170 <br>
 
 ## FlinkWaterMarkWithSourceDemo
 对这个Demo的输出需要调试
+
+## FlinkWatermarkWithPeriodicDemoX
+FlinkWatermarkWithPeriodicDemo1和FlinkWatermarkWithPeriodicDemo2都需要好好调试。
