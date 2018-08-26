@@ -21,14 +21,17 @@ object SparkSQLAddOrUpdateColumnDemo {
       (3, "wangwu", "shanghai")
     )
     val inputDF = sc.parallelize(dataSeq1).toDF("id", "name", "city")
+    inputDF.show()
 
-    inputDF
+    val outDF = inputDF
       .select($"id", $"name", $"city")
       .withColumn("city", when($"city".isNull, "hangzhou").otherwise($"city")) // update column
+      .withColumn("time", concat(lit("2018-01-18")))
       // notice: it is a error when lit(null)
       .withColumn("date", concat(lit("2018-01-18"), lit("_"), lit(null))) // add column
-      .show()
+      .drop("name")    // delete column
 
+    outDF.show()
     sc.stop()
   }
 }

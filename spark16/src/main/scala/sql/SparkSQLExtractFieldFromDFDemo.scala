@@ -6,7 +6,6 @@ import org.apache.spark.sql.functions._
 
 /**
   * Created by yidxue on 2018/3/9
-  * refer: https://stackoverflow.com/questions/32000646/extract-column-values-of-dataframe-as-list-in-apache-spark/32004908
   */
 object SparkSQLExtractFieldFromDFDemo {
   def main(args: Array[String]): Unit = {

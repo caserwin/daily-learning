@@ -7,9 +7,7 @@ import org.apache.spark.sql.types._
 /**
   * Created by ragrawal on 9/23/15.
   * Computes Mean
-  *
   * https://ragrawal.wordpress.com/2015/11/03/spark-custom-udaf-example/
-  *
   */
 
 //Extend UserDefinedAggregateFunction to write custom aggregate function
@@ -51,6 +49,4 @@ class CustomMean() extends UserDefinedAggregateFunction {
   def evaluate(buffer: Row): Double = {
     buffer.getDouble(0)/buffer.getLong(1).toDouble
   }
-
 }
-

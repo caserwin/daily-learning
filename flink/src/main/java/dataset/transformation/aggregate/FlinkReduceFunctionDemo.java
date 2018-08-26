@@ -32,6 +32,7 @@ public class FlinkReduceFunctionDemo {
         DataSet<WCBean> inData = env.fromElements(wcs);
 
         DataSet<WCBean> wordCounts = inData.groupBy(new SelectWord()).reduce(new WordCounterReduce());
+
         wordCounts.print();
     }
 }

@@ -31,6 +31,9 @@ object SaprkSQLIntersectDemo {
     // 求交集
     inputDF1.intersect(inputDF2).show(truncate = false)
 
+    // 根据某个字段求交集
+    inputDF1.join(inputDF2, Seq("id", "city"), "inner").show(truncate = false)
+
     sc.stop()
   }
 }

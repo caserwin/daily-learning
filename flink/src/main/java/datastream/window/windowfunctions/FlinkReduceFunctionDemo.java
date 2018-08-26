@@ -1,7 +1,7 @@
 package datastream.window.windowfunctions;
 
 import bean.MyEvent;
-import datastream.window.windowfunctions.function.MyReduceFunction;
+import org.apache.flink.api.common.functions.ReduceFunction;
 import org.apache.flink.streaming.api.TimeCharacteristic;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
@@ -37,7 +37,16 @@ public class FlinkReduceFunctionDemo {
         );
 
         // 窗口聚合
-        stream.keyBy(new FlinkAggregateFunctionDemo.SelectMess()).window(TumblingEventTimeWindows.of(Time.seconds(10))).reduce(new MyReduceFunction()).print();
+        stream
+            .keyBy(new FlinkAggregateFunctionDemo.SelectMess())
+            .window(TumblingEventTimeWindows.of(Time.seconds(10)))
+            .reduce(new ReduceFunction<MyEvent>() {
+                @Override
+                public MyEvent reduce(MyEvent e1, MyEvent e2) {
+                    return new MyEvent(e1.value + e2.value, "message", (int) System.currentTimeMillis());
+                }
+            })
+            .print();
 
         env.execute("FlinkWindowReduceFunctionDemo");
     }

@@ -30,7 +30,6 @@ object SparkSQLJoinDemo {
       * 但是在spark 1.6中不存在。
       */
 
-
     input1.join(input2, Seq("id"), "left").show()
     /* 左边数据全部保留。且相同key 的数据做笛卡尔积
       +---+--------+--------+-------+

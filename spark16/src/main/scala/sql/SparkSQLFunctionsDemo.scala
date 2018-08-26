@@ -6,7 +6,6 @@ import org.apache.spark.sql.functions._
 
 /**
   * Created by yidxue on 2018/3/2
-  *
   * 举例一些 spark sql function 的例子，更多的例子得根据实际业务，自己探索、、、
   */
 object SparkSQLFunctionsDemo {

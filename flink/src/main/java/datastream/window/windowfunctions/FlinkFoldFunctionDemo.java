@@ -1,8 +1,7 @@
 package datastream.window.windowfunctions;
 
 import bean.MyEvent;
-import datastream.window.windowfunctions.function.MyFoldFunction;
-import org.apache.flink.streaming.api.CheckpointingMode;
+import org.apache.flink.api.common.functions.FoldFunction;
 import org.apache.flink.streaming.api.TimeCharacteristic;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
@@ -12,6 +11,7 @@ import org.apache.flink.streaming.api.windowing.time.Time;
 
 /**
  * Created by yidxue on 2018/8/22
+ * @author yidxue
  */
 public class FlinkFoldFunctionDemo {
     public static void main(String[] args) throws Exception {
@@ -37,7 +37,18 @@ public class FlinkFoldFunctionDemo {
             }
         );
 
-        stream.keyBy(new FlinkAggregateFunctionDemo.SelectMess()).window(TumblingEventTimeWindows.of(Time.seconds(10))).fold("", new MyFoldFunction()).print();
+        // 聚合函数
+        stream
+            .keyBy(new FlinkAggregateFunctionDemo.SelectMess())
+            .window(TumblingEventTimeWindows.of(Time.seconds(10)))
+            .fold("", new FoldFunction<MyEvent, String>() {
+                @Override
+                public String fold(String accumulator, MyEvent event) {
+                    return accumulator + "\t" + event.message;
+                }
+            })
+            .print();
+
         env.execute("FlinkWindowFoldFunctionDemo");
     }
 }
