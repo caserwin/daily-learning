@@ -1,7 +1,7 @@
 package sql
 
 import org.apache.spark.sql.SparkSession
-import org.apache.spark.sql.functions.{lit, when}
+import org.apache.spark.sql.functions.{concat, lit, when}
 
 /**
   * Created by yidxue on 2018/1/29
@@ -18,13 +18,17 @@ object SparkSQLAddOrUpdateColumnDemo {
       (3, "wangwu", "shanghai")
     )
     val inputDF = spark.sparkContext.parallelize(dataSeq1).toDF("id", "name", "city")
+    inputDF.show()
 
-    inputDF
+    val outDF = inputDF
       .select($"id", $"name", $"city")
-      .withColumn("city", when($"city".isNull, "hangzhou").otherwise($"city"))   // update column
-      .withColumn("date", lit("2018-01-18"))           // add column
-      .show()
+      .withColumn("city", when($"city".isNull, "hangzhou").otherwise($"city")) // update column
+      .withColumn("time", concat(lit("2018-01-18")))
+      // notice: it is a error when lit(null)
+      .withColumn("date", concat(lit("2018-01-18"), lit("_"), lit(null))) // add column
+      .drop("name")    // delete column
 
+    outDF.show()
     spark.stop()
   }
 }

@@ -16,12 +16,6 @@ object SparkSQLFieldsOperateDemo {
     val df = spark.read.json("data/cityinfo.json")
     df.show()
 
-    // 增加字段
-    df.withColumn("newCol", lit("new")).show()
-
-    // 删除 name 字段
-    df.drop("name").show()
-
     // 修改字段类型，也是通过 withColumn 实现
     df.printSchema()
     val inputDF1 = df.withColumn("Cindex", $"Cindex".cast("string"))

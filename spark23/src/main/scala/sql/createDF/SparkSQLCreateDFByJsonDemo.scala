@@ -13,9 +13,7 @@ object SparkSQLCreateDFByJsonDemo {
     val peopleDF = spark.read.format("json").load("spark-examples/src/main/resources/people.json")
     val peopleDF1 = spark.read.json("spark-examples/src/main/resources/people.json")
 
-
     peopleDF.show()
     peopleDF1.show()
-
   }
 }

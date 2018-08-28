@@ -10,31 +10,17 @@ object SparkSQLCreateDFDemo2 {
   val COUNTRY_MAP = Map(
     "日本" -> "JAPAN",
     "中国" -> "CHINA",
-    "ドイツ" -> "GERMANY",
-    "台灣" -> "CHINA TAIWAN",
+    "台湾" -> "CHINA TAIWAN",
     "美国" -> "UNITED STATES",
-    "中非共和国" -> "CENTRAL AFRICAN REPUBLIC",
-    "ПЕРУ" -> "PERU",
-    "ILHAS VIRGENS BRITÂNICAS" -> "BRITISH VIRGIN ISLANDS",
-    "말레이시아" -> "MALAYSIA",
-    "핏케언 제도" -> "PITCAIRN ISLANDS",
-    "新加坡" -> "SINGAPORE",
-    "SÉNÉGAL" -> "SENEGAL",
-    "カンボジア" -> "CAMBODIA"
+    "新加坡" -> "SINGAPORE"
   )
 
   val mapping: String =
-    """|4801,DNAME
-       |5101,acwd
-       |5106,avwd
-       |4901,ixwd
-       |5201,akwd
-       |4701,esnatech
-       |5006,abwd
-       |701,dgwd
-       |801,diwd
-       |901,djwd
-       |10202,rvwd""".stripMargin
+    """|4801,xxx
+       |5101,yyy
+       |5106,fff
+       |4901,rrr
+       |10202,sss""".stripMargin
 
   def main(args: Array[String]): Unit = {
     val spark = SparkSession.builder.appName("Simple Application").config("spark.master", "local[*]").getOrCreate()

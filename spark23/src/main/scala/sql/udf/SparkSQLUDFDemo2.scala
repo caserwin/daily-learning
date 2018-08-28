@@ -4,7 +4,7 @@ import org.apache.spark.sql.SparkSession
 
 object SparkSQLUDFDemo2 {
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
     val spark = SparkSession.builder.appName("SQL Application").config("spark.master", "local[*]").getOrCreate()
 
     val df = spark.read.json("data/temperatures.json")

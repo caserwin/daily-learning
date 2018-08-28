@@ -5,7 +5,6 @@ import org.apache.spark.sql.SparkSession
 /**
   * User: Erwin
   * Date: 17/11/7 下午12:43
-  * Description: 
   */
 object SparkSQLCreateDFByTextFileDemo {
 
@@ -15,7 +14,7 @@ object SparkSQLCreateDFByTextFileDemo {
     import spark.implicits._
 
     val peopleDF = spark.sparkContext
-      .textFile("spark22/src/main/resources/people.txt").map(_.split(","))
+      .textFile("spark-examples/src/main/resources/people.txt").map(_.split(","))
       .map(attributes => (attributes(0), attributes(1).trim.toInt))
       .toDF("id", "name")
 
