@@ -2,6 +2,7 @@ package datastream.window.windowfunctions;
 
 import bean.MyEvent;
 import org.apache.flink.api.common.functions.FoldFunction;
+import org.apache.flink.api.java.functions.KeySelector;
 import org.apache.flink.streaming.api.TimeCharacteristic;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
@@ -11,9 +12,16 @@ import org.apache.flink.streaming.api.windowing.time.Time;
 
 /**
  * Created by yidxue on 2018/8/22
- * @author yidxue
  */
 public class FlinkFoldFunctionDemo {
+
+    public static class SelectMess implements KeySelector<MyEvent, String> {
+        @Override
+        public String getKey(MyEvent w) {
+            return w.getMessage();
+        }
+    }
+
     public static void main(String[] args) throws Exception {
         final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
@@ -39,7 +47,7 @@ public class FlinkFoldFunctionDemo {
 
         // 聚合函数
         stream
-            .keyBy(new FlinkAggregateFunctionDemo.SelectMess())
+            .keyBy(new SelectMess())
             .window(TumblingEventTimeWindows.of(Time.seconds(10)))
             .fold("", new FoldFunction<MyEvent, String>() {
                 @Override

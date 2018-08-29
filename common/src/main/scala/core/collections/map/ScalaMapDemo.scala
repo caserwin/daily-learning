@@ -12,7 +12,6 @@ object ScalaMapDemo {
   def main(args: Array[String]): Unit = {
     // 初始化
     var A = Map("Computer" -> 3000, "Iphone" -> 2000, "Cup" -> 10)
-
     // 增加元素
     A = modifyMap(A)
     println(A)
@@ -25,6 +24,9 @@ object ScalaMapDemo {
     // 把Collection 转成Map
     val map1 = mapping.split("\\n").map(x => x.split(",")).map(arr => arr(0) -> arr(1)).toMap
     map1.foreach(println(_))
+
+    // 拼装
+    println(A.map(x => x._1 + "=" + x._2).mkString(" and "))
 
     // 得到所有keys
     println("所有的key: " + map1.keys)

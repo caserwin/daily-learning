@@ -13,10 +13,8 @@ import org.apache.flink.streaming.api.windowing.time.Time;
 
 /**
  * Created by yidxue on 2018/8/21
- *
- * @author yidxue
  */
-public class FlinkAggregateFunctionDemo {
+public class FlinkAggregateFunctionDemo1 {
 
     public static class SelectMess implements KeySelector<MyEvent, String> {
         @Override

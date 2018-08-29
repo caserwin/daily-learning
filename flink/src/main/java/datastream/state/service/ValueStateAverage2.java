@@ -1,4 +1,4 @@
-package datastream.state;
+package datastream.state.service;
 
 import org.apache.flink.api.common.functions.RichFlatMapFunction;
 import org.apache.flink.api.common.state.ValueState;
@@ -13,7 +13,7 @@ import org.apache.flink.util.Collector;
  * @author yidxue
  * 全局状态记录统计
  */
-public class CountWindowAverage1 extends RichFlatMapFunction<Tuple2<Long, Long>, Tuple2<Long, Long>> {
+public class ValueStateAverage2 extends RichFlatMapFunction<Tuple2<String, Long>, Tuple2<String, Long>> {
 
     /**
      * The ValueState handle. The first field is the count, the second field a running sum.
@@ -21,7 +21,7 @@ public class CountWindowAverage1 extends RichFlatMapFunction<Tuple2<Long, Long>,
     private transient ValueState<Tuple2<Long, Long>> sum;
 
     @Override
-    public void flatMap(Tuple2<Long, Long> input, Collector<Tuple2<Long, Long>> out) throws Exception {
+    public void flatMap(Tuple2<String, Long> input, Collector<Tuple2<String, Long>> out) throws Exception {
 
         // access the state value
         Tuple2<Long, Long> currentSum = sum.value();
@@ -35,7 +35,6 @@ public class CountWindowAverage1 extends RichFlatMapFunction<Tuple2<Long, Long>,
         // update the state
         sum.update(currentSum);
 
-        // if the count reaches 2, emit the average and clear the state
         out.collect(new Tuple2<>(input.f0, currentSum.f1 / currentSum.f0));
     }
 

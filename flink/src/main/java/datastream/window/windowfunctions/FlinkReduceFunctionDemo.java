@@ -2,6 +2,7 @@ package datastream.window.windowfunctions;
 
 import bean.MyEvent;
 import org.apache.flink.api.common.functions.ReduceFunction;
+import org.apache.flink.api.java.functions.KeySelector;
 import org.apache.flink.streaming.api.TimeCharacteristic;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
@@ -13,6 +14,13 @@ import org.apache.flink.streaming.api.windowing.time.Time;
  * Created by yidxue on 2018/8/21
  */
 public class FlinkReduceFunctionDemo {
+    public static class SelectMess implements KeySelector<MyEvent, String> {
+        @Override
+        public String getKey(MyEvent w) {
+            return w.getMessage();
+        }
+    }
+
     public static void main(String[] args) throws Exception {
         final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
@@ -38,7 +46,7 @@ public class FlinkReduceFunctionDemo {
 
         // 窗口聚合
         stream
-            .keyBy(new FlinkAggregateFunctionDemo.SelectMess())
+            .keyBy(new SelectMess())
             .window(TumblingEventTimeWindows.of(Time.seconds(10)))
             .reduce(new ReduceFunction<MyEvent>() {
                 @Override
