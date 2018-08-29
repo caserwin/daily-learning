@@ -1,6 +1,6 @@
 package datastream.state;
 
-import datastream.state.service.MapStateAverage;
+import datastream.state.service.MapStateWordCount;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 
@@ -20,7 +20,7 @@ public class FlinkMapStateDemo {
             Tuple2.of("k2", "a"),
             Tuple2.of("k2", "b"))
             .keyBy(0)
-            .map(new MapStateAverage())
+            .map(new MapStateWordCount())
             .print();
 
         env.execute("state manage demo");
