@@ -1,6 +1,6 @@
-package datastream.state;
+package datastream.state.keyedstate;
 
-import datastream.state.service.ValueStateAverage1;
+import datastream.state.keyedstate.service.ValueStateAverage1;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 

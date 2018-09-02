@@ -10,7 +10,6 @@ import java.util.Arrays;
 
 /**
  * Created by yidxue on 2018/4/4
- * @author yidxue
  */
 public class FlinkAggregateDemo3 {
     public static void main(String[] args) throws Exception {

@@ -1,13 +1,13 @@
-package datastream.state;
+package datastream.state.keyedstate;
 
-import datastream.state.service.ReducingStateSum;
+import datastream.state.keyedstate.service.AggregatingStateAverage;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 
 /**
- * Created by yidxue on 2018/8/28
+ * Created by yidxue on 2018/8/29
  */
-public class FlinkReducingStateDemo {
+public class FlinkAggregatingStateDemo {
     public static void main(String[] args) throws Exception {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.fromElements(
@@ -20,7 +20,7 @@ public class FlinkReducingStateDemo {
             Tuple2.of("k2", 1L),
             Tuple2.of("k2", 2L))
             .keyBy(0)
-            .flatMap(new ReducingStateSum())
+            .map(new AggregatingStateAverage())
             .print();
 
         env.execute("state manage demo");

@@ -36,11 +36,11 @@ public class FlinkDistinctDemo {
         // distinct 集合元素
         DistinctOperator<Tuple> out = inData.project(2, 0).distinct();
         out.print();
-
+        System.out.println("===================");
         // 根据指定index field 进行 distinct，保留第一次出现的元素
         DistinctOperator<Tuple> out1 = inData.project(2, 0).distinct(0);
         out1.print();
-
+        System.out.println("===================");
         // Distinct with key expression, * 表示所有字段
         DataSet<CustomType> input = env.fromElements(
             new CustomType("name1", 1),

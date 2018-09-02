@@ -1,4 +1,4 @@
-package datastream.state.service;
+package datastream.state.keyedstate.service;
 
 import org.apache.flink.api.common.functions.AggregateFunction;
 import org.apache.flink.api.common.functions.RichMapFunction;

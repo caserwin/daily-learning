@@ -8,8 +8,6 @@ import org.apache.flink.api.java.tuple.Tuple2;
 
 /**
  * Created by yidxue on 2018/2/11
- *
- * @author yidxue
  */
 public class FlinkKeySelectDemo {
 

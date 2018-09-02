@@ -71,7 +71,10 @@ public class FlinkAggregateFunctionDemo {
         );
 
         // 窗口聚合
-        stream.keyBy(new SelectMess()).window(TumblingEventTimeWindows.of(Time.seconds(1))).aggregate(new MyAggregateFunction()).print();
+        stream
+            .keyBy(new SelectMess())
+            .window(TumblingEventTimeWindows.of(Time.seconds(1)))
+            .aggregate(new MyAggregateFunction()).print();
 
         env.execute("FlinkWindowAggregateFunctionDemo");
     }
