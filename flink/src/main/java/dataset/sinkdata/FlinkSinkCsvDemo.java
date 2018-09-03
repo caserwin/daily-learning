@@ -16,8 +16,9 @@ public class FlinkSinkCsvDemo {
 
         DataSet<Tuple2<Long, String>> result = DataSetUtils.zipWithIndex(in);
 
-        String resultPath = "data/flink/sink";
-        result.writeAsCsv(resultPath, "\n", ",");
+//        String hdfsPath = "hdfs://localhost:9000/user/flink.txt";
+        String localPath = "data/flink.txt";
+        result.writeAsCsv(localPath, "\n", ",");
         env.execute();
     }
 }

@@ -9,7 +9,6 @@ import org.apache.flink.api.java.ExecutionEnvironment;
  */
 public class FlinkReadDataFromClazz {
     public static void main(String[] args) throws Exception {
-        // set up execution environment
         ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
 
         DataSet<WCBean> input = env.fromElements(

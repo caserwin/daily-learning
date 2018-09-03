@@ -12,10 +12,5 @@ public class FlinkReadDataFromCollection {
         final ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
         DataSet<String> ds1 = env.fromElements("a","b","c","d");
         ds1.print();
-
-
-        DataSet<String> ds2 = env.fromElements("a","b","c","d");
-        ds2.print();
-
     }
 }

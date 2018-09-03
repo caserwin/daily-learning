@@ -7,7 +7,7 @@ import org.apache.flink.api.java.ExecutionEnvironment;
  * @author yidxue
  */
 public class FlinkReadHDFSFile {
-    private static final String SAP_PATH = "hdfs://10.29.42.40:8020/user/pda/jmtForCall/jmtdata/jmtdata_AllSites_2018-01-01.csv";
+    private static final String SAP_PATH = "hdfs://localhost:9000/user/json-2018-01-13";
 
     public static void main(String[] args) throws Exception {
 
