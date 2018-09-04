@@ -1,5 +1,5 @@
 ## 说明
-主要关于窗口边界和以及延时数据处理的调研。首先我们要知道一个结论，窗口触发的条件：
+主要关于窗口边界和以及延时数据处理的调研。测试代码可见：TimeWindowDemo.java 和 BoundaryForTimeWindowTest.java。首先我们要知道一个结论，窗口触发的条件：
 ```
 1、watermark时间 >= window_end_time
 2、在[window_start_time,window_end_time)中有数据存在
@@ -41,12 +41,8 @@ public static long getWindowStartWithOffset(long timestamp, long offset, long wi
 
 ## timeWindow 问题汇总
 ### 关于数据分组问题
-其实也就是要先确定windows的时间边界：包括 start time 和 end time。 <br>
-对于 timeWindow(Time.seconds(14)) 这样的窗口。其实就是
-```
-offset = 0
-windowSize = 14000
-```
+其实也就是要先确定windows的时间边界：包括 start time 和 end time。
+#### code
 确定窗口 start 边界的Code如下，end 边界就是 start+ windowSize。
 ```
 public class BoundaryForTimeWindowTest {
@@ -79,7 +75,7 @@ public class BoundaryForTimeWindowTest {
     }
 }
 ```
-输出：
+#### 输出：
 ```
 1000000050000 -> 2001-09-09 09:47:30.000	所属窗口的起始时间是: 1000000050000 -> 2001-09-09 09:47:30.000
 1000000054000 -> 2001-09-09 09:47:34.000	所属窗口的起始时间是: 1000000050000 -> 2001-09-09 09:47:30.000
@@ -88,11 +84,16 @@ public class BoundaryForTimeWindowTest {
 1000000100000 -> 2001-09-09 09:48:20.000	所属窗口的起始时间是: 1000000092000 -> 2001-09-09 09:48:12.000
 1000000109000 -> 2001-09-09 09:48:29.000	所属窗口的起始时间是: 1000000106000 -> 2001-09-09 09:48:26.000
 ```
-当窗口长度为14秒的时候，对于元素 1000000109000 所属的窗口就是 [1000000106000,1000000180000)
-
+#### 说明：
+对于 timeWindow(Time.seconds(14)) 这样的窗口。对应flink 源码中 getWindowStartWithOffset()方法的参数就是（大家看源码吧）：
+```
+offset = 0
+windowSize = 14000
+```
+上述输出表明，当窗口长度为14秒的时候，对于元素 1000000109000 所属的窗口就是 [1000000106000,1000000180000)
 
 ### 关于延时数据
-先吐个槽，研究这个这个非常麻烦，不过现在我还是有自己的理解。
+先吐个槽，研究挺麻烦的，不过现在我还是有自己的理解。
 
 #### 情况1：元素在水位线以下，但是windows没被触发计算
 ##### 参数：
