@@ -161,6 +161,10 @@ public class DateUtil {
         }
     }
 
+    public static String timestampToDate(Long timestamp) {
+        return DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss").print(new DateTime(timestamp));
+    }
+
     public static void main(String[] args) {
         // 是否是指定格式的日期
         System.out.println(isValidDate("2017-11-11", "yyyy-MM-dd"));

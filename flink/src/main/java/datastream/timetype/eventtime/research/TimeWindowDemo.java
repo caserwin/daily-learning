@@ -1,4 +1,4 @@
-package datastream.timetype.eventtime;
+package datastream.timetype.eventtime.research;
 
 import org.apache.flink.api.common.functions.ReduceFunction;
 import org.apache.flink.api.java.tuple.Tuple3;
@@ -15,20 +15,22 @@ import java.text.SimpleDateFormat;
 /**
  * Created by yidxue on 2018/8/23
  */
-public class FlinkWatermarkWithPeriodicDemo1 {
+public class TimeWindowDemo {
 
     public static void main(String[] args) throws Exception {
+        long delay = 5100L;
+        int windowSize = 15;
 
         final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         // 设置数据源
         env.setParallelism(1);
         env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
-        DataStream<Tuple3<String, String, Long>> dataStream = env.addSource(new DataSource()).name("Demo Source");
+        DataStream<Tuple3<String, String, Long>> dataStream = env.addSource(new TimeWindowDemo.DataSource()).name("Demo Source");
 
         // 设置水位线
         DataStream<Tuple3<String, String, Long>> watermark = dataStream.assignTimestampsAndWatermarks(new AssignerWithPeriodicWatermarks<Tuple3<String, String, Long>>() {
-            // //最大允许的乱序时间是10s
-            private final long maxOutOfOrderness = 10000L;
+            //最大允许的乱序时间是10s
+            private final long maxOutOfOrderness = delay;
             private long currentMaxTimestamp = 0L;
 
             @Override
@@ -40,15 +42,14 @@ public class FlinkWatermarkWithPeriodicDemo1 {
             public long extractTimestamp(Tuple3<String, String, Long> element, long previousElementTimestamp) {
                 long timestamp = element.f2;
                 SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-                System.out.println(format.format(timestamp));
-                System.out.println(format.format(timestamp - (timestamp - 0L + 30000L) % 30000L));
+                System.out.println(element.f1 + " -> " + timestamp + " -> " + format.format(timestamp));
                 currentMaxTimestamp = Math.max(timestamp, currentMaxTimestamp);
                 return timestamp;
             }
         });
 
         // 窗口函数进行处理
-        DataStream<Tuple3<String, String, Long>> resStream = watermark.keyBy(0).timeWindow(Time.seconds(30)).reduce(
+        DataStream<Tuple3<String, String, Long>> resStream = watermark.keyBy(0).timeWindow(Time.seconds(windowSize)).reduce(
             new ReduceFunction<Tuple3<String, String, Long>>() {
                 @Override
                 public Tuple3<String, String, Long> reduce(Tuple3<String, String, Long> value1, Tuple3<String, String, Long> value2) throws Exception {
@@ -67,15 +68,13 @@ public class FlinkWatermarkWithPeriodicDemo1 {
 
         @Override
         public void run(SourceContext<Tuple3<String, String, Long>> ctx) throws InterruptedException {
-
-            // 这是我设置watermark 都比 timestamp 早两秒
             Tuple3[] elements = new Tuple3[]{
                 Tuple3.of("a", "1", 1000000050000L),
                 Tuple3.of("a", "2", 1000000054000L),
                 Tuple3.of("a", "3", 1000000079900L),
-                Tuple3.of("a", "4", 1000000105000L),
-                Tuple3.of("b", "4", 1000000076001L),
-                Tuple3.of("b", "5", 1000000089000L)
+                Tuple3.of("a", "4", 1000000115000L),
+                Tuple3.of("b", "5", 1000000100000L),
+                Tuple3.of("b", "6", 1000000108000L)
             };
 
             int count = 0;
@@ -92,3 +91,4 @@ public class FlinkWatermarkWithPeriodicDemo1 {
         }
     }
 }
+

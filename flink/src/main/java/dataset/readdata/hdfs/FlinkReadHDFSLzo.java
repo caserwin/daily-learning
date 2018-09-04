@@ -17,7 +17,7 @@ import org.apache.hadoop.mapred.TextInputFormat;
  */
 public class FlinkReadHDFSLzo {
 
-    private static final String TIMING_PROD_PATH = "hdfs://localhost:9000/user/sy1_logstash_telephony_hdfs.2018-01-02.lzo";
+    private static final String TIMING_PROD_PATH = "hdfs://localhost:9000/user/tmp.lzo";
 
     private static JobConf getConfiguration() {
         JobConf conf = new JobConf();
