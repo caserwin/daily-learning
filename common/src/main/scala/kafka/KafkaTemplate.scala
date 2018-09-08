@@ -1,13 +1,14 @@
-package kafka.message
+package kafka
 
 import java.text.SimpleDateFormat
 import java.util.Date
+
 import net.minidev.json.{JSONObject, JSONValue}
 
 /**
   * User: Erwin
   * Date: 17/12/4 下午8:14
-  * Description: 
+  * Description:
   */
 object KafkaTemplate {
 

@@ -1,9 +1,9 @@
-package kafka.message
+package kafka
 
 import java.util.Properties
-import org.apache.kafka.clients.producer._
+import org.apache.kafka.clients.producer.{KafkaProducer, ProducerRecord}
 
-object KafkaNotifier {
+object KafkaProducer {
 
   def sendMsgToKafka(jsonStr: String): Unit = {
     val props = new Properties()
