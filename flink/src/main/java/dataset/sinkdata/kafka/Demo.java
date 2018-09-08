@@ -5,7 +5,6 @@ import dataset.sinkdata.kafka.bean.Json;
 import dataset.sinkdata.kafka.method2.KafkaOutputFormat;
 import org.apache.flink.api.java.DataSet;
 import org.apache.flink.api.java.ExecutionEnvironment;
-
 import java.util.Random;
 
 /**
@@ -36,7 +35,7 @@ public class Demo {
     }
 
     private static String[] jsonBuilder() throws InterruptedException {
-        String[] strs = new String[10];
+        String[] strs = new String[1000];
         Random random = new Random();
         Json json;
         for (int i = 0; i < strs.length; i++) {
