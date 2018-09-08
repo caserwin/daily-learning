@@ -14,18 +14,15 @@ import org.apache.flink.util.Collector
 
 /**
   * Created by yidxue on 2018/5/12
-  * 程序需要修改
+  * nc -lk 9999
+  * https://blog.csdn.net/lmalds/article/details/52704170
   */
 object FlinkWaterMarkDemo {
 
   def main(args: Array[String]): Unit = {
-    if (args.length != 2) {
-      System.err.println("USAGE:\nSocketWatermarkTest <hostname> <port>")
-      return
-    }
 
-    val hostName = args(0)
-    val port = args(1).toInt
+    val hostName = "localhost"
+    val port = 9999
 
     val env = StreamExecutionEnvironment.getExecutionEnvironment
     env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime)
@@ -52,7 +49,7 @@ object FlinkWaterMarkDemo {
       override def extractTimestamp(t: (String, Long), l: Long): Long = {
         val timestamp = t._2
         currentMaxTimestamp = Math.max(timestamp, currentMaxTimestamp)
-        println("timestamp:" + t._1 + "," + t._2 + "|" + format.format(t._2) + "," + currentMaxTimestamp + "|" + format.format(currentMaxTimestamp) + "," + a.toString)
+        println("timestamp:" + t._1 + "," + t._2 + "|" + format.format(t._2) + "," + currentMaxTimestamp + "|" + format.format(currentMaxTimestamp) + ",")
         timestamp
       }
     })

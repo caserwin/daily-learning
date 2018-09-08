@@ -18,7 +18,7 @@ public class TimeWindowDemo {
 
     public static void main(String[] args) throws Exception {
         long delay = 5100L;
-        int windowSize = 15;
+        int windowSize = 10;
 
         final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         // 设置数据源

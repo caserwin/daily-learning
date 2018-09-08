@@ -5,30 +5,33 @@ import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 /**
- *
+ * @author yidxue
  */
-public class ConsumerThreadNew implements Runnable {
-    private static Logger LOG = LoggerFactory.getLogger(ConsumerThreadNew.class);
-
-    //KafkaConsumer kafka生产者
+public class ConsumerThread implements Runnable {
+    private static Logger LOG = LoggerFactory.getLogger(ConsumerThread.class);
+    /**
+     * KafkaConsumer kafka生产者
+     */
     private KafkaConsumer<String, String> consumer;
-    //消费者名字
+    /**
+     * 消费者名字
+     */
     private String name;
-    //消费的topic组
+    /**
+     * 消费的topic组
+     */
     private List<String> topics;
 
-    //构造函数
-    public ConsumerThreadNew(KafkaConsumer<String, String> consumer, String topic, String name) {
+    public ConsumerThread(KafkaConsumer<String, String> consumer, String topics, String name) {
         super();
         this.consumer = consumer;
         this.name = name;
-        this.topics = Arrays.asList(topic);
+        this.topics = Arrays.asList(topics.split(","));
     }
 
     @Override
@@ -41,7 +44,6 @@ public class ConsumerThreadNew implements Runnable {
         while (true) {
             ConsumerRecords<String, String> records = consumer.poll(100);
             for (ConsumerRecord<String, String> record : records) {
-//                LOG.info("消费者的名字为:" + name + ",消费的消息为：" + record.value());
                 System.out.println("消费者的名字为:" + name + ",消费的消息为：" + record.value());
                 buffer.add(record);
             }
