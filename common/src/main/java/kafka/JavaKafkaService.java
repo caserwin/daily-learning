@@ -5,9 +5,8 @@ import kafka.admin.RackAwareMode;
 import kafka.server.ConfigType;
 import kafka.utils.ZkUtils;
 import org.apache.kafka.common.security.JaasUtils;
-
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Map;
+import java.util.Properties;
 
 
 /**
@@ -63,6 +62,6 @@ public class JavaKafkaService {
         javaKafka.createTopic("localhost:2181", "testByJava");
         javaKafka.modifyTopic("localhost:2181", "testByJava");
         javaKafka.selectTopic("localhost:2181", "testByJava");
-        javaKafka.deleteTopic("localhost:2181", "testByJava");
+//        javaKafka.deleteTopic("localhost:2181", "testByJava");
     }
 }
