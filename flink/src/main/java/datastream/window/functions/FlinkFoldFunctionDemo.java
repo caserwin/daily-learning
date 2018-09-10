@@ -1,9 +1,8 @@
-package datastream.window.windowfunctions;
+package datastream.window.functions;
 
 import bean.MyEvent;
-import org.apache.flink.api.common.functions.AggregateFunction;
+import org.apache.flink.api.common.functions.FoldFunction;
 import org.apache.flink.api.java.functions.KeySelector;
-import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.streaming.api.TimeCharacteristic;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
@@ -12,9 +11,9 @@ import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindo
 import org.apache.flink.streaming.api.windowing.time.Time;
 
 /**
- * Created by yidxue on 2018/8/21
+ * Created by yidxue on 2018/8/22
  */
-public class FlinkAggregateFunctionDemo1 {
+public class FlinkFoldFunctionDemo {
 
     public static class SelectMess implements KeySelector<MyEvent, String> {
         @Override
@@ -24,7 +23,6 @@ public class FlinkAggregateFunctionDemo1 {
     }
 
     public static void main(String[] args) throws Exception {
-
         final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
 
@@ -47,35 +45,18 @@ public class FlinkAggregateFunctionDemo1 {
             }
         );
 
-        // 窗口聚合
+        // 聚合函数
         stream
             .keyBy(new SelectMess())
-            .window(TumblingEventTimeWindows.of(Time.seconds(1)))
-            .aggregate(new MyAggregateFunction())
+            .window(TumblingEventTimeWindows.of(Time.seconds(10)))
+            .fold("", new FoldFunction<MyEvent, String>() {
+                @Override
+                public String fold(String accumulator, MyEvent event) {
+                    return accumulator + "\t" + event.message;
+                }
+            })
             .print();
 
-        env.execute("FlinkWindowAggregateFunctionDemo");
-    }
-
-    public static class MyAggregateFunction implements AggregateFunction<MyEvent, Tuple2<Long, Long>, Double> {
-        @Override
-        public Tuple2<Long, Long> createAccumulator() {
-            return new Tuple2<>(0L, 0L);
-        }
-
-        @Override
-        public Tuple2<Long, Long> add(MyEvent event, Tuple2<Long, Long> accumulator) {
-            return new Tuple2<>(accumulator.f0 + event.getValue(), accumulator.f1 + 1L);
-        }
-
-        @Override
-        public Double getResult(Tuple2<Long, Long> accumulator) {
-            return ((double) accumulator.f0) / accumulator.f1;
-        }
-
-        @Override
-        public Tuple2<Long, Long> merge(Tuple2<Long, Long> a, Tuple2<Long, Long> b) {
-            return new Tuple2<>(a.f0 + b.f0, a.f1 + b.f1);
-        }
+        env.execute("FlinkWindowFoldFunctionDemo");
     }
 }

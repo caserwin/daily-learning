@@ -1,4 +1,4 @@
-package datastream.window.windowfunctions;
+package datastream.window.functions;
 
 import org.apache.flink.api.java.functions.KeySelector;
 import org.apache.flink.api.java.tuple.Tuple2;

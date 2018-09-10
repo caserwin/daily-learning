@@ -15,15 +15,15 @@ public class FlinkStreamConvertToTableDemo {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         StreamTableEnvironment tableEnv = TableEnvironment.getTableEnvironment(env);
 
-        DataStream<Tuple2<Integer, Integer>> stream = env.fromElements(
-            Tuple2.of(2, 6),
-            Tuple2.of(2, 4),
-            Tuple2.of(1, 3),
-            Tuple2.of(1, 5),
-            Tuple2.of(6, 7),
-            Tuple2.of(6, 7),
-            Tuple2.of(1, 17),
-            Tuple2.of(1, 2));
+        DataStream<Tuple2<String, Integer>> stream = env.fromElements(
+            Tuple2.of("a", 6),
+            Tuple2.of("a", 4),
+            Tuple2.of("a", 3),
+            Tuple2.of("b", 5),
+            Tuple2.of("b", 7),
+            Tuple2.of("b", 7),
+            Tuple2.of("c", 17),
+            Tuple2.of("c", 2));
 
 // Convert the DataStream into a Table with default fields "f0", "f1"
         Table table1 = tableEnv.fromDataStream(stream);

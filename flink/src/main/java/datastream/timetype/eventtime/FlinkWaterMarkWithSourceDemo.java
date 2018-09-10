@@ -1,7 +1,7 @@
 package datastream.timetype.eventtime;
 
 import org.apache.flink.api.common.functions.ReduceFunction;
-import org.apache.flink.api.java.tuple.Tuple2;
+import org.apache.flink.api.java.tuple.Tuple3;
 import org.apache.flink.api.java.tuple.Tuple4;
 import org.apache.flink.streaming.api.TimeCharacteristic;
 import org.apache.flink.streaming.api.datastream.DataStream;
@@ -18,19 +18,21 @@ import org.apache.flink.streaming.api.windowing.time.Time;
 public class FlinkWaterMarkWithSourceDemo {
 
     public static void main(String[] args) throws Exception {
+        int windowSize = 10;
+
         final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);
         env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
 
         // 数据源
-        DataStream<Tuple2<String, String>> dataStream = env.addSource(new DataSource()).name("Demo Source");
+        DataStream<Tuple3<String, String, Long>> dataStream = env.addSource(new DataSource()).name("Demo Source");
 
         // 窗口函数进行处理
-        DataStream<Tuple2<String, String>> resStream = dataStream.keyBy(0).timeWindow(Time.seconds(3)).reduce(
-            new ReduceFunction<Tuple2<String, String>>() {
+        DataStream<Tuple3<String, String, Long>> resStream = dataStream.keyBy(0).timeWindow(Time.seconds(windowSize)).reduce(
+            new ReduceFunction<Tuple3<String, String, Long>>() {
                 @Override
-                public Tuple2<String, String> reduce(Tuple2<String, String> value1, Tuple2<String, String> value2) throws Exception {
-                    return Tuple2.of(value1.f0, value1.f1 + "" + value2.f1);
+                public Tuple3<String, String, Long> reduce(Tuple3<String, String, Long> value1, Tuple3<String, String, Long> value2) throws Exception {
+                    return Tuple3.of(value1.f0, value1.f1 + "" + value2.f1, 1L);
                 }
             }
         );
@@ -39,23 +41,25 @@ public class FlinkWaterMarkWithSourceDemo {
         env.execute("event time demo");
     }
 
-    private static class DataSource extends RichParallelSourceFunction<Tuple2<String, String>> {
+    private static class DataSource extends RichParallelSourceFunction<Tuple3<String, String, Long>> {
         private volatile boolean running = true;
+        long delay = 5100L;
 
         @Override
-        public void run(SourceContext<Tuple2<String, String>> ctx) {
+        public void run(SourceContext<Tuple3<String, String, Long>> ctx) {
             // 这是我设置watermark 都比 timestamp 早两秒
             Tuple4[] elements = new Tuple4[]{
-                Tuple4.of("a", "1", 1461756862000L, 1461756860000L),
-                Tuple4.of("a", "2", 1461756863000L, 1461756862000L),
-                Tuple4.of("a", "3", 1461756861000L, 1461756858000L),
-                Tuple4.of("b", "4", 1461756862000L, 1461756860000L),
-                Tuple4.of("b", "5", 1461756859000L, 1461756862000L)
+                Tuple4.of("a", "1", 1000000050000L, 1000000050000L - delay),
+                Tuple4.of("a", "2", 1000000054000L, 1000000054000L - delay),
+                Tuple4.of("a", "3", 1000000079900L, 1000000079900L - delay),
+                Tuple4.of("a", "4", 1000000115000L, 1000000115000L - delay),
+                Tuple4.of("b", "5", 1000000100000L, 1000000100000L - delay),
+                Tuple4.of("b", "6", 1000000108000L, 1000000108000L - delay)
             };
 
             int count = 0;
             while (running && count < elements.length) {
-                ctx.collectWithTimestamp(new Tuple2<>((String) elements[count].f0, (String) elements[count].f1), (long) elements[count].f2);
+                ctx.collectWithTimestamp(new Tuple3<>((String) elements[count].f0, (String) elements[count].f1, (long) elements[count].f2), (long) elements[count].f2);
                 ctx.emitWatermark(new Watermark((long) elements[count].f3));
                 count++;
             }

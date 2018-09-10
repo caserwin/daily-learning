@@ -1,4 +1,4 @@
-package datastream.window.windowassigners;
+package datastream.window.assigners;
 
 import org.apache.flink.api.java.tuple.Tuple3;
 import org.apache.flink.streaming.api.TimeCharacteristic;
@@ -32,7 +32,7 @@ public class FlinkTimeWindowsDemo {
 
         // 设置水位线
         DataStream<Tuple3<Integer, String, Long>> stream = source.assignTimestampsAndWatermarks(
-            new BoundedOutOfOrdernessTimestampExtractor<Tuple3<Integer, String, Long>>(Time.seconds(1)) {
+            new BoundedOutOfOrdernessTimestampExtractor<Tuple3<Integer, String, Long>>(Time.seconds(10)) {
                 @Override
                 public long extractTimestamp(Tuple3<Integer, String, Long> element) {
                     return element.f2;

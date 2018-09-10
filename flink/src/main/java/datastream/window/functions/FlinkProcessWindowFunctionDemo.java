@@ -1,26 +1,20 @@
-package datastream.window.windowfunctions;
+package datastream.window.functions;
 
 import bean.MyEvent;
-import org.apache.flink.api.common.functions.FoldFunction;
 import org.apache.flink.api.java.functions.KeySelector;
 import org.apache.flink.streaming.api.TimeCharacteristic;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.timestamps.BoundedOutOfOrdernessTimestampExtractor;
-import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindows;
+import org.apache.flink.streaming.api.functions.windowing.ProcessWindowFunction;
 import org.apache.flink.streaming.api.windowing.time.Time;
+import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
+import org.apache.flink.util.Collector;
 
 /**
- * Created by yidxue on 2018/8/22
+ * Created by yidxue on 2018/8/24
  */
-public class FlinkFoldFunctionDemo {
-
-    public static class SelectMess implements KeySelector<MyEvent, String> {
-        @Override
-        public String getKey(MyEvent w) {
-            return w.getMessage();
-        }
-    }
+public class FlinkProcessWindowFunctionDemo {
 
     public static void main(String[] args) throws Exception {
         final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
@@ -45,18 +39,31 @@ public class FlinkFoldFunctionDemo {
             }
         );
 
-        // 聚合函数
+        // 窗口聚合
         stream
             .keyBy(new SelectMess())
-            .window(TumblingEventTimeWindows.of(Time.seconds(10)))
-            .fold("", new FoldFunction<MyEvent, String>() {
-                @Override
-                public String fold(String accumulator, MyEvent event) {
-                    return accumulator + "\t" + event.message;
-                }
-            })
+            .timeWindow(Time.minutes(5))
+            .process(new MyProcessWindowFunction())
             .print();
 
-        env.execute("FlinkWindowFoldFunctionDemo");
+        env.execute("FlinkProcessWindowFunctionDemo");
+    }
+
+    public static class SelectMess implements KeySelector<MyEvent, String> {
+        @Override
+        public String getKey(MyEvent w) {
+            return w.getMessage();
+        }
+    }
+
+    public static class MyProcessWindowFunction extends ProcessWindowFunction<MyEvent, String, String, TimeWindow> {
+        @Override
+        public void process(String key, Context context, Iterable<MyEvent> input, Collector<String> out) {
+            long count = 0;
+            for (MyEvent in : input) {
+                count++;
+            }
+            out.collect("key: " + key + "-> Window: " + context.window() + "-> count: " + count);
+        }
     }
 }

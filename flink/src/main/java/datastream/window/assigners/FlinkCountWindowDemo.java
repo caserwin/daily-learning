@@ -1,4 +1,4 @@
-package datastream.window.windowassigners;
+package datastream.window.assigners;
 
 import org.apache.flink.api.common.functions.FlatMapFunction;
 import org.apache.flink.api.java.tuple.Tuple2;

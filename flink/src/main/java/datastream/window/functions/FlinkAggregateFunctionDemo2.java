@@ -1,4 +1,4 @@
-package datastream.window.windowfunctions;
+package datastream.window.functions;
 
 import org.apache.flink.api.common.functions.AggregateFunction;
 import org.apache.flink.api.java.tuple.Tuple2;

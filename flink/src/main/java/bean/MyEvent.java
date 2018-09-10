@@ -6,17 +6,17 @@ package bean;
  * @author yidxue
  */
 public class MyEvent {
-    public int timestamp;
+    public long timestamp;
     public int value;
     public String message;
 
-    public MyEvent(int value, String message, int timestamp) {
+    public MyEvent(int value, String message, long timestamp) {
         this.timestamp = timestamp;
         this.value = value;
         this.message = message;
     }
 
-    public int getTimestamp() {
+    public long getTimestamp() {
         return timestamp;
     }
 

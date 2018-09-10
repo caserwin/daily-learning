@@ -25,8 +25,7 @@ public class FlinkBatchSQLDemo {
         tEnv.registerDataSet("WordCount", input, "word, frequency");
 
         // run a SQL query on the Table and retrieve the result as a new Table
-        Table table = tEnv.sqlQuery(
-            "SELECT word, SUM(frequency) as frequency FROM WordCount GROUP BY word");
+        Table table = tEnv.sqlQuery("SELECT word, SUM(frequency) as frequency FROM WordCount GROUP BY word");
 
         DataSet<WCBean> result = tEnv.toDataSet(table, WCBean.class);
 
