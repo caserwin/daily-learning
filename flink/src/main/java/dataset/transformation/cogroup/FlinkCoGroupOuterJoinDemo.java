@@ -1,19 +1,18 @@
 package dataset.transformation.cogroup;
 
 import org.apache.flink.api.common.functions.CoGroupFunction;
-import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.java.DataSet;
 import org.apache.flink.api.java.ExecutionEnvironment;
 import org.apache.flink.api.java.operators.DataSource;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.api.java.tuple.Tuple3;
 import org.apache.flink.util.Collector;
-
 import java.util.HashMap;
 import java.util.HashSet;
 
 /**
  * Created by yidxue on 2018/2/11
+ * 这个 outer join 必须左右两边去重的
  */
 public class FlinkCoGroupOuterJoinDemo {
 

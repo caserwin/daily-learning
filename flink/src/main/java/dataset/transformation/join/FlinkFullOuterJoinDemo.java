@@ -8,6 +8,8 @@ import org.apache.flink.api.java.tuple.Tuple3;
 
 /**
  * Created by yidxue on 2018/5/11
+ *
+ * 这个 outer join 必须左右两边去重的
  */
 public class FlinkFullOuterJoinDemo {
 

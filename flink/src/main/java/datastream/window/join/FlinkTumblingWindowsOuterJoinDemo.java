@@ -12,12 +12,12 @@ import org.apache.flink.streaming.api.functions.timestamps.BoundedOutOfOrderness
 import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindows;
 import org.apache.flink.streaming.api.windowing.time.Time;
 import org.apache.flink.util.Collector;
-
 import java.util.HashMap;
 import java.util.HashSet;
 
 /**
  * Created by yidxue on 2018/9/12
+ * 这个 outer join 必须左右两边去重的
  */
 public class FlinkTumblingWindowsOuterJoinDemo {
     public static void main(String[] args) throws Exception {
@@ -29,8 +29,8 @@ public class FlinkTumblingWindowsOuterJoinDemo {
         env.setParallelism(1);
 
         // 设置数据源
-        DataStream<Tuple3<String, String, Long>> leftSource = env.addSource(new DataSource()).name("Demo Source");
-        DataStream<Tuple3<String, String, Long>> rightSource = env.addSource(new DataSource1()).name("Demo Source");
+        DataStream<Tuple3<String, String, Long>> leftSource = env.addSource(new DataSource1()).name("Demo Source");
+        DataStream<Tuple3<String, String, Long>> rightSource = env.addSource(new DataSource2()).name("Demo Source");
 
         // 设置水位线
         DataStream<Tuple3<String, String, Long>> leftStream = leftSource.assignTimestampsAndWatermarks(
@@ -75,7 +75,6 @@ public class FlinkTumblingWindowsOuterJoinDemo {
             }
 
             for (Tuple3<String, String, Long> rightElem : rightElements) {
-                System.out.println(rightElem.f0);
                 set.add(rightElem.f0);
                 right.put(rightElem.f0, new Element(rightElem.f1, rightElem.f2));
             }
