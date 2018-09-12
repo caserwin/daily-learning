@@ -1,7 +1,6 @@
 package dataset.transformation.cogroup;
 
 import org.apache.flink.api.common.functions.CoGroupFunction;
-import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.java.DataSet;
 import org.apache.flink.api.java.ExecutionEnvironment;
 import org.apache.flink.api.java.operators.DataSource;
@@ -25,30 +24,29 @@ public class FlinkCoGroupInnerJoinDemo {
     }
 
     public static void main(String[] args) throws Exception {
-
         ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
 
-        DataSource<Integer> leftSide = env.fromElements(1, 2, 3, 4, 5);
-        DataSet<Tuple2<Integer, String>> leftSide2 = leftSide.map(
-            new MapFunction<Integer, Tuple2<Integer, String>>() {
-                @Override
-                public Tuple2<Integer, String> map(Integer integer) {
-                    return new Tuple2<>(integer, "some data");
-                }
-            });
+        DataSource<Tuple2<Integer, String>> leftSide = env.fromElements(
+            Tuple2.of(1, "left"),
+            Tuple2.of(2, "left"),
+            Tuple2.of(3, "left"),
+            Tuple2.of(4, "left"),
+            Tuple2.of(5, "left")
+        );
 
-        DataSource<Integer> rightSide = env.fromElements(4, 5, 6, 7, 8, 9, 10);
-        DataSet<Tuple2<Integer, String>> rightSide2 = rightSide.map(
-            new MapFunction<Integer, Tuple2<Integer, String>>() {
-                @Override
-                public Tuple2<Integer, String> map(Integer integer) {
-                    return new Tuple2<>(integer, "some other data");
-                }
-            });
 
+        DataSource<Tuple2<Integer, String>> rightSide = env.fromElements(
+            Tuple2.of(4, "right"),
+            Tuple2.of(5, "right"),
+            Tuple2.of(6, "right"),
+            Tuple2.of(7, "right"),
+            Tuple2.of(8, "right"),
+            Tuple2.of(9, "right")
+        );
 
         // where() 的参数是leftSide2 的字段索引，equalTo() 的参数是rightSide2 的字段索引。
-        DataSet<Tuple2<Integer, Integer>> innerJoin = leftSide2.coGroup(rightSide2)
+        DataSet<Tuple2<Integer, Integer>> innerJoin = leftSide
+                                                          .coGroup(rightSide)
                                                           .where(0)
                                                           .equalTo(0)
                                                           .with(new InnerJoin());

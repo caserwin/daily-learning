@@ -8,10 +8,8 @@ import org.apache.flink.api.java.tuple.Tuple3;
 
 /**
  * Created by yidxue on 2018/5/11
- *
- * @author yidxue
  */
-public class FlinkLeftOuterJoinDemo {
+public class FlinkFullOuterJoinDemo {
 
     public static class Rating {
         public String name;
@@ -28,20 +26,17 @@ public class FlinkLeftOuterJoinDemo {
 
     public static class OutJoinPointAssigner implements JoinFunction<Tuple2<String, Double>, Rating, Tuple3<String, Double, Integer>> {
         @Override
-        public Tuple3<String, Double, Integer> join(Tuple2<String, Double> movie, Rating rating) {
-            return new Tuple3<>(movie.f0, movie.f1, rating == null ? -1 : rating.points);
+        public Tuple3<String, Double, Integer> join(Tuple2<String, Double> weight, Rating rating) {
+            if (weight != null) {
+                return new Tuple3<>(weight.f0, weight.f1, rating == null ? -1 : rating.points);
+            } else {
+                return new Tuple3<>(rating.name, -1.0, rating.points);
+            }
         }
     }
 
     public static void main(String[] args) throws Exception {
         final ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
-
-        DataSet<Tuple2<String, Double>> weights = env.fromElements(
-            Tuple2.of("discoun2", 0.1),
-            Tuple2.of("discoun2", 0.2),
-            Tuple2.of("discoun3", 0.3),
-            Tuple2.of("discoun5", 0.4)
-        );
 
         DataSet<Rating> ratings = env.fromElements(
             new Rating("discoun1", 1),
@@ -49,11 +44,19 @@ public class FlinkLeftOuterJoinDemo {
             new Rating("discoun3", 3),
             new Rating("discoun4", 4));
 
+        DataSet<Tuple2<String, Double>> weights = env.fromElements(
+            Tuple2.of("discoun2", 0.2),
+            Tuple2.of("discoun3", 0.3),
+            Tuple2.of("discoun5", 0.4)
+        );
+
         DataSet<Tuple3<String, Double, Integer>> weightedRatings = weights
-                                                                       .leftOuterJoin(ratings)
+                                                                       .fullOuterJoin(ratings)
                                                                        .where("f0")
                                                                        .equalTo("name")
                                                                        .with(new OutJoinPointAssigner());
+
         weightedRatings.print();
     }
 }
+
