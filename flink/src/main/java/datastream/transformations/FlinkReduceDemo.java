@@ -7,7 +7,7 @@ import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 
 /**
  * Created by yidxue on 2018/5/14
- *
+ * KeyedStream → DataStream
  * @author yidxue
  */
 public class FlinkReduceDemo {

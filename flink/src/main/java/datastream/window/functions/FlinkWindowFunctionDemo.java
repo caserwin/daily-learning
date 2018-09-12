@@ -66,22 +66,23 @@ public class FlinkWindowFunctionDemo {
         KeyedStream<Tuple2<String, String>, Integer> tuple2IntegerKeyedStream = union.keyBy(new KeySelector<Tuple2<String, String>, Integer>() {
             @Override
             public Integer getKey(Tuple2<String, String> value) {
-                // 这里把原来的 stream 分成两组，结果为0 的一组，结果为1 的一组。
                 return Integer.parseInt(value.f0) % 2;
             }
         });
 
-        tuple2IntegerKeyedStream.timeWindow(Time.seconds(3)).apply(new WindowFunction<Tuple2<String, String>, String, Integer, TimeWindow>() {
-            @Override
-            public void apply(Integer integer, TimeWindow window, Iterable<Tuple2<String, String>> input, Collector<String> out) {
-                StringBuffer stringBuffer = new StringBuffer();
-                input.forEach(t -> {
-                    stringBuffer.append(t.toString()).append("  ");
-                });
-                System.out.println(stringBuffer.toString());
-            }
-        });
+        tuple2IntegerKeyedStream.timeWindow(Time.seconds(3)).apply(new MyWindowFunction());
 
         env.execute("WindowsFunctionDemo");
+    }
+
+    public static class MyWindowFunction implements WindowFunction<Tuple2<String, String>, String, Integer, TimeWindow> {
+        @Override
+        public void apply(Integer integer, TimeWindow window, Iterable<Tuple2<String, String>> input, Collector<String> out) throws Exception {
+            StringBuffer stringBuffer = new StringBuffer();
+            input.forEach(t -> {
+                stringBuffer.append(t.toString()).append("  ");
+            });
+            System.out.println(stringBuffer.toString());
+        }
     }
 }

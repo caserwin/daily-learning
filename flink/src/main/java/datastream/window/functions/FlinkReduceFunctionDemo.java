@@ -1,8 +1,7 @@
 package datastream.window.functions;
 
-import bean.MyEvent;
 import org.apache.flink.api.common.functions.ReduceFunction;
-import org.apache.flink.api.java.functions.KeySelector;
+import org.apache.flink.api.java.tuple.Tuple3;
 import org.apache.flink.streaming.api.TimeCharacteristic;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
@@ -14,44 +13,36 @@ import org.apache.flink.streaming.api.windowing.time.Time;
  * Created by yidxue on 2018/8/21
  */
 public class FlinkReduceFunctionDemo {
-    public static class SelectMess implements KeySelector<MyEvent, String> {
-        @Override
-        public String getKey(MyEvent w) {
-            return w.getMessage();
-        }
-    }
 
     public static void main(String[] args) throws Exception {
+        int windowSize = 10;
+        long delay = 5000L;
+
         final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
+        env.setParallelism(1);
 
         // 设置数据源
-        DataStream<MyEvent> source = env.fromElements(
-            new MyEvent(1, "a", 1534581000),
-            new MyEvent(2, "b", 1534581005),
-            new MyEvent(8, "a", 1534581010),
-            new MyEvent(4, "b", 1534581015),
-            new MyEvent(8, "a", 1534581020)
-        );
+        DataStream<Tuple3<String, Integer, Long>> source = env.addSource(new DataSource()).name("Demo Source");
 
         // 设置水位线
-        DataStream<MyEvent> stream = source.assignTimestampsAndWatermarks(
-            new BoundedOutOfOrdernessTimestampExtractor<MyEvent>(Time.seconds(10)) {
+        DataStream<Tuple3<String, Integer, Long>> stream = source.assignTimestampsAndWatermarks(
+            new BoundedOutOfOrdernessTimestampExtractor<Tuple3<String, Integer, Long>>(Time.milliseconds(delay)) {
                 @Override
-                public long extractTimestamp(MyEvent element) {
-                    return element.getTimestamp();
+                public long extractTimestamp(Tuple3<String, Integer, Long> element) {
+                    return element.f2;
                 }
             }
         );
 
         // 窗口聚合
         stream
-            .keyBy(new SelectMess())
-            .window(TumblingEventTimeWindows.of(Time.seconds(10)))
-            .reduce(new ReduceFunction<MyEvent>() {
+            .keyBy(0)
+            .window(TumblingEventTimeWindows.of(Time.seconds(windowSize)))
+            .reduce(new ReduceFunction<Tuple3<String, Integer, Long>>() {
                 @Override
-                public MyEvent reduce(MyEvent e1, MyEvent e2) {
-                    return new MyEvent(e1.value + e2.value, "message", (int) System.currentTimeMillis());
+                public Tuple3<String, Integer, Long> reduce(Tuple3<String, Integer, Long> e1, Tuple3<String, Integer, Long> e2) {
+                    return new Tuple3<>(e1.f0, e1.f1 + e2.f1, 1L);
                 }
             })
             .print();

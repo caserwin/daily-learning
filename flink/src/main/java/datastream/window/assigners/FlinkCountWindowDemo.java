@@ -46,8 +46,8 @@ public class FlinkCountWindowDemo {
         // create windows of windowSize records slided every slideSize records
         DataStream<Tuple2<String, Integer>> counts = tmp
                                                          .keyBy(0)
-//                                                         .countWindow(windowSize)
-                                                         .countWindow(windowSize, slideSize)
+                                                         .countWindow(windowSize)
+//                                                         .countWindow(windowSize, slideSize)
                                                          .sum(1);
 
         counts.print();

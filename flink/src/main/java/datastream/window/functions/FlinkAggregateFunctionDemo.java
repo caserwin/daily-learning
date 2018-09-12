@@ -1,7 +1,6 @@
 package datastream.window.functions;
 
-import org.apache.flink.api.common.functions.FoldFunction;
-import org.apache.flink.api.java.tuple.Tuple2;
+import org.apache.flink.api.common.functions.AggregateFunction;
 import org.apache.flink.api.java.tuple.Tuple3;
 import org.apache.flink.streaming.api.TimeCharacteristic;
 import org.apache.flink.streaming.api.datastream.DataStream;
@@ -11,9 +10,9 @@ import org.apache.flink.streaming.api.windowing.assigners.TumblingEventTimeWindo
 import org.apache.flink.streaming.api.windowing.time.Time;
 
 /**
- * Created by yidxue on 2018/8/22
+ * Created by yidxue on 2018/8/21
  */
-public class FlinkFoldFunctionDemo {
+public class FlinkAggregateFunctionDemo {
 
     public static void main(String[] args) throws Exception {
         int windowSize = 10;
@@ -28,7 +27,7 @@ public class FlinkFoldFunctionDemo {
 
         // 设置水位线
         DataStream<Tuple3<String, Integer, Long>> stream = source.assignTimestampsAndWatermarks(
-            new BoundedOutOfOrdernessTimestampExtractor<Tuple3<String, Integer, Long>>(Time.seconds(delay)) {
+            new BoundedOutOfOrdernessTimestampExtractor<Tuple3<String, Integer, Long>>(Time.milliseconds(delay)) {
                 @Override
                 public long extractTimestamp(Tuple3<String, Integer, Long> element) {
                     return element.f2;
@@ -36,18 +35,36 @@ public class FlinkFoldFunctionDemo {
             }
         );
 
-        // 聚合函数
+        // 窗口聚合
         stream
             .keyBy(0)
             .window(TumblingEventTimeWindows.of(Time.seconds(windowSize)))
-            .fold(Tuple2.of("", ""), new FoldFunction<Tuple3<String, Integer, Long>, Tuple2<String, String>>() {
-                @Override
-                public Tuple2<String, String> fold(Tuple2<String, String> accumulator, Tuple3<String, Integer, Long> event) {
-                    return new Tuple2<>(event.f0, accumulator.f1 + event.f1);
-                }
-            })
+            .aggregate(new MyAggregateFunction())
             .print();
 
-        env.execute("FlinkWindowFoldFunctionDemo");
+        env.execute("FlinkWindowAggregateFunctionDemo");
     }
+
+    public static class MyAggregateFunction implements AggregateFunction<Tuple3<String, Integer, Long>, Tuple3<String, Integer, Integer>, Tuple3<String, Double, String>> {
+        @Override
+        public Tuple3<String, Integer, Integer> createAccumulator() {
+            return new Tuple3<>("", 0, 0);
+        }
+
+        @Override
+        public Tuple3<String, Integer, Integer> add(Tuple3<String, Integer, Long> event, Tuple3<String, Integer, Integer> accumulator) {
+            return new Tuple3<>(event.f0, accumulator.f1 + event.f1, accumulator.f2 + 1);
+        }
+
+        @Override
+        public Tuple3<String, Double, String> getResult(Tuple3<String, Integer, Integer> accumulator) {
+            return new Tuple3<>(accumulator.f0, (double) accumulator.f1 / accumulator.f2, "元素个数：" + accumulator.f2);
+        }
+
+        @Override
+        public Tuple3<String, Integer, Integer> merge(Tuple3<String, Integer, Integer> a, Tuple3<String, Integer, Integer> b) {
+            return new Tuple3<>(a.f0, a.f1 + b.f1, a.f2 + b.f2);
+        }
+    }
+
 }
