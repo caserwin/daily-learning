@@ -1,5 +1,6 @@
 package datastream.window.functions;
 
+import datastream.datasource.DataSource;
 import org.apache.flink.api.common.functions.AggregateFunction;
 import org.apache.flink.api.java.tuple.Tuple3;
 import org.apache.flink.streaming.api.TimeCharacteristic;
@@ -23,13 +24,13 @@ public class FlinkAggregateFunctionDemo {
         env.setParallelism(1);
 
         // 设置数据源
-        DataStream<Tuple3<String, Integer, Long>> source = env.addSource(new DataSource()).name("Demo Source");
+        DataStream<Tuple3<String, String, Long>> source = env.addSource(new DataSource()).name("Demo Source");
 
         // 设置水位线
-        DataStream<Tuple3<String, Integer, Long>> stream = source.assignTimestampsAndWatermarks(
-            new BoundedOutOfOrdernessTimestampExtractor<Tuple3<String, Integer, Long>>(Time.milliseconds(delay)) {
+        DataStream<Tuple3<String, String, Long>> stream = source.assignTimestampsAndWatermarks(
+            new BoundedOutOfOrdernessTimestampExtractor<Tuple3<String, String, Long>>(Time.milliseconds(delay)) {
                 @Override
-                public long extractTimestamp(Tuple3<String, Integer, Long> element) {
+                public long extractTimestamp(Tuple3<String, String, Long> element) {
                     return element.f2;
                 }
             }
@@ -45,15 +46,15 @@ public class FlinkAggregateFunctionDemo {
         env.execute("FlinkWindowAggregateFunctionDemo");
     }
 
-    public static class MyAggregateFunction implements AggregateFunction<Tuple3<String, Integer, Long>, Tuple3<String, Integer, Integer>, Tuple3<String, Double, String>> {
+    public static class MyAggregateFunction implements AggregateFunction<Tuple3<String, String, Long>, Tuple3<String, Integer, Integer>, Tuple3<String, Double, String>> {
         @Override
         public Tuple3<String, Integer, Integer> createAccumulator() {
             return new Tuple3<>("", 0, 0);
         }
 
         @Override
-        public Tuple3<String, Integer, Integer> add(Tuple3<String, Integer, Long> event, Tuple3<String, Integer, Integer> accumulator) {
-            return new Tuple3<>(event.f0, accumulator.f1 + event.f1, accumulator.f2 + 1);
+        public Tuple3<String, Integer, Integer> add(Tuple3<String, String, Long> event, Tuple3<String, Integer, Integer> accumulator) {
+            return new Tuple3<>(event.f0, accumulator.f1 + Integer.parseInt(event.f1), accumulator.f2 + 1);
         }
 
         @Override

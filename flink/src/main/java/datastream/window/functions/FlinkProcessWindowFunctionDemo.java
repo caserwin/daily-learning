@@ -20,7 +20,7 @@ public class FlinkProcessWindowFunctionDemo {
 
     public static void main(String[] args) throws Exception {
         int windowSize = 10;
-        long delay = 5100L;
+        long delay = 5000L;
 
         final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);

@@ -1,4 +1,4 @@
-对于 FlinkTimeWindowsDemo 这个比较重要，需要记录。设置延迟4秒。
+Flink 内置的计数窗口和时间窗口。对于 FlinkTimeWindowsDemo 这个比较重要，需要记录。设置延迟4秒。
 
 ## 1 数据源1：
 ```

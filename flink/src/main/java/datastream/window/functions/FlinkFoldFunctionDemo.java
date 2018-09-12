@@ -1,5 +1,6 @@
 package datastream.window.functions;
 
+import datastream.datasource.DataSource;
 import org.apache.flink.api.common.functions.FoldFunction;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.api.java.tuple.Tuple3;
@@ -24,13 +25,13 @@ public class FlinkFoldFunctionDemo {
         env.setParallelism(1);
 
         // 设置数据源
-        DataStream<Tuple3<String, Integer, Long>> source = env.addSource(new DataSource()).name("Demo Source");
+        DataStream<Tuple3<String, String, Long>> source = env.addSource(new DataSource()).name("Demo Source");
 
         // 设置水位线
-        DataStream<Tuple3<String, Integer, Long>> stream = source.assignTimestampsAndWatermarks(
-            new BoundedOutOfOrdernessTimestampExtractor<Tuple3<String, Integer, Long>>(Time.seconds(delay)) {
+        DataStream<Tuple3<String, String, Long>> stream = source.assignTimestampsAndWatermarks(
+            new BoundedOutOfOrdernessTimestampExtractor<Tuple3<String, String, Long>>(Time.milliseconds(delay)) {
                 @Override
-                public long extractTimestamp(Tuple3<String, Integer, Long> element) {
+                public long extractTimestamp(Tuple3<String, String, Long> element) {
                     return element.f2;
                 }
             }
@@ -40,9 +41,9 @@ public class FlinkFoldFunctionDemo {
         stream
             .keyBy(0)
             .window(TumblingEventTimeWindows.of(Time.seconds(windowSize)))
-            .fold(Tuple2.of("", ""), new FoldFunction<Tuple3<String, Integer, Long>, Tuple2<String, String>>() {
+            .fold(Tuple2.of("", ""), new FoldFunction<Tuple3<String, String, Long>, Tuple2<String, String>>() {
                 @Override
-                public Tuple2<String, String> fold(Tuple2<String, String> accumulator, Tuple3<String, Integer, Long> event) {
+                public Tuple2<String, String> fold(Tuple2<String, String> accumulator, Tuple3<String, String, Long> event) {
                     return new Tuple2<>(event.f0, accumulator.f1 + event.f1);
                 }
             })

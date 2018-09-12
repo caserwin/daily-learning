@@ -1,4 +1,4 @@
-package datastream.window.assigners;
+package datastream.window.predefined;
 
 import org.apache.flink.api.common.functions.FlatMapFunction;
 import org.apache.flink.api.java.tuple.Tuple2;
@@ -30,6 +30,7 @@ public class FlinkCountWindowDemo {
     public static void main(String[] args) throws Exception {
         final ParameterTool params = ParameterTool.fromArgs(args);
         final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
+        env.setParallelism(1);
 
         String[] words = new String[]{"a a b b a b a b c c a a"};
         DataStream<String> text = env.fromElements(words);
