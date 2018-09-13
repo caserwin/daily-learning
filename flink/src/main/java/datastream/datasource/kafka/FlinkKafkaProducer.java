@@ -1,6 +1,6 @@
 package datastream.datasource.kafka;
 
-import bean.WCBean;
+import util.bean.WCBean;
 import org.apache.flink.api.common.serialization.SimpleStringSchema;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;

@@ -1,6 +1,8 @@
 package datastream.window.join;
 
-import datastream.datasource.DataSource;
+import util.bean.Element;
+import util.source.DataSource1;
+import util.source.DataSource2;
 import org.apache.flink.api.common.functions.CoGroupFunction;
 import org.apache.flink.api.java.functions.KeySelector;
 import org.apache.flink.api.java.tuple.Tuple3;
@@ -83,31 +85,12 @@ public class FlinkTumblingWindowsOuterJoinDemo {
                 Element leftElem = getHashMapByDefault(left, key, new Element("null", -1L));
                 Element rightElem = getHashMapByDefault(right, key, new Element("null", -1L));
 
-                out.collect(new Tuple5<>(key, leftElem.getF1(), rightElem.getF1(), leftElem.getF2(), rightElem.getF2()));
+                out.collect(new Tuple5<>(key, leftElem.getName(), rightElem.getName(), leftElem.getNumber(), rightElem.getNumber()));
             }
         }
 
         private Element getHashMapByDefault(HashMap<String, Element> map, String key, Element defaultValue) {
             return map.get(key) == null ? defaultValue : map.get(key);
-        }
-
-    }
-
-    public static class Element {
-        private String f1;
-        private Long f2;
-
-        public Element(String f1, Long f2) {
-            this.f1 = f1;
-            this.f2 = f2;
-        }
-
-        public String getF1() {
-            return f1;
-        }
-
-        public Long getF2() {
-            return f2;
         }
     }
 

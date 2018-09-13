@@ -1,6 +1,6 @@
 package datastream.datasource;
 
-import bean.WCBean;
+import util.bean.WCBean;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 

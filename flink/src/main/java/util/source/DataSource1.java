@@ -1,4 +1,4 @@
-package datastream.window.join;
+package util.source;
 
 import org.apache.flink.api.java.tuple.Tuple3;
 import org.apache.flink.streaming.api.functions.source.RichParallelSourceFunction;

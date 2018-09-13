@@ -1,6 +1,6 @@
 package datastream.timetype.eventtime;
 
-import datastream.datasource.DataSource;
+import util.source.DataSource;
 import org.apache.flink.api.common.functions.ReduceFunction;
 import org.apache.flink.api.java.tuple.Tuple3;
 import org.apache.flink.streaming.api.TimeCharacteristic;

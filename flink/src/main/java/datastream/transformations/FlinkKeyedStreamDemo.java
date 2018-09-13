@@ -1,7 +1,6 @@
 package datastream.transformations;
 
-import bean.CustomType;
-import org.apache.flink.api.java.DataSet;
+import util.bean.Element;
 import org.apache.flink.api.java.functions.KeySelector;
 import org.apache.flink.api.java.tuple.Tuple;
 import org.apache.flink.api.java.tuple.Tuple2;
@@ -27,17 +26,17 @@ public class FlinkKeyedStreamDemo {
             Tuple2.of(1, 17),
             Tuple2.of(1, 2));
 
-        DataStream<CustomType> dStream2 = env.fromElements(
-            new CustomType("name1", 1),
-            new CustomType("name1", 1),
-            new CustomType("name2", 2),
-            new CustomType("name3", 2));
+        DataStream<Element> dStream2 = env.fromElements(
+            new Element("name1", 1),
+            new Element("name1", 1),
+            new Element("name2", 2),
+            new Element("name3", 2));
 
         // 根据第一个字段分成 3 组
         KeyedStream<Tuple2<Integer, Integer>, Tuple> kstream1 = dStream1.keyBy(0);
 
         // 根据 aName 分成4组
-        KeyedStream<CustomType, Tuple> kstream2 = dStream2.keyBy("aName");
+        KeyedStream<Element, Tuple> kstream2 = dStream2.keyBy("name");
 
         // 根据奇数和偶数分成两组
         KeyedStream<Tuple2<Integer, Integer>, Integer> kstream3 = dStream1.keyBy(new KeySelector<Tuple2<Integer, Integer>, Integer>() {

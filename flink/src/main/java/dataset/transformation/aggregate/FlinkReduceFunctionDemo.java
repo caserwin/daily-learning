@@ -1,6 +1,6 @@
 package dataset.transformation.aggregate;
 
-import bean.WCBean;
+import util.bean.WCBean;
 import org.apache.flink.api.common.functions.ReduceFunction;
 import org.apache.flink.api.java.DataSet;
 import org.apache.flink.api.java.ExecutionEnvironment;

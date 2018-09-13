@@ -1,6 +1,6 @@
 package sql.batch.function;
 
-import bean.WCBean;
+import util.bean.WCBean;
 import org.apache.flink.api.java.DataSet;
 import org.apache.flink.api.java.ExecutionEnvironment;
 import org.apache.flink.table.api.Table;

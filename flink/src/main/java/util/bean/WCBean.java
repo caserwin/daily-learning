@@ -1,4 +1,4 @@
-package bean;
+package util.bean;
 
 /**
  * Created by yidxue on 2018/2/11

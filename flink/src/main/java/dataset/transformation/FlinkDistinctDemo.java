@@ -1,6 +1,6 @@
 package dataset.transformation;
 
-import bean.CustomType;
+import util.bean.Element;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.java.DataSet;
 import org.apache.flink.api.java.ExecutionEnvironment;
@@ -14,10 +14,10 @@ import org.apache.flink.api.java.tuple.Tuple3;
  */
 public class FlinkDistinctDemo {
 
-    public class CustomMap implements MapFunction<CustomType, Tuple2<String, Integer>> {
+    public class CustomMap implements MapFunction<Element, Tuple2<String, Long>> {
         @Override
-        public Tuple2<String, Integer> map(CustomType ct) {
-            return Tuple2.of(ct.aName, ct.aNumber);
+        public Tuple2<String, Long> map(Element ct) {
+            return Tuple2.of(ct.getName(), ct.getNumber());
         }
     }
 
@@ -42,13 +42,13 @@ public class FlinkDistinctDemo {
         out1.print();
         System.out.println("===================");
         // Distinct with key expression, * 表示所有字段
-        DataSet<CustomType> input = env.fromElements(
-            new CustomType("name1", 1),
-            new CustomType("name1", 1),
-            new CustomType("name2", 2),
-            new CustomType("name3", 2));
+        DataSet<Element> input = env.fromElements(
+            new Element("name1", 1),
+            new Element("name1", 1),
+            new Element("name2", 2),
+            new Element("name3", 2));
         // DataSet<CustomType> out2 = input.distinct("*");
-        DataSet<CustomType> out2 = input.distinct("aNumber");
+        DataSet<Element> out2 = input.distinct("number");
         out2.map(new FlinkDistinctDemo().new CustomMap()).print();
     }
 }

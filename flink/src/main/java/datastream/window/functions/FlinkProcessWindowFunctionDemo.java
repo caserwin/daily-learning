@@ -1,6 +1,6 @@
 package datastream.window.functions;
 
-import datastream.datasource.DataSource;
+import util.source.DataSource;
 import org.apache.flink.api.java.tuple.Tuple;
 import org.apache.flink.api.java.tuple.Tuple3;
 import org.apache.flink.streaming.api.TimeCharacteristic;

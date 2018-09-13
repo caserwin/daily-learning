@@ -1,4 +1,4 @@
-package tool;
+package util.tool;
 
 import org.apache.flink.api.java.utils.ParameterTool;
 

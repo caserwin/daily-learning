@@ -1,6 +1,6 @@
 package datastream.window.functions;
 
-import datastream.datasource.DataSource;
+import util.source.DataSource;
 import org.apache.flink.api.common.functions.FoldFunction;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.api.java.tuple.Tuple3;

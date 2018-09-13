@@ -1,6 +1,7 @@
 package datastream.window.join;
 
-import datastream.datasource.DataSource;
+import util.source.DataSource1;
+import util.source.DataSource;
 import org.apache.flink.api.common.functions.CoGroupFunction;
 import org.apache.flink.api.java.functions.KeySelector;
 import org.apache.flink.api.java.tuple.Tuple3;
@@ -54,7 +55,6 @@ public class FlinkTumblingWindowsLeftJoinDemo {
             .window(TumblingEventTimeWindows.of(Time.seconds(windowSize)))
             .apply(new LeftJoin())
             .print();
-
 
         env.execute("TimeWindowDemo");
     }
