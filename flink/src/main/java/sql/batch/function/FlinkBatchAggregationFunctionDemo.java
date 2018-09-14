@@ -77,9 +77,7 @@ public class FlinkBatchAggregationFunctionDemo {
         // 1. Register the function.
         tableEnv.registerFunction("wAvg", new WeightedAvg());
 
-        // 2.
-
-        // 3. use the function in SQL API: https://ci.apache.org/projects/flink/flink-docs-release-1.4/dev/table/sql.html
+        // 2. use the function in SQL API: https://ci.apache.org/projects/flink/flink-docs-release-1.4/dev/table/sql.html
         tableEnv.registerDataSet("userScores", input, "user, point, level");
         Table table = tableEnv.sqlQuery("SELECT user, wAvg(point, level) AS avgPoints FROM userScores GROUP BY user");
         tableEnv.toDataSet(table, Row.class).print();

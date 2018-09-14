@@ -6,29 +6,26 @@ import org.apache.flink.api.java.ExecutionEnvironment;
 import org.apache.flink.table.api.Table;
 import org.apache.flink.table.api.TableEnvironment;
 import org.apache.flink.table.api.java.BatchTableEnvironment;
+import util.source.BatchCollectionSource;
 
 /**
  * @author yidxue
  */
-public class FlinkBatchTableDemo {
+public class FlinkBatchSelectTableDemo1 {
 
     public static void main(String[] args) throws Exception {
         ExecutionEnvironment env = ExecutionEnvironment.createCollectionsEnvironment();
-        BatchTableEnvironment tEnv = TableEnvironment.getTableEnvironment(env);
+        BatchTableEnvironment tableEnv = TableEnvironment.getTableEnvironment(env);
 
-        DataSet<WCBean> input = env.fromElements(
-            new WCBean("Hello", 1),
-            new WCBean("Ciao", 1),
-            new WCBean("Hello", 1));
-
-        Table table = tEnv.fromDataSet(input);
+        DataSet<WCBean> input = env.fromCollection(BatchCollectionSource.getBeanSource());
+        Table table = tableEnv.fromDataSet(input);
 
         Table filtered = table
                              .groupBy("word")
                              .select("word, frequency.sum as frequency")
-                             .filter("frequency = 2");
+                             .filter("frequency = 3");
 
-        DataSet<WCBean> result = tEnv.toDataSet(filtered, WCBean.class);
+        DataSet<WCBean> result = tableEnv.toDataSet(filtered, WCBean.class);
 
         result.print();
     }

@@ -1,7 +1,7 @@
 package datastream.window.join;
 
-import util.source.DataSource1;
-import util.source.DataSource;
+import util.source.StreamDataSource1;
+import util.source.StreamDataSource;
 import org.apache.flink.api.common.functions.CoGroupFunction;
 import org.apache.flink.api.java.functions.KeySelector;
 import org.apache.flink.api.java.tuple.Tuple3;
@@ -27,8 +27,8 @@ public class FlinkTumblingWindowsLeftJoinDemo {
         env.setParallelism(1);
 
         // 设置数据源
-        DataStream<Tuple3<String, String, Long>> leftSource = env.addSource(new DataSource()).name("Demo Source");
-        DataStream<Tuple3<String, String, Long>> rightSource = env.addSource(new DataSource1()).name("Demo Source");
+        DataStream<Tuple3<String, String, Long>> leftSource = env.addSource(new StreamDataSource()).name("Demo Source");
+        DataStream<Tuple3<String, String, Long>> rightSource = env.addSource(new StreamDataSource1()).name("Demo Source");
 
         // 设置水位线
         DataStream<Tuple3<String, String, Long>> leftStream = leftSource.assignTimestampsAndWatermarks(

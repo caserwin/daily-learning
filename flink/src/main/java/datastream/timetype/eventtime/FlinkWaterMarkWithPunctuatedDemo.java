@@ -1,6 +1,6 @@
 package datastream.timetype.eventtime;
 
-import util.source.DataSource;
+import util.source.StreamDataSource;
 import org.apache.flink.api.common.functions.ReduceFunction;
 import org.apache.flink.api.java.tuple.Tuple3;
 import org.apache.flink.streaming.api.TimeCharacteristic;
@@ -23,7 +23,7 @@ public class FlinkWaterMarkWithPunctuatedDemo {
         // 设置数据源
         env.setParallelism(1);
         env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
-        DataStream<Tuple3<String, String, Long>> dataStream = env.addSource(new DataSource()).name("Demo Source");
+        DataStream<Tuple3<String, String, Long>> dataStream = env.addSource(new StreamDataSource()).name("Demo Source");
 
         // 设置水位线
         DataStream<Tuple3<String, String, Long>> watermark = dataStream.assignTimestampsAndWatermarks(new AssignerWithPunctuatedWatermarks<Tuple3<String, String, Long>>() {

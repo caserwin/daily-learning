@@ -1,6 +1,6 @@
 package datastream.datasource;
 
-import util.source.DataSource;
+import util.source.StreamDataSource;
 import org.apache.flink.api.java.tuple.Tuple3;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
@@ -16,7 +16,7 @@ public class FlinkAddSourceDemo {
         // 设置一个数据源，你们可以把1 改成 10 看看是什么效果。
         env.setParallelism(2);
 
-        DataStream<Tuple3<String, String, Long>> stream = env.addSource(new DataSource()).name("Demo Source");
+        DataStream<Tuple3<String, String, Long>> stream = env.addSource(new StreamDataSource()).name("Demo Source");
         stream.print();
         env.execute("addSourceDemo");
     }

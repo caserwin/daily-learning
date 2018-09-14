@@ -7,7 +7,7 @@ import org.apache.flink.streaming.api.functions.source.SourceFunction;
 /**
  * Created by yidxue on 2018/9/12
  */
-public class DataSource2 extends RichParallelSourceFunction<Tuple3<String, String, Long>> {
+public class StreamDataSource2 extends RichParallelSourceFunction<Tuple3<String, String, Long>> {
     private volatile boolean running = true;
 
     @Override

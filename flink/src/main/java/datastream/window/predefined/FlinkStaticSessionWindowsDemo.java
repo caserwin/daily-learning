@@ -1,6 +1,6 @@
 package datastream.window.predefined;
 
-import util.source.DataSource;
+import util.source.StreamDataSource;
 import org.apache.flink.api.common.functions.ReduceFunction;
 import org.apache.flink.api.java.tuple.Tuple3;
 import org.apache.flink.streaming.api.TimeCharacteristic;
@@ -22,7 +22,7 @@ public class FlinkStaticSessionWindowsDemo {
         env.setParallelism(1);
 
         // 设置数据源
-        DataStream<Tuple3<String, String, Long>> source = env.addSource(new DataSource()).name("Demo Source");
+        DataStream<Tuple3<String, String, Long>> source = env.addSource(new StreamDataSource()).name("Demo Source");
 
         // 设置水位线
         DataStream<Tuple3<String, String, Long>> stream = source.assignTimestampsAndWatermarks(

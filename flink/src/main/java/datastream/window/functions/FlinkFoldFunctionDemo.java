@@ -1,6 +1,6 @@
 package datastream.window.functions;
 
-import util.source.DataSource;
+import util.source.StreamDataSource;
 import org.apache.flink.api.common.functions.FoldFunction;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.api.java.tuple.Tuple3;
@@ -25,7 +25,7 @@ public class FlinkFoldFunctionDemo {
         env.setParallelism(1);
 
         // 设置数据源
-        DataStream<Tuple3<String, String, Long>> source = env.addSource(new DataSource()).name("Demo Source");
+        DataStream<Tuple3<String, String, Long>> source = env.addSource(new StreamDataSource()).name("Demo Source");
 
         // 设置水位线
         DataStream<Tuple3<String, String, Long>> stream = source.assignTimestampsAndWatermarks(

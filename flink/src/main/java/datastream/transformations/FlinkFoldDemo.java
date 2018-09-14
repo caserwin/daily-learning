@@ -31,7 +31,6 @@ public class FlinkFoldDemo {
             Tuple2.of(1, 17),
             Tuple2.of(1, 2));
 
-
         DataStream<String> reStream = dStream.keyBy(0).fold("Start", new CusFold());
         reStream.print();
 

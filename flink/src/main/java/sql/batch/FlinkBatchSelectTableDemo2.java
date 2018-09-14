@@ -11,7 +11,7 @@ import org.apache.flink.types.Row;
 /**
  * Created by yidxue on 2018/2/23
  */
-public class FlinkBatchSQLAndTableMixDemo {
+public class FlinkBatchSelectTableDemo2 {
     public static void main(String[] args) throws Exception {
         ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
         BatchTableEnvironment tEnv = TableEnvironment.getTableEnvironment(env);
@@ -29,7 +29,7 @@ public class FlinkBatchSQLAndTableMixDemo {
         Table table = tEnv.scan("WordCount")
                           .as("word, frequent")
                           .select("*")
-                          .filter("word === 'Hello'");
+                          .where("word === 'Hello'");
 
         table.printSchema();
         tEnv.toDataSet(table, Row.class).print();

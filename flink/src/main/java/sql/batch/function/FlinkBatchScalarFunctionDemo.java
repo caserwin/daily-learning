@@ -8,6 +8,7 @@ import org.apache.flink.table.api.TableEnvironment;
 import org.apache.flink.table.api.java.BatchTableEnvironment;
 import org.apache.flink.table.functions.ScalarFunction;
 import org.apache.flink.types.Row;
+import util.source.BatchCollectionSource;
 
 /**
  * Created by yidxue on 2018/2/20
@@ -30,11 +31,7 @@ public class FlinkBatchScalarFunctionDemo {
         ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
         BatchTableEnvironment tableEnv = TableEnvironment.getTableEnvironment(env);
 
-        DataSet<WCBean> input = env.fromElements(
-            new WCBean("Hello", 1),
-            new WCBean("Ciao", 2),
-            new WCBean("Hello", 3));
-
+        DataSet<WCBean> input = env.fromCollection(BatchCollectionSource.getBeanSource());
 
         // 1. register the function
         tableEnv.registerFunction("hashCode", new HashCode(10));
@@ -44,6 +41,7 @@ public class FlinkBatchScalarFunctionDemo {
         Table table1 = myTable.select("word, hashCode(word,frequency)");
         tableEnv.toDataSet(table1, Row.class).print();
 
+        System.out.println("========================");
         // 3. use the function in SQL API
         tableEnv.registerDataSet("WordCount", input, "word, frequency");
         Table table2 = tableEnv.sqlQuery("SELECT word, hashCode(word,frequency) FROM WordCount");

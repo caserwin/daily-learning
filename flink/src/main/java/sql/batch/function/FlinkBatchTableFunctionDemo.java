@@ -38,14 +38,12 @@ public class FlinkBatchTableFunctionDemo {
         // 1. Register the function.
         tableEnv.registerFunction("split", new Split("\\s+"));
 
-        // 2. use the function in Java Table API
-        Table myTable = tableEnv.fromDataSet(input);
-
-        // 3. use the function in SQL API: https://ci.apache.org/projects/flink/flink-docs-release-1.4/dev/table/sql.html
+        // 2. use the function in SQL API: https://ci.apache.org/projects/flink/flink-docs-release-1.4/dev/table/sql.html
         tableEnv.registerDataSet("MyTable", input, "f0");
         Table table21 =tableEnv.sqlQuery("SELECT f0, word, length FROM MyTable, LATERAL TABLE(split(f0)) as T(word, length)");
         Table table22 =tableEnv.sqlQuery("SELECT f0, word, length FROM MyTable LEFT JOIN LATERAL TABLE(split(f0)) as T(word, length) ON TRUE");
         tableEnv.toDataSet(table21, Row.class).print();
+        System.out.println("========================");
         tableEnv.toDataSet(table22, Row.class).print();
 
     }

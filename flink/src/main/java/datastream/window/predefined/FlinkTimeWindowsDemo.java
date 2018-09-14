@@ -1,6 +1,6 @@
 package datastream.window.predefined;
 
-import util.source.DataSource;
+import util.source.StreamDataSource;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.common.functions.ReduceFunction;
 import org.apache.flink.api.java.tuple.Tuple3;
@@ -25,7 +25,7 @@ public class FlinkTimeWindowsDemo {
         env.setParallelism(1);
 
         // 设置数据源
-        DataStream<Tuple3<String, String, Long>> source = env.addSource(new DataSource()).name("Demo Source");
+        DataStream<Tuple3<String, String, Long>> source = env.addSource(new StreamDataSource()).name("Demo Source");
 
 //        DataStream<Tuple3<String, String, Long>> source = env.fromElements(
 //            Tuple3.of("a", "1", 1000000050000L),
