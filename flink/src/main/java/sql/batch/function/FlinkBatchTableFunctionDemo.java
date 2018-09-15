@@ -33,15 +33,15 @@ public class FlinkBatchTableFunctionDemo {
         ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
         BatchTableEnvironment tableEnv = TableEnvironment.getTableEnvironment(env);
 
-        DataSet<String> input = env.fromElements("word1 w1", "word2 w2", "word3 w3");
+        DataSet<String> input = env.fromElements("word1 w1", "word2 w2", "word3");
 
         // 1. Register the function.
         tableEnv.registerFunction("split", new Split("\\s+"));
 
-        // 2. use the function in SQL API: https://ci.apache.org/projects/flink/flink-docs-release-1.4/dev/table/sql.html
-        tableEnv.registerDataSet("MyTable", input, "f0");
-        Table table21 =tableEnv.sqlQuery("SELECT f0, word, length FROM MyTable, LATERAL TABLE(split(f0)) as T(word, length)");
-        Table table22 =tableEnv.sqlQuery("SELECT f0, word, length FROM MyTable LEFT JOIN LATERAL TABLE(split(f0)) as T(word, length) ON TRUE");
+        // 2. use the function in SQL API
+        tableEnv.registerDataSet("test", input, "f0");
+        Table table21 =tableEnv.sqlQuery("SELECT f0, word, length FROM test, LATERAL TABLE(split(f0)) as T(word, length)");
+        Table table22 =tableEnv.sqlQuery("SELECT f0, word, length FROM test LEFT JOIN LATERAL TABLE(split(f0)) as T(word, length) ON TRUE");
         tableEnv.toDataSet(table21, Row.class).print();
         System.out.println("========================");
         tableEnv.toDataSet(table22, Row.class).print();

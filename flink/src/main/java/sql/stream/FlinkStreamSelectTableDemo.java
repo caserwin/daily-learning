@@ -1,8 +1,6 @@
 package sql.stream;
 
-import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.api.java.tuple.Tuple3;
-import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.table.api.Table;
@@ -22,10 +20,9 @@ public class FlinkStreamSelectTableDemo {
 
         DataStreamSource<Tuple3<String, String, Long>> input = env.addSource(new StreamDataSource());
         Table table = stableEnv.fromDataStream(input, "col1,col2,col3");
-        Table filtered = table.groupBy("col1").select("col1, col2.cast(INT).sum as col2");
+        Table out = table.groupBy("col1").select("col1, col2.cast(INT).sum as col2");
 
-        DataStream<Tuple2<Boolean, Row>> result = stableEnv.toRetractStream(filtered, Row.class);
-        result.print();
+        stableEnv.toRetractStream(out, Row.class).print();
         env.execute("Flink Table Demo");
     }
 }

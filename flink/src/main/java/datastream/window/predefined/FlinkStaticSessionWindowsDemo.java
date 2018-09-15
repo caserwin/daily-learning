@@ -10,6 +10,8 @@ import org.apache.flink.streaming.api.functions.timestamps.BoundedOutOfOrderness
 import org.apache.flink.streaming.api.windowing.assigners.EventTimeSessionWindows;
 import org.apache.flink.streaming.api.windowing.time.Time;
 
+import java.text.SimpleDateFormat;
+
 /**
  * Created by yidxue on 2018/9/11
  */
@@ -26,17 +28,19 @@ public class FlinkStaticSessionWindowsDemo {
 
         // 设置水位线
         DataStream<Tuple3<String, String, Long>> stream = source.assignTimestampsAndWatermarks(
-            new BoundedOutOfOrdernessTimestampExtractor<Tuple3<String, String, Long>>(Time.seconds(6)) {
+            new BoundedOutOfOrdernessTimestampExtractor<Tuple3<String, String, Long>>(Time.seconds(3)) {
                 @Override
                 public long extractTimestamp(Tuple3<String, String, Long> element) {
-                    System.out.println("watermark -> " + getCurrentWatermark().getTimestamp());
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+
+                    System.out.println(element.f0 + "\t" + element.f1 + " timestamp -> " + format.format(element.f2));
                     return element.f2;
                 }
             }
         );
 
         // 窗口聚合
-        stream.keyBy(0).window(EventTimeSessionWindows.withGap(Time.seconds(10))).reduce(
+        stream.keyBy(0).window(EventTimeSessionWindows.withGap(Time.seconds(5))).reduce(
             new ReduceFunction<Tuple3<String, String, Long>>() {
                 @Override
                 public Tuple3<String, String, Long> reduce(Tuple3<String, String, Long> value1, Tuple3<String, String, Long> value2) throws Exception {

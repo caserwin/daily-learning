@@ -67,19 +67,19 @@ public class FlinkBatchAggregationFunctionDemo {
         BatchTableEnvironment tableEnv = TableEnvironment.getTableEnvironment(env);
 
         DataSet<Tuple3<String, Float, Integer>> input = env.fromElements(
-            Tuple3.of("erw1", 0.5f, 2),
-            Tuple3.of("erw2", 0.5f, 2),
-            Tuple3.of("erw3", 0.3f, 1),
-            Tuple3.of("erw1", 0.5f, 1),
-            Tuple3.of("erw2", 0.7f, 6),
-            Tuple3.of("erw1", 0.7f, 6));
+            Tuple3.of("a", 0.5f, 2),
+            Tuple3.of("a", 0.5f, 2),
+            Tuple3.of("a", 0.3f, 1),
+            Tuple3.of("a", 0.5f, 1),
+            Tuple3.of("b", 0.5f, 3),
+            Tuple3.of("b", 0.7f, 6));
 
         // 1. Register the function.
         tableEnv.registerFunction("wAvg", new WeightedAvg());
 
-        // 2. use the function in SQL API: https://ci.apache.org/projects/flink/flink-docs-release-1.4/dev/table/sql.html
-        tableEnv.registerDataSet("userScores", input, "user, point, level");
-        Table table = tableEnv.sqlQuery("SELECT user, wAvg(point, level) AS avgPoints FROM userScores GROUP BY user");
+        // 2. use the function in SQL API
+        tableEnv.registerDataSet("test", input, "user, point, level");
+        Table table = tableEnv.sqlQuery("SELECT user, wAvg(point, level) AS avgPoints FROM test GROUP BY user");
         tableEnv.toDataSet(table, Row.class).print();
     }
 }

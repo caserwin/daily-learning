@@ -1,37 +1,32 @@
 package sql.batch;
 
+import util.bean.WCBean;
 import org.apache.flink.api.java.DataSet;
 import org.apache.flink.api.java.ExecutionEnvironment;
-import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.table.api.Table;
 import org.apache.flink.table.api.TableEnvironment;
 import org.apache.flink.table.api.java.BatchTableEnvironment;
-import org.apache.flink.types.Row;
+import util.source.BatchCollectionSource;
 
 /**
  * Created by yidxue on 2018/2/23
  */
 public class FlinkBatchSelectTableDemo2 {
+
     public static void main(String[] args) throws Exception {
         ExecutionEnvironment env = ExecutionEnvironment.getExecutionEnvironment();
         BatchTableEnvironment tEnv = TableEnvironment.getTableEnvironment(env);
 
-        DataSet<Tuple2<String, Integer>> input = env.fromElements(
-            Tuple2.of("Hello", 1),
-            Tuple2.of("Ciao", 1),
-            Tuple2.of("Hello", 1));
+        DataSet<WCBean> input = env.fromCollection(BatchCollectionSource.getBeanSource());
+        tEnv.registerDataSet("WordCount", input, "word, frequency");
 
-        // register the DataSet as table "WordCount"
-        tEnv.registerDataSet("WordCount", input,"word, count");
-        tEnv.scan("WordCount").printSchema();
-
-        // where() and fliter() will get the same result
-        Table table = tEnv.scan("WordCount")
-                          .as("word, frequent")
+        Table table = tEnv
+                          .scan("WordCount")
+                          .as("word, frequency")
                           .select("*")
                           .where("word === 'Hello'");
 
+        tEnv.toDataSet(table, WCBean.class).print();
         table.printSchema();
-        tEnv.toDataSet(table, Row.class).print();
     }
 }

@@ -18,16 +18,15 @@ public class FlinkStreamRegisterTableDemo {
         StreamTableEnvironment tableEnv = TableEnvironment.getTableEnvironment(env);
         env.setParallelism(1);
 
+        // method 1:
         DataStream<Tuple3<String, String, Long>> input1 = env.addSource(new StreamDataSource());
-
-        // method 1: tuple to Table
-        Table in1 = tableEnv.fromDataStream(input1, "col1, col2, col3").select("col1,col2");
-        tableEnv.toAppendStream(in1, Row.class).print();
+        Table out = tableEnv.fromDataStream(input1, "col1, col2, col3").select("col1, col2, col3");
+        tableEnv.toAppendStream(out, Row.class).print();
 
         // method 2:
         tableEnv.registerDataStream("info", input1, "col1, col2, col3");
-        Table sqlResult = tableEnv.sqlQuery("select * from info");
-        tableEnv.toAppendStream(sqlResult, Row.class).print();
+        Table sqlResult = tableEnv.sqlQuery("select count(*) from info");
+        tableEnv.toRetractStream(sqlResult, Row.class).print();
 
         env.execute("Flink Table Demo");
     }

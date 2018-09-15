@@ -9,7 +9,7 @@ import org.apache.flink.table.api.java.BatchTableEnvironment;
 import util.source.BatchCollectionSource;
 
 /**
- * @author yidxue
+ * Created by yidxue on 2018/2/23
  */
 public class FlinkBatchSelectTableDemo1 {
 
@@ -18,7 +18,7 @@ public class FlinkBatchSelectTableDemo1 {
         BatchTableEnvironment tableEnv = TableEnvironment.getTableEnvironment(env);
 
         DataSet<WCBean> input = env.fromCollection(BatchCollectionSource.getBeanSource());
-        Table table = tableEnv.fromDataSet(input);
+        Table table = tableEnv.fromDataSet(input, "word,frequency");
 
         Table filtered = table
                              .groupBy("word")
@@ -28,5 +28,6 @@ public class FlinkBatchSelectTableDemo1 {
         DataSet<WCBean> result = tableEnv.toDataSet(filtered, WCBean.class);
 
         result.print();
+        table.printSchema();
     }
 }
