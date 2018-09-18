@@ -60,7 +60,6 @@ public class FlinkTumblingWindowsOuterJoinDemo {
             .apply(new OuterJoin())
             .print();
 
-
         env.execute("TimeWindowDemo");
     }
 

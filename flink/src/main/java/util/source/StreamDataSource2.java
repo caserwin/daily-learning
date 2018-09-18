@@ -14,6 +14,7 @@ public class StreamDataSource2 extends RichParallelSourceFunction<Tuple3<String,
     public void run(SourceFunction.SourceContext<Tuple3<String, String, Long>> ctx) throws InterruptedException {
 
         Tuple3[] elements = new Tuple3[]{
+            Tuple3.of("a", "beijing", 1000000058000L),
             Tuple3.of("c", "beijing", 1000000055000L),
             Tuple3.of("d", "beijing", 1000000106000L),
         };

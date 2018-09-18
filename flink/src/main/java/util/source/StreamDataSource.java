@@ -5,6 +5,7 @@ import org.apache.flink.streaming.api.functions.source.RichParallelSourceFunctio
 
 /**
  * Created by yidxue on 2018/9/12
+ * 注意：这个类绝对不能改
  */
 public class StreamDataSource extends RichParallelSourceFunction<Tuple3<String, String, Long>> {
     private volatile boolean running = true;
