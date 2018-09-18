@@ -14,7 +14,7 @@ public class StreamDataSource1 extends RichParallelSourceFunction<Tuple3<String,
 
         Tuple3[] elements = new Tuple3[]{
             Tuple3.of("a", "hangzhou", 1000000052000L),
-            Tuple3.of("b", "beijing", 1000000106000L),
+            Tuple3.of("b", "beijing", 1000000104000L),
         };
 
         int count = 0;

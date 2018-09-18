@@ -19,9 +19,9 @@ import util.source.StreamDataSource1;
  */
 public class FlinkIntervalJoinDemo {
     public static void main(String[] args) throws Exception {
-        long delay = 6999L;
-        long positive = 3000L;
-        long negative = -3000L;
+        long delay = 7000L;
+        long positive = 5000L;
+        long negative = -5000L;
 
         final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
