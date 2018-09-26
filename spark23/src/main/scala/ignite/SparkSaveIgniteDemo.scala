@@ -28,8 +28,9 @@ object SparkSaveIgniteDemo {
       .mode(SaveMode.Append)
       .option(OPTION_CONFIG_FILE, config)
       .option(OPTION_TABLE, "person")
+      .option(OPTION_STREAMER_ALLOW_OVERWRITE, "true")
       .option(OPTION_CREATE_TABLE_PRIMARY_KEY_FIELDS, "id")
-      .option(OPTION_CREATE_TABLE_PARAMETERS, "template=replicated,backups=1")
+      .option(OPTION_CREATE_TABLE_PARAMETERS, "template=replicated,backups=2")
       .save()
 
     spark.stop()

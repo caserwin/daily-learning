@@ -27,6 +27,10 @@ public class StringUtil {
         System.out.println(StringUtils.repeat(" ,", 5).split(",").length);
         String strnum[] = StringUtils.repeat(",", 5).split(",");
         System.out.println(strnum.length);
+
+        // String 格式化
+        String sql = String.format("select id,name,position from employee where name = '%s'", "ltq");
+        System.out.println(sql);
     }
 
     public static boolean isChinese(char c) {
