@@ -12,6 +12,7 @@ object ScalaListDemo {
   def main(args: Array[String]): Unit = {
     // 定义一个List
     val x = List(1, 2, 3, 4)
+    println(x.take(2))
 
     // List 添加元素，并赋值给新的List
     val y = x.+:(2)

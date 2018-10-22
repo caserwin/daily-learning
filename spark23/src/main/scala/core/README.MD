@@ -1,11 +1,3 @@
-## transform 算子
-
-### 读数据
-### 持久化
-### value型算子
-### key-value型算子
-
-
 ## action 算子
 
 foreach：循环遍历每一个元素。
