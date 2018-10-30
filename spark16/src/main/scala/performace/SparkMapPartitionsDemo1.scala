@@ -6,7 +6,7 @@ import org.apache.spark.{SparkConf, SparkContext}
   * User: Erwin
   * Date: 17/11/21 下午5:02
   * Description:
-  * 如果是java贝尔安bean 的，必须加上：
+  * 如果是java自定义的bean，必须加上：
   * implicit val SensorDataEncoder1: Encoder[MeetingValueBean] = Encoders.bean(classOf[bean.MeetingValueBean])
   */
 case class test() {

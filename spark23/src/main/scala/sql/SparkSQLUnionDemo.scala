@@ -23,7 +23,7 @@ object SparkSQLUnionDemo {
       (2, "lisi", "beijing"),
       (3, "wangwu", "wenzhou")
     )
-    val inputDF2 = spark.sparkContext.parallelize(dataSeq2).toDF("id", "name", "city")
+    val inputDF2 = spark.sparkContext.parallelize(dataSeq2).toDF("id", "city", "name")
 
     inputDF1.union(inputDF2).show()
 
