@@ -34,7 +34,6 @@ object SparkSQLFilterDemo {
     spark.stop()
   }
 
-
   def jsonFilter(json: String, label: String, value: String): Boolean = {
     var is = false
     try {

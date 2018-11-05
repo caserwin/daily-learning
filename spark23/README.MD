@@ -1,9 +1,6 @@
-<div align=left><img width="150" height="90" src="https://github.com/caserwin/daily-learning/raw/master/spark16/pic/spark-logo-trademark.png"/></div>
-
-
-我常用的 spark-submit
+我常用的 spark2-submit
 ```
-spark-submit \
+spark2-submit \
       --conf spark.driver.extraJavaOptions="-Dconfig.resource=xxx.conf" \
       --class app.Main \
       --master yarn-client \

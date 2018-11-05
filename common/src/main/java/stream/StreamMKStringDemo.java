@@ -1,11 +1,11 @@
 package stream;
 
+import java.util.Arrays;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
  * Created by yidxue on 2018/6/21
- * @author yidxue
  */
 public class StreamMKStringDemo {
     public static void main(String[] args) {
@@ -14,5 +14,8 @@ public class StreamMKStringDemo {
 
         Stream<Integer> stream2 = Stream.of(1, 2, 3);
         System.out.println(stream2.map(String::valueOf).collect(Collectors.joining(",")));
+
+        int[] f = {1, 2, 3, 4};
+        System.out.println(Arrays.stream(f).mapToObj(String::valueOf).collect(Collectors.joining(",")));
     }
 }
