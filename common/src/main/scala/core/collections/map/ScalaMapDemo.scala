@@ -10,6 +10,14 @@ object ScalaMapDemo {
        |10202,rvwd""".stripMargin
 
   def main(args: Array[String]): Unit = {
+
+    // create map by two list
+    val listA = List("a", "f", "d")
+    val listB = List(7, 5, 4)
+    import scala.collection.breakOut
+    val m = (listA zip listB) (breakOut): Map[String, Int]
+    println(m)
+
     // 初始化
     var A = Map("Computer" -> 3000, "Iphone" -> 2000, "Cup" -> 10)
     // 增加元素

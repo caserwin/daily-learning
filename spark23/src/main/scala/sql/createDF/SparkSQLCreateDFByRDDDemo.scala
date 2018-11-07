@@ -26,7 +26,7 @@ object SparkSQLCreateDFByRDDDemo {
     val columns = "NAME,ID"
     val schema = StructType(columns.split(",").map(fieldName => StructField(fieldName.trim, StringType, nullable = true)))
     val jmtJoinMethodDF = spark.createDataFrame(resRdd, schema)
-
-    jmtJoinMethodDF.show()
+    jmtJoinMethodDF.printSchema()
+//    jmtJoinMethodDF.show()
   }
 }

@@ -28,6 +28,7 @@ object CountVectorizerExample {
     val spark = SparkSession
       .builder
       .appName("CountVectorizerExample")
+      .master("local[*]")
       .getOrCreate()
 
     // $example on$

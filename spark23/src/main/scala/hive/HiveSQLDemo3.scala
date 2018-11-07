@@ -17,6 +17,7 @@ object HiveSQLDemo3 {
       .enableHiveSupport()
       .getOrCreate()
     import spark.implicits._
+    // 插入hive字段必须小写
     val fields = Seq("id", "name", "city", "l_date")
 
     val dataSeq1 = Seq(
@@ -30,10 +31,13 @@ object HiveSQLDemo3 {
     // 存储表，不分区
     inputDF.write.mode(SaveMode.Overwrite).saveAsTable("testtable3")
 
-    // 动态存储分区表
+    // 动态存储分区表: 字段要小写
     spark.sqlContext.setConf("hive.exec.dynamic.partition", "true")
     spark.sqlContext.setConf("hive.exec.dynamic.partition.mode", "nonstrict")
-    inputDF.write.partitionBy("l_date").format("hive").saveAsTable("testtable4")
+    // 插入hive字段必须小写
+//    inputDF.write.mode(SaveMode.Append).partitionBy("l_date").format("hive").saveAsTable("testtable4")    // 不推荐，有bug
+//    inputDF.write.mode(SaveMode.Append).partitionBy("l_date").saveAsTable("testtable4")                   // 这个可以用
+    inputDF.write.mode(SaveMode.Overwrite).partitionBy("l_date").saveAsTable("testtable4")                  // 推荐，这个也可以用
 
     spark.stop()
   }
