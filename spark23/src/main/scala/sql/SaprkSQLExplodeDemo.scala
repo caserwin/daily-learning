@@ -1,6 +1,7 @@
 package sql
 
 import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.functions._
 
 /**
   * Created by yidxue on 2018/1/30
@@ -12,21 +13,18 @@ object SaprkSQLExplodeDemo {
     import spark.implicits._
 
     val dataSeq1 = Seq(
-      ("yidxue", 20, "aa bb"),
-      ("erwin", 20, "aa cc"),
-      ("yuyi", 20, "bb cc")
+      ("yidxue", 20, "aa bb", List(("a", 1), ("a", 2), ("b", 2))),
+      ("erwin", 20, "aa cc", List(("b", 1), ("c", 1))),
+      ("yuyi", 20, "bb cc", List(("b", 1), ("c", 1)))
     )
 
-    val inputDF = spark.sparkContext.parallelize(dataSeq1).toDF("name", "age", "interest")
+    val inputDF = spark.sparkContext.parallelize(dataSeq1).toDF("name", "age", "interest", "other")
 
     inputDF.show()
 
-    inputDF.explode("interest", "interests") { interest: String => interest.split("\\s+") }
-      .select(
-        $"name",
-        $"age",
-        $"interests"
-      ).show()
+    inputDF.explode("interest", "interests") { interest: String => interest.split("\\s+") }.select($"name", $"age", $"interests").show()
+    inputDF.withColumn("interests", explode(split($"interest", "\\s+"))).select($"name", $"age", $"interests").show()
+    inputDF.withColumn("other", explode($"other")).select($"name", $"age", $"other").show()
 
     spark.stop()
   }

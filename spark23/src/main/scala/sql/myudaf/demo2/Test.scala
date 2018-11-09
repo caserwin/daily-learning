@@ -1,4 +1,4 @@
-package sql.udaf.demo2
+package sql.myudaf.demo2
 
 import org.apache.spark.sql.functions._
 import org.apache.spark.sql.types.{DoubleType, StringType, StructField, StructType}

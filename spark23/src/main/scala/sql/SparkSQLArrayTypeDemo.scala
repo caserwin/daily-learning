@@ -1,7 +1,8 @@
 package sql
 
 import org.apache.spark.sql.SparkSession
-import org.apache.spark.sql.functions.{array_contains, collect_list, when}
+import org.apache.spark.sql.expressions.UserDefinedFunction
+import org.apache.spark.sql.functions._
 
 /**
   * Created by yidxue on 2018/7/10
@@ -21,11 +22,18 @@ object SparkSQLArrayTypeDemo {
     )
     val inputDF = spark.sparkContext.parallelize(dataSeq1).toDF("name", "Cindex", "country", "et")
 
-    inputDF.groupBy("country")
+    val df = inputDF.groupBy("country")
       .agg(collect_list($"Et").alias("et"))
-      .withColumn("FLAG", when(array_contains($"et", "aaa")||array_contains($"et", "bbb"), "TRUE").otherwise("FALSE"))
-      .show(truncate = false)
+      .withColumn("FLAG", when(array_contains($"et", "aaa") || array_contains($"et", "bbb"), "TRUE").otherwise("FALSE"))
+      .withColumn("ETNEW", myUDF($"et"))
+
+    df.show(truncate = false)
+    df.printSchema()
 
     spark.stop()
   }
+
+  val myUDF: UserDefinedFunction = udf(myFunc)
+  def myFunc: (Seq[String] => String) = { s => s.mkString(":") }
+
 }

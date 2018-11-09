@@ -1,4 +1,4 @@
-package sql.udf
+package sql.myudf
 
 import org.apache.spark.sql.SparkSession
 

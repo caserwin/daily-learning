@@ -1,4 +1,4 @@
-package sql.udaf.demo1
+package sql.myudaf.demo1
 
 import org.apache.spark.sql.Row
 import org.apache.spark.sql.expressions.{MutableAggregationBuffer, UserDefinedAggregateFunction}
