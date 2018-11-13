@@ -1,6 +1,8 @@
 package hive
 
 import java.io.File
+
+import org.apache.log4j.{LogManager, Logger}
 import org.apache.spark.sql.{SaveMode, SparkSession}
 
 /**
@@ -9,6 +11,7 @@ import org.apache.spark.sql.{SaveMode, SparkSession}
 object HiveSQLDemo3 {
 
   private val warehouseLocation = new File("/user/hive/warehouse").getAbsolutePath
+  val logger: Logger = LogManager.getRootLogger
 
   def main(args: Array[String]): Unit = {
     implicit val spark: SparkSession = SparkSession
@@ -34,6 +37,11 @@ object HiveSQLDemo3 {
     // 动态存储分区表: 字段要小写
     spark.sqlContext.setConf("hive.exec.dynamic.partition", "true")
     spark.sqlContext.setConf("hive.exec.dynamic.partition.mode", "nonstrict")
+    try {
+      spark.sql(s"ALTER TABLE testtable4 DROP IF EXISTS PARTITION (l_date='2018-10-01')")
+    } catch {
+      case _: Throwable => logger.info("testtable4 table not exist, create hive table .")
+    }
     // 插入hive字段必须小写
 //    inputDF.write.mode(SaveMode.Append).partitionBy("l_date").format("hive").saveAsTable("testtable4")    // 不推荐，有bug
 //    inputDF.write.mode(SaveMode.Append).partitionBy("l_date").saveAsTable("testtable4")                   // 这个可以用
