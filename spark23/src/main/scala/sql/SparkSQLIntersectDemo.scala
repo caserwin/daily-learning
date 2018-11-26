@@ -7,7 +7,7 @@ import org.apache.spark.sql.SparkSession
   * 两个 dataframe 取交集。
   * 缺点：不能根据指定字段取交集记录。
   */
-object SaprkSQLIntersectDemo {
+object SparkSQLIntersectDemo {
 
   def main(args: Array[String]): Unit = {
     val spark = SparkSession.builder.appName("SQL Application").config("spark.master", "local[*]").getOrCreate()

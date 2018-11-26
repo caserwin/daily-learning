@@ -23,7 +23,7 @@ object SparkSQLSortDemo {
     // 工具 Cindex 字段排序： desc降序， asc升序
     df.orderBy(df("Cindex").desc).show(false)
 
-    df.orderBy(col("Cindex").asc).show(false)
+    df.orderBy(col("Cindex").asc, col("country").asc).show(false)
     df.orderBy(col("Cindex").asc).limit(3).show(false)
 
     spark.stop()

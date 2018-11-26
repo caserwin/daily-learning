@@ -6,7 +6,7 @@ import org.apache.spark.sql.functions._
 /**
   * Created by yidxue on 2018/1/30
   */
-object SaprkSQLExplodeDemo {
+object SparkSQLExplodeDemo {
 
   def main(args: Array[String]): Unit = {
     val spark = SparkSession.builder.appName("SQL Application").config("spark.master", "local[*]").getOrCreate()
