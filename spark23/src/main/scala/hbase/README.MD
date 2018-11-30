@@ -1,0 +1,1 @@
+在 resources目录下，添加hbase-site.xml、hdfs-site.xml、core-site.xml等配置文件 ? 需要吗？还没经过验证、、
