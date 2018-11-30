@@ -16,7 +16,7 @@ public class ReservoirSample {
         }
     }
 
-    public static int[] getSample(int[] a, int k) {
+    private static int[] getSample(int[] a, int k) {
         int[] reservoir = new int[k];
         Random rand = new Random();
         int j = 0;

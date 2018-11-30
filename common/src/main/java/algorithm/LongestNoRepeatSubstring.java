@@ -18,7 +18,7 @@ public class LongestNoRepeatSubstring {
      * O(n)复杂度
      * 用一个hashmap把 O(n^2)复杂度降低到 O(n)复杂度
      */
-    public static int lengthOfLongestSubstring(String s) {
+    private static int lengthOfLongestSubstring(String s) {
         HashMap<Character, Integer> map = new HashMap<>();
         int max = 0;
         for (int i = 0, j = 0; i < s.length(); i++) {
@@ -37,7 +37,7 @@ public class LongestNoRepeatSubstring {
      * O(n^2)复杂度
      * 子串的开头可能是字符串中任一子串的位置
      */
-    public static int lengthOfLongestSubstring2(String s) {
+    private static int lengthOfLongestSubstring2(String s) {
         int max = 0;
         String substr;
         for (int i = 0; i < s.length(); i++) {

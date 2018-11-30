@@ -11,7 +11,7 @@ public class LongestCommonSubsequence {
         System.out.println("子序列长度：" + getLongestCommonSubsequence(str1, str2));
     }
 
-    public static int getLongestCommonSubsequence(String str1, String str2) {
+    private static int getLongestCommonSubsequence(String str1, String str2) {
         if (str1.length() == 0 || str2.length() == 0) {
             return -1;
         }

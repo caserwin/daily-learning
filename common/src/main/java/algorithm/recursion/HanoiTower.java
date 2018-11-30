@@ -9,7 +9,7 @@ public class HanoiTower {
         move(4, "A", "B", "C");
     }
 
-    public static void move(int level, String from, String mid, String to) {
+    private static void move(int level, String from, String mid, String to) {
         if (level == 1) {
             System.out.println(level + "号盘子" + "从" + from + " 移动到" + to);
         } else {

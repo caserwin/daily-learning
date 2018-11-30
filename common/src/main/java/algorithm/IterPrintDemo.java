@@ -26,14 +26,14 @@ public class IterPrintDemo {
         printNodePath(node3);
     }
 
-    public static String getNodePath(Node node) {
+    private static String getNodePath(Node node) {
         if (node.parent == null) {
             return node.id + ":" + node.value;
         }
         return getNodePath(node.parent) + "-->" + node.id + ":" + node.value;
     }
 
-    public static void printNodePath(Node node) {
+    private static void printNodePath(Node node) {
         while (node.parent != null) {
             System.out.print(node.id + ":" + node.value + "<--");
             node = node.parent;

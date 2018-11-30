@@ -11,7 +11,7 @@ public class LongestCommonSubstring {
         System.out.println("子串长度：" + getLongestCommonSubstring(str1, str2));
     }
 
-    public static int getLongestCommonSubstring(String str1, String str2) {
+    private static int getLongestCommonSubstring(String str1, String str2) {
         if (str1.length() == 0 || str2.length() == 0) {
             return -1;
         }

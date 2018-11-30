@@ -6,12 +6,11 @@ package algorithm;
 public class SkipSteps {
 
     public static void main(String[] args) {
-        System.out.println(processByRecursion(4));
-        System.out.println(processByIteration(4));
+        System.out.println(processByRecursion(10));
+        System.out.println(processByIteration(10));
     }
 
-
-    public static int processByRecursion(int n) {
+    private static int processByRecursion(int n) {
         if (n == 1) {
             return 1;
         }
@@ -21,7 +20,7 @@ public class SkipSteps {
         return processByRecursion(n - 1) + processByRecursion(n - 2);
     }
 
-    public static int processByIteration(int n) {
+    private static int processByIteration(int n) {
         int[] res = new int[n];
         res[0] = 1;
         res[1] = 2;

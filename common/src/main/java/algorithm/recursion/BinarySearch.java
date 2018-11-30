@@ -9,7 +9,7 @@ public class BinarySearch {
         System.out.println(search(a, 9, 0, a.length - 1));
     }
 
-    public static int search(int[] a, int value, int begin, int end) {
+    private static int search(int[] a, int value, int begin, int end) {
         if (begin > end) {
             return -1;
         } else {

@@ -1,5 +1,7 @@
 package algorithm.pathplanning;
 
+import algorithm.util.Tool;
+
 /**
  * Created by yidxue on 2018/11/30
  */
@@ -27,7 +29,6 @@ public class MinRoutePlanMultipy {
 
         Node minNode = mrp.getBestPathNode(dist, "min");
         System.out.println(Tool.getNodePath(minNode));
-
     }
 
     public int getBestPath(int[][] dist, String type) {

@@ -10,7 +10,7 @@ public class Node {
         this.parent = parent;
     }
 
-    int id;
-    int value;
-    Node parent;
+    public int id;
+    public int value;
+    public Node parent;
 }

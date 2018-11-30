@@ -14,7 +14,7 @@ public class MergeSort {
         System.out.println(Arrays.toString(nums));
     }
 
-    public static void sort(int[] nums, int low, int high) {
+    private static void sort(int[] nums, int low, int high) {
         int mid = (low + high) / 2;
         if (low < high) {
             // 处理左边
