@@ -9,14 +9,15 @@ import java.util.HashMap;
 public class LongestNoRepeatSubstring {
 
     public static void main(String[] args) {
-        String str = "abcstrestr";
+        String str = "abcstrrestr";
         System.out.println(lengthOfLongestSubstring(str));
+        System.out.println(lengthOfLongestSubstring1(str));
         System.out.println(lengthOfLongestSubstring2(str));
     }
 
     /**
-     * O(n)复杂度
-     * 用一个hashmap把 O(n^2)复杂度降低到 O(n)复杂度
+     * O(n)复杂度，用一个hashmap把 O(n^2)复杂度降低到 O(n)复杂度
+     * https://www.jianshu.com/p/c43f2c9eaf16
      */
     private static int lengthOfLongestSubstring(String s) {
         HashMap<Character, Integer> map = new HashMap<>();
@@ -24,7 +25,6 @@ public class LongestNoRepeatSubstring {
         for (int i = 0, j = 0; i < s.length(); i++) {
             if (map.containsKey(s.charAt(i))) {
                 j = Math.max(j, map.get(s.charAt(i)) + 1);
-//                j = map.get(s.charAt(i)) + 1;
             }
             map.put(s.charAt(i), i);
             max = Math.max(max, i - j + 1);
@@ -34,8 +34,31 @@ public class LongestNoRepeatSubstring {
     }
 
     /**
-     * O(n^2)复杂度
-     * 子串的开头可能是字符串中任一子串的位置
+     * O(n)复杂度，用一个hashmap把 O(n^2)复杂度降低到 O(n)复杂度
+     */
+    private static int lengthOfLongestSubstring1(String str) {
+        HashMap<Character, Integer> map = new HashMap<>();
+        int max = 0;
+        int cmax = 0;
+        String csubstr;
+        for (int i = 0, j = 0; i < str.length(); i++) {
+            csubstr = str.substring(j, i);
+            if (!csubstr.contains(String.valueOf(str.charAt(i)))) {
+                cmax += 1;
+                map.put(str.charAt(i), i);
+            } else {
+                j = map.get(str.charAt(i)) + 1;
+                max = Math.max(max, cmax);
+                cmax = i - j + 1;
+                map.put(str.charAt(i), i);
+            }
+        }
+        return max;
+    }
+
+
+    /**
+     * O(n^2)复杂度，子串的开头可能是字符串中任一位置的字符，遍历所有可能
      */
     private static int lengthOfLongestSubstring2(String s) {
         int max = 0;
