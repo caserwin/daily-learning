@@ -3,6 +3,7 @@ package sql
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.expressions.UserDefinedFunction
 import org.apache.spark.sql.functions._
+import sql.myudaf.MergeListsUDAF
 
 /**
   * Created by yidxue on 2018/1/29
@@ -29,6 +30,9 @@ object SparkSQLGroupByDemo1 {
 
     // 对 array 类型 merge
     inputDF.groupBy("id").agg(flatten(collect_list("array")).alias("mergeArray")).show(truncate = false)
+
+    val mergeUDAF = new MergeListsUDAF()
+    inputDF.groupBy("id").agg(mergeUDAF($"array").alias("mergeArray")).show(truncate = false)
 
     // 聚合
     inputDF.groupBy("id").agg(count(lit(1)).alias("COUNT")).show()

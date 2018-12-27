@@ -7,7 +7,7 @@ import org.apache.spark.sql.functions._
 /**
   * Created by yidxue on 2018/1/29
   */
-object SparkSQLGroupByDemo {
+object SparkSQLGroupByDemo1 {
 
   private val dealNUM = udf((num: String) => {
     val res1 = num.toFloat.toInt
