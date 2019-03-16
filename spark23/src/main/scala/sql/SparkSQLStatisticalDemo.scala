@@ -1,9 +1,9 @@
 package sql
 
-import org.apache.spark.sql.expressions.UserDefinedFunction
 import org.apache.spark.sql.SparkSession
+import org.apache.spark.sql.expressions.UserDefinedFunction
 import org.apache.spark.sql.functions._
-import Numeric.Implicits._
+import scala.Numeric.Implicits._
 
 /**
   * Created by yidxue on 2018/12/27
@@ -18,16 +18,21 @@ object SparkSQLStatisticalDemo {
   }
 
   val methodMatch: UserDefinedFunction = udf((seq: Seq[Int], method: String) => {
-    method match {
-      case "0" => seq.min
-      case "25" => seq.sorted.toSeq((0.25 * seq.length).toInt)
-      case "50" => seq.sorted.toSeq((0.50 * seq.length).toInt)
-      case "75" => seq.sorted.toSeq((0.75 * seq.length).toInt)
-      case "100" => seq.max
-      case "avg" => mean(seq)
-      case "stddev" => stdDev(seq)
-      case _ => mean(seq)
+    val res = if (seq.isEmpty) {
+      0
+    } else {
+      method match {
+        case "0" => seq.min
+        case "25" => seq.sorted.toSeq((0.25 * seq.length).toInt)
+        case "50" => seq.sorted.toSeq((0.50 * seq.length).toInt)
+        case "75" => seq.sorted.toSeq((0.75 * seq.length).toInt)
+        case "100" => seq.max
+        case "avg" => mean(seq)
+        case "stddev" => stdDev(seq)
+        case _ => mean(seq)
+      }
     }
+    res
   })
 
   def main(args: Array[String]): Unit = {
@@ -36,9 +41,9 @@ object SparkSQLStatisticalDemo {
 
     val dataSeq = Seq(
       ("1", Seq(1, 2, 3, 4)),
-      ("1", Seq(4, 5, 6)),
+      ("1", Seq()),
       ("1", Seq(6, 7, 8)),
-      ("2", Seq(1, 3, 4))
+      ("2", Seq(1, 2))
     )
     val inputDF = spark.sparkContext.parallelize(dataSeq).toDF("id", "array")
     inputDF.printSchema()

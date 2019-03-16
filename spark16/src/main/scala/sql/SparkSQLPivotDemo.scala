@@ -16,18 +16,19 @@ object SparkSQLPivotDemo {
     import sqlContext.implicits._
 
     val dataSeq = Seq(
-      ("1", "lisi", "4"),
-      ("1", "lisi", "10"),
-      ("1", "lisi", "4"),
-      ("1", "lisi", "10"),
-      ("2", "lisi", "4"),
-      ("2", "lisi", "10"),
-      ("2", "wangwu", "3"),
-      ("2", "wangwu", "4")
+      ("1", "lisi", "a", "4"),
+      ("1", "lisi", "a", "10"),
+      ("1", "lisi", "a", "4"),
+      ("1", "lisi", "a", "10"),
+      ("2", "lisi", "a", "4"),
+      ("2", "lisi", "b", "10"),
+      ("2", "wangwu", "b", "3"),
+      ("2", "wangwu", "b", "4")
     )
-    val inputDF = sc.parallelize(dataSeq).toDF("id", "name", "num")
+    val inputDF = sc.parallelize(dataSeq).toDF("id", "name", "col", "num")
     inputDF.groupBy("id").pivot("name").agg(sum($"num").alias("sum")).show()
-
+    inputDF.groupBy("id").pivot("name").count().show()
+    inputDF.groupBy("id").count().withColumnRenamed("count", "idcount").show()
     sc.stop()
   }
 }

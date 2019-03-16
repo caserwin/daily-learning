@@ -23,6 +23,7 @@ object SparkCSVUtil {
     sqlContext.read
       .format("com.databricks.spark.csv")
       .option("header", "true")
+      //      .option("nullValue", "")
       .option("delimiter", "\t")
       .load(path)
   }

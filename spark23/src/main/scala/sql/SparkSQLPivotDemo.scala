@@ -1,7 +1,7 @@
 package sql
 
 import org.apache.spark.sql.SparkSession
-import org.apache.spark.sql.functions.sum
+import org.apache.spark.sql.functions._
 
 /**
   * Created by yidxue on 2018/9/25
@@ -24,6 +24,7 @@ object SparkSQLPivotDemo {
     )
     val inputDF = spark.sparkContext.parallelize(dataSeq).toDF("id", "name", "num")
     inputDF.groupBy("id").pivot("name").agg(sum($"num").alias("sum")).show()
+    inputDF.groupBy("id").pivot("name").agg(count($"num").alias("count")).show()
 
     spark.stop()
   }
