@@ -23,10 +23,13 @@ public class JavaHashMapDemo {
         Map<String, String> map = new HashMap<String, String>() {{
             put("key1", "value1");
             put("key2", "value2");
-            put("keyN", "valueN");
+            put("keyN", "valueN1");
+            put("keyn", "valueN2");
         }};
 
+        // 区分大小写
         System.out.println(map.get("keyN"));
+        System.out.println(map.get("keyn"));
 
         HashMap<String, Integer> hm = new HashMap<>();
         HashMap<String, Integer> hm1 = new HashMap<>();

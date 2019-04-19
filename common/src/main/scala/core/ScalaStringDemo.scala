@@ -3,7 +3,7 @@ package core
 object ScalaStringDemo {
 
   def main(args: Array[String]): Unit = {
-    val str: String = "12345 23dd"
+    val str: String = "南スーダン12345 23dd"
 
     // 字符串是否包含
     println(str.contains("1234"))
@@ -17,5 +17,8 @@ object ScalaStringDemo {
     // mkstring
     val fields = Seq("col1", "col2")
     println(fields.map(field => s"$field  string  comment  '$field'").mkString(","))
+
+    //
+    println(str.toUpperCase)
   }
 }

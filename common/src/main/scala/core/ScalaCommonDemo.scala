@@ -3,7 +3,7 @@ package core
 /**
   * Created by yidxue on 2018/7/16
   */
-object ScalaTmpForDemo {
+object ScalaCommonDemo {
 
   def main(args: Array[String]): Unit = {
 
