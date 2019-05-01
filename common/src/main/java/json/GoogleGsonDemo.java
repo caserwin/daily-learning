@@ -2,9 +2,14 @@ package json;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.google.gson.internal.LinkedTreeMap;
+import com.google.gson.stream.JsonReader;
 import json.bean.BuildBean;
 import json.bean.Group;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,7 +18,7 @@ import java.util.Map;
  */
 public class GoogleGsonDemo {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         Group group = BuildBean.basicFunc();
         Gson gson = new Gson();
         // class to json
@@ -55,5 +60,12 @@ public class GoogleGsonDemo {
         JsonObject jobj1 = new Gson().fromJson(json, JsonObject.class);
         System.out.println(jobj1.get("message").getAsJsonObject().get("this"));
         System.out.println(jobj1.get("message").getAsJsonObject().get("that"));
+
+        // read from json file
+        String filename = "/Users/cisco/workspace/mygit/daily-learning/common/src/main/resources/fail_data";
+        JsonReader reader = new JsonReader(new FileReader(filename));
+        HashMap data = gson.fromJson(reader,  HashMap.class);
+        ArrayList<LinkedTreeMap<String, String>> ls = (ArrayList<LinkedTreeMap<String, String>>) data.get("context");
+        System.out.println(ls.get(0).get("date"));
     }
 }

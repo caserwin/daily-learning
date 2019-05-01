@@ -26,7 +26,7 @@ public class JavaHashMapDemo {
             put("keyN", "valueN1");
             put("keyn", "valueN2");
         }};
-
+        System.out.println(map);
         // 区分大小写
         System.out.println(map.get("keyN"));
         System.out.println(map.get("keyn"));
