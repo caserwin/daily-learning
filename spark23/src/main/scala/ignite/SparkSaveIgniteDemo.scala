@@ -1,7 +1,6 @@
 package ignite
 
-import org.apache.spark.sql.{SaveMode, SparkSession}
-import org.apache.ignite.spark.IgniteDataFrameSettings._
+import org.apache.spark.sql.SparkSession
 import org.apache.spark.storage.StorageLevel
 
 /**
@@ -23,15 +22,7 @@ object SparkSaveIgniteDemo {
     val inputDF1 = spark.sparkContext.parallelize(dataSeq1).toDF("id", "name", "city")
 
     inputDF1.persist(StorageLevel.MEMORY_AND_DISK_SER)
-
-    inputDF1.write.format(FORMAT_IGNITE)
-      .mode(SaveMode.Append)
-      .option(OPTION_CONFIG_FILE, config)
-      .option(OPTION_TABLE, "person")
-      .option(OPTION_STREAMER_ALLOW_OVERWRITE, "true")
-      .option(OPTION_CREATE_TABLE_PRIMARY_KEY_FIELDS, "id")
-      .option(OPTION_CREATE_TABLE_PARAMETERS, "template=replicated,backups=2")
-      .save()
+    IgniteService.save(inputDF1, "person", "id,name")
 
     spark.stop()
   }
