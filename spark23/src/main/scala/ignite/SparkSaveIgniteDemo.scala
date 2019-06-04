@@ -11,7 +11,13 @@ object SparkSaveIgniteDemo {
   def main(args: Array[String]): Unit = {
     val config = "example-ignite.xml"
 
-    val spark = SparkSession.builder.appName("SQL Application").getOrCreate()
+    val spark = SparkSession.builder
+      .appName("SQL Application")
+      .config("ignite.disableSparkSQLOptimization", "true")
+      .config("spark.kryoserializer.buffer.max", "512")
+      .config("spark.kryoserializer.buffer", "512")
+      .config("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
+      .getOrCreate()
     import spark.implicits._
 
     val dataSeq1 = Seq(
