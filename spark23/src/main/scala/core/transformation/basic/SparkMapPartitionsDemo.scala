@@ -6,6 +6,16 @@ import org.apache.spark.{SparkConf, SparkContext}
   * Created by yidxue on 2018/5/7
   */
 object SparkMapPartitionsDemo {
+  /*  插入数据库
+      df.mapPartitions(
+        iter => {
+          val igniteOBJ = new IgniteJavaService(Constant.IGNITE_URL)
+          for (element <- iter) yield {
+            igniteOBJ.upsertMeetingLevel(element, Constant.MEETINGDATA_COLS, Constant.meetingLevelname, day, classOf[MeetingValueBean])
+          }
+        }
+      )
+   */
 
   def main(args: Array[String]): Unit = {
     val sparkConf = new SparkConf().setAppName("WordCount").setMaster("local[*]")

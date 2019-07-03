@@ -1,7 +1,6 @@
 package ignite
 
-import org.apache.spark.sql.{SaveMode, SparkSession}
-import org.apache.ignite.spark.IgniteDataFrameSettings._
+import org.apache.spark.sql.SparkSession
 import org.apache.spark.storage.StorageLevel
 
 /**
@@ -12,7 +11,13 @@ object SparkSaveIgniteDemo {
   def main(args: Array[String]): Unit = {
     val config = "example-ignite.xml"
 
-    val spark = SparkSession.builder.appName("SQL Application").getOrCreate()
+    val spark = SparkSession.builder
+      .appName("SQL Application")
+      .config("ignite.disableSparkSQLOptimization", "true")
+      .config("spark.kryoserializer.buffer.max", "512")
+      .config("spark.kryoserializer.buffer", "512")
+      .config("spark.serializer", "org.apache.spark.serializer.KryoSerializer")
+      .getOrCreate()
     import spark.implicits._
 
     val dataSeq1 = Seq(
@@ -23,15 +28,7 @@ object SparkSaveIgniteDemo {
     val inputDF1 = spark.sparkContext.parallelize(dataSeq1).toDF("id", "name", "city")
 
     inputDF1.persist(StorageLevel.MEMORY_AND_DISK_SER)
-
-    inputDF1.write.format(FORMAT_IGNITE)
-      .mode(SaveMode.Append)
-      .option(OPTION_CONFIG_FILE, config)
-      .option(OPTION_TABLE, "person")
-      .option(OPTION_STREAMER_ALLOW_OVERWRITE, "true")
-      .option(OPTION_CREATE_TABLE_PRIMARY_KEY_FIELDS, "id")
-      .option(OPTION_CREATE_TABLE_PARAMETERS, "template=replicated,backups=2")
-      .save()
+    IgniteService.save(inputDF1, "person", "id,name")
 
     spark.stop()
   }
