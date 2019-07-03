@@ -19,6 +19,25 @@
         <module>beam</module>
     </modules>
 
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <dependency.scope>compile</dependency.scope>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>  <!-- 设置默认激活这个配置 -->
+            </activation>
+        </profile>
+
+        <profile>
+            <id>online</id>
+            <properties>
+                <dependency.scope>provided</dependency.scope>
+            </properties>
+        </profile>
+    </profiles>
+
     <properties>
         <beam.version>2.6.0</beam.version>
         <bigquery.version>v2-rev374-1.23.0</bigquery.version>

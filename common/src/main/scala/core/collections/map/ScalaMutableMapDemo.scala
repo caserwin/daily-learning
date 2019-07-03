@@ -42,6 +42,10 @@ object ScalaMutableMapDemo {
     // 得到所有values
     println("所有的value: "+map.values)
 
+    val m = Map("petal length" -> 347, "petal width" -> 261, "sepal length" -> 125, "sepal width" -> 86)
+    val all = m.foldLeft(0.0)(_+_._2)
+    val m_trans = m.map(x => x._1->x._2/all)
+    println(m_trans)
   }
 
   def addNewItem(map: mutable.LinkedHashMap[String, String]): Unit = {
