@@ -22,6 +22,9 @@ object SparkSQLTempTableDemo {
     // 以下code报错
     //    spark.newSession().sql("SELECT * FROM people").show()
 
+    //    spark.sql("CACHE TABLE people")
+    //    spark.sql("select * from people").show()
+
     // 创建全局视图
     input1.createGlobalTempView("people1")
     spark.sql("select * from global_temp.people1").show()
