@@ -4,12 +4,7 @@ import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.expressions.UserDefinedFunction
 import org.apache.spark.sql.functions.{collect_list, udf}
 
-import scala.collection.immutable.ListMap
-
 object SparkSQLGroupBySortDemo {
-  def manOf[T: Manifest](t: T): Manifest[T] = manifest[T]
-
-  //  val flatten_distinct: UserDefinedFunction = udf((xs: Seq[Seq[String]]) => xs.flatten.distinct)
   val merge_array: UserDefinedFunction = udf(mergeArray)
 
   def mergeArray: Seq[Seq[String]] => Seq[String] = {
