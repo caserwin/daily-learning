@@ -41,6 +41,13 @@ object ScalaMapDemo {
 
     // 得到所有values
     println("所有的value: " + map1.values)
+
+    // 根据value 排序
+    println(A.toList.sortWith {_._2 > _._2})
+    println(A.toList.sortWith {_._2 < _._2})
+
+    println(A.toList.sortBy(-_._2))
+    println(A.toList.sortBy(_._2))
   }
 
 

@@ -9,7 +9,7 @@ import org.apache.spark.sql.functions.udf
   */
 object SparkSQLUDFDemo4 {
 
-  def myFunc: (String => Array[String]) = { s => Array(s.toLowerCase, s.toUpperCase) }
+  def myFunc: String => Array[String] = { s => Array(s.toLowerCase, s.toUpperCase) }
 
   val myUDF: UserDefinedFunction = udf(myFunc)
 

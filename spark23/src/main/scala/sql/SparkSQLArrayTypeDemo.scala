@@ -25,15 +25,14 @@ object SparkSQLArrayTypeDemo {
     val df = inputDF.groupBy("country")
       .agg(collect_list($"Et").alias("et"))
       .withColumn("FLAG", when(array_contains($"et", "aaa") || array_contains($"et", "bbb"), "TRUE").otherwise("FALSE"))
-      .withColumn("ETNEW", myUDF($"et"))
+      .withColumn("ETNEW", myUDF($"et", $"FLAG"))
 
     df.show(truncate = false)
-    df.printSchema()
-
     spark.stop()
   }
 
   val myUDF: UserDefinedFunction = udf(myFunc)
-  def myFunc: (Seq[String] => String) = { s => s.mkString(":") }
+
+  def myFunc: (Seq[String], String) => String = { (s, i) => s.mkString(",") + "\t" + i }
 
 }
