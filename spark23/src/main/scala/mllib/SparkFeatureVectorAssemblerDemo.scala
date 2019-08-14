@@ -17,7 +17,7 @@ object SparkFeatureVectorAssemblerDemo {
       .getOrCreate()
 
     val dataset = spark
-      .createDataFrame(Seq((0, 18, None, Vectors.dense(0.0, 10.0, 0.5), 1.0)))
+      .createDataFrame(Seq((0, 18, 12, Vectors.dense(0.0, 10.0, 0.5), 1.0)))
       .toDF("id", "hour", "mobile", "userFeatures", "clicked")
     dataset.show()
 
