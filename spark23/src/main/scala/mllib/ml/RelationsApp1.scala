@@ -1,6 +1,5 @@
 package mllib.ml
 
-import com.typesafe.config.ConfigFactory
 import org.apache.spark.mllib.fpm.{AssociationRules, FPGrowth}
 import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.SparkSession
@@ -8,8 +7,6 @@ import sql.ProcessContext
 
 object RelationsApp1 {
   def manOf[T: Manifest](t: T): Manifest[T] = manifest[T]
-
-  private val app = ConfigFactory.load
 
   def main(args: Array[String]): Unit = {
     implicit val spark: SparkSession = new ProcessContext("cat-relation").spark

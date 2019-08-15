@@ -24,13 +24,13 @@ public class HbaseClientDemo {
     public static void main(String[] args) throws IOException {
         HbaseClientDemo hcd = new HbaseClientDemo();
         System.out.println("=======");
-//        hcd.addRow("kaola_strategyflow:usr_status_rt", "row0003", "cf", "c2", "v2");
-//        hcd.getData("kaola_strategyflow:usr_status_rt", "row1", "cf", "c1");
-//        hcd.scanData("kaola_strategyflow:usr_status_rt", "row1", "rowkey0001");
-//        hcd.deleRow("kaola_strategyflow:usr_status_rt", "row0003", "cf1", "q1");
+//        hcd.addRow("xxx:xxx", "row0003", "cf", "c2", "v2");
+//        hcd.getData("xxx:xxx", "row1", "cf", "c1");
+//        hcd.scanData("xxx:xxx", "row1", "rowkey0001");
+//        hcd.deleRow("xxx:xxx", "row0003", "cf1", "q1");
         hcd.deleRowByRegex("xxx:xxx", "rowkey_*.");
-//        hcd.scanDataByRegex("kaola_strategyflow:usr_status_rt", "rowkey_*.");
-//        hcd.scanDataByRegex("kaola_strategyflow:usr_status_rt", "rowkey_");
+//        hcd.scanDataByRegex("xxx:xxx", "rowkey_*.");
+//        hcd.scanDataByRegex("xxx:xxx", "rowkey_");
     }
 
 

@@ -23,7 +23,7 @@ object SparkSQLArrayTypeDemo {
     val inputDF = spark.sparkContext.parallelize(dataSeq1).toDF("name", "Cindex", "country", "et")
 
     val df = inputDF.groupBy("country")
-      .agg(collect_list($"Et").alias("et"))
+      .agg(collect_list($"et").alias("et"))
       .withColumn("FLAG", when(array_contains($"et", "aaa") || array_contains($"et", "bbb"), "TRUE").otherwise("FALSE"))
       .withColumn("ETNEW", myUDF($"et", $"FLAG"))
 
