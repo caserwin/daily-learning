@@ -14,7 +14,7 @@ import org.apache.flink.streaming.api.windowing.time.Time;
  * Created by yidxue on 2018/9/17
  * 这里要记录下，countWindow 结合 event time + watermark机制，根本不起作用。
  */
-public class FlinkCountWindowDemo2 {
+public class FlinkTumblingCountWindowDemo {
     public static void main(String[] args) throws Exception {
         long delay = 5100L;
 

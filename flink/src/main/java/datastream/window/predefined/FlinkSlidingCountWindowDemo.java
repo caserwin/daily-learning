@@ -11,7 +11,7 @@ import org.apache.flink.streaming.api.functions.source.RichParallelSourceFunctio
 /**
  * @author yidxue
  */
-public class FlinkCountWindowDemo1 {
+public class FlinkSlidingCountWindowDemo {
 
     public static void main(String[] args) throws Exception {
         final ParameterTool params = ParameterTool.fromArgs(args);

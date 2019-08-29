@@ -11,14 +11,13 @@ import org.apache.flink.streaming.api.functions.timestamps.BoundedOutOfOrderness
 import org.apache.flink.streaming.api.windowing.time.Time;
 
 /**
- * Created by yidxue on 2018/8/18
- * nc -lk 9999
+ * @author yidxue
  */
-public class FlinkTimeWindowsDemo {
+public class FlinkSlidingTimeWindowsDemo {
 
     public static void main(String[] args) throws Exception {
         int windowSize = 10;
-        long delay = 5100L;
+        long delay = 5000L;
 
         final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
@@ -40,23 +39,23 @@ public class FlinkTimeWindowsDemo {
 
         // 设置水位线
         DataStream<Tuple3<String, String, Long>> stream = source.assignTimestampsAndWatermarks(
-            new BoundedOutOfOrdernessTimestampExtractor<Tuple3<String, String, Long>>(Time.milliseconds(delay)) {
-                @Override
-                public long extractTimestamp(Tuple3<String, String, Long> element) {
-                    System.out.println("watermark -> " + getCurrentWatermark().getTimestamp());
-                    return element.f2;
+                new BoundedOutOfOrdernessTimestampExtractor<Tuple3<String, String, Long>>(Time.milliseconds(delay)) {
+                    @Override
+                    public long extractTimestamp(Tuple3<String, String, Long> element) {
+                        System.out.println("watermark -> " + getCurrentWatermark().getTimestamp());
+                        return element.f2;
+                    }
                 }
-            }
         );
 
         // 窗口聚合
-        stream.keyBy(0).timeWindow(Time.seconds(windowSize)).reduce(
-            new ReduceFunction<Tuple3<String, String, Long>>() {
-                @Override
-                public Tuple3<String, String, Long> reduce(Tuple3<String, String, Long> value1, Tuple3<String, String, Long> value2) throws Exception {
-                    return Tuple3.of(value1.f0, value1.f1 + "" + value2.f1, 1L);
+        stream.keyBy(0).timeWindow(Time.seconds(windowSize), Time.seconds(1000L)).reduce(
+                new ReduceFunction<Tuple3<String, String, Long>>() {
+                    @Override
+                    public Tuple3<String, String, Long> reduce(Tuple3<String, String, Long> value1, Tuple3<String, String, Long> value2) throws Exception {
+                        return Tuple3.of(value1.f0, value1.f1 + "" + value2.f1, 1L);
+                    }
                 }
-            }
         ).print();
 
         env.execute("TimeWindowDemo");
