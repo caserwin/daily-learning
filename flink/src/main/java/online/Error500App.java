@@ -6,7 +6,7 @@ import org.apache.flink.api.common.serialization.SimpleStringSchema;
 import org.apache.flink.streaming.api.TimeCharacteristic;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
-import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer010;
+import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -58,7 +58,7 @@ public class Error500App {
         props.setProperty("bootstrap.servers", "10.29.42.141:9092,10.29.42.142:9092,10.29.42.143:9092");
         props.setProperty("group.id", "group1");
         String topic = "error500.test";
-        FlinkKafkaConsumer010<String> myConsumer = new FlinkKafkaConsumer010<>(topic, new SimpleStringSchema(), props);
+        FlinkKafkaConsumer<String> myConsumer = new FlinkKafkaConsumer<>(topic, new SimpleStringSchema(), props);
 
         // 添加 kafka 数据源
         DataStream<String> stream = env.addSource(myConsumer.setStartFromEarliest());

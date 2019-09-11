@@ -13,14 +13,14 @@ public class FlinkAggregationsDemo {
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
         DataStream<Tuple2<Integer, Integer>> dStream = env.fromElements(
-            Tuple2.of(2, 6),
-            Tuple2.of(2, 4),
-            Tuple2.of(1, 3),
-            Tuple2.of(1, 5),
-            Tuple2.of(6, 7),
-            Tuple2.of(6, 7),
-            Tuple2.of(1, 17),
-            Tuple2.of(1, 2));
+                Tuple2.of(2, 6),
+                Tuple2.of(2, 4),
+                Tuple2.of(1, 3),
+                Tuple2.of(1, 5),
+                Tuple2.of(6, 7),
+                Tuple2.of(6, 7),
+                Tuple2.of(1, 17),
+                Tuple2.of(1, 2));
 
 //        DataStream<Tuple2<Integer,Integer>> sumStream = dStream.keyBy(0).sum(1);
 //        sumStream.print();

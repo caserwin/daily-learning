@@ -3,7 +3,7 @@ package datastream.datasource.kafka;
 import org.apache.flink.streaming.api.TimeCharacteristic;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
-import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer010;
+import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer;
 import org.apache.flink.streaming.connectors.kafka.internals.KafkaTopicPartition;
 import org.apache.flink.api.common.serialization.SimpleStringSchema;
 import java.util.HashMap;
@@ -14,7 +14,7 @@ import java.util.Properties;
  * @author yidxue
  * https://ci.apache.org/projects/flink/flink-docs-release-1.6/dev/connectors/kafka.html
  */
-public class FlinkKafkaConsumer {
+public class FlinkKafkaConsumerDemo {
     public static void main(String[] args) throws Exception {
         final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setStreamTimeCharacteristic(TimeCharacteristic.ProcessingTime);
@@ -27,7 +27,7 @@ public class FlinkKafkaConsumer {
         props.setProperty("bootstrap.servers", "localhost:9092");
         props.setProperty("group.id", "group1");
         String topic = "test";
-        FlinkKafkaConsumer010<String> myConsumer = new FlinkKafkaConsumer010<>(topic, new SimpleStringSchema(), props);
+        FlinkKafkaConsumer<String> myConsumer = new FlinkKafkaConsumer<>(topic, new SimpleStringSchema(), props);
 
         // 设置offset 从最开始读取。
         //        myConsumer.setStartFromEarliest();

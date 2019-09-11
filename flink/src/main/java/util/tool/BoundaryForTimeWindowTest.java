@@ -8,15 +8,15 @@ public class BoundaryForTimeWindowTest {
         // 注意是毫秒为单位
         long windowsize = 10000L;
         // 注意是毫秒为单位，滚动窗口 offset = 0L
-        long offset = 0L;
+        long offset = 5000L;
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-        long a1 = 1000000052000L;
-        long a2 = 1000000104000L;
-        long b1 = 1000000050000L;
-        long b2 = 1000000054000L;
-        long b5 = 1000000100000L;
-        long b6 = 1000000108000L;
+        long a1 = 1000000000000L;
+        long a2 = 1000000004000L;
+        long b1 = 1000000009000L;
+        long b2 = 1000000012000L;
+        long b5 = 1000000008000L;
+        long b6 = 1000000010000L;
 
         System.out.println(a1 + " -> " + format.format(a1) + "\t所属窗口的起始时间是: " + getWindowStartWithOffset(a1, offset, windowsize) + " -> " + format.format(getWindowStartWithOffset(a1, offset, windowsize)));
         System.out.println(a2 + " -> " + format.format(a2) + "\t所属窗口的起始时间是: " + getWindowStartWithOffset(a2, offset, windowsize) + " -> " + format.format(getWindowStartWithOffset(a2, offset, windowsize)));

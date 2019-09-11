@@ -12,7 +12,7 @@
     <artifactId>flink</artifactId>
 
     <properties>
-        <flink.version>1.6.0</flink.version>
+        <flink.version>1.7.2</flink.version>
         <scala.version>2.11</scala.version>
     </properties>
 
@@ -87,8 +87,14 @@
 
         <dependency>
             <groupId>org.apache.flink</groupId>
-            <artifactId>flink-connector-kafka-0.10_${scala.version}</artifactId>
+            <artifactId>flink-connector-kafka_${scala.version}</artifactId>
             <version>${flink.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>net.jpountz.lz4</groupId>
+                    <artifactId>lz4</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>

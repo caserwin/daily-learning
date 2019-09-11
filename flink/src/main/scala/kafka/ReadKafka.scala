@@ -4,7 +4,7 @@ import java.util.Properties
 
 import org.apache.flink.streaming.api.TimeCharacteristic
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment
-import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer010
+import org.apache.flink.streaming.connectors.kafka.FlinkKafkaConsumer
 import org.apache.flink.streaming.util.serialization.SimpleStringSchema
 
 
@@ -24,7 +24,7 @@ object ReadKafka {
     props.setProperty("group.id", "myGroup-2") // Consumer group ID
 
     // create a Kafka consumer
-    val myConsumer = new FlinkKafkaConsumer010[String]("aggr_splunk", new SimpleStringSchema, props)
+    val myConsumer = new FlinkKafkaConsumer[String]("aggr_splunk", new SimpleStringSchema, props)
     myConsumer.setStartFromEarliest()
     val stream = env.addSource(myConsumer)
 
