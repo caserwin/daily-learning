@@ -58,6 +58,12 @@ under the License.
 			<groupId>org.apache.flink</groupId>
 			<artifactId>flink-connector-kafka-0.10_2.11</artifactId>
 			<version>1.6.0</version>
+			<exclusions>
+				<exclusion>
+					<groupId>net.jpountz.lz4</groupId>
+					<artifactId>lz4</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
