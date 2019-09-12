@@ -14,7 +14,8 @@
         <module>spark23</module>
         <module>common</module>
         <module>spark-examples</module>
-        <module>flink-examples</module>
+<!--        <module>flink-examples-1.6</module>-->
+        <module>flink-examples-1.9</module>
         <module>ut-report</module>
         <module>beam</module>
     </modules>

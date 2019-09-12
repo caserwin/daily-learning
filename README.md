@@ -10,6 +10,6 @@
 * common module: 记录常用的Java和Scala 代码。
 * flink example module: 从flink github 中拷贝的example 代码。目前基于1.6的Flink 代码。
 * spark example module: 从Spark github 中拷贝的example 代码。目前基于2.3的Spark 代码。
-* flink module: Flink 1.6 官方的API 使用示例。主要Java 实现，见：https://github.com/caserwin/daily-learning/tree/master/flink/src/main/java
+* flink module: Flink 1.9 官方的API 使用示例。主要Java 实现，见：https://github.com/caserwin/daily-learning/tree/master/flink/src/main/java
 * spark-16 module: Spark 1.6官方的API 使用示例。主要Scala 实现，见：https://github.com/caserwin/daily-learning/tree/master/spark16/src/main/scala
 * spark-22 module: Spark 2.3官方的API 使用示例。主要Scala 实现，见：https://github.com/caserwin/daily-learning/tree/master/spark23/src/main/scala
