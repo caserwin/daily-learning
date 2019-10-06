@@ -10,7 +10,7 @@ import scala.collection.mutable.ArrayBuffer
   * Date: 17/11/15 上午10:10
   * Description: 
   */
-object SparkAggregateByKey {
+object SparkAggregateByKeyDemo1 {
 
   def main(args: Array[String]): Unit = {
     val sparkConf = new SparkConf().setAppName("WordCount").setMaster("local[*]")
@@ -32,7 +32,7 @@ object SparkAggregateByKey {
     val crdd = input.rdd.map {
       case Row(gid: String, uid: String, name: String, city: String) =>
         ((gid, uid), (name, city))
-    }.aggregateByKey(ArrayBuffer[(String, String)]())((ls,v) => ls+=v, (ls1,ls2) => ls1++=ls2).mapValues(_.toList)
+    }.aggregateByKey(ArrayBuffer[(String, String)]())((ls, v) => ls += v, (ls1, ls2) => ls1 ++= ls2).mapValues(_.toList)
 
     crdd.foreach(println(_))
   }

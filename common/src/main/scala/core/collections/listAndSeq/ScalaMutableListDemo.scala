@@ -1,6 +1,5 @@
 package core.collections.listAndSeq
 
-import scala.Array.concat
 import scala.collection.mutable
 
 /**

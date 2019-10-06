@@ -2,7 +2,7 @@ package performace
 
 import org.apache.spark.{SparkConf, SparkContext}
 
-object SparkGroupByKeyTest {
+object SparkGroupByKey2 {
 
   def main(args: Array[String]): Unit = {
     val sparkConf = new SparkConf().setAppName("WordCount").setMaster("local[*]")
