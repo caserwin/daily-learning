@@ -1,7 +1,7 @@
 package core.collections.javaconversions
 
+import java.util
 import java.util.Calendar
-
 import scala.collection.JavaConversions._
 
 /**
@@ -10,6 +10,15 @@ import scala.collection.JavaConversions._
 object ScalaUseJavaCollectionsDemo {
 
   def main(args: Array[String]): Unit = {
+
+    val brandDistinctMap = new java.util.HashMap[String, java.lang.Double]
+    brandDistinctMap.put("a", 1d)
+    // 这里必须是写成  java.lang.Double 这种形式
+    val vm: util.HashMap[String, java.lang.Double] = CollectionDemo.setHashMap(brandDistinctMap)
+    for (en <- vm.entrySet()) {
+      println(en.getKey + "->" + en.getValue)
+    }
+
     JavaHashMapDemo()
   }
 

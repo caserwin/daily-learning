@@ -21,4 +21,12 @@ public class CollectionDemo {
         list.add("b");
         return list;
     }
+
+    public static HashMap<String, Double> setHashMap(HashMap<String, Double> map) {
+        HashMap<String, Double> vm = new HashMap<>();
+        for (HashMap.Entry<String, Double> en : map.entrySet()) {
+            vm.put(en.getKey(), en.getValue());
+        }
+        return vm;
+    }
 }

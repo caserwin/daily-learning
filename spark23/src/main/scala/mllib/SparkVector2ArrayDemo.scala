@@ -4,7 +4,7 @@ import org.apache.spark.ml.feature.OneHotEncoderEstimator
 import org.apache.spark.sql.SparkSession
 import org.apache.spark.sql.functions.{col, udf}
 
-object SparkVector2Array {
+object SparkVector2ArrayDemo {
 
   def main(args: Array[String]): Unit = {
     implicit val spark: SparkSession = SparkSession

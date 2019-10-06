@@ -7,7 +7,7 @@ import org.apache.spark.mllib.util.MLUtils
 import org.apache.spark.rdd.RDD
 
 
-object SparkMllibVectorDemo {
+object SparkVectorDemo {
 
   def main(args: Array[String]): Unit = {
     val spark = SparkSession.builder().master("local[2]").appName("example").getOrCreate()
