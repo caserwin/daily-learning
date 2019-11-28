@@ -19,5 +19,7 @@ object SparkSQLCreateDFDemo1 {
 
     val inputDF = spark.sparkContext.parallelize(dataSeq).toDF("id", "name", "city")
     inputDF.show()
+
+    spark.stop()
   }
 }

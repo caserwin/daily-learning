@@ -12,5 +12,6 @@ object ScalaForYieldDemo {
     val a = Array(1, 2, 3, 4, 5)
     val b = for (e <- a if e > 2 if e < 4) yield e
     b.foreach(println(_))
+
   }
 }

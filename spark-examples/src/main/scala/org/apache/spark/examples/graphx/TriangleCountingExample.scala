@@ -49,7 +49,7 @@ object TriangleCountingExample {
 
     // $example on$
     // Load the edges in canonical order and partition the graph for triangle count
-    val graph = GraphLoader.edgeListFile(sc, "data/graphx/followers.txt", true)
+    val graph = GraphLoader.edgeListFile(sc, "data/graphx/followers.txt", canonicalOrientation = true)
       .partitionBy(PartitionStrategy.RandomVertexCut)
     // Find the triangle count for each vertex
     val triCounts = graph.triangleCount().vertices

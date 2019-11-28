@@ -51,7 +51,7 @@ object SynthBenchmark {
     val options = args.map {
       arg =>
         arg.dropWhile(_ == '-').split('=') match {
-          case Array(opt, v) => (opt -> v)
+          case Array(opt, v) => opt -> v
           case _ => throw new IllegalArgumentException("Invalid argument: " + arg)
         }
     }

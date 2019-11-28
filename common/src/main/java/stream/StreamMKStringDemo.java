@@ -17,5 +17,12 @@ public class StreamMKStringDemo {
 
         int[] f = {1, 2, 3, 4};
         System.out.println(Arrays.stream(f).mapToObj(String::valueOf).collect(Collectors.joining(",")));
+
+
+//        String ss = "2759545:1569909247000,2317685:1569909247000,5234586:1569909247000,2586449:1569909247000,1128562:1569909247000,2759545:1569909247000,2317685:1569909247000,5234586:1569909247000,2586449:1569909247000,1128562:1569909247000";
+        String ss = "";
+        String[] s = Arrays.stream(ss.split(",")).map(x -> x.split(":")[0]).toArray(String[]::new);
+
+        System.out.println(s.length);
     }
 }

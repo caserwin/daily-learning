@@ -39,6 +39,7 @@ object AggregateMessagesExample {
     val spark = SparkSession
       .builder
       .appName(s"${this.getClass.getSimpleName}")
+      .master("local[*]")
       .getOrCreate()
     val sc = spark.sparkContext
 

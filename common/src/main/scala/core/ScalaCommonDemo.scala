@@ -20,6 +20,8 @@ object ScalaCommonDemo {
     val ls2 = Seq("a", "b")
     ls1.zip(ls2).foreach(println(_))
 
+    println(ls1.take(10))
+
     // 判断一个对象的数据类型
     def manOf[T: Manifest](t: T): Manifest[T] = manifest[T]
     println("ls1 的数据类型为：" + manOf(ls1))

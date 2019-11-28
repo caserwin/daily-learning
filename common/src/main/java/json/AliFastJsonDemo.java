@@ -1,9 +1,13 @@
 package json;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.TypeReference;
+import json.bean.AccountBean;
 import json.bean.BuildBean;
+import json.bean.DataBean;
 import json.bean.Group;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,7 +24,7 @@ public class AliFastJsonDemo {
         System.out.println("=============================");
 
         // json to class
-        Group group = JSON.parseObject(jsonString, Group.class);
+        AccountBean group = JSON.parseObject(jsonString, AccountBean.class);
         System.out.println("json to class:");
         System.out.println(group.toString());
         System.out.println("=============================");
@@ -47,7 +51,7 @@ public class AliFastJsonDemo {
         System.out.println("=============================");
 
         // multi json, 获得指定的多层嵌套key
-        String json = "{ \"message\": {\"this\": 174065352, \"that\":\"ddd\"} }";
+        String json = "{ \"message\": {\"this\": 174065352, \"that\":\"\"} }";
         System.out.println("message.this:" + JSON.parseObject(JSON.parseObject(json).get("message").toString()).get("this"));
         System.out.println("message.that:" + JSON.parseObject(JSON.parseObject(json).get("message").toString()).get("that"));
 

@@ -12,6 +12,8 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.lang.reflect.Type;
+import com.google.gson.reflect.TypeToken;
 
 /**
  * @author yidxue
@@ -62,10 +64,16 @@ public class GoogleGsonDemo {
         System.out.println(jobj1.get("message").getAsJsonObject().get("that"));
 
         // read from json file
-        String filename = "/Users/cisco/workspace/mygit/daily-learning/common/src/main/resources/fail_data";
+        String filename = "common/src/main/resources/fail_data";
         JsonReader reader = new JsonReader(new FileReader(filename));
-        HashMap data = gson.fromJson(reader,  HashMap.class);
+        HashMap data = gson.fromJson(reader, HashMap.class);
         ArrayList<LinkedTreeMap<String, String>> ls = (ArrayList<LinkedTreeMap<String, String>>) data.get("context");
         System.out.println(ls.get(0).get("date"));
+
+        // json to map2
+        Type type = new TypeToken<Map<String, String>>() {
+        }.getType();
+        Map<String, String> myMap = gson.fromJson("{'k1':'apple','k2':'orange'}", type);
+        System.out.println(myMap);
     }
 }

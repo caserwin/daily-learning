@@ -18,6 +18,7 @@
         <module>flink-examples-1.9</module>
         <module>ut-report</module>
         <module>beam</module>
+        <module>spark-graph</module>
     </modules>
 
     <profiles>

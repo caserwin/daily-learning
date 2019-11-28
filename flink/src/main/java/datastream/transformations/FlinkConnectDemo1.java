@@ -19,7 +19,7 @@ import java.util.HashSet;
  * @author yidxue
  * 这个得多试运行。
  */
-public class FlinkConnectDemo {
+public class FlinkConnectDemo1 {
     public static void main(String[] args) throws Exception {
         final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setParallelism(1);

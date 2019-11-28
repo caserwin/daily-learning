@@ -24,16 +24,16 @@ import org.apache.spark.graphx.GraphLoader
 import org.apache.spark.sql.SparkSession
 
 /**
- * Suppose I want to build a graph from some text files, restrict the graph
- * to important relationships and users, run page-rank on the sub-graph, and
- * then finally return attributes associated with the top users.
- * This example do all of this in just a few lines with GraphX.
- *
- * Run with
- * {{{
- * bin/run-example graphx.ComprehensiveExample
- * }}}
- */
+  * Suppose I want to build a graph from some text files, restrict the graph
+  * to important relationships and users, run page-rank on the sub-graph, and
+  * then finally return attributes associated with the top users.
+  * This example do all of this in just a few lines with GraphX.
+  *
+  * Run with
+  * {{{
+  * bin/run-example graphx.ComprehensiveExample
+  * }}}
+  */
 object ComprehensiveExample {
 
   def main(args: Array[String]): Unit = {
@@ -41,13 +41,15 @@ object ComprehensiveExample {
     val spark = SparkSession
       .builder
       .appName(s"${this.getClass.getSimpleName}")
+      .master("local[*]")
       .getOrCreate()
     val sc = spark.sparkContext
 
     // $example on$
     // Load my user data and parse into tuples of user id and attribute list
-    val users = (sc.textFile("data/graphx/users.txt")
-      .map(line => line.split(",")).map( parts => (parts.head.toLong, parts.tail) ))
+    val users = sc.textFile("data/graphx/users.txt")
+      .map(line => line.split(","))
+      .map(parts => (parts.head.toLong, parts.tail))
 
     // Parse the edge data which is already in userId -> userId format
     val followerGraph = GraphLoader.edgeListFile(sc, "data/graphx/followers.txt")
@@ -60,7 +62,7 @@ object ComprehensiveExample {
     }
 
     // Restrict the graph to users with usernames and names
-    val subgraph = graph.subgraph(vpred = (vid, attr) => attr.size == 2)
+    val subgraph = graph.subgraph(vpred = (vid, attr) => attr.length == 2)
 
     // Compute the PageRank
     val pagerankGraph = subgraph.pageRank(0.001)
@@ -77,4 +79,5 @@ object ComprehensiveExample {
     spark.stop()
   }
 }
+
 // scalastyle:on println

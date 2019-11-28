@@ -14,16 +14,19 @@ object SparkSQLArrayTypeDemo {
     import spark.implicits._
 
     val dataSeq1 = Seq(
-      ("HangZhou", 1.7, "CN", "aaa"),
+      ("HangZhou", 1.7, "CN", "aaa1"),
       ("NewYork", 1.7, "US", "downloadstart"),
       ("Halifax", 3.0, "US", "downloadend"),
-      ("ShangHai", 2.2, "CN", "aaa"),
-      ("NanJing", 1.0, "CN", "aaa")
+      ("ShangHai", 2.2, "CN", "aaa2"),
+      ("NanJing", 1.0, "CN", "aaa3")
     )
     val inputDF = spark.sparkContext.parallelize(dataSeq1).toDF("name", "Cindex", "country", "et")
 
     val df = inputDF.groupBy("country")
-      .agg(collect_list($"et").alias("et"))
+      .agg(
+        collect_list($"et").alias("et"),
+        concat_ws(",", collect_list($"Cindex")).alias("Cindex")
+      )
       .withColumn("FLAG", when(array_contains($"et", "aaa") || array_contains($"et", "bbb"), "TRUE").otherwise("FALSE"))
       .withColumn("ETNEW", myUDF($"et", $"FLAG"))
 

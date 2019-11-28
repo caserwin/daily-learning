@@ -17,7 +17,7 @@ import java.util.Random;
  * Created by yidxue on 2018/8/23
  * 参考：https://blog.csdn.net/whr_yy/article/details/79887275
  */
-public class FlinkWindowFunctionDemo {
+public class FlinkApplyFunctionDemo {
     public static void main(String[] args) throws Exception {
 
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
@@ -75,6 +75,9 @@ public class FlinkWindowFunctionDemo {
         env.execute("WindowsFunctionDemo");
     }
 
+    /**
+     * apply 也可以用 extends RichWindowFunction 这种方式
+     */
     public static class MyWindowFunction implements WindowFunction<Tuple2<String, String>, String, Integer, TimeWindow> {
         @Override
         public void apply(Integer integer, TimeWindow window, Iterable<Tuple2<String, String>> input, Collector<String> out) throws Exception {

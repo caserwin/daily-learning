@@ -17,7 +17,7 @@ import util.source.StreamDataSource1;
  * Created by yidxue on 2018/9/18
  * Interval Join 中的元素必须是 watermark 之上。
  */
-public class FlinkIntervalJoinDemo {
+public class FlinkIntervalJoinDemo1 {
     public static void main(String[] args) throws Exception {
         long delay = 7000L;
         long positive = 5000L;
@@ -33,34 +33,34 @@ public class FlinkIntervalJoinDemo {
 
         // 设置水位线
         DataStream<Tuple3<String, String, Long>> leftStream = leftSource.assignTimestampsAndWatermarks(
-            new BoundedOutOfOrdernessTimestampExtractor<Tuple3<String, String, Long>>(Time.milliseconds(delay)) {
-                @Override
-                public long extractTimestamp(Tuple3<String, String, Long> element) {
-                    return element.f2;
+                new BoundedOutOfOrdernessTimestampExtractor<Tuple3<String, String, Long>>(Time.milliseconds(delay)) {
+                    @Override
+                    public long extractTimestamp(Tuple3<String, String, Long> element) {
+                        return element.f2;
+                    }
                 }
-            }
         );
 
         DataStream<Tuple3<String, String, Long>> rigjhtStream = rightSource.assignTimestampsAndWatermarks(
-            new BoundedOutOfOrdernessTimestampExtractor<Tuple3<String, String, Long>>(Time.milliseconds(delay)) {
-                @Override
-                public long extractTimestamp(Tuple3<String, String, Long> element) {
-                    return element.f2;
+                new BoundedOutOfOrdernessTimestampExtractor<Tuple3<String, String, Long>>(Time.milliseconds(delay)) {
+                    @Override
+                    public long extractTimestamp(Tuple3<String, String, Long> element) {
+                        return element.f2;
+                    }
                 }
-            }
         );
 
         // interval Join
         leftStream
-            .keyBy(new LeftSelectKey())
-            .intervalJoin(rigjhtStream.keyBy(new RightSelectKey()))
-            .between(Time.milliseconds(negative), Time.milliseconds(positive))
-            .process(new ProcessJoinFunction<Tuple3<String, String, Long>, Tuple3<String, String, Long>, Tuple5<String, String, String, Long, Long>>() {
-                @Override
-                public void processElement(Tuple3<String, String, Long> left, Tuple3<String, String, Long> right, Context ctx, Collector<Tuple5<String, String, String, Long, Long>> out) {
-                    out.collect(Tuple5.of(left.f0, left.f1, right.f1, left.f2, right.f2));
-                }
-            }).print();
+                .keyBy(new LeftSelectKey())
+                .intervalJoin(rigjhtStream.keyBy(new RightSelectKey()))
+                .between(Time.milliseconds(negative), Time.milliseconds(positive))
+                .process(new ProcessJoinFunction<Tuple3<String, String, Long>, Tuple3<String, String, Long>, Tuple5<String, String, String, Long, Long>>() {
+                    @Override
+                    public void processElement(Tuple3<String, String, Long> left, Tuple3<String, String, Long> right, Context ctx, Collector<Tuple5<String, String, String, Long, Long>> out) {
+                        out.collect(Tuple5.of(left.f0, left.f1, right.f1, left.f2, right.f2));
+                    }
+                }).print();
 
 
         env.execute("TimeWindowDemo");

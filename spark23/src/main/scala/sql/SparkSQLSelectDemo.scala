@@ -27,7 +27,7 @@ object SparkSQLSelectDemo {
 
     // 多字段查询
     val cols = "name,country,et".split(",").map(name => col(name))
-    df.select(cols: _*).show()
+    df.select("name,country,et".split(",").map(name => col(name)): _*).show()
 
     spark.stop()
   }

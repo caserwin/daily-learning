@@ -11,6 +11,8 @@ public class StringUtil {
         System.out.println(StringUtils.equals("user", "user"));
         System.out.println(StringUtils.equals("user1", "user"));
 
+        System.out.println(StringUtils.countMatches("abrcdebcbcb","bc"));
+
         System.out.println("===============================");
         System.out.println(StringUtils.isBlank(null));
         System.out.println(StringUtils.isBlank(" "));

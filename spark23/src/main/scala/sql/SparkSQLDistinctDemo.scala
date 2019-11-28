@@ -22,7 +22,7 @@ object SparkSQLDistinctDemo {
     // method1: distinct
     inputDF.distinct().show()
     // method2: dropDuplicates
-    inputDF.dropDuplicates(Seq("id")).show()
+    inputDF.select("id").dropDuplicates(Seq("id")).show()
 
     spark.stop()
   }

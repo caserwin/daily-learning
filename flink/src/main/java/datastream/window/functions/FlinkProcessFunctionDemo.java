@@ -16,7 +16,7 @@ import org.apache.flink.util.Collector;
 /**
  * Created by yidxue on 2018/8/24
  */
-public class FlinkProcessWindowFunctionDemo {
+public class FlinkProcessFunctionDemo {
 
     public static void main(String[] args) throws Exception {
         int windowSize = 10;

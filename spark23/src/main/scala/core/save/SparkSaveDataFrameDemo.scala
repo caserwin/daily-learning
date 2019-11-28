@@ -10,6 +10,6 @@ object SparkSaveDataFrameDemo {
     val df = spark.sqlContext.read.json("data/cityinfo.json")
     df.show()
 
-    df.rdd.map(x=>x.mkString("\t\t")).repartition(1).saveAsTextFile("output")
+    df.rdd.map(x=>x.mkString("\t")).repartition(2).saveAsTextFile("output")
   }
 }

@@ -36,29 +36,29 @@ public class FlinkTumblingWindowsOuterJoinDemo {
 
         // 设置水位线
         DataStream<Tuple3<String, String, Long>> leftStream = leftSource.assignTimestampsAndWatermarks(
-            new BoundedOutOfOrdernessTimestampExtractor<Tuple3<String, String, Long>>(Time.milliseconds(delay)) {
-                @Override
-                public long extractTimestamp(Tuple3<String, String, Long> element) {
-                    return element.f2;
+                new BoundedOutOfOrdernessTimestampExtractor<Tuple3<String, String, Long>>(Time.milliseconds(delay)) {
+                    @Override
+                    public long extractTimestamp(Tuple3<String, String, Long> element) {
+                        return element.f2;
+                    }
                 }
-            }
         );
 
         DataStream<Tuple3<String, String, Long>> rigjhtStream = rightSource.assignTimestampsAndWatermarks(
-            new BoundedOutOfOrdernessTimestampExtractor<Tuple3<String, String, Long>>(Time.milliseconds(delay)) {
-                @Override
-                public long extractTimestamp(Tuple3<String, String, Long> element) {
-                    return element.f2;
+                new BoundedOutOfOrdernessTimestampExtractor<Tuple3<String, String, Long>>(Time.milliseconds(delay)) {
+                    @Override
+                    public long extractTimestamp(Tuple3<String, String, Long> element) {
+                        return element.f2;
+                    }
                 }
-            }
         );
 
         // join 操作
         leftStream.coGroup(rigjhtStream)
-            .where(new LeftSelectKey()).equalTo(new RightSelectKey())
-            .window(TumblingEventTimeWindows.of(Time.seconds(windowSize)))
-            .apply(new OuterJoin())
-            .print();
+                .where(new LeftSelectKey()).equalTo(new RightSelectKey())
+                .window(TumblingEventTimeWindows.of(Time.seconds(windowSize)))
+                .apply(new OuterJoin())
+                .print();
 
         env.execute("TimeWindowDemo");
     }
