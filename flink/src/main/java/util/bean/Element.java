@@ -1,8 +1,11 @@
 package util.bean;
 
+import lombok.Data;
+
 /**
  * Created by yidxue on 2018/5/11
  */
+@Data
 public class Element {
     /**
      * 必须设置为 public
@@ -19,26 +22,5 @@ public class Element {
     public Element(String name, long number) {
         this.name = name;
         this.number = number;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public long getNumber() {
-        return number;
-    }
-
-    public void setNumber(int number) {
-        this.number = number;
-    }
-
-    @Override
-    public String toString() {
-        return this.name + ":" + this.number;
     }
 }
