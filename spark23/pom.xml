@@ -100,12 +100,12 @@
             <scope>${dependency.scope}</scope>
         </dependency>
 
-        <dependency>
-            <groupId>com.hadoop.gplcompression</groupId>
-            <artifactId>hadoop-lzo</artifactId>
-            <version>0.4.20</version>
-            <scope>${dependency.scope}</scope>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.hadoop.gplcompression</groupId>-->
+<!--            <artifactId>hadoop-lzo</artifactId>-->
+<!--            <version>0.4.20</version>-->
+<!--            <scope>${dependency.scope}</scope>-->
+<!--        </dependency>-->
 
         <dependency>
             <groupId>com.jayway.jsonpath</groupId>

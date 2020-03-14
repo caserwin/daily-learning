@@ -61,11 +61,18 @@
             <scope>provided</scope>
         </dependency>
 
+<!--        <dependency>-->
+<!--            <groupId>com.hadoop.gplcompression</groupId>-->
+<!--            <artifactId>hadoop-lzo</artifactId>-->
+<!--            <version>0.4.20</version>-->
+<!--            <scope>provided</scope>-->
+<!--        </dependency>-->
+
         <dependency>
-            <groupId>com.hadoop.gplcompression</groupId>
-            <artifactId>hadoop-lzo</artifactId>
-            <version>0.4.20</version>
-            <scope>provided</scope>
+            <groupId>com.databricks</groupId>
+            <artifactId>spark-csv_2.11</artifactId>
+            <version>1.5.0</version>
+            <scope>${dependency.scope}</scope>
         </dependency>
 
         <dependency>
