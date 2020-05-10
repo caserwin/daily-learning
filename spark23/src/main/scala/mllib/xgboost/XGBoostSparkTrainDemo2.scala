@@ -7,7 +7,7 @@ import org.apache.spark.ml.feature.{StringIndexer, VectorAssembler}
 import org.apache.spark.ml.Pipeline
 import org.apache.spark.sql.SparkSession
 
-object XGBoostDemo {
+object XGBoostSparkTrainDemo2 {
   def main(args: Array[String]): Unit = {
     val spark = SparkSession
       .builder()

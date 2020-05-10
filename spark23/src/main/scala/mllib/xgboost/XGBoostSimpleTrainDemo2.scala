@@ -4,7 +4,7 @@ import ml.dmlc.xgboost4j.scala.{DMatrix, XGBoost}
 
 import scala.collection.mutable
 
-object PredictLeafIndices {
+object XGBoostSimpleTrainDemo2 {
 
   def main(args: Array[String]): Unit = {
     val trainMat = new DMatrix("data/xgboost/agaricus.txt.train")
@@ -31,7 +31,7 @@ object PredictLeafIndices {
 
     // predict all trees
     val leafIndex2 = booster.predictLeaf(testMat, 0)
-    for (leafs <- leafIndex) {
+    for (leafs <- leafIndex2) {
       println(java.util.Arrays.toString(leafs))
     }
   }

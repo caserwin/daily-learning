@@ -4,7 +4,7 @@ import ml.dmlc.xgboost4j.scala.{DMatrix, XGBoost}
 
 import scala.collection.mutable
 
-object BoostFromPrediction {
+object XGBoostSimpleTrainDemo1 {
   def main(args: Array[String]): Unit = {
     println("start running example to start from a initial prediction")
 
