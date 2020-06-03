@@ -9,7 +9,7 @@ import org.apache.spark.sql.types.{DoubleType, StringType, StructField, StructTy
 /**
   * Created by yidxue on 2020-05-10
   */
-object XGBoostSparkTrainDemo1 {
+object XGBoostSparkTrainDemo {
 
   def main(args: Array[String]): Unit = {
     val spark = SparkSession.builder().appName("get feature").master("local[*]").getOrCreate()
@@ -33,14 +33,13 @@ object XGBoostSparkTrainDemo1 {
       setOutputCol("features")
     val xgbInput = vectorAssembler.transform(labelTransformed).select("features", "classIndex")
 
-
-    val xgbParam = Map("eta" -> 0.1f,
+    val xgbParam = Map(
+      "eta" -> 0.1f,
       "missing" -> -999,
       "objective" -> "multi:softprob",
       "num_class" -> 3,
       "num_round" -> 100,
       "num_workers" -> 2)
-
 
     val xgbClassifier = new XGBoostClassifier(xgbParam).
       setFeaturesCol("features").
@@ -48,7 +47,7 @@ object XGBoostSparkTrainDemo1 {
     val xgbClassificationModel = xgbClassifier.fit(xgbInput)
 
     //    val features: linalg.Vector = xgbInput.head().getAs[org.apache.spark.ml.linalg.Vector]("features")
-    val features0: Vector = Vectors.sparse(4, Array(0, 1, 2, 3), Array(5.4, 3.9, 1.3, 0.4))
+    val features0: Vector = Vectors.sparse(4, Array(0, 1, 2, 3), Array(5.4, 3.9, 1.3, 1.4))
     val features1: Vector = Vectors.sparse(4, Array(0, 1, 2, 3), Array(5.7, 3.0, 4.2, 1.2))
     val features2: Vector = Vectors.sparse(4, Array(0, 1, 2, 3), Array(6.9, 3.1, 5.1, 2.3))
 
@@ -58,7 +57,7 @@ object XGBoostSparkTrainDemo1 {
       (2, features1),
       (3, features2)
     )).toDF("id", "features")
-    xgbClassificationModel.transform(df.select("features")).select("probability", "prediction").show(100, truncate = false)
+    xgbClassificationModel.transform(df.select("features")).select("probability", "prediction").show(10, truncate = false)
 
     // 实时预测
     println(xgbClassificationModel.predict(features0))
