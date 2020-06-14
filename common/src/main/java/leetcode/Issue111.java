@@ -1,6 +1,7 @@
 package leetcode;
 
-import lombok.Data;
+
+import leetcode.pojo.TreeNode;
 
 /**
  * User: caserwin
@@ -8,16 +9,6 @@ import lombok.Data;
  * Description: https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/submissions/
  */
 public class Issue111 {
-    @Data
-    public static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
 
     public static void main(String[] args) {
 

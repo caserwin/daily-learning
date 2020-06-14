@@ -1,6 +1,6 @@
 package leetcode;
 
-import lombok.Data;
+import leetcode.pojo.TreeNode;
 
 /**
  * User: caserwin
@@ -8,16 +8,6 @@ import lombok.Data;
  * Description:
  */
 public class Issue101 {
-    @Data
-    public static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-
-        TreeNode(int x) {
-            val = x;
-        }
-    }
 
     public static void main(String[] args) {
         TreeNode root = new TreeNode(0);
@@ -38,7 +28,7 @@ public class Issue101 {
     }
 
 
-    public static boolean isSymmetric(TreeNode root) {
+    private static boolean isSymmetric(TreeNode root) {
         if (root == null) {
             return true;
         }

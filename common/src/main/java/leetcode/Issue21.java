@@ -1,6 +1,7 @@
 package leetcode;
 
-import lombok.Data;
+
+import leetcode.pojo.ListNode;
 
 /**
  * User: caserwin
@@ -8,15 +9,7 @@ import lombok.Data;
  * Description:
  */
 public class Issue21 {
-    @Data
-    public static class ListNode {
-        int val;
-        ListNode next;
 
-        ListNode(int x) {
-            val = x;
-        }
-    }
 
     public static void main(String[] args) {
         ListNode node1 = new ListNode(1);

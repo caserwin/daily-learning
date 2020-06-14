@@ -5,7 +5,6 @@ package leetcode;
  */
 public class Issue14 {
     public static void main(String[] args) {
-
         String[] strs = {"dog","racecar","car"};
         System.out.println(longestCommonPrefix(strs));
     }
