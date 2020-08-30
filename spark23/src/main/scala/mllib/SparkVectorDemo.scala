@@ -18,7 +18,7 @@ object SparkVectorDemo {
     println(dv.toDense)
     println(dv.toSparse)
 
-    // 创建sparse vector
+    // 创建 sparse vector
     val sv1: Vector = Vectors.sparse(3, Array(0, 2), Array(1.0, 3.0))
     //    val sv2: Vector = Vectors.sparse(3, Seq((0, 1.0), (2, 3.0)))
     println("=======================")
@@ -35,7 +35,7 @@ object SparkVectorDemo {
 
     df.show(truncate = false)
 
-    // 创建dense vector 数据集
+    // 创建 sparse vector 数据集
     val examples: RDD[LabeledPoint] = MLUtils.loadLibSVMFile(spark.sparkContext, "data/mllib/sample_libsvm_data.txt")
     println(examples.take(10).foreach(x => println(x)))
 

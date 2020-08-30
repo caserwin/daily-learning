@@ -4,7 +4,7 @@ import org.apache.spark.ml.Pipeline
 import org.apache.spark.ml.feature.{OneHotEncoderEstimator, StringIndexer, VectorAssembler}
 import org.apache.spark.sql.SparkSession
 
-object SparkFeatureOneHotEncoderEstimatorDemo {
+object SparkCateFeaDemo2 {
 
   def main(args: Array[String]): Unit = {
     implicit val spark: SparkSession = SparkSession
