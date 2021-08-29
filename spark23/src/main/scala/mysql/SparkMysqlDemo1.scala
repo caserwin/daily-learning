@@ -8,7 +8,7 @@ import org.apache.spark.sql.SparkSession
   * Created by yidxue on 2020-08-30
   */
 
-object SparkInsertMysqlDemo {
+object SparkMysqlDemo1 {
 
   def main(args: Array[String]): Unit = {
 
