@@ -6,7 +6,7 @@ import org.apache.spark.{SparkConf, SparkContext}
 /**
   * Created by yidxue on 2018/1/30
   */
-object SaprkSQLExplodeDemo {
+object SparkSQLExplodeDemo {
 
   def main(args: Array[String]): Unit = {
     val conf = new SparkConf().setAppName("Spark SQL Example").setMaster("local[1]")

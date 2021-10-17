@@ -6,7 +6,7 @@ import org.apache.spark.sql.SQLContext
 /**
   * Created by yidxue on 2018/1/30
   */
-object SaprkSQLIntersectDemo {
+object SparkSQLIntersectDemo {
 
   def main(args: Array[String]): Unit = {
     val conf = new SparkConf().setAppName("Spark SQL Example").setMaster("local[1]")
